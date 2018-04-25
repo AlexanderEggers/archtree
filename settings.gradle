@@ -1,0 +1,4 @@
+include ':examples', ':library'
+project(":library").name = "archtree-core"
+project(":examples").name = "archtree-examples"
+rootProject.name = "archtree-library"

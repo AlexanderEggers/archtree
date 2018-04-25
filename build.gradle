@@ -1,0 +1,40 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+
+    ext {
+        kotlin_version = '1.2.30'
+        support_lib_version = "27.1.1"
+        dagger_version = '2.15'
+        lifecycle_version = '1.1.1'
+        archknife_version = '0.3.1'
+        autotarget_version = '0.4.0'
+
+        archtree_library_version = "0.1.0"
+    }
+
+    repositories {
+        google()
+        jcenter()
+        maven { url  "https://dl.bintray.com/mordag/android" }
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.1.2'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.0'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven { url  "https://dl.bintray.com/mordag/android" }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
