@@ -22,7 +22,7 @@ Comments/bugs/questions/pull requests are always welcome!
 Compatibility
 -------------
 
- * **Minimum Android SDK**: BottomNav requires a minimum API level of 16.
+ * **Minimum Android SDK**: ArchTree requires a minimum API level of 16.
  
 TODO
 -------------
