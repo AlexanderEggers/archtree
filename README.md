@@ -9,7 +9,7 @@ Download
 --------
 Coming soon!
 
-How do I use ArchTree? (Step-by-step introduction for 1.0.0-beta1)
+How do I use ArchTree? (Step-by-step introduction for 0.1.0)
 -------------------
 Coming soon!
 
