@@ -3,7 +3,7 @@ apply plugin: 'kotlin-android'
 
 ext {
     bintrayRepo = 'android'
-    bintrayName = 'archtree'
+    bintrayName = 'archtree-fragment'
 
     publishedGroupId = 'org.archtree'
     libraryName = 'archtree-fragment'
@@ -61,6 +61,7 @@ dependencies {
     implementation "org.archknife:archknife-extension:$archknife_version"
 
     api project(":archtree-builder")
+    //api "org.archtree:archtree-builder:$archtree_library_version"
 }
 
 apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'

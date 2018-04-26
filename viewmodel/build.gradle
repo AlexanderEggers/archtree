@@ -3,7 +3,7 @@ apply plugin: 'kotlin-android'
 
 ext {
     bintrayRepo = 'android'
-    bintrayName = 'archtree'
+    bintrayName = 'archtree-viewmodel'
 
     publishedGroupId = 'org.archtree'
     libraryName = 'archtree-viewmodel'
