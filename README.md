@@ -23,6 +23,7 @@ Compatibility
 -------------
 
  * **Minimum Android SDK**: ArchTree requires a minimum API level of 16.
+ * ArchTree requires Binding-v2.
  
 TODO
 -------------
