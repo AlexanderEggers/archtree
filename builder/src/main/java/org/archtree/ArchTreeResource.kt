@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import org.archtree.viewmodel.BaseViewModel
-import org.autotarget.util.HasFragmentFlow
 
 abstract class ArchTreeResource<ViewModel : BaseViewModel> constructor(builder: ArchTreeBuilder<ViewModel, *>) {
 
@@ -29,8 +28,6 @@ abstract class ArchTreeResource<ViewModel : BaseViewModel> constructor(builder: 
         private set
 
     var title: String? = builder.title
-        private set
-    var fragmentFlow: HasFragmentFlow? = builder.fragmentFlow
         private set
     var bundle: Bundle? = builder.bundle
         private set

@@ -6,11 +6,14 @@ import android.support.v4.app.FragmentActivity
 import android.util.Log
 import org.archtree.ArchTreeResource
 import org.archtree.viewmodel.BaseViewModel
+import org.autotarget.util.HasFragmentFlow
 
 open class ActivityResource<ViewModel : BaseViewModel>
 constructor(builder: ActivityBuilder<ViewModel>) : ArchTreeResource<ViewModel>(builder) {
 
     var viewModel: ViewModel? = null
+        private set
+    var fragmentFlow: HasFragmentFlow? = builder.fragmentFlow
         private set
 
     open fun onCreateViewModel(activity: FragmentActivity, factory: ViewModelProvider.Factory) {

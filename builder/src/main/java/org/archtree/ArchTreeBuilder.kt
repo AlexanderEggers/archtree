@@ -2,7 +2,6 @@ package org.archtree
 
 import android.os.Bundle
 import org.archtree.viewmodel.BaseViewModel
-import org.autotarget.util.HasFragmentFlow
 
 @Suppress("UNCHECKED_CAST")
 abstract class ArchTreeBuilder<ViewModel : BaseViewModel, out Builder> {
@@ -17,8 +16,6 @@ abstract class ArchTreeBuilder<ViewModel : BaseViewModel, out Builder> {
     var skipViewModelInit: Boolean = false
         private set
 
-    var fragmentFlow: HasFragmentFlow? = null
-        private set
     var title: String? = null
         private set
     var bundle: Bundle? = null
@@ -35,11 +32,6 @@ abstract class ArchTreeBuilder<ViewModel : BaseViewModel, out Builder> {
         this.viewModelClass = viewModelClass
         this.bindingKey = bindingKey
         this.skipViewModelInit = skipViewModelInit
-        return this as Builder
-    }
-
-    fun setFragmentFlow(fragmentFlow: HasFragmentFlow): Builder {
-        this.fragmentFlow = fragmentFlow
         return this as Builder
     }
 

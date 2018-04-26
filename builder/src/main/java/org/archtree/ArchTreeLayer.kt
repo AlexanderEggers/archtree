@@ -9,26 +9,26 @@ import org.archtree.viewmodel.BaseViewModel
 abstract class ArchTreeLayer<in ViewModel : BaseViewModel> {
 
     @CallSuper
-    fun onResume(viewModel: ViewModel?, binding: ViewDataBinding?, bundle: Bundle?) {
+    open fun onResume(viewModel: ViewModel?, binding: ViewDataBinding?, bundle: Bundle?) {
     }
 
     @CallSuper
-    fun onResume(viewModel: ViewModel?, view: View?, bundle: Bundle?) {
+    open fun onResume(viewModel: ViewModel?, view: View?, bundle: Bundle?) {
     }
 
     @CallSuper
-    fun onCreate(viewModel: ViewModel?, binding: ViewDataBinding?, bundle: Bundle?) {
+    open fun onCreate(viewModel: ViewModel?, binding: ViewDataBinding?, bundle: Bundle?) {
     }
 
     @CallSuper
-    fun onCreate(viewModel: ViewModel?, view: View?, bundle: Bundle?) {
+    open fun onCreate(viewModel: ViewModel?, view: View?, bundle: Bundle?) {
     }
 
     @CallSuper
-    fun onStop(viewModel: ViewModel?, binding: ViewDataBinding?) {
+    open fun onStop(viewModel: ViewModel?, binding: ViewDataBinding?) {
     }
 
     @CallSuper
-    fun onStop(viewModel: ViewModel?, view: View?) {
+    open fun onStop(viewModel: ViewModel?, view: View?) {
     }
 }
