@@ -9,7 +9,7 @@ Download
 --------
 Coming soon!
 
-How do I use ArchTree? (Step-by-step introduction for 1.0.0-beta1)
+How do I use ArchTree? (Step-by-step introduction for 0.1.0)
 -------------------
 Coming soon!
 
@@ -22,7 +22,7 @@ Comments/bugs/questions/pull requests are always welcome!
 Compatibility
 -------------
 
- * **Minimum Android SDK**: BottomNav requires a minimum API level of 16.
+ * **Minimum Android SDK**: ArchTree requires a minimum API level of 16.
  
 TODO
 -------------
