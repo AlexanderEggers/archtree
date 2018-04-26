@@ -1,0 +1,50 @@
+package org.archtree
+
+import android.databinding.DataBindingUtil
+import android.databinding.ViewDataBinding
+import android.os.Bundle
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import org.archtree.viewmodel.BaseViewModel
+import org.autotarget.util.HasFragmentFlow
+
+abstract class ArchTreeResource<ViewModel : BaseViewModel> constructor(builder: ArchTreeBuilder<ViewModel, *>) {
+
+    protected var layer: ArchTreeLayer<ViewModel>? = builder.layer
+
+    var view: View? = null
+        private set
+    var layoutId: Int = builder.layoutId
+        private set
+    var bindingKey: Int = builder.bindingKey
+        private set
+
+    var viewModelClass: Class<ViewModel>? = builder.viewModelClass
+        private set
+    var binding: ViewDataBinding? = null
+        private set
+    var skipViewModelInit: Boolean = builder.skipViewModelInit
+        private set
+
+    var title: String? = builder.title
+        private set
+    var fragmentFlow: HasFragmentFlow? = builder.fragmentFlow
+        private set
+    var bundle: Bundle? = builder.bundle
+        private set
+
+    fun onCreateView(inflater: LayoutInflater, container: ViewGroup?): View? {
+        binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
+
+        view = if (binding == null) {
+            Log.d("TEST", "Did you forget to define your layout using <layout>...</layout>? Using fallback...")
+            inflater.inflate(layoutId, container, false)
+        } else {
+            binding!!.root
+        }
+
+        return view
+    }
+}
