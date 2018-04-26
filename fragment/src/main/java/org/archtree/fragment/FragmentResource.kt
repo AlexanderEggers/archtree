@@ -7,13 +7,13 @@ import android.util.Log
 import org.archtree.ArchTreeResource
 import org.archtree.viewmodel.BaseViewModel
 
-class FragmentResource<ViewModel : BaseViewModel>
+open class FragmentResource<ViewModel : BaseViewModel>
 constructor(builder: FragmentBuilder<ViewModel>) : ArchTreeResource<ViewModel>(builder) {
 
     var viewModel: ViewModel? = null
         private set
 
-    fun onCreateViewModel(fragment: Fragment, factory: ViewModelProvider.Factory) {
+    open fun onCreateViewModel(fragment: Fragment, factory: ViewModelProvider.Factory) {
         viewModel = ViewModelProviders.of(fragment, factory).get(viewModelClass!!)
 
         if (binding != null && bindingKey != -1) binding!!.setVariable(bindingKey, viewModel)
@@ -25,7 +25,7 @@ constructor(builder: FragmentBuilder<ViewModel>) : ArchTreeResource<ViewModel>(b
         }
     }
 
-    fun getLayer(): FragmentLayer<ViewModel> {
+    open fun getLayer(): FragmentLayer<ViewModel> {
         return super.layer as FragmentLayer<ViewModel>
     }
 }

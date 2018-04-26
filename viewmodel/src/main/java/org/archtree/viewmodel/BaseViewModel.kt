@@ -24,12 +24,12 @@ abstract class BaseViewModel : ViewModel() {
     fun init(forceInit: Boolean, bundle: Bundle?) {
         if (!hasInitialised || forceInit) {
             hasInitialised = true
-            processInit(bundle)
+            onInit(bundle)
         }
     }
 
     @CallSuper
-    protected open fun processInit(bundle: Bundle?) {
+    protected open fun onInit(bundle: Bundle?) {
 
     }
 

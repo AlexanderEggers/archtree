@@ -7,7 +7,7 @@ import org.autotarget.util.HasFragmentFlow
 @Suppress("UNCHECKED_CAST")
 abstract class ArchTreeBuilder<ViewModel : BaseViewModel, out Builder> {
 
-    var layoutId: Int = 0
+    var layoutId: Int = -1
         private set
 
     var viewModelClass: Class<ViewModel>? = null
@@ -53,7 +53,22 @@ abstract class ArchTreeBuilder<ViewModel : BaseViewModel, out Builder> {
         return this as Builder
     }
 
+    /**
+     * Internal method used to execute some common operations if the build() method of
+     * ActivityBuilder/FragmentBuilder is called.
+     *
+     * @param layer custom layer which can be used to execute certain operation for the predefined
+     * lifecycle methods.
+     * @throws RuntimeException throws this exception if the layout for this component is not set.
+     * @since 1.0.0
+     * @see ArchTreeLayer
+     */
+    @Throws(RuntimeException::class)
     protected fun internalBuild(layer: ArchTreeLayer<ViewModel>) {
         this.layer = layer
+
+        if (layoutId == -1) {
+            throw RuntimeException("Did you forget to set the layout for this component?")
+        }
     }
 }

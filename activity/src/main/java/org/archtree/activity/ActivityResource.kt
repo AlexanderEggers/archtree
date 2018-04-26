@@ -7,17 +7,18 @@ import android.util.Log
 import org.archtree.ArchTreeResource
 import org.archtree.viewmodel.BaseViewModel
 
-class ActivityResource<ViewModel : BaseViewModel>
+open class ActivityResource<ViewModel : BaseViewModel>
 constructor(builder: ActivityBuilder<ViewModel>) : ArchTreeResource<ViewModel>(builder) {
 
     var viewModel: ViewModel? = null
         private set
 
-    fun onCreateViewModel(activity: FragmentActivity, factory: ViewModelProvider.Factory) {
+    open fun onCreateViewModel(activity: FragmentActivity, factory: ViewModelProvider.Factory) {
         viewModel = ViewModelProviders.of(activity, factory).get(viewModelClass!!)
 
         if (binding != null && bindingKey != -1) binding!!.setVariable(bindingKey, viewModel)
-        else Log.d(ActivityResource::class.java.name, "ViewModel is not attached to layout. Are you sure about that?")
+        else Log.w(ActivityResource::class.java.name, "ViewModel is not attached to the " +
+                "component layout.")
 
         if (!skipViewModelInit) {
             viewModel?.init(bundle)
@@ -25,7 +26,7 @@ constructor(builder: ActivityBuilder<ViewModel>) : ArchTreeResource<ViewModel>(b
         }
     }
 
-    fun getLayer(): ActivityLayer<ViewModel> {
+    open fun getLayer(): ActivityLayer<ViewModel> {
         return super.layer as ActivityLayer<ViewModel>
     }
 }
