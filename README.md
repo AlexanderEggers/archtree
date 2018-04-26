@@ -7,11 +7,28 @@ Android library that simplifies the usage of Activities, Fragments and ViewModel
 
 Download
 --------
-Coming soon!
+```gradle
+repositories {
+  jcenter()
+}
+
+dependencies {
+  //includes all library artifacts
+  implementation 'org.archtree:archtree-core:0.1.0'
+  //just archtree builder base
+  implementation 'org.archtree:archtree-builder:0.1.0'
+  //just archtree activity classes
+  implementation 'org.archtree:archtree-activity:0.1.0'
+  //just archtree fragment classes
+  implementation 'org.archtree:archtree-fragment:0.1.0'
+  //just archtree viewmodel classes
+  implementation 'org.archtree:archtree-viewmodel:0.1.0'
+}
+```
 
 How do I use ArchTree? (Step-by-step introduction for 0.1.0)
 -------------------
-Coming soon!
+Coming soon! For now, use the [example project][3] as a reference.
 
 Status
 ------
@@ -42,3 +59,4 @@ Apache 2.0. See the [LICENSE][1] file for details.
 
 [1]: https://github.com/Mordag/archtree/blob/master/LICENSE
 [2]: https://github.com/Mordag
+[3]: https://github.com/Mordag/archtree/tree/master/examples
