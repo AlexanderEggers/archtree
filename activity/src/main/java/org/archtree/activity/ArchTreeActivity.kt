@@ -74,8 +74,8 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
         }
     }
 
-    override fun onShowNextFragment(containerId: Int, state: Int, addToBackStack: Boolean, clearBackStack: Boolean, bundle: Bundle?) {
-        activityResource?.fragmentFlow?.onShowNextFragment(containerId, state, addToBackStack, clearBackStack, bundle)
+    override fun onShowNextFragment(containerId: Int, state: Int, addToBackStack: Boolean, clearBackStack: Boolean, bundle: Bundle?): Boolean {
+        return activityResource?.fragmentFlow?.onShowNextFragment(containerId, state, addToBackStack, clearBackStack, bundle) ?: false
     }
 
     fun getActivityResource(): ActivityResource<ViewModel>? {
