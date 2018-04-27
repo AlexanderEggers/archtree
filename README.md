@@ -14,19 +14,20 @@ repositories {
 
 dependencies {
   //includes all library artifacts
-  implementation 'org.archtree:archtree-core:0.1.0'
+  implementation 'org.archtree:archtree-core:0.2.0'
+  
   //just archtree builder base
-  implementation 'org.archtree:archtree-builder:0.1.0'
+  implementation 'org.archtree:archtree-builder:0.2.0'
   //just archtree activity classes
-  implementation 'org.archtree:archtree-activity:0.1.0'
+  implementation 'org.archtree:archtree-activity:0.2.0'
   //just archtree fragment classes
-  implementation 'org.archtree:archtree-fragment:0.1.0'
+  implementation 'org.archtree:archtree-fragment:0.2.0'
   //just archtree viewmodel classes
-  implementation 'org.archtree:archtree-viewmodel:0.1.0'
+  implementation 'org.archtree:archtree-viewmodel:0.2.0'
 }
 ```
 
-How do I use ArchTree? (Step-by-step introduction for 0.1.0)
+How do I use ArchTree? (Step-by-step introduction for 0.2.0)
 -------------------
 Coming soon! For now, use the [example project][3] as a reference.
 
