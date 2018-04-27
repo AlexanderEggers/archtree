@@ -61,7 +61,7 @@ dependencies {
     implementation "org.archknife:archknife-extension:$archknife_version"
     implementation "org.autotarget:autotarget-fragment:$autotarget_version"
 
-    implementation project(":archtree-builder")
+    api project(":archtree-builder")
     //api "org.archtree:archtree-builder:$archtree_library_version"
 }
 
