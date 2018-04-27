@@ -45,7 +45,6 @@ Compatibility
  
 TODO
 -------------
-* Implementation
 * Testing
 * Documentation
 
