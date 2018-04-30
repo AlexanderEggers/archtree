@@ -9,8 +9,7 @@ Download
 --------
 ```gradle
 repositories {
-  //jcenter() Coming soon!
-  maven { url  "https://dl.bintray.com/mordag/android" }
+  jcenter()
 }
 
 dependencies {
