@@ -14,20 +14,22 @@ repositories {
 
 dependencies {
   //includes all library artifacts
-  implementation 'org.archtree:archtree-core:0.2.0'
+  implementation 'org.archtree:archtree-core:0.3.0'
   
   //just archtree builder base
-  implementation 'org.archtree:archtree-builder:0.2.0'
+  implementation 'org.archtree:archtree-builder:0.3.0'
   //just archtree activity classes
-  implementation 'org.archtree:archtree-activity:0.2.0'
+  implementation 'org.archtree:archtree-activity:0.3.0'
   //just archtree fragment classes
-  implementation 'org.archtree:archtree-fragment:0.2.0'
+  implementation 'org.archtree:archtree-fragment:0.3.0'
   //just archtree viewmodel classes
-  implementation 'org.archtree:archtree-viewmodel:0.2.0'
+  implementation 'org.archtree:archtree-viewmodel:0.3.0'
+  //just action classes
+  implementation 'org.archtree:archtree-action:0.3.0'
 }
 ```
 
-How do I use ArchTree? (Step-by-step introduction for 0.2.0)
+How do I use ArchTree? (Step-by-step introduction for 0.3.0)
 -------------------
 Coming soon! For now, use the [example project][3] as a reference.
 
@@ -42,7 +44,6 @@ Compatibility
 
  * **Minimum Android SDK**: ArchTree requires a minimum API level of 16.
  * ArchTree requires Binding-v2.
- * ArchTree requires Dagger-v2 (at least version 2.15).
  
 TODO
 -------------
