@@ -1,6 +1,6 @@
-package org.archtree.fragment
+package archtree.fragment
 
-import org.archtree.viewmodel.BaseViewModel
+import archtree.viewmodel.BaseViewModel
 
 interface HasFragmentBuilder<ViewModel : BaseViewModel> {
 

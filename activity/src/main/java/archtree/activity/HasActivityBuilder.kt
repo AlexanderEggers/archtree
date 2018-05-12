@@ -1,6 +1,6 @@
-package org.archtree.activity
+package archtree.activity
 
-import org.archtree.viewmodel.BaseViewModel
+import archtree.viewmodel.BaseViewModel
 
 interface HasActivityBuilder<ViewModel : BaseViewModel> {
 

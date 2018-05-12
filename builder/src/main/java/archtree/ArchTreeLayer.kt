@@ -1,10 +1,10 @@
-package org.archtree
+package archtree
 
 import android.databinding.ViewDataBinding
 import android.os.Bundle
 import android.support.annotation.CallSuper
 import android.view.View
-import org.archtree.viewmodel.BaseViewModel
+import archtree.viewmodel.BaseViewModel
 
 abstract class ArchTreeLayer<in ViewModel : BaseViewModel> {
 

@@ -1,4 +1,4 @@
-package org.archtree.activity
+package archtree.activity
 
 import android.arch.lifecycle.ViewModelProvider
 import android.content.Intent
@@ -10,7 +10,7 @@ import android.view.View
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
-import org.archtree.viewmodel.BaseViewModel
+import archtree.viewmodel.BaseViewModel
 import org.autotarget.util.HasFragmentFlow
 import javax.inject.Inject
 

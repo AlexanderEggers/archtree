@@ -3,11 +3,11 @@
 buildscript {
 
     ext {
-        kotlin_version = '1.2.30'
+        kotlin_version = '1.2.41'
         support_lib_version = "27.1.1"
-        dagger_version = '2.15'
+        dagger_version = '2.16'
         lifecycle_version = '1.1.1'
-        archknife_version = '0.3.1'
+        archknife_version = '0.3.2'
         autotarget_version = '0.4.1'
 
         archtree_library_version = "0.2.0"

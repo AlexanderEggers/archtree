@@ -1,4 +1,4 @@
-package org.archtree.fragment
+package archtree.fragment
 
 import android.arch.lifecycle.ViewModelProvider
 import android.databinding.ViewDataBinding
@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import org.archknife.extension.Injectable
-import org.archtree.viewmodel.BaseViewModel
+import archtree.viewmodel.BaseViewModel
 import javax.inject.Inject
 
 abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injectable, HasFragmentBuilder<ViewModel> {

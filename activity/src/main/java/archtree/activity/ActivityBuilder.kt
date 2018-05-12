@@ -1,7 +1,7 @@
-package org.archtree.activity
+package archtree.activity
 
-import org.archtree.ArchTreeBuilder
-import org.archtree.viewmodel.BaseViewModel
+import archtree.ArchTreeBuilder
+import archtree.viewmodel.BaseViewModel
 import org.autotarget.util.HasFragmentFlow
 
 open class ActivityBuilder<ViewModel : BaseViewModel> : ArchTreeBuilder<ViewModel, ActivityBuilder<ViewModel>>() {

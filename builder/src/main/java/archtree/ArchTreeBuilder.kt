@@ -1,7 +1,7 @@
-package org.archtree
+package archtree
 
 import android.os.Bundle
-import org.archtree.viewmodel.BaseViewModel
+import archtree.viewmodel.BaseViewModel
 
 @Suppress("UNCHECKED_CAST")
 abstract class ArchTreeBuilder<ViewModel : BaseViewModel, out Builder> {

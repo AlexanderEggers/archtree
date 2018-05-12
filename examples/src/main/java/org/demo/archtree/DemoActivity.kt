@@ -8,7 +8,6 @@ import org.archtree.activity.ActivityLayer
 import org.archtree.activity.ActivityResource
 import org.archtree.activity.ArchTreeActivity
 import org.autotarget.annotation.ActivityTarget
-import org.autotarget.generated.FragmentTargets
 import org.autotarget.service.TargetService
 import org.autotarget.util.ContextInjector
 import javax.inject.Inject

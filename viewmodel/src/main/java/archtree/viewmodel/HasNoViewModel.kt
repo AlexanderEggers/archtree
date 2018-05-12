@@ -1,4 +1,4 @@
-package org.archtree.viewmodel
+package archtree.viewmodel
 
 import org.archknife.annotation.ProvideViewModel
 import javax.inject.Inject

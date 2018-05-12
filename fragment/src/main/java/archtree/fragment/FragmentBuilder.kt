@@ -1,7 +1,7 @@
-package org.archtree.fragment
+package archtree.fragment
 
-import org.archtree.ArchTreeBuilder
-import org.archtree.viewmodel.BaseViewModel
+import archtree.ArchTreeBuilder
+import archtree.viewmodel.BaseViewModel
 
 open class FragmentBuilder<ViewModel : BaseViewModel> : ArchTreeBuilder<ViewModel, FragmentBuilder<ViewModel>>() {
 

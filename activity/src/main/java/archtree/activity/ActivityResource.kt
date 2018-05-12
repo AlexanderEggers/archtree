@@ -1,11 +1,11 @@
-package org.archtree.activity
+package archtree.activity
 
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.support.v4.app.FragmentActivity
 import android.util.Log
-import org.archtree.ArchTreeResource
-import org.archtree.viewmodel.BaseViewModel
+import archtree.ArchTreeResource
+import archtree.viewmodel.BaseViewModel
 import org.autotarget.util.HasFragmentFlow
 
 open class ActivityResource<ViewModel : BaseViewModel>

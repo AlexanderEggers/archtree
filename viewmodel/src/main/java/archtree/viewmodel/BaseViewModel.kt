@@ -1,4 +1,4 @@
-package org.archtree.viewmodel
+package archtree.viewmodel
 
 import android.arch.lifecycle.ViewModel
 import android.content.Intent

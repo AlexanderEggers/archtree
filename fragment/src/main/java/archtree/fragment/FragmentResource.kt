@@ -1,11 +1,11 @@
-package org.archtree.fragment
+package archtree.fragment
 
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.support.v4.app.Fragment
 import android.util.Log
-import org.archtree.ArchTreeResource
-import org.archtree.viewmodel.BaseViewModel
+import archtree.ArchTreeResource
+import archtree.viewmodel.BaseViewModel
 
 open class FragmentResource<ViewModel : BaseViewModel>
 constructor(builder: FragmentBuilder<ViewModel>) : ArchTreeResource<ViewModel>(builder) {
