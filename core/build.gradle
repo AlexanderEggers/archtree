@@ -51,10 +51,12 @@ dependencies {
     api project(":archtree-activity")
     api project(":archtree-fragment")
     api project(":archtree-viewmodel")
+    api project(":archtree-action")
 
     //api "org.archtree:archtree-activity:$archtree_library_version"
     //api "org.archtree:archtree-fragment:$archtree_library_version"
     //api "org.archtree:archtree-viewmodel:$archtree_library_version"
+    //api "org.archtree:archtree-action:$archtree_library_version"
 }
 
 apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'

@@ -1,7 +1,7 @@
 package org.demo.archtree
 
+import archtree.viewmodel.BaseViewModel
 import org.archknife.annotation.ProvideViewModel
-import org.archtree.viewmodel.BaseViewModel
 import javax.inject.Inject
 
 @ProvideViewModel

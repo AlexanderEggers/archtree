@@ -1,10 +1,10 @@
 package org.demo.archtree
 
+import archtree.fragment.ArchTreeFragment
+import archtree.fragment.FragmentBuilder
+import archtree.fragment.FragmentResource
+import archtree.viewmodel.HasNoViewModel
 import org.archknife.annotation.ProvideFragment
-import org.archtree.fragment.ArchTreeFragment
-import org.archtree.fragment.FragmentBuilder
-import org.archtree.fragment.FragmentResource
-import org.archtree.viewmodel.HasNoViewModel
 import org.autotarget.annotation.FragmentTarget
 
 @FragmentTarget(R.id.fragment_container)

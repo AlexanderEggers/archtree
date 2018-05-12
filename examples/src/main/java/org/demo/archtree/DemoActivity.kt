@@ -2,12 +2,13 @@ package org.demo.archtree
 
 import android.databinding.ViewDataBinding
 import android.os.Bundle
+import archtree.activity.ActivityBuilder
+import archtree.activity.ActivityLayer
+import archtree.activity.ActivityResource
+import archtree.activity.ArchTreeActivity
 import org.archknife.annotation.ProvideActivity
-import org.archtree.activity.ActivityBuilder
-import org.archtree.activity.ActivityLayer
-import org.archtree.activity.ActivityResource
-import org.archtree.activity.ArchTreeActivity
 import org.autotarget.annotation.ActivityTarget
+import org.autotarget.generated.FragmentTargets
 import org.autotarget.service.TargetService
 import org.autotarget.util.ContextInjector
 import javax.inject.Inject
