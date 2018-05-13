@@ -48,13 +48,10 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    api project(":archtree-activity")
-    api project(":archtree-fragment")
+    api project(":archtree-builder")
     api project(":archtree-viewmodel")
     api project(":archtree-action")
 
-    //api "org.archtree:archtree-activity:$archtree_library_version"
-    //api "org.archtree:archtree-fragment:$archtree_library_version"
     //api "org.archtree:archtree-viewmodel:$archtree_library_version"
     //api "org.archtree:archtree-action:$archtree_library_version"
 }

@@ -1,7 +1,5 @@
-include ':examples', ':core', ':activity', ':fragment', ':viewmodel', ':builder', ':action'
+include ':examples', ':core', ':viewmodel', ':builder', ':action'
 project(":core").name = "archtree-core"
-project(":activity").name = "archtree-activity"
-project(":fragment").name = "archtree-fragment"
 project(":viewmodel").name = "archtree-viewmodel"
 project(":builder").name = "archtree-builder"
 project(":examples").name = "archtree-examples"

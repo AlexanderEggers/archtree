@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentActivity
 import android.util.Log
 import archtree.ArchTreeResource
 import archtree.viewmodel.BaseViewModel
-import org.autotarget.util.HasFragmentFlow
+import autotarget.util.HasFragmentFlow
 
 open class ActivityResource<ViewModel : BaseViewModel>
 constructor(builder: ActivityBuilder<ViewModel>) : ArchTreeResource<ViewModel>(builder) {

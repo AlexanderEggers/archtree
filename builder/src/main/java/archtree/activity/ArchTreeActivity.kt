@@ -11,7 +11,7 @@ import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import archtree.viewmodel.BaseViewModel
-import org.autotarget.util.HasFragmentFlow
+import autotarget.util.HasFragmentFlow
 import javax.inject.Inject
 
 abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity(),

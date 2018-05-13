@@ -7,7 +7,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import org.archknife.extension.Injectable
+import archknife.extension.Injectable
 import archtree.viewmodel.BaseViewModel
 import javax.inject.Inject
 
