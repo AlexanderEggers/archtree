@@ -52,6 +52,7 @@ dependencies {
     api project(":archtree-viewmodel")
     api project(":archtree-action")
 
+    //api "org.archtree:archtree-builder:$archtree_library_version"
     //api "org.archtree:archtree-viewmodel:$archtree_library_version"
     //api "org.archtree:archtree-action:$archtree_library_version"
 }
