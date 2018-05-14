@@ -47,4 +47,6 @@ dependencies {
 
     implementation "org.autotarget:autotarget-core:$autotarget_version"
     kapt "org.autotarget:autotarget-processor:$autotarget_version"
+
+    kapt "com.android.databinding:compiler:3.1.2"
 }

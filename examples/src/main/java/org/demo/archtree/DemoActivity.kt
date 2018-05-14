@@ -8,17 +8,11 @@ import archtree.activity.ActivityLayer
 import archtree.activity.ActivityResource
 import archtree.activity.ArchTreeActivity
 import autotarget.annotation.ActivityTarget
-import autotarget.generated.FragmentTargets
-import autotarget.service.TargetService
 import autotarget.util.ContextInjector
-import javax.inject.Inject
 
 @ActivityTarget
 @ProvideActivity
 class DemoActivity: ArchTreeActivity<DemoActivityViewModel>() {
-
-    @Inject
-    lateinit var targetService: TargetService
 
     override fun provideActivityResource(builder: ActivityBuilder<DemoActivityViewModel>): ActivityResource<DemoActivityViewModel> {
         return builder.setViewModel(DemoActivityViewModel::class.java, BR.viewModel)
@@ -28,9 +22,7 @@ class DemoActivity: ArchTreeActivity<DemoActivityViewModel>() {
 
                     override fun onCreate(viewModel: DemoActivityViewModel?, binding: ViewDataBinding?, bundle: Bundle?) {
                         super.onCreate(viewModel, binding, bundle)
-
                         ContextInjector.inject(this@DemoActivity)
-                        targetService.execute(FragmentTargets.showDemoFragment())
                     }
                 })
     }
