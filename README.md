@@ -16,9 +16,9 @@ dependencies {
   //includes all library artifacts
   implementation 'org.archtree:archtree-core:0.4.0'
   
-  //just archtree builder (base, activity and fragment)
+  //just builder (base, activity and fragment) and viewmodel classes
   implementation 'org.archtree:archtree-builder:0.4.0'
-  //just archtree viewmodel classes
+  //just viewmodel classes
   implementation 'org.archtree:archtree-viewmodel:0.4.0'
   //just action classes
   implementation 'org.archtree:archtree-action:0.4.0'
