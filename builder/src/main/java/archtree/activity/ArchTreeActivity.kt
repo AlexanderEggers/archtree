@@ -57,6 +57,10 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
         } else {
             activityResource?.getLayer()?.onCreate(getViewModel(), getView(), getBundle())
         }
+
+        if(activityResource?.hideSupportBar == true) {
+            supportActionBar?.hide()
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

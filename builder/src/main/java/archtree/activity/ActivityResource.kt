@@ -13,8 +13,8 @@ constructor(builder: ActivityBuilder<ViewModel>) : ArchTreeResource<ViewModel>(b
 
     var viewModel: ViewModel? = null
         private set
-    var fragmentFlow: HasFragmentFlow? = builder.fragmentFlow
-        private set
+    val fragmentFlow: HasFragmentFlow? = builder.fragmentFlow
+    val hideSupportBar: Boolean = builder.hideSupportBar
 
     open fun onCreateViewModel(activity: FragmentActivity, factory: ViewModelProvider.Factory) {
         viewModel = ViewModelProviders.of(activity, factory).get(viewModelClass!!)

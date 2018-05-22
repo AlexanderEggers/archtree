@@ -8,6 +8,13 @@ open class ActivityBuilder<ViewModel : BaseViewModel> : ArchTreeBuilder<ViewMode
 
     var fragmentFlow: HasFragmentFlow? = null
         private set
+    var hideSupportBar: Boolean = false
+        private set
+
+    open fun setHideSupportBar(hideSupportBar: Boolean): ActivityBuilder<ViewModel> {
+        this.fragmentFlow = fragmentFlow
+        return this
+    }
 
     open fun setFragmentFlow(fragmentFlow: HasFragmentFlow): ActivityBuilder<ViewModel> {
         this.fragmentFlow = fragmentFlow
