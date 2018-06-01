@@ -34,7 +34,7 @@ android {
     buildToolsVersion "27.0.3"
 
     defaultConfig {
-        minSdkVersion 16
+        minSdkVersion 14
         versionName "$archtree_library_version"
         consumerProguardFiles 'proguard-rules.pro'
     }

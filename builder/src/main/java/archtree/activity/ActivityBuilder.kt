@@ -12,7 +12,7 @@ open class ActivityBuilder<ViewModel : BaseViewModel> : ArchTreeBuilder<ViewMode
         private set
 
     open fun setHideSupportBar(hideSupportBar: Boolean): ActivityBuilder<ViewModel> {
-        this.fragmentFlow = fragmentFlow
+        this.hideSupportBar = hideSupportBar
         return this
     }
 
