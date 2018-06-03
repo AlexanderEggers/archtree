@@ -90,15 +90,15 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
         return dispatchingAndroidInjector
     }
 
-    fun getView(): View? {
+    open fun getView(): View? {
         return window.decorView.findViewById(android.R.id.content)
     }
 
-    fun getViewModel(): ViewModel? {
+    open fun getViewModel(): ViewModel? {
         return activityResource?.viewModel
     }
 
-    fun getBinding(): ViewDataBinding? {
+    open fun getBinding(): ViewDataBinding? {
         return activityResource?.binding
     }
 

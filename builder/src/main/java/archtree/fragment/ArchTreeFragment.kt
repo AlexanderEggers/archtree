@@ -65,15 +65,15 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
         }
     }
 
-    fun getFragmentResource(): FragmentResource<ViewModel>? {
+    open fun getFragmentResource(): FragmentResource<ViewModel>? {
         return fragmentResource
     }
 
-    fun getViewModel(): ViewModel? {
+    open fun getViewModel(): ViewModel? {
         return fragmentResource?.viewModel
     }
 
-    fun getBinding(): ViewDataBinding? {
+    open fun getBinding(): ViewDataBinding? {
         return fragmentResource?.binding
     }
 
