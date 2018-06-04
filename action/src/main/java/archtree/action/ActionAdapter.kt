@@ -7,20 +7,15 @@ class ActionAdapter {
 
     companion object {
 
+        @JvmOverloads
         @JvmStatic
         @BindingAdapter("action", "actionParameter")
-        fun <T> setAction(button: View, action: Action<T>?, actionParameter: T?) {
+        fun <T> setAction(button: View, action: Action<T>?, actionParameter: T? = null) {
             if (action != null) {
                 button.setOnClickListener(ActionListener(button, action, actionParameter))
             } else {
                 throw IllegalStateException("Action object should not be null.")
             }
-        }
-
-        @JvmStatic
-        @BindingAdapter("action")
-        fun setAction(button: View, action: Action<Any>) {
-            setAction(button, action, null)
         }
     }
 

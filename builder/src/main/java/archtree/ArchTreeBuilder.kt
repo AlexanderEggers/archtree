@@ -28,6 +28,7 @@ abstract class ArchTreeBuilder<ViewModel : BaseViewModel, out Builder> {
         return this as Builder
     }
 
+    @JvmOverloads
     fun setViewModel(viewModelClass: Class<ViewModel>, bindingKey: Int = -1, skipViewModelInit: Boolean = false): Builder {
         this.viewModelClass = viewModelClass
         this.bindingKey = bindingKey

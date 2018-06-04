@@ -9,19 +9,8 @@ abstract class BaseViewModel : ViewModel() {
 
     private var hasInitialised: Boolean = false
 
-    fun init() {
-        init(false, null)
-    }
-
-    fun init(bundle: Bundle?) {
-        init(false, bundle)
-    }
-
-    fun init(forceInit: Boolean) {
-        init(forceInit, null)
-    }
-
-    fun init(forceInit: Boolean, bundle: Bundle?) {
+    @JvmOverloads
+    fun init(forceInit: Boolean = false, bundle: Bundle? = null) {
         if (!hasInitialised || forceInit) {
             hasInitialised = true
             onInit(bundle)
