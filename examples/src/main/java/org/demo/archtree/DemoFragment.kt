@@ -12,6 +12,7 @@ import autotarget.annotation.FragmentTarget
 class DemoFragment: ArchTreeFragment<HasNoViewModel>() {
 
     override fun provideFragmentResource(builder: FragmentBuilder<HasNoViewModel>): FragmentResource<HasNoViewModel> {
-        return builder.setLayoutId(R.layout.fragment_layout).build()
+        return builder.setLayoutId(R.layout.fragment_layout)
+                .build()
     }
 }
