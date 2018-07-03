@@ -65,7 +65,7 @@ dependencies {
     api project(':archtree-viewmodel')
     //api "org.archtree:archtree-viewmodel:$archtree_library_version"
 
-    kapt "com.android.databinding:compiler:$databinding_version"
+    kapt "com.android.databinding:compiler:$android_studio_version"
 }
 
 apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'

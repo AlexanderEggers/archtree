@@ -50,11 +50,8 @@ tasks.withType(Javadoc).all {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "android.arch.lifecycle:extensions:$lifecycle_version"
-    implementation "org.archknife:archknife-annotation:$archknife_version"
-    implementation "com.google.dagger:dagger:$dagger_version"
 }
 
 apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'

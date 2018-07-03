@@ -24,7 +24,7 @@ constructor(builder: ActivityBuilder<ViewModel>) : ArchTreeResource<ViewModel>(b
                 "component layout.")
 
         if (!skipViewModelInit) {
-            viewModel?.init(bundle)
+            viewModel?.init(false, bundle)
             binding?.setLifecycleOwner(activity)
         }
     }

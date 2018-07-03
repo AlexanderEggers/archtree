@@ -4,7 +4,6 @@ import archknife.annotation.ProvideFragment
 import archtree.fragment.ArchTreeFragment
 import archtree.fragment.FragmentBuilder
 import archtree.fragment.FragmentResource
-import archtree.viewmodel.HasNoViewModel
 import autotarget.annotation.FragmentTarget
 
 @FragmentTarget(R.id.fragment_container)
