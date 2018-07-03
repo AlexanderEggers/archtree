@@ -13,19 +13,21 @@ repositories {
 }
 
 dependencies {
+  def archtree_version = "0.5.0"
+
   //includes all library artifacts
-  implementation 'org.archtree:archtree-core:0.4.0'
+  implementation "org.archtree:archtree-core:$archtree_version"
   
   //just builder (base, activity and fragment) and viewmodel classes
-  implementation 'org.archtree:archtree-builder:0.4.0'
+  implementation "org.archtree:archtree-builder:$archtree_version"
   //just viewmodel classes
-  implementation 'org.archtree:archtree-viewmodel:0.4.0'
+  implementation "org.archtree:archtree-viewmodel:$archtree_version"
   //just action classes
-  implementation 'org.archtree:archtree-action:0.4.0'
+  implementation "org.archtree:archtree-action:$archtree_version"
 }
 ```
 
-How do I use ArchTree? (Step-by-step introduction for 0.4.0)
+How do I use ArchTree? (Step-by-step introduction for 0.5.0)
 -------------------
 Coming soon! For now, use the [example project][3] as a reference.
 
@@ -38,7 +40,7 @@ Comments/bugs/questions/pull requests are always welcome!
 Compatibility
 -------------
 
- * **Minimum Android SDK**: ArchTree requires a minimum API level of 16.
+ * **Minimum Android SDK**: ArchTree requires a minimum API level of 14.
  * ArchTree requires Binding-v2.
 
 Author
