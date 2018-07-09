@@ -3,11 +3,11 @@ apply plugin: 'kotlin-android'
 
 ext {
     bintrayRepo = 'android'
-    bintrayName = 'archtree-core'
+    bintrayName = 'archtree-helper'
 
     publishedGroupId = 'org.archtree'
-    libraryName = 'archtree-core'
-    artifact = 'archtree-core'
+    libraryName = 'archtree-helper'
+    artifact = 'archtree-helper'
 
     libraryDescription = 'Android library that simplifies the usage of Activities, Fragments and ViewModels.'
 
@@ -44,18 +44,15 @@ android {
     }
 }
 
+tasks.withType(Javadoc).all {
+    enabled = false
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-
-    api project(":archtree-builder")
-    api project(":archtree-viewmodel")
-    api project(":archtree-action")
-    api project(":archtree-helper")
-
-    //api "org.archtree:archtree-builder:$archtree_library_version"
-    //api "org.archtree:archtree-viewmodel:$archtree_library_version"
-    //api "org.archtree:archtree-action:$archtree_library_version"
+    implementation "com.google.dagger:dagger:$dagger_version"
+    implementation "com.android.support:appcompat-v7:$support_lib_version"
 }
 
 apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
