@@ -7,7 +7,7 @@ abstract class Action<T> {
 
     abstract fun execute(parameter: T?)
 
-    fun canExecute(parameter: T?): Boolean {
+    open fun canExecute(parameter: T?): Boolean {
         return true
     }
 
