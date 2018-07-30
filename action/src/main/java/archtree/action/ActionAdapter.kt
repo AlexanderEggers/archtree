@@ -9,16 +9,16 @@ class ActionAdapter {
 
         @JvmStatic
         @BindingAdapter("action", "actionParameter")
-        fun <T> setAction(button: View, action: Action<T>?, actionParameter: T?) {
+        fun <T> setAction(view: View, action: Action<T>?, actionParameter: T?) {
             action?.let {
-                button.setOnClickListener(ActionListener(button, it, actionParameter))
+                view.setOnClickListener(ActionListener(view, it, actionParameter))
             } ?: throw IllegalStateException("Action object should not be null.")
         }
 
         @JvmStatic
         @BindingAdapter("action")
-        fun setAction(button: View, action: Action<Any>?) {
-            setAction(button, action, null)
+        fun setAction(view: View, action: Action<Any>?) {
+            setAction(view, action, null)
         }
     }
 

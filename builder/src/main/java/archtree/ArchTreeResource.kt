@@ -1,5 +1,6 @@
 package archtree
 
+import android.databinding.DataBindingComponent
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import android.os.Bundle
@@ -26,6 +27,7 @@ abstract class ArchTreeResource<ViewModel : BaseViewModel> constructor(builder: 
         private set
     var skipViewModelInit: Boolean = builder.skipViewModelInit
         private set
+    var dataBindingComponent: DataBindingComponent? = builder.dataBindingComponent
 
     var title: String? = builder.title
         private set
@@ -33,7 +35,7 @@ abstract class ArchTreeResource<ViewModel : BaseViewModel> constructor(builder: 
         private set
 
     fun onCreateView(inflater: LayoutInflater, container: ViewGroup?): View? {
-        binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
+        binding = DataBindingUtil.inflate(inflater, layoutId, container, false, dataBindingComponent)
 
         view = if (binding == null) {
             Log.d(ArchTreeResource::class.java.name, "Did you forget to define your layout using " +

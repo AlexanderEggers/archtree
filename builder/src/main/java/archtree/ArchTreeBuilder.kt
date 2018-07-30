@@ -1,5 +1,6 @@
 package archtree
 
+import android.databinding.DataBindingComponent
 import android.os.Bundle
 import archtree.viewmodel.BaseViewModel
 
@@ -15,6 +16,8 @@ abstract class ArchTreeBuilder<ViewModel : BaseViewModel, out Builder> {
         private set
     var skipViewModelInit: Boolean = false
         private set
+    var dataBindingComponent: DataBindingComponent? = null
+        private set
 
     var title: String? = null
         private set
@@ -29,10 +32,12 @@ abstract class ArchTreeBuilder<ViewModel : BaseViewModel, out Builder> {
     }
 
     @JvmOverloads
-    fun setViewModel(viewModelClass: Class<ViewModel>, bindingKey: Int = -1, skipViewModelInit: Boolean = false): Builder {
+    fun setViewModel(viewModelClass: Class<ViewModel>, bindingKey: Int = -1,
+                     dataBindingComponent: DataBindingComponent? = null, skipViewModelInit: Boolean = false): Builder {
         this.viewModelClass = viewModelClass
         this.bindingKey = bindingKey
         this.skipViewModelInit = skipViewModelInit
+        this.dataBindingComponent = dataBindingComponent
         return this as Builder
     }
 
