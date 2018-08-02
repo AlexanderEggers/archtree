@@ -1,7 +1,9 @@
 package archtree
 
+import android.annotation.SuppressLint
 import android.databinding.DataBindingComponent
 import android.os.Bundle
+import android.util.Log
 import archtree.viewmodel.BaseViewModel
 
 @Suppress("UNCHECKED_CAST")
@@ -31,13 +33,20 @@ abstract class ArchTreeBuilder<ViewModel : BaseViewModel, out Builder> {
         return this as Builder
     }
 
+    @SuppressLint("LogNotTimber")
     @JvmOverloads
     fun setViewModel(viewModelClass: Class<ViewModel>, bindingKey: Int = -1,
-                     dataBindingComponent: DataBindingComponent? = null, skipViewModelInit: Boolean = false): Builder {
+                     dataBindingComponent: Any? = null, skipViewModelInit: Boolean = false): Builder {
         this.viewModelClass = viewModelClass
         this.bindingKey = bindingKey
         this.skipViewModelInit = skipViewModelInit
-        this.dataBindingComponent = dataBindingComponent
+
+        try {
+            this.dataBindingComponent = dataBindingComponent as? DataBindingComponent?
+        } catch (e: ClassCastException) {
+            Log.e(ArchTreeBuilder::class.java.name, e.message)
+        }
+
         return this as Builder
     }
 

@@ -51,7 +51,8 @@ dependencies {
     api project(":archtree-builder")
     api project(":archtree-viewmodel")
     api project(":archtree-action")
-    api project(":archtree-helper")
+
+    //api project(":archtree-helper") TODO is not included yet, still WIP
 
     //api "org.archtree:archtree-builder:$archtree_library_version"
     //api "org.archtree:archtree-viewmodel:$archtree_library_version"

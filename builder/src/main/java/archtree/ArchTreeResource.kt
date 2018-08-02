@@ -1,5 +1,6 @@
 package archtree
 
+import android.annotation.SuppressLint
 import android.databinding.DataBindingComponent
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
@@ -34,6 +35,7 @@ abstract class ArchTreeResource<ViewModel : BaseViewModel> constructor(builder: 
     var bundle: Bundle? = builder.bundle
         private set
 
+    @SuppressLint("LogNotTimber")
     fun onCreateView(inflater: LayoutInflater, container: ViewGroup?): View? {
         binding = DataBindingUtil.inflate(inflater, layoutId, container, false, dataBindingComponent)
 
