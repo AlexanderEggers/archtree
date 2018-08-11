@@ -2,6 +2,4 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:background="@android:color/holo_blue_bright"
-    android:layout_height="100dp">
-
-</LinearLayout>
+    android:layout_height="100dp" />
