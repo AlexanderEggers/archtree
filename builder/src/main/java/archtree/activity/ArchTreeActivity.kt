@@ -6,6 +6,7 @@ import android.databinding.ViewDataBinding
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
+import android.view.MenuItem
 import android.view.View
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -60,12 +61,32 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
 
         if(activityResource?.hideSupportBar == true) {
             supportActionBar?.hide()
+        } else {
+            val toolbarViewId = getActivityResource()?.toolbarViewId
+            if(toolbarViewId != null) {
+                setSupportActionBar(findViewById(toolbarViewId))
+                supportActionBar?.setDisplayHomeAsUpEnabled(true)
+            }
         }
+
+        window.decorView.systemUiVisibility = getActivityResource()?.systemUiVisibility ?: 0
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        getViewModel()?.sendActivityResult(requestCode, resultCode, data, getBundle())
+        getViewModel()?.onActivityResult(requestCode, resultCode, data, getBundle())
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                if(getActivityResource()?.enableDefaultBackPressed == true) {
+                    onBackPressed()
+                }
+            }
+            else -> getViewModel()?.onOptionsItemSelected(item)
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onStop() {

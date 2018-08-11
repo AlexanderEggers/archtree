@@ -13,8 +13,14 @@ constructor(builder: ActivityBuilder<ViewModel>) : ArchTreeResource<ViewModel>(b
 
     var viewModel: ViewModel? = null
         private set
+
     val fragmentFlow: HasFragmentFlow? = builder.fragmentFlow
+    val menuId: Int? = builder.menuId
+    val systemUiVisibility: Int = builder.systemUiVisibility
+
     val hideSupportBar: Boolean = builder.hideSupportBar
+    val toolbarViewId: Int? = builder.toolbarViewId
+    val enableDefaultBackPressed: Boolean = builder.enableDefaultBackPressed
 
     open fun onCreateViewModel(activity: FragmentActivity, factory: ViewModelProvider.Factory) {
         viewModel = ViewModelProviders.of(activity, factory).get(viewModelClass!!)

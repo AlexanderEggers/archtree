@@ -8,7 +8,7 @@ class ActionAdapter {
     companion object {
 
         @JvmStatic
-        @BindingAdapter("action", "actionParameter")
+        @BindingAdapter("archtree_action", "archtree_actionParameter")
         fun <T> setAction(view: View, action: Action<T>?, actionParameter: T?) {
             action?.let {
                 view.setOnClickListener(ActionListener(view, it, actionParameter))
@@ -16,7 +16,7 @@ class ActionAdapter {
         }
 
         @JvmStatic
-        @BindingAdapter("action")
+        @BindingAdapter("archtree_action")
         fun setAction(view: View, action: Action<Any>?) {
             setAction(view, action, null)
         }

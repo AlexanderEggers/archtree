@@ -4,6 +4,7 @@ import android.arch.lifecycle.ViewModel
 import android.content.Intent
 import android.os.Bundle
 import android.support.annotation.CallSuper
+import android.view.MenuItem
 
 abstract class BaseViewModel : ViewModel() {
 
@@ -19,15 +20,16 @@ abstract class BaseViewModel : ViewModel() {
 
     @CallSuper
     protected open fun onInit(bundle: Bundle?) {
-
-    }
-
-    fun sendActivityResult(requestCode: Int, resultCode: Int, data: Intent?, bundle: Bundle?) {
-        onActivityResult(requestCode, resultCode, data, bundle)
+        //do nothing by default
     }
 
     @CallSuper
-    protected open fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?, bundle: Bundle?) {
+    open fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?, bundle: Bundle?) {
+        //do nothing by default
+    }
 
+    @CallSuper
+    open fun onOptionsItemSelected(item: MenuItem) {
+        //do nothing by default
     }
 }

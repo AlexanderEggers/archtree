@@ -42,6 +42,10 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_7
         targetCompatibility JavaVersion.VERSION_1_7
     }
+
+    dataBinding {
+        enabled = true
+    }
 }
 
 tasks.withType(Javadoc).all {
@@ -53,6 +57,10 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "com.google.dagger:dagger:$dagger_version"
     implementation "com.android.support:appcompat-v7:$support_lib_version"
+    implementation "com.android.support:transition:$support_lib_version"
+    implementation 'com.google.code.gson:gson:2.8.5'
+
+    kapt "com.android.databinding:compiler:$android_studio_version"
 }
 
 apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
