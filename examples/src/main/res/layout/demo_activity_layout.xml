@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
+        <import type="org.demo.archtree.R" />
 
         <variable
             name="viewModel"
@@ -20,17 +23,24 @@
             android:text="Test" />
 
         <Button
-            archtree_action="@{viewModel.action}"
             android:id="@+id/button"
-            android:text="Click me!"
+            archtree_action="@{viewModel.action}"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="Click me!" />
 
         <LinearLayout
             android:id="@+id/fragment_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" />
+
+        <archtree.list.BindableRecyclerViewLayout
+            archtree_itemTemplate="@{R.layout.demo_list_item_layout}"
+            archtree_itemsSource="@{viewModel.observableArrayList}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
 
     </LinearLayout>
 
