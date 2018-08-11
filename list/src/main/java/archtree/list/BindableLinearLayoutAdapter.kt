@@ -1,27 +1,27 @@
 package archtree.list
 
-import android.view.View
+import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 
 import java.util.ArrayList
 
-abstract class BinableLinearLayoutAdapter {
+abstract class BindableLinearLayoutAdapter: BindableListAdapter {
 
-    private val mViewHolderList = ArrayList<ViewHolder>()
+    private val mViewHolderList = ArrayList<RecyclerView.ViewHolder>()
     private lateinit var viewGroup: ViewGroup
 
     protected abstract val itemCount: Int
 
-    protected abstract fun onCreateViewHolder(viewGroup: ViewGroup, type: Int): ViewHolder
+    protected abstract fun onCreateViewHolder(viewGroup: ViewGroup, type: Int): RecyclerView.ViewHolder
 
-    protected abstract fun onBindViewHolder(viewHolder: ViewHolder, position: Int)
+    protected abstract fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int)
 
     fun bindViewGroup(viewGroup: ViewGroup) {
         this.viewGroup = viewGroup
         notifyDataSetChanged()
     }
 
-    fun notifyDataSetChanged() {
+    override fun notifyDataSetChanged() {
         viewGroup.removeAllViews()
         mViewHolderList.clear()
 
@@ -32,15 +32,13 @@ abstract class BinableLinearLayoutAdapter {
         for (i in mViewHolderList.indices) {
             val viewHolder = mViewHolderList[i]
             onBindViewHolder(viewHolder, i)
-            viewGroup.addView(viewHolder.itemLayout)
+            viewGroup.addView(viewHolder.itemView)
         }
     }
 
-    private fun getType(position: Int): Int {
+    protected fun getType(position: Int): Int {
         return NO_TYPE_SET
     }
-
-    abstract class ViewHolder(internal val itemLayout: View)
 
     companion object {
         private const val NO_TYPE_SET = 0
