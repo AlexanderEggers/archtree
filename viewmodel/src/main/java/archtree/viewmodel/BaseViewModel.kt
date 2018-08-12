@@ -32,4 +32,9 @@ abstract class BaseViewModel : ViewModel() {
     open fun onOptionsItemSelected(item: MenuItem) {
         //do nothing by default
     }
+
+    @CallSuper
+    open fun onBackPressed(): Boolean {
+        return true
+    }
 }

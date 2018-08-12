@@ -40,7 +40,8 @@ class ResourceAccessor
      * @throws android.content.res.Resources.NotFoundException if the given resource does not exist.
      * @since 1.0.0
      */
-    fun getString(@StringRes stringRes: Int, vararg arguments: Any): String {
+    @JvmOverloads
+    fun getString(@StringRes stringRes: Int, vararg arguments: Any = emptyArray()): String {
         return context.getString(stringRes, *arguments)
     }
 
@@ -54,7 +55,8 @@ class ResourceAccessor
      * @throws android.content.res.Resources.NotFoundException if the given resource does not exist.
      * @since 1.0.0
      */
-    fun getPlural(@PluralsRes pluralRes: Int, amount: Int, vararg arguments: Any): String {
+    @JvmOverloads
+    fun getPlural(@PluralsRes pluralRes: Int, amount: Int, vararg arguments: Any = emptyArray()): String {
         return context.resources.getQuantityString(pluralRes, amount, *arguments)
     }
 
@@ -127,7 +129,7 @@ class ResourceAccessor
      * @throws android.content.res.Resources.NotFoundException if the given resource does not exist.
      * @since 1.0.0
      */
-    fun getDimensionPixelSize(res: Int): Int {
+    fun getDimensionPixelSize(@DimenRes res: Int): Int {
         return context.resources.getDimensionPixelSize(res)
     }
 
@@ -139,7 +141,7 @@ class ResourceAccessor
      * @throws android.content.res.Resources.NotFoundException if the given resource does not exist.
      * @since 1.0.0
      */
-    fun getDimensionPixelOffset(res: Int): Int {
+    fun getDimensionPixelOffset(@DimenRes res: Int): Int {
         return context.resources.getDimensionPixelOffset(res)
     }
 
@@ -151,7 +153,7 @@ class ResourceAccessor
      * @throws android.content.res.Resources.NotFoundException if the given resource does not exist.
      * @since 1.0.0
      */
-    fun getIntArray(res: Int): IntArray {
+    fun getIntArray(@ArrayRes res: Int): IntArray {
         return context.resources.getIntArray(res)
     }
 

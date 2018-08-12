@@ -32,11 +32,11 @@ class BindableLinearLayout : LinearLayout {
         fun <T : BindableListItem> bindItemsSource(
                 container: BindableLinearLayout,
                 oldItems: List<T>?,
-                @LayoutRes oldEntryLayout: Int,
+                @LayoutRes oldItemLayout: Int,
                 newItems: List<T>?,
-                @LayoutRes newEntryLayout: Int) {
-            bindItemsSource<T, ViewModel>(container, oldItems, oldEntryLayout,
-                    null, newItems, newEntryLayout, null)
+                @LayoutRes newItemLayout: Int) {
+            bindItemsSource<T, ViewModel>(container, oldItems, oldItemLayout,
+                    null, newItems, newItemLayout, null)
         }
 
         @JvmStatic
@@ -44,15 +44,15 @@ class BindableLinearLayout : LinearLayout {
         fun <T : BindableListItem, V : ViewModel> bindItemsSource(
                 container: BindableLinearLayout,
                 oldItems: List<T>?,
-                @LayoutRes oldEntryLayout: Int,
-                oldParentDataContext: V?,
+                @LayoutRes oldItemLayout: Int,
+                oldViewModel: V?,
                 newItems: List<T>?,
-                @LayoutRes newEntryLayout: Int,
-                newParentDataContext: V?) {
+                @LayoutRes newItemLayout: Int,
+                newViewModel: V?) {
 
             if (oldItems === newItems
-                    && oldEntryLayout == newEntryLayout
-                    && oldParentDataContext == newParentDataContext) {
+                    && oldItemLayout == newItemLayout
+                    && oldViewModel == newViewModel) {
                 // Nothing changed
                 return
             }
@@ -65,7 +65,7 @@ class BindableLinearLayout : LinearLayout {
                 override fun onCreateViewHolder(viewGroup: ViewGroup, type: Int): RecyclerView.ViewHolder {
                     val binding = DataBindingUtil.inflate<ViewDataBinding>(
                             LayoutInflater.from(container.context),
-                            newEntryLayout,
+                            newItemLayout,
                             viewGroup,
                             false
                     )
@@ -76,7 +76,7 @@ class BindableLinearLayout : LinearLayout {
                 @Suppress("UNCHECKED_CAST")
                 override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
                     if (viewHolder is DataContextAwareViewHolder<*, *>) {
-                        (viewHolder as DataContextAwareViewHolder<T, V>).bind(newItems!![position], newParentDataContext)
+                        (viewHolder as DataContextAwareViewHolder<T, V>).bind(newItems!![position], newViewModel)
                     }
                 }
             }

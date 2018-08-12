@@ -6,6 +6,7 @@ import android.databinding.ViewDataBinding
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
+import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import dagger.android.AndroidInjector
@@ -70,6 +71,22 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
         }
 
         window.decorView.systemUiVisibility = getActivityResource()?.systemUiVisibility ?: 0
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val menuId = activityResource?.menuId
+        if(menuId != null) {
+            val inflater = menuInflater
+            inflater.inflate(menuId, menu)
+        }
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onBackPressed() {
+        val shouldRunDefaultBackPressed = getViewModel()?.onBackPressed() ?: true
+        if(shouldRunDefaultBackPressed) {
+            super.onBackPressed()
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

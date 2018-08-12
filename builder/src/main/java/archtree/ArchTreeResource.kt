@@ -40,8 +40,8 @@ abstract class ArchTreeResource<ViewModel : BaseViewModel> constructor(builder: 
         binding = DataBindingUtil.inflate(inflater, layoutId, container, false, dataBindingComponent)
 
         view = if (binding == null) {
-            Log.d(ArchTreeResource::class.java.name, "Did you forget to define your layout using " +
-                    "<layout>...</layout>? Inflating layout using the default " +
+            Log.d(ArchTreeResource::class.java.name, "Did you forget to define your layout " +
+                    "using <layout>...</layout>? Inflating layout using the default " +
                     "LayoutInflater.inflate(...).")
             inflater.inflate(layoutId, container, false)
         } else {

@@ -16,7 +16,7 @@ abstract class BindableLinearLayoutAdapter: BindableListAdapter {
 
     protected abstract fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int)
 
-    fun bindViewGroup(viewGroup: ViewGroup) {
+    open fun bindViewGroup(viewGroup: ViewGroup) {
         this.viewGroup = viewGroup
         notifyDataSetChanged()
     }
@@ -36,7 +36,7 @@ abstract class BindableLinearLayoutAdapter: BindableListAdapter {
         }
     }
 
-    protected fun getType(position: Int): Int {
+    open fun getType(position: Int): Int {
         return NO_TYPE_SET
     }
 

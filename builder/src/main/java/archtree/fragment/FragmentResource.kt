@@ -17,7 +17,7 @@ constructor(builder: FragmentBuilder<ViewModel>) : ArchTreeResource<ViewModel>(b
         viewModel = ViewModelProviders.of(fragment, factory).get(viewModelClass!!)
 
         if (binding != null && bindingKey != -1) binding!!.setVariable(bindingKey, viewModel)
-        else Log.d(FragmentResource::class.java.name, "ViewModel is not attached to layout. Are you sure about that?")
+        else Log.w(FragmentResource::class.java.name, "ViewModel is not attached to layout.")
 
         if (!skipViewModelInit) {
             viewModel?.init(false, bundle)

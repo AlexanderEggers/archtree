@@ -11,27 +11,18 @@ import javax.inject.Singleton
 class BitmapAccessor
 @Inject constructor(private val context: Context) {
 
-    fun getBitmapFromResource(@DrawableRes imageRes: Int): Bitmap? {
-        return BitmapFactory.decodeResource(context.resources, imageRes)
-    }
-
-    fun getBitmapFromResource(@DrawableRes imageRes: Int, bitmapOptions: BitmapFactory.Options): Bitmap? {
+    @JvmOverloads
+    fun getBitmapFromResource(@DrawableRes imageRes: Int, bitmapOptions: BitmapFactory.Options? = null): Bitmap? {
         return BitmapFactory.decodeResource(context.resources, imageRes, bitmapOptions)
     }
 
-    fun getBitmapFromFile(filePath: String): Bitmap? {
-        return BitmapFactory.decodeFile(filePath)
-    }
-
-    fun getBitmapFromFile(filePath: String, bitmapOptions: BitmapFactory.Options): Bitmap? {
+    @JvmOverloads
+    fun getBitmapFromFile(filePath: String, bitmapOptions: BitmapFactory.Options? = null): Bitmap? {
         return BitmapFactory.decodeFile(filePath, bitmapOptions)
     }
 
-    fun getBitmapFromByteArray(byteArray: ByteArray, offset: Int, length: Int): Bitmap? {
-        return BitmapFactory.decodeByteArray(byteArray, offset, length)
-    }
-
-    fun getBitmapFromByteArray(byteArray: ByteArray, offset: Int, length: Int, bitmapOptions: BitmapFactory.Options): Bitmap? {
+    @JvmOverloads
+    fun getBitmapFromByteArray(byteArray: ByteArray, offset: Int, length: Int, bitmapOptions: BitmapFactory.Options? = null): Bitmap? {
         return BitmapFactory.decodeByteArray(byteArray, offset, length, bitmapOptions)
     }
 }

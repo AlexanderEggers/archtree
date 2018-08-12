@@ -25,14 +25,14 @@ buildscript {
 
     dependencies {
         classpath "com.android.tools.build:gradle:$android_studio_version"
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.0'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
 plugins {
-    id "org.sonarqube" version "2.6"
+    id "org.sonarqube" version "2.6.2"
 }
 
 allprojects {

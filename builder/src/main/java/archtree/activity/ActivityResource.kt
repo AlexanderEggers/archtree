@@ -26,8 +26,7 @@ constructor(builder: ActivityBuilder<ViewModel>) : ArchTreeResource<ViewModel>(b
         viewModel = ViewModelProviders.of(activity, factory).get(viewModelClass!!)
 
         if (binding != null && bindingKey != -1) binding!!.setVariable(bindingKey, viewModel)
-        else Log.w(ActivityResource::class.java.name, "ViewModel is not attached to the " +
-                "component layout.")
+        else Log.w(ActivityResource::class.java.name, "ViewModel is not attached to layout.")
 
         if (!skipViewModelInit) {
             viewModel?.init(false, bundle)

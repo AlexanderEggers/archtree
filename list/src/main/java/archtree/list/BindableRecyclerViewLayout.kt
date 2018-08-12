@@ -27,11 +27,11 @@ class BindableRecyclerViewLayout : RecyclerView {
         fun <T : BindableListItem> bindItemsSource(
                 container: BindableRecyclerViewLayout,
                 oldItems: List<T>?,
-                @LayoutRes oldEntryLayout: Int,
+                @LayoutRes oldItemLayout: Int,
                 newItems: List<T>?,
-                @LayoutRes newEntryLayout: Int) {
-            bindItemsSource<T, ViewModel>(container, oldItems, oldEntryLayout,
-                    null, newItems, newEntryLayout, null)
+                @LayoutRes newItemLayout: Int) {
+            bindItemsSource<T, ViewModel>(container, oldItems, oldItemLayout,
+                    null, newItems, newItemLayout, null)
         }
 
         @JvmStatic
@@ -39,15 +39,15 @@ class BindableRecyclerViewLayout : RecyclerView {
         fun <T : BindableListItem, V : ViewModel> bindItemsSource(
                 container: BindableRecyclerViewLayout,
                 oldItems: List<T>?,
-                @LayoutRes oldEntryLayout: Int,
-                oldParentDataContext: V?,
+                @LayoutRes oldItemLayout: Int,
+                oldViewModel: V?,
                 newItems: List<T>?,
-                @LayoutRes newEntryLayout: Int,
-                newParentDataContext: V?) {
+                @LayoutRes newItemLayout: Int,
+                newViewModel: V?) {
 
             if (oldItems === newItems
-                    && oldEntryLayout == newEntryLayout
-                    && oldParentDataContext == newParentDataContext) {
+                    && oldItemLayout == newItemLayout
+                    && oldViewModel == newViewModel) {
                 // Nothing changed
                 return
             }
@@ -57,7 +57,7 @@ class BindableRecyclerViewLayout : RecyclerView {
                 override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
                     val binding = DataBindingUtil.inflate<ViewDataBinding>(
                             LayoutInflater.from(container.context),
-                            newEntryLayout,
+                            newItemLayout,
                             parent,
                             false
                     )
@@ -68,7 +68,7 @@ class BindableRecyclerViewLayout : RecyclerView {
                 @Suppress("UNCHECKED_CAST")
                 override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
                     if (viewHolder is DataContextAwareViewHolder<*, *>) {
-                        (viewHolder as DataContextAwareViewHolder<T, V>).bind(newItems!![position], newParentDataContext)
+                        (viewHolder as DataContextAwareViewHolder<T, V>).bind(newItems!![position], newViewModel)
                     }
                 }
 

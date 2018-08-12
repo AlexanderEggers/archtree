@@ -1,6 +1,7 @@
 package archtree.helper
 
 import android.support.annotation.WorkerThread
+import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.JsonArray
 import com.google.gson.reflect.TypeToken
@@ -18,8 +19,13 @@ class JsonConverter
     }
     
     @WorkerThread
-    fun toJsonTree(value: List<*>): JsonArray {
-        return gson.toJsonTree(value).asJsonArray
+    fun toJsonTree(value: List<*>): JsonArray? {
+        return try {
+            gson.toJsonTree(value).asJsonArray
+        } catch (e: IllegalStateException) {
+            Log.wtf(JsonConverter::class.java.name, "Given JsonElement is not a JsonArray.")
+            null
+        }
     }
 
     @WorkerThread

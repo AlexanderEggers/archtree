@@ -35,7 +35,7 @@ open class ActivityBuilder<ViewModel : BaseViewModel> : ArchTreeBuilder<ViewMode
     @JvmOverloads
     open fun setToolbar(@IdRes viewId: Int, enableDefaultBackPressed: Boolean = true): ActivityBuilder<ViewModel> {
         this.toolbarViewId = viewId
-
+        this.enableDefaultBackPressed = enableDefaultBackPressed
         return this
     }
 
