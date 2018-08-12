@@ -12,7 +12,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class ValueAccessor
+class ResourceAccessor
 @Inject constructor(private val context: Context) {
 
     /**
