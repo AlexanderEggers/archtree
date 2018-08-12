@@ -54,9 +54,11 @@ dependencies {
     api project(":archtree-helper")
     api project(":archtree-list")
 
-    //api "org.archtree:archtree-builder:$archtree_library_version"
-    //api "org.archtree:archtree-viewmodel:$archtree_library_version"
-    //api "org.archtree:archtree-action:$archtree_library_version"
+    /*api "org.archtree:archtree-builder:$archtree_library_version"
+    api "org.archtree:archtree-viewmodel:$archtree_library_version"
+    api "org.archtree:archtree-action:$archtree_library_version"
+    api "org.archtree:archtree-helper:$archtree_library_version"
+    api "org.archtree:archtree-list:$archtree_library_version"*/
 }
 
 apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
