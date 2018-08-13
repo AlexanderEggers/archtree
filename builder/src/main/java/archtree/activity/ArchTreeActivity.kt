@@ -54,12 +54,6 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
             activityResource?.onCreateViewModel(this, viewModelFactory)
         }
 
-        if (getBinding() != null) {
-            activityResource?.getLayer()?.onCreate(getViewModel(), getBinding(), getBundle())
-        } else {
-            activityResource?.getLayer()?.onCreate(getViewModel(), getView(), getBundle())
-        }
-
         if(activityResource?.hideSupportBar == true) {
             supportActionBar?.hide()
         } else {
@@ -71,6 +65,12 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
         }
 
         window.decorView.systemUiVisibility = getActivityResource()?.systemUiVisibility ?: 0
+
+        if (getBinding() != null) {
+            activityResource?.getLayer()?.onCreate(getViewModel(), getBinding(), getBundle())
+        } else {
+            activityResource?.getLayer()?.onCreate(getViewModel(), getView(), getBundle())
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

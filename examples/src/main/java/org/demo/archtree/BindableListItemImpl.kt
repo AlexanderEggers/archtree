@@ -4,9 +4,9 @@ import android.arch.lifecycle.ViewModel
 import android.databinding.ViewDataBinding
 import archtree.list.BindableListItem
 
-class BindableListItemImpl(private val value: String): BindableListItem() {
+class BindableListItemImpl(private val value: String): BindableListItem {
 
-    override fun <V : ViewModel> bind(viewModel: V?, binding: ViewDataBinding) {
+    override fun bind(viewModel: ViewModel?, binding: ViewDataBinding) {
         binding.setVariable(BR.value, value)
     }
 }
