@@ -3,6 +3,7 @@ package archtree.fragment
 import android.arch.lifecycle.ViewModelProvider
 import android.databinding.ViewDataBinding
 import android.os.Bundle
+import android.support.annotation.CallSuper
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -53,6 +54,11 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
         }
 
         return view
+    }
+
+    @CallSuper
+    open fun onBackPressed(): Boolean {
+        return getViewModel()?.onBackPressed() ?: true
     }
 
     override fun onStop() {

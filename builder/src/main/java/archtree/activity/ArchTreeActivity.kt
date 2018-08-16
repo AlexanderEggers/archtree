@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import archtree.fragment.ArchTreeFragment
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
@@ -86,7 +87,14 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
     }
 
     override fun onBackPressed() {
-        val shouldRunDefaultBackPressed = getViewModel()?.onBackPressed() ?: true
+        var shouldRunDefaultBackPressed = getViewModel()?.onBackPressed() ?: true
+        supportFragmentManager.fragments.forEach { fragment ->
+            if(fragment is ArchTreeFragment<*>?) {
+                val fragmentShouldRunDefaultBackPressed = fragment?.onBackPressed() ?: true
+                if(shouldRunDefaultBackPressed) shouldRunDefaultBackPressed = fragmentShouldRunDefaultBackPressed
+            }
+        }
+
         if(shouldRunDefaultBackPressed) {
             super.onBackPressed()
         }

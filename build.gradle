@@ -14,7 +14,7 @@ buildscript {
         archknife_version = '0.6.0'
         autotarget_version = '0.6.0'
 
-        archtree_library_version = "0.6.0"
+        archtree_library_version = "0.6.1"
     }
 
     repositories {
