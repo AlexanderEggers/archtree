@@ -64,7 +64,10 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
             }
         }
 
-        window.decorView.systemUiVisibility = getActivityResource()?.systemUiVisibility ?: 0
+        val systemUiVisibility = getActivityResource()?.systemUiVisibility
+        if(systemUiVisibility != 0) {
+            window.decorView.systemUiVisibility = getActivityResource()?.systemUiVisibility ?: 0
+        }
 
         if (getBinding() != null) {
             activityResource?.getLayer()?.onCreate(getViewModel(), getBinding(), getBundle())
