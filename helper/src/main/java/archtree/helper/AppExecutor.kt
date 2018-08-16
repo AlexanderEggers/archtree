@@ -11,6 +11,8 @@ import javax.inject.Singleton
 class AppExecutor @Inject constructor() {
 
     val workerThread: Executor = Executors.newSingleThreadExecutor()
+    val workerThreadPool: Executor = Executors.newCachedThreadPool()
+    
     val mainThread: Executor = MainThreadExecutor()
 
     private class MainThreadExecutor : Executor {
