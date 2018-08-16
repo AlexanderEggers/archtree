@@ -39,5 +39,13 @@ class CommonAdapter {
                 view.setImageResource(icon)
             } ?: view.setImageBitmap(null)
         }
+
+        @JvmStatic
+        @BindingAdapter("archtree_textRes")
+        fun setTextRes(view: TextView, value: Int?) {
+            value?.run {
+                view.setText(value)
+            }
+        }
     }
 }
