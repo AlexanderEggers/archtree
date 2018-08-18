@@ -1,7 +1,7 @@
 Change Log
 ==========
 
-Version 0.5.0 *(2018-08-12)*
+Version 0.6.0 *(2018-08-12)*
 ----------------------------
 - **NEW:** Added new artifact 'helper'. This artifact includes several util and databinding related classes to help you to improve your app quality. Take a look inside the related folder to get an idea (https://github.com/Mordag/archtree/tree/master/helper/src/main/java/archtree/helper)
 - **NEW:** Added new artifact 'list'. This artifact can be used to create databindable list and connect those with your viewmodels using the given ObservableList. To bind your item source to a certain list view, you can use the attribute "archtree_itemSource". The item layout can be set using the attribute "archtree_itemLayout". There are two support list types inside this artifact: **BindableLinearLayout** and **BindableRecyclerViewLayout**
