@@ -3,46 +3,38 @@ package archtree.action
 import android.databinding.BindingAdapter
 import android.view.View
 
-class ActionAdapter {
+@BindingAdapter("archtree_action", "archtree_actionParameter")
+fun <T> setAction(view: View, action: Action<T>?, actionParameter: T?) {
+    action?.let {
+        view.setOnClickListener(ActionListener(view, it, actionParameter))
+    } ?: throw IllegalStateException("Action object should not be null.")
+}
 
-    companion object {
+@BindingAdapter("archtree_action")
+fun setAction(view: View, action: Action<Any>?) {
+    setAction(view, action, null)
+}
 
-        @JvmStatic
-        @BindingAdapter("archtree_action", "archtree_actionParameter")
-        fun <T> setAction(view: View, action: Action<T>?, actionParameter: T?) {
-            action?.let {
-                view.setOnClickListener(ActionListener(view, it, actionParameter))
-            } ?: throw IllegalStateException("Action object should not be null.")
-        }
+private class ActionListener<T>
+internal constructor(private val view: View, private val action: Action<T>,
+                     private val actionParameter: T?) : View.OnClickListener, OnConditionChangedListener<T> {
 
-        @JvmStatic
-        @BindingAdapter("archtree_action")
-        fun setAction(view: View, action: Action<Any>?) {
-            setAction(view, action, null)
-        }
+    init {
+        this.action.listeners.add(this)
+        this.updateView()
     }
 
-    private class ActionListener<T>
-    internal constructor(private val view: View, private val action: Action<T>,
-                         private val actionParameter: T?) : View.OnClickListener, OnConditionChangedListener<T> {
+    private fun updateView() {
+        this.view.isEnabled = this.action.canExecute(this.actionParameter)
+    }
 
-        init {
-            this.action.listeners.add(this)
-            this.updateView()
-        }
+    override fun onConditionChanged(action: Action<T>) {
+        this.updateView()
+    }
 
-        private fun updateView() {
-            this.view.isEnabled = this.action.canExecute(this.actionParameter)
-        }
-
-        override fun onConditionChanged(action: Action<T>) {
-            this.updateView()
-        }
-
-        override fun onClick(view: View) {
-            if (this.action.canExecute(this.actionParameter)) {
-                this.action.execute(this.actionParameter)
-            }
+    override fun onClick(view: View) {
+        if (this.action.canExecute(this.actionParameter)) {
+            this.action.execute(this.actionParameter)
         }
     }
 }

@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable
 import android.os.Build
 import android.support.annotation.*
 import android.support.v4.content.ContextCompat
+import android.support.v4.content.res.ResourcesCompat
 import android.text.Html
 import android.text.Spanned
 import javax.inject.Inject
@@ -104,9 +105,8 @@ class ResourceAccessor
      * @throws android.content.res.Resources.NotFoundException if the given resource does not exist.
      * @since 1.0.0
      */
-    @RequiresApi(26)
-    fun getFont(@FontRes fontRes: Int): Typeface {
-        return context.resources.getFont(fontRes)
+    fun getFont(@FontRes fontRes: Int): Typeface? {
+        return ResourcesCompat.getFont(context, fontRes)
     }
 
     /**
