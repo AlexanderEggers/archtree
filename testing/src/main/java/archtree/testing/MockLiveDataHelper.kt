@@ -6,7 +6,7 @@ import android.arch.lifecycle.MutableLiveData
 
 import java.util.Arrays
 
-object ArchTestUtils {
+object MockLiveDataHelper {
 
     fun <T> liveDataOfList(list: List<T>): LiveData<List<T>> {
         val data = MutableLiveData<List<T>>()
