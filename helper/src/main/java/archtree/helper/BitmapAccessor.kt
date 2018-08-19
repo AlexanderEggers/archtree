@@ -8,21 +8,21 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class BitmapAccessor
+open class BitmapAccessor
 @Inject constructor(private val context: Context) {
 
     @JvmOverloads
-    fun getBitmapFromResource(@DrawableRes imageRes: Int, bitmapOptions: BitmapFactory.Options? = null): Bitmap? {
+    open fun getBitmapFromResource(@DrawableRes imageRes: Int, bitmapOptions: BitmapFactory.Options? = null): Bitmap? {
         return BitmapFactory.decodeResource(context.resources, imageRes, bitmapOptions)
     }
 
     @JvmOverloads
-    fun getBitmapFromFile(filePath: String, bitmapOptions: BitmapFactory.Options? = null): Bitmap? {
+    open fun getBitmapFromFile(filePath: String, bitmapOptions: BitmapFactory.Options? = null): Bitmap? {
         return BitmapFactory.decodeFile(filePath, bitmapOptions)
     }
 
     @JvmOverloads
-    fun getBitmapFromByteArray(byteArray: ByteArray, offset: Int, length: Int, bitmapOptions: BitmapFactory.Options? = null): Bitmap? {
+    open fun getBitmapFromByteArray(byteArray: ByteArray, offset: Int, length: Int, bitmapOptions: BitmapFactory.Options? = null): Bitmap? {
         return BitmapFactory.decodeByteArray(byteArray, offset, length, bitmapOptions)
     }
 }

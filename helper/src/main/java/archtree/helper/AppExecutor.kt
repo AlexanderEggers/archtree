@@ -8,7 +8,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class AppExecutor @Inject constructor() {
+open class AppExecutor @Inject constructor() {
 
     val workerThread: Executor = Executors.newSingleThreadExecutor()
     val workerThreadPool: Executor = Executors.newCachedThreadPool()

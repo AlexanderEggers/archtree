@@ -131,7 +131,7 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
         return activityResource?.fragmentFlow?.onShowNextFragment(containerId, state, addToBackStack, clearBackStack, bundle) ?: false
     }
 
-    fun getActivityResource(): ActivityResource<ViewModel>? {
+    open fun getActivityResource(): ActivityResource<ViewModel>? {
         return activityResource
     }
 

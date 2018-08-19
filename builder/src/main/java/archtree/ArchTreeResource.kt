@@ -36,7 +36,7 @@ abstract class ArchTreeResource<ViewModel : BaseViewModel> constructor(builder: 
         private set
 
     @SuppressLint("LogNotTimber")
-    fun onCreateView(inflater: LayoutInflater, container: ViewGroup?): View? {
+    open fun onCreateView(inflater: LayoutInflater, container: ViewGroup?): View? {
         binding = DataBindingUtil.inflate(inflater, layoutId, container, false, dataBindingComponent)
 
         view = if (binding == null) {

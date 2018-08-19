@@ -10,16 +10,16 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class JsonConverter
+open class JsonConverter
 @Inject constructor(private val gson: Gson) {
 
     @WorkerThread
-    fun convertJson(value: String, type: Type): JsonArray {
+    open fun convertJson(value: String, type: Type): JsonArray {
         return gson.fromJson(value, type)
     }
     
     @WorkerThread
-    fun toJsonTree(value: List<*>): JsonArray? {
+    open fun toJsonTree(value: List<*>): JsonArray? {
         return try {
             gson.toJsonTree(value).asJsonArray
         } catch (e: IllegalStateException) {
@@ -29,7 +29,7 @@ class JsonConverter
     }
 
     @WorkerThread
-    fun toJson(value: Any): String {
+    open fun toJson(value: Any): String {
         return gson.toJson(value)
     }
 }

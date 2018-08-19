@@ -28,14 +28,14 @@ abstract class ArchTreeBuilder<ViewModel : BaseViewModel, out Builder> {
     var layer: ArchTreeLayer<ViewModel>? = null
         private set
 
-    fun setLayoutId(layoutId: Int): Builder {
+    open fun setLayoutId(layoutId: Int): Builder {
         this.layoutId = layoutId
         return this as Builder
     }
 
     @SuppressLint("LogNotTimber")
     @JvmOverloads
-    fun setViewModel(viewModelClass: Class<ViewModel>, bindingKey: Int = -1,
+    open fun setViewModel(viewModelClass: Class<ViewModel>, bindingKey: Int = -1,
                      dataBindingComponent: Any? = null, skipViewModelInit: Boolean = false): Builder {
         this.viewModelClass = viewModelClass
         this.bindingKey = bindingKey
@@ -50,12 +50,12 @@ abstract class ArchTreeBuilder<ViewModel : BaseViewModel, out Builder> {
         return this as Builder
     }
 
-    fun setTitle(title: String): Builder {
+    open fun setTitle(title: String): Builder {
         this.title = title
         return this as Builder
     }
 
-    fun setBundle(bundle: Bundle): Builder {
+    open fun setBundle(bundle: Bundle): Builder {
         this.bundle = bundle
         return this as Builder
     }
@@ -71,7 +71,7 @@ abstract class ArchTreeBuilder<ViewModel : BaseViewModel, out Builder> {
      * @see ArchTreeLayer
      */
     @Throws(RuntimeException::class)
-    protected fun internalBuild(layer: ArchTreeLayer<ViewModel>) {
+    protected open fun internalBuild(layer: ArchTreeLayer<ViewModel>) {
         this.layer = layer
 
         if (layoutId == -1) {

@@ -13,7 +13,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class ResourceAccessor
+open class ResourceAccessor
 @Inject constructor(private val context: Context) {
 
     /**
@@ -24,7 +24,7 @@ class ResourceAccessor
      * @since 1.0.0
      */
     @Suppress("DEPRECATION")
-    fun getHtmlText(text: String): Spanned {
+    open fun getHtmlText(text: String): Spanned {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             Html.fromHtml(text, Html.FROM_HTML_MODE_LEGACY)
         } else {
@@ -42,7 +42,7 @@ class ResourceAccessor
      * @since 1.0.0
      */
     @JvmOverloads
-    fun getString(@StringRes stringRes: Int, vararg arguments: Any = emptyArray()): String {
+    open fun getString(@StringRes stringRes: Int, vararg arguments: Any? = emptyArray()): String {
         return context.getString(stringRes, *arguments)
     }
 
@@ -57,7 +57,7 @@ class ResourceAccessor
      * @since 1.0.0
      */
     @JvmOverloads
-    fun getPlural(@PluralsRes pluralRes: Int, amount: Int, vararg arguments: Any = emptyArray()): String {
+    open fun getPlural(@PluralsRes pluralRes: Int, amount: Int, vararg arguments: Any? = emptyArray()): String? {
         return context.resources.getQuantityString(pluralRes, amount, *arguments)
     }
 
@@ -69,7 +69,7 @@ class ResourceAccessor
      * @throws android.content.res.Resources.NotFoundException if the given resource does not exist.
      * @since 1.0.0
      */
-    fun getInteger(@IntegerRes integerRes: Int): Int? {
+    open fun getInteger(@IntegerRes integerRes: Int): Int? {
         return context.resources.getInteger(integerRes)
     }
 
@@ -81,7 +81,7 @@ class ResourceAccessor
      * @throws android.content.res.Resources.NotFoundException if the given resource does not exist.
      * @since 1.0.0
      */
-    fun getBoolean(@BoolRes boolRes: Int): Boolean? {
+    open fun getBoolean(@BoolRes boolRes: Int): Boolean? {
         return context.resources.getBoolean(boolRes)
     }
 
@@ -93,7 +93,7 @@ class ResourceAccessor
      * @throws android.content.res.Resources.NotFoundException if the given resource does not exist.
      * @since 1.0.0
      */
-    fun getColor(@ColorRes colorRes: Int): Int {
+    open fun getColor(@ColorRes colorRes: Int): Int? {
         return ContextCompat.getColor(context, colorRes)
     }
 
@@ -105,7 +105,7 @@ class ResourceAccessor
      * @throws android.content.res.Resources.NotFoundException if the given resource does not exist.
      * @since 1.0.0
      */
-    fun getFont(@FontRes fontRes: Int): Typeface? {
+    open fun getFont(@FontRes fontRes: Int): Typeface? {
         return ResourcesCompat.getFont(context, fontRes)
     }
 
@@ -117,7 +117,7 @@ class ResourceAccessor
      * @throws android.content.res.Resources.NotFoundException if the given resource does not exist.
      * @since 1.0.0
      */
-    fun getDrawable(@DrawableRes drawableRes: Int): Drawable? {
+    open fun getDrawable(@DrawableRes drawableRes: Int): Drawable? {
         return ContextCompat.getDrawable(context, drawableRes)
     }
 
@@ -129,7 +129,7 @@ class ResourceAccessor
      * @throws android.content.res.Resources.NotFoundException if the given resource does not exist.
      * @since 1.0.0
      */
-    fun getDimensionPixelSize(@DimenRes res: Int): Int {
+    open fun getDimensionPixelSize(@DimenRes res: Int): Int? {
         return context.resources.getDimensionPixelSize(res)
     }
 
@@ -141,7 +141,7 @@ class ResourceAccessor
      * @throws android.content.res.Resources.NotFoundException if the given resource does not exist.
      * @since 1.0.0
      */
-    fun getDimensionPixelOffset(@DimenRes res: Int): Int {
+    open fun getDimensionPixelOffset(@DimenRes res: Int): Int? {
         return context.resources.getDimensionPixelOffset(res)
     }
 
@@ -153,7 +153,7 @@ class ResourceAccessor
      * @throws android.content.res.Resources.NotFoundException if the given resource does not exist.
      * @since 1.0.0
      */
-    fun getIntArray(@ArrayRes res: Int): IntArray {
+    open fun getIntArray(@ArrayRes res: Int): IntArray? {
         return context.resources.getIntArray(res)
     }
 
@@ -165,7 +165,7 @@ class ResourceAccessor
      * @throws android.content.res.Resources.NotFoundException if the given resource does not exist.
      * @since 1.0.0
      */
-    fun getDimension(@DimenRes res: Int): Float {
+    open fun getDimension(@DimenRes res: Int): Float? {
         return context.resources.getDimension(res)
     }
 }

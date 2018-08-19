@@ -11,6 +11,12 @@ android {
         minSdkVersion 14
         targetSdkVersion 27
         versionCode 1
+
+        testInstrumentationRunner "android.test.InstrumentationTestRunner"
+
+        testOptions {
+            unitTests.returnDefaultValues = true
+        }
     }
 
     compileOptions {
@@ -41,4 +47,6 @@ dependencies {
     kapt "org.autotarget:autotarget-processor:$autotarget_version"
 
     kapt "com.android.databinding:compiler:$android_studio_version"
+
+    testImplementation project(path: ':archtree-testing')
 }
