@@ -57,7 +57,7 @@ open class ResourceAccessor
      * @since 1.0.0
      */
     @JvmOverloads
-    open fun getPlural(@PluralsRes pluralRes: Int, amount: Int, vararg arguments: Any? = emptyArray()): String? {
+    open fun getPlural(@PluralsRes pluralRes: Int, amount: Int, vararg arguments: Any? = emptyArray()): String {
         return context.resources.getQuantityString(pluralRes, amount, *arguments)
     }
 
@@ -69,7 +69,7 @@ open class ResourceAccessor
      * @throws android.content.res.Resources.NotFoundException if the given resource does not exist.
      * @since 1.0.0
      */
-    open fun getInteger(@IntegerRes integerRes: Int): Int? {
+    open fun getInteger(@IntegerRes integerRes: Int): Int {
         return context.resources.getInteger(integerRes)
     }
 
@@ -81,7 +81,7 @@ open class ResourceAccessor
      * @throws android.content.res.Resources.NotFoundException if the given resource does not exist.
      * @since 1.0.0
      */
-    open fun getBoolean(@BoolRes boolRes: Int): Boolean? {
+    open fun getBoolean(@BoolRes boolRes: Int): Boolean {
         return context.resources.getBoolean(boolRes)
     }
 
@@ -93,7 +93,7 @@ open class ResourceAccessor
      * @throws android.content.res.Resources.NotFoundException if the given resource does not exist.
      * @since 1.0.0
      */
-    open fun getColor(@ColorRes colorRes: Int): Int? {
+    open fun getColor(@ColorRes colorRes: Int): Int {
         return ContextCompat.getColor(context, colorRes)
     }
 
@@ -129,7 +129,7 @@ open class ResourceAccessor
      * @throws android.content.res.Resources.NotFoundException if the given resource does not exist.
      * @since 1.0.0
      */
-    open fun getDimensionPixelSize(@DimenRes res: Int): Int? {
+    open fun getDimensionPixelSize(@DimenRes res: Int): Int {
         return context.resources.getDimensionPixelSize(res)
     }
 
@@ -141,7 +141,7 @@ open class ResourceAccessor
      * @throws android.content.res.Resources.NotFoundException if the given resource does not exist.
      * @since 1.0.0
      */
-    open fun getDimensionPixelOffset(@DimenRes res: Int): Int? {
+    open fun getDimensionPixelOffset(@DimenRes res: Int): Int {
         return context.resources.getDimensionPixelOffset(res)
     }
 
@@ -153,7 +153,7 @@ open class ResourceAccessor
      * @throws android.content.res.Resources.NotFoundException if the given resource does not exist.
      * @since 1.0.0
      */
-    open fun getIntArray(@ArrayRes res: Int): IntArray? {
+    open fun getIntArray(@ArrayRes res: Int): IntArray {
         return context.resources.getIntArray(res)
     }
 
@@ -165,7 +165,7 @@ open class ResourceAccessor
      * @throws android.content.res.Resources.NotFoundException if the given resource does not exist.
      * @since 1.0.0
      */
-    open fun getDimension(@DimenRes res: Int): Float? {
+    open fun getDimension(@DimenRes res: Int): Float {
         return context.resources.getDimension(res)
     }
 }

@@ -76,3 +76,5 @@ fun mockResourceAccessorGetIntArray(resourceAccessor: ResourceAccessor, answer: 
 fun mockResourceAccessorGetBoolean(resourceAccessor: ResourceAccessor, answer: Answer<Boolean>) {
     `when`(resourceAccessor.getBoolean(anyInt())).thenAnswer(answer)
 }
+
+

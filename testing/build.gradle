@@ -65,6 +65,7 @@ dependencies {
     api "org.powermock:powermock-module-junit4:$powermock_version"
 
     implementation project(":archtree-helper")
+    //implementation "org.archtree:archtree-helper:$archtree_library_version"
 }
 
 apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
