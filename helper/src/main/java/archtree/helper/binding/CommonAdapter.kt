@@ -1,7 +1,9 @@
 package archtree.helper.binding
 
+import android.content.res.Resources
 import android.databinding.BindingAdapter
 import android.os.Build
+import android.support.v4.content.ContextCompat
 import android.support.v4.content.res.ResourcesCompat
 import android.text.Html
 import android.widget.ImageView
@@ -22,20 +24,36 @@ fun setHtml(textView: TextView, html: String?) {
 @BindingAdapter("archtree_custom_font")
 fun setFont(view: TextView, value: Int?) {
     value?.run {
-        view.typeface = ResourcesCompat.getFont(view.context, value)
+        val typeface = try {
+            ResourcesCompat.getFont(view.context, value)
+        } catch (e: Resources.NotFoundException) {
+            null
+        }
+        typeface?.run {
+            view.typeface = typeface
+        }
     }
 }
 
 @BindingAdapter("archtree_icon_src")
 fun setIcon(view: ImageView, icon: Int?) {
     icon?.run {
-        view.setImageResource(icon)
+        val drawable = try {
+            ContextCompat.getDrawable(view.context, icon)
+        } catch (e: Resources.NotFoundException) {
+            null
+        }
+        view.setImageDrawable(drawable)
     } ?: view.setImageBitmap(null)
 }
 
 @BindingAdapter("archtree_textRes")
 fun setTextRes(view: TextView, value: Int?) {
     value?.run {
-        view.setText(value)
+        view.text = try {
+            view.resources.getString(value)
+        } catch (e: Resources.NotFoundException) {
+            ""
+        }
     }
 }
