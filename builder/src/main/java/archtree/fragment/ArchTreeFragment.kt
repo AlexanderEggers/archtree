@@ -1,11 +1,13 @@
 package archtree.fragment
 
 import android.arch.lifecycle.ViewModelProvider
+import android.content.Intent
 import android.databinding.ViewDataBinding
 import android.os.Bundle
 import android.support.annotation.CallSuper
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import archknife.extension.Injectable
@@ -69,6 +71,15 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
         } else {
             fragmentResource?.getLayer()?.onStop(getViewModel(), view)
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        getViewModel()?.onOptionsItemSelected(item)
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        getViewModel()?.onActivityResult(requestCode, resultCode, data, getBundle())
     }
 
     open fun getFragmentResource(): FragmentResource<ViewModel>? {

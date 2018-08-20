@@ -103,6 +103,12 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         getViewModel()?.onActivityResult(requestCode, resultCode, data, getBundle())
+
+        supportFragmentManager.fragments.forEach { fragment ->
+            if(fragment is ArchTreeFragment<*>?) {
+                fragment?.onActivityResult(requestCode, resultCode, data)
+            }
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

@@ -29,7 +29,7 @@ abstract class BaseViewModel : ViewModel() {
     }
 
     @CallSuper
-    open fun onOptionsItemSelected(item: MenuItem) {
+    open fun onOptionsItemSelected(item: MenuItem?) {
         //do nothing by default
     }
 
