@@ -69,6 +69,8 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
                 if(toolbarIcon != null) {
                     supportActionBar?.setIcon(toolbarIcon)
                 }
+            } else if(toolbarTitle != null) {
+                title = toolbarTitle
             }
         }
 
