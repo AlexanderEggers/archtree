@@ -1,6 +1,12 @@
 Change Log
 ==========
 
+Version 0.7.0 *(2018-08-19)*
+----------------------------
+- **NEW:** Added new artifact 'testing'. This artifact will help you with testing your app. It provides you with a ArchTreeBaseTest. This artifact will get more useful helper and methods in the next pre-1.0.0 releases.
+- **FIX:** Made some classes and functions non-final to simplify testing those classes in your own code.
+- **FIX:** Fixed wrong return value inside the JsonConveter method convertJson.
+
 Version 0.6.0 *(2018-08-12)*
 ----------------------------
 - **NEW:** Added new artifact 'helper'. This artifact includes several util and databinding related classes to help you to improve your app quality. Take a look inside the related folder to get an idea (https://github.com/Mordag/archtree/tree/master/helper/src/main/java/archtree/helper)
