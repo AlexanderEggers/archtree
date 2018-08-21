@@ -6,6 +6,7 @@ import android.databinding.ViewDataBinding
 import android.os.Bundle
 import android.support.annotation.CallSuper
 import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -24,8 +25,25 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
     override fun onResume() {
         super.onResume()
 
-        if (fragmentResource?.title != null) {
-            activity!!.title = fragmentResource?.title
+        val toolbarViewId = getFragmentResource()?.toolbarViewId
+        val toolbarTitle = getFragmentResource()?.toolbarTitle
+
+        if(toolbarViewId != null) {
+            val supportActivity = activity as? AppCompatActivity
+
+            supportActivity?.setSupportActionBar(supportActivity.findViewById(toolbarViewId))
+            supportActivity?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+            if(toolbarTitle != null) {
+                supportActivity?.supportActionBar?.title = toolbarTitle
+            }
+
+            val toolbarIcon = getFragmentResource()?.toolbarIcon
+            if(toolbarIcon != null) {
+                supportActivity?.supportActionBar?.setIcon(toolbarIcon)
+            }
+        } else if (toolbarTitle != null) {
+            activity!!.title = toolbarTitle
         }
 
         if (getBinding() != null) {

@@ -1,6 +1,5 @@
 package archtree.activity
 
-import android.support.annotation.IdRes
 import android.support.annotation.MenuRes
 import archtree.ArchTreeBuilder
 import archtree.viewmodel.BaseViewModel
@@ -17,10 +16,6 @@ open class ActivityBuilder<ViewModel : BaseViewModel> : ArchTreeBuilder<ViewMode
 
     var hideSupportBar: Boolean = false
         private set
-    var toolbarViewId: Int? = null
-        private set
-    var enableDefaultBackPressed: Boolean = false
-        private set
 
     open fun setFragmentFlow(fragmentFlow: HasFragmentFlow): ActivityBuilder<ViewModel> {
         this.fragmentFlow = fragmentFlow
@@ -29,13 +24,6 @@ open class ActivityBuilder<ViewModel : BaseViewModel> : ArchTreeBuilder<ViewMode
 
     open fun setHideSupportBar(hideSupportBar: Boolean): ActivityBuilder<ViewModel> {
         this.hideSupportBar = hideSupportBar
-        return this
-    }
-
-    @JvmOverloads
-    open fun setToolbar(@IdRes viewId: Int, enableDefaultBackPressed: Boolean = true): ActivityBuilder<ViewModel> {
-        this.toolbarViewId = viewId
-        this.enableDefaultBackPressed = enableDefaultBackPressed
         return this
     }
 

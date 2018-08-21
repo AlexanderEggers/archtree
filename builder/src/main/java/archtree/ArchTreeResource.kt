@@ -30,9 +30,14 @@ abstract class ArchTreeResource<ViewModel : BaseViewModel> constructor(builder: 
         private set
     var dataBindingComponent: DataBindingComponent? = builder.dataBindingComponent
 
-    var title: String? = builder.title
-        private set
     var bundle: Bundle? = builder.bundle
+        private set
+
+    var toolbarViewId: Int? = null
+        private set
+    var toolbarTitle: String = ""
+        private set
+    var toolbarIcon: Int? = null
         private set
 
     @SuppressLint("LogNotTimber")

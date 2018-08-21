@@ -31,10 +31,6 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
     override fun onResume() {
         super.onResume()
 
-        if (activityResource?.title != null) {
-            title = activityResource?.title
-        }
-
         if (getBinding() != null) {
             activityResource?.getLayer()?.onResume(getViewModel(), getBinding(), getBundle())
         } else {
@@ -59,15 +55,26 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
             supportActionBar?.hide()
         } else {
             val toolbarViewId = getActivityResource()?.toolbarViewId
+            val toolbarTitle = getActivityResource()?.toolbarTitle
+
             if(toolbarViewId != null) {
                 setSupportActionBar(findViewById(toolbarViewId))
                 supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+                if(toolbarTitle != null) {
+                    supportActionBar?.title = toolbarTitle
+                }
+
+                val toolbarIcon = getActivityResource()?.toolbarIcon
+                if(toolbarIcon != null) {
+                    supportActionBar?.setIcon(toolbarIcon)
+                }
             }
         }
 
         val systemUiVisibility = getActivityResource()?.systemUiVisibility
-        if(systemUiVisibility != 0) {
-            window.decorView.systemUiVisibility = getActivityResource()?.systemUiVisibility ?: 0
+        if(systemUiVisibility != null && systemUiVisibility != 0) {
+            window.decorView.systemUiVisibility = systemUiVisibility
         }
 
         if (getBinding() != null) {
@@ -89,8 +96,8 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
     override fun onBackPressed() {
         var shouldRunDefaultBackPressed = getViewModel()?.onBackPressed() ?: true
         supportFragmentManager.fragments.forEach { fragment ->
-            if(fragment is ArchTreeFragment<*>?) {
-                val fragmentShouldRunDefaultBackPressed = fragment?.onBackPressed() ?: true
+            if(fragment is ArchTreeFragment<*>? && fragment?.isVisible == true) {
+                val fragmentShouldRunDefaultBackPressed = fragment.onBackPressed()
                 if(shouldRunDefaultBackPressed) shouldRunDefaultBackPressed = fragmentShouldRunDefaultBackPressed
             }
         }
@@ -105,8 +112,8 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
         getViewModel()?.onActivityResult(requestCode, resultCode, data, getBundle())
 
         supportFragmentManager.fragments.forEach { fragment ->
-            if(fragment is ArchTreeFragment<*>?) {
-                fragment?.onActivityResult(requestCode, resultCode, data)
+            if(fragment is ArchTreeFragment<*>? && fragment?.isVisible == true) {
+                fragment.onActivityResult(requestCode, resultCode, data)
             }
         }
     }
@@ -114,9 +121,7 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
-                if(getActivityResource()?.enableDefaultBackPressed == true) {
-                    onBackPressed()
-                }
+                onBackPressed()
             }
             else -> getViewModel()?.onOptionsItemSelected(item)
         }

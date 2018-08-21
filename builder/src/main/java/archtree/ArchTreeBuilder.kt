@@ -3,6 +3,7 @@ package archtree
 import android.annotation.SuppressLint
 import android.databinding.DataBindingComponent
 import android.os.Bundle
+import android.support.annotation.IdRes
 import android.util.Log
 import archtree.viewmodel.BaseViewModel
 
@@ -21,12 +22,25 @@ abstract class ArchTreeBuilder<ViewModel : BaseViewModel, out Builder> {
     var dataBindingComponent: DataBindingComponent? = null
         private set
 
-    var title: String? = null
-        private set
     var bundle: Bundle? = null
         private set
     var layer: ArchTreeLayer<ViewModel>? = null
         private set
+
+    var toolbarViewId: Int? = null
+        private set
+    var toolbarTitle: String = ""
+        private set
+    var toolbarIcon: Int? = null
+        private set
+
+    @JvmOverloads
+    open fun setToolbar(@IdRes viewId: Int = 0, title: String = "", icon: Int? = null): Builder {
+        this.toolbarViewId = viewId
+        this.toolbarTitle = title
+        this.toolbarIcon = icon
+        return this as Builder
+    }
 
     open fun setLayoutId(layoutId: Int): Builder {
         this.layoutId = layoutId
@@ -50,8 +64,9 @@ abstract class ArchTreeBuilder<ViewModel : BaseViewModel, out Builder> {
         return this as Builder
     }
 
+    @Deprecated("Use setToolbar(...) instead.")
     open fun setTitle(title: String): Builder {
-        this.title = title
+        this.toolbarTitle = title
         return this as Builder
     }
 

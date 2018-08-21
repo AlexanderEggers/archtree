@@ -13,7 +13,7 @@ class DemoActivity: ArchTreeActivity<DemoActivityViewModel>() {
     override fun provideActivityResource(builder: ActivityBuilder<DemoActivityViewModel>): ActivityResource<DemoActivityViewModel> {
         return builder.setViewModel(DemoActivityViewModel::class.java, BR.viewModel, ActivityDatabindingComponent(this))
                 .setLayoutId(R.layout.demo_activity_layout)
-                .setTitle("Demo Activity")
+                .setToolbar(title = "Demo Activity")
                 .build()
     }
 }

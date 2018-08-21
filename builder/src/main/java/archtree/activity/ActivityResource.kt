@@ -1,5 +1,6 @@
 package archtree.activity
 
+import android.annotation.SuppressLint
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.support.v4.app.FragmentActivity
@@ -19,9 +20,8 @@ constructor(builder: ActivityBuilder<ViewModel>) : ArchTreeResource<ViewModel>(b
     val systemUiVisibility: Int = builder.systemUiVisibility
 
     val hideSupportBar: Boolean = builder.hideSupportBar
-    val toolbarViewId: Int? = builder.toolbarViewId
-    val enableDefaultBackPressed: Boolean = builder.enableDefaultBackPressed
 
+    @SuppressLint("LogNotTimber")
     open fun onCreateViewModel(activity: FragmentActivity, factory: ViewModelProvider.Factory) {
         viewModel = ViewModelProviders.of(activity, factory).get(viewModelClass!!)
 
