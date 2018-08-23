@@ -40,9 +40,9 @@
             android:orientation="vertical" />
 
         <archtree.list.BindableRecyclerViewLayout
-            archtree_itemTemplate="@{R.layout.demo_list_item_layout}"
-            archtree_itemsSource="@{viewModel.observableArrayList}"
-            archtree_dataBindingComponent="@{dataBindingComponent}"
+            archtree_listItemTemplate="@{R.layout.demo_list_item_layout}"
+            archtree_listSource="@{viewModel.observableArrayList}"
+            archtree_listDataBindingComponent="@{dataBindingComponent}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layoutManager="android.support.v7.widget.LinearLayoutManager" />

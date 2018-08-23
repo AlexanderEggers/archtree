@@ -27,7 +27,7 @@ class BindableLinearLayout : LinearLayout {
     }
 }
 
-@BindingAdapter("archtree_itemsSource", "archtree_itemTemplate")
+@BindingAdapter("archtree_listSource", "archtree_listItemTemplate")
 fun <T : BindableListItem> bindItemsSource(
         container: BindableLinearLayout,
         oldItems: List<T>?,
@@ -39,7 +39,7 @@ fun <T : BindableListItem> bindItemsSource(
             null, null)
 }
 
-@BindingAdapter("archtree_itemsSource", "archtree_itemTemplate", "archtree_viewModel")
+@BindingAdapter("archtree_listSource", "archtree_listItemTemplate", "archtree_listViewModel")
 fun <T : BindableListItem, V : ViewModel> bindItemsSource(
         container: BindableLinearLayout,
         oldItems: List<T>?,
@@ -53,7 +53,7 @@ fun <T : BindableListItem, V : ViewModel> bindItemsSource(
             newViewModel, null)
 }
 
-@BindingAdapter("archtree_itemsSource", "archtree_itemTemplate", "archtree_dataBindingComponent")
+@BindingAdapter("archtree_listSource", "archtree_listItemTemplate", "archtree_listDataBindingComponent")
 fun <T : BindableListItem, D: Any> bindItemsSource(
         container: BindableLinearLayout,
         oldItems: List<T>?,
@@ -67,7 +67,8 @@ fun <T : BindableListItem, D: Any> bindItemsSource(
             null, newDataBindingComponent)
 }
 
-@BindingAdapter("archtree_itemsSource", "archtree_itemTemplate", "archtree_viewModel", "archtree_dataBindingComponent")
+@BindingAdapter("archtree_listSource", "archtree_listItemTemplate", "archtree_listViewModel",
+        "archtree_listDataBindingComponent")
 fun <T : BindableListItem, V : ViewModel, D: Any> bindItemsSource(
         container: BindableLinearLayout,
         oldItems: List<T>?,
