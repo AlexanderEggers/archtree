@@ -28,16 +28,18 @@ abstract class ArchTreeResource<ViewModel : BaseViewModel> constructor(builder: 
         private set
     var skipViewModelInit: Boolean = builder.skipViewModelInit
         private set
+
     var dataBindingComponent: DataBindingComponent? = builder.dataBindingComponent
+    var dataBindingComponentBindingKey: Int = builder.dataBindingComponentBindingKey
 
     var bundle: Bundle? = builder.bundle
         private set
 
-    var toolbarViewId: Int? = null
+    var toolbarViewId: Int? = builder.toolbarViewId
         private set
-    var toolbarTitle: String = ""
+    var toolbarTitle: String = builder.toolbarTitle
         private set
-    var toolbarIcon: Int? = null
+    var toolbarIcon: Int? = builder.toolbarIcon
         private set
 
     @SuppressLint("LogNotTimber")
@@ -51,6 +53,10 @@ abstract class ArchTreeResource<ViewModel : BaseViewModel> constructor(builder: 
             inflater.inflate(layoutId, container, false)
         } else {
             binding!!.root
+        }
+
+        if(binding != null && dataBindingComponentBindingKey != -1) {
+            binding!!.setVariable(dataBindingComponentBindingKey, dataBindingComponent)
         }
 
         return view

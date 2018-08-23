@@ -3,6 +3,7 @@ package archtree.list
 import android.arch.lifecycle.ViewModel
 import android.content.Context
 import android.databinding.BindingAdapter
+import android.databinding.DataBindingComponent
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import android.databinding.adapters.ListenerUtil
@@ -28,11 +29,12 @@ fun <T : BindableListItem> bindItemsSource(
         @LayoutRes oldItemLayout: Int,
         newItems: List<T>?,
         @LayoutRes newItemLayout: Int) {
-    bindItemsSource<T, ViewModel>(container, oldItems, oldItemLayout,
-            null, newItems, newItemLayout, null)
+    bindItemsSource<T, ViewModel, Any>(container, oldItems, oldItemLayout,
+            null, null, newItems, newItemLayout,
+            null, null)
 }
 
-@BindingAdapter("archtree_itemsSource", "archtree_itemTemplate", "archtree_parentDataContext")
+@BindingAdapter("archtree_itemsSource", "archtree_itemTemplate", "archtree_viewModel")
 fun <T : BindableListItem, V : ViewModel> bindItemsSource(
         container: RecyclerView,
         oldItems: List<T>?,
@@ -41,10 +43,41 @@ fun <T : BindableListItem, V : ViewModel> bindItemsSource(
         newItems: List<T>?,
         @LayoutRes newItemLayout: Int,
         newViewModel: V?) {
+    bindItemsSource<T, ViewModel, Any>(container, oldItems, oldItemLayout,
+            oldViewModel, null, newItems, newItemLayout,
+            newViewModel, null)
+}
+
+@BindingAdapter("archtree_itemsSource", "archtree_itemTemplate", "archtree_dataBindingComponent")
+fun <T : BindableListItem, D: Any> bindItemsSource(
+        container: RecyclerView,
+        oldItems: List<T>?,
+        @LayoutRes oldItemLayout: Int,
+        oldDatabindingComponent: D?,
+        newItems: List<T>?,
+        @LayoutRes newItemLayout: Int,
+        newDatabindingComponent: D?) {
+    bindItemsSource<T, ViewModel, D>(container, oldItems, oldItemLayout,
+            null, oldDatabindingComponent, newItems, newItemLayout,
+            null, newDatabindingComponent)
+}
+
+@BindingAdapter("archtree_itemsSource", "archtree_itemTemplate", "archtree_viewModel", "archtree_dataBindingComponent")
+fun <T : BindableListItem, V : ViewModel, D: Any> bindItemsSource(
+        container: RecyclerView,
+        oldItems: List<T>?,
+        @LayoutRes oldItemLayout: Int,
+        oldViewModel: V?,
+        oldDataBindingComponent: D?,
+        newItems: List<T>?,
+        @LayoutRes newItemLayout: Int,
+        newViewModel: V?,
+        newDataBindingComponent: D?) {
 
     if (oldItems === newItems
             && oldItemLayout == newItemLayout
-            && oldViewModel == newViewModel) {
+            && oldViewModel == newViewModel
+            && oldDataBindingComponent == newDataBindingComponent) {
         // Nothing changed
         return
     }
@@ -52,11 +85,20 @@ fun <T : BindableListItem, V : ViewModel> bindItemsSource(
     val adapter = object : RecyclerView.Adapter<RecyclerView.ViewHolder>(), BindableListAdapter {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+            val realDataBindingComponent: DataBindingComponent? = if (newDataBindingComponent != null) {
+                try {
+                    newDataBindingComponent as? DataBindingComponent?
+                } catch (e: ClassCastException) {
+                    null
+                }
+            } else null
+
             val binding = DataBindingUtil.inflate<ViewDataBinding>(
                     LayoutInflater.from(container.context),
                     newItemLayout,
                     parent,
-                    false
+                    false,
+                    realDataBindingComponent
             )
 
             return DataContextAwareViewHolder<T, V>(binding)

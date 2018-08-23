@@ -19,7 +19,10 @@ abstract class ArchTreeBuilder<ViewModel : BaseViewModel, out Builder> {
         private set
     var skipViewModelInit: Boolean = false
         private set
+
     var dataBindingComponent: DataBindingComponent? = null
+        private set
+    var dataBindingComponentBindingKey: Int = -1
         private set
 
     var bundle: Bundle? = null
@@ -47,13 +50,19 @@ abstract class ArchTreeBuilder<ViewModel : BaseViewModel, out Builder> {
         return this as Builder
     }
 
-    @SuppressLint("LogNotTimber")
     @JvmOverloads
     open fun setViewModel(viewModelClass: Class<ViewModel>, bindingKey: Int = -1,
-                     dataBindingComponent: Any? = null, skipViewModelInit: Boolean = false): Builder {
+                          skipViewModelInit: Boolean = false): Builder {
         this.viewModelClass = viewModelClass
         this.bindingKey = bindingKey
         this.skipViewModelInit = skipViewModelInit
+        return this as Builder
+    }
+
+    @SuppressLint("LogNotTimber")
+    @JvmOverloads
+    open fun setDatabindingComponent(dataBindingComponent: Any?, bindingKey: Int = -1): Builder {
+        dataBindingComponentBindingKey = bindingKey
 
         try {
             this.dataBindingComponent = dataBindingComponent as? DataBindingComponent?
@@ -81,11 +90,10 @@ abstract class ArchTreeBuilder<ViewModel : BaseViewModel, out Builder> {
      *
      * @param layer custom layer which can be used to execute certain operation for the predefined
      * lifecycle methods.
-     * @throws RuntimeException throws this exception if the layout for this component is not set.
+     * @throws RuntimeException throws exception if the layout for this component is not set.
      * @since 1.0.0
      * @see ArchTreeLayer
      */
-    @Throws(RuntimeException::class)
     protected open fun internalBuild(layer: ArchTreeLayer<ViewModel>) {
         this.layer = layer
 

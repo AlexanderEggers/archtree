@@ -11,7 +11,8 @@ import autotarget.annotation.ActivityTarget
 class DemoActivity: ArchTreeActivity<DemoActivityViewModel>() {
 
     override fun provideActivityResource(builder: ActivityBuilder<DemoActivityViewModel>): ActivityResource<DemoActivityViewModel> {
-        return builder.setViewModel(DemoActivityViewModel::class.java, BR.viewModel, ActivityDatabindingComponent(this))
+        return builder.setViewModel(DemoActivityViewModel::class.java, BR.viewModel)
+                .setDatabindingComponent(ActivityDatabindingComponent(this), BR.dataBindingComponent)
                 .setLayoutId(R.layout.demo_activity_layout)
                 .setToolbar(title = "Demo Activity")
                 .build()

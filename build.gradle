@@ -3,7 +3,7 @@
 buildscript {
 
     ext {
-        kotlin_version = '1.2.60'
+        kotlin_version = '1.2.61'
         android_studio_version = "3.1.4"
 
         support_lib_version = "27.1.1"
@@ -13,13 +13,13 @@ buildscript {
         room_version = '1.1.1'
 
         archknife_version = '0.6.0'
-        autotarget_version = '0.7.0'
+        autotarget_version = '0.7.1'
 
         junit_version = "4.12"
         mockito_version = '2.21.0'
         powermock_version = '2.0.0-beta.5'
 
-        archtree_library_version = "0.7.1"
+        archtree_library_version = "0.8.0"
     }
 
     repositories {
