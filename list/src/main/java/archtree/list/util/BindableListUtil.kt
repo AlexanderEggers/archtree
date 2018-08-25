@@ -1,8 +1,9 @@
-package archtree.list
+package archtree.list.util
 
 import android.databinding.ObservableList
 import android.databinding.adapters.ListenerUtil
 import android.view.View
+import archtree.list.R
 
 class BindableListUtil {
 

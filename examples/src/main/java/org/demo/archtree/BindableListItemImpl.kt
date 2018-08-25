@@ -2,7 +2,7 @@ package org.demo.archtree
 
 import android.arch.lifecycle.ViewModel
 import android.databinding.ViewDataBinding
-import archtree.list.BindableListItem
+import archtree.list.util.BindableListItem
 
 class BindableListItemImpl(private val value: String): BindableListItem {
 

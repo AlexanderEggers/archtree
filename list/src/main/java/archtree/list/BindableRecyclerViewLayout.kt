@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import archtree.list.util.*
 
 class BindableRecyclerViewLayout : RecyclerView {
 

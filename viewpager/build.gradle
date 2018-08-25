@@ -1,0 +1,61 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+ext {
+    bintrayRepo = 'android'
+    bintrayName = 'archtree-viewpager'
+
+    publishedGroupId = 'org.archtree'
+    libraryName = 'archtree-viewpager'
+    artifact = 'archtree-viewpager'
+
+    libraryDescription = 'Android library that simplifies the usage of Activities, Fragments and ViewModels.'
+
+    siteUrl = 'https://github.com/Mordag/archtree'
+    gitUrl = 'https://github.com/Mordag/archtree.git'
+
+    libraryVersion = "$archtree_library_version"
+
+    developerId = 'mordag'
+    developerName = 'Alexander Eggers'
+
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file("local.properties").newDataInputStream())
+    developerEmail = properties.getProperty("user.email", "")
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
+android {
+    compileSdkVersion 27
+    buildToolsVersion "27.0.3"
+
+    defaultConfig {
+        minSdkVersion 14
+        versionName "$archtree_library_version"
+        consumerProguardFiles 'proguard-rules.pro'
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+}
+
+tasks.withType(Javadoc).all {
+    enabled = false
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "android.arch.lifecycle:extensions:$lifecycle_version"
+    implementation "com.android.support:support-v4:$support_lib_version"
+
+    implementation project(path: ':archtree-list')
+}
+
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'

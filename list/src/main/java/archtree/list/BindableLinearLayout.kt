@@ -13,6 +13,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import archtree.list.util.*
 
 class BindableLinearLayout : LinearLayout {
 
