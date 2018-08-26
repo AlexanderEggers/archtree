@@ -72,7 +72,7 @@ abstract class ArchTreeBuilder<ViewModel : BaseViewModel, out Builder> {
         return this as Builder
     }
 
-    @Deprecated("Use setToolbar(...) instead.")
+    @Deprecated("Use setToolbar(title) instead.", ReplaceWith(expression = "setToolbar(title)"))
     open fun setTitle(title: String): Builder {
         this.toolbarTitle = title
         return this as Builder
