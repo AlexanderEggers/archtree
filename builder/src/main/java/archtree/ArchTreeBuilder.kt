@@ -1,6 +1,7 @@
 package archtree
 
 import android.annotation.SuppressLint
+import android.databinding.DataBindingComponent
 import android.os.Bundle
 import android.support.annotation.IdRes
 import android.util.Log
