@@ -1,7 +1,6 @@
 package archtree
 
 import android.annotation.SuppressLint
-import android.databinding.DataBindingComponent
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import android.os.Bundle
@@ -55,7 +54,7 @@ abstract class ArchTreeResource<ViewModel : BaseViewModel> constructor(builder: 
             binding!!.root
         }
 
-        if(binding != null && dataBindingComponentBindingKey != -1) {
+        if (binding != null && dataBindingComponentBindingKey != -1) {
             binding!!.setVariable(dataBindingComponentBindingKey, dataBindingComponent)
         }
 

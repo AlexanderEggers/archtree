@@ -24,7 +24,7 @@ abstract class BaseViewModel : ViewModel() {
     }
 
     @CallSuper
-    open fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?, bundle: Bundle?) {
+    open fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         //do nothing by default
     }
 

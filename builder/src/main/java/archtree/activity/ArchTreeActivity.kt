@@ -10,11 +10,11 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import archtree.fragment.ArchTreeFragment
+import archtree.viewmodel.BaseViewModel
+import autotarget.util.HasFragmentFlow
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
-import archtree.viewmodel.BaseViewModel
-import autotarget.util.HasFragmentFlow
 import javax.inject.Inject
 
 abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity(),
@@ -51,31 +51,31 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
             activityResource?.onCreateViewModel(this, viewModelFactory)
         }
 
-        if(activityResource?.hideSupportBar == true) {
+        if (activityResource?.hideSupportBar == true) {
             supportActionBar?.hide()
         } else {
             val toolbarViewId = getActivityResource()?.toolbarViewId
             val toolbarTitle = getActivityResource()?.toolbarTitle
 
-            if(toolbarViewId != null) {
+            if (toolbarViewId != null) {
                 setSupportActionBar(findViewById(toolbarViewId))
                 supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-                if(toolbarTitle != null) {
+                if (toolbarTitle != null) {
                     supportActionBar?.title = toolbarTitle
                 }
 
                 val toolbarIcon = getActivityResource()?.toolbarIcon
-                if(toolbarIcon != null) {
+                if (toolbarIcon != null) {
                     supportActionBar?.setIcon(toolbarIcon)
                 }
-            } else if(toolbarTitle != null) {
+            } else if (toolbarTitle != null) {
                 title = toolbarTitle
             }
         }
 
         val systemUiVisibility = getActivityResource()?.systemUiVisibility
-        if(systemUiVisibility != null && systemUiVisibility != 0) {
+        if (systemUiVisibility != null && systemUiVisibility != 0) {
             window.decorView.systemUiVisibility = systemUiVisibility
         }
 
@@ -88,7 +88,7 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val menuId = activityResource?.menuId
-        if(menuId != null) {
+        if (menuId != null) {
             val inflater = menuInflater
             inflater.inflate(menuId, menu)
         }
@@ -98,23 +98,23 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
     override fun onBackPressed() {
         var shouldRunDefaultBackPressed = getViewModel()?.onBackPressed() ?: true
         supportFragmentManager.fragments.forEach { fragment ->
-            if(fragment is ArchTreeFragment<*>? && fragment?.isVisible == true) {
+            if (fragment is ArchTreeFragment<*>? && fragment?.isVisible == true) {
                 val fragmentShouldRunDefaultBackPressed = fragment.onBackPressed()
-                if(shouldRunDefaultBackPressed) shouldRunDefaultBackPressed = fragmentShouldRunDefaultBackPressed
+                if (shouldRunDefaultBackPressed) shouldRunDefaultBackPressed = fragmentShouldRunDefaultBackPressed
             }
         }
 
-        if(shouldRunDefaultBackPressed) {
+        if (shouldRunDefaultBackPressed) {
             super.onBackPressed()
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        getViewModel()?.onActivityResult(requestCode, resultCode, data, getBundle())
+        getViewModel()?.onActivityResult(requestCode, resultCode, data)
 
         supportFragmentManager.fragments.forEach { fragment ->
-            if(fragment is ArchTreeFragment<*>? && fragment?.isVisible == true) {
+            if (fragment is ArchTreeFragment<*>? && fragment?.isVisible == true) {
                 fragment.onActivityResult(requestCode, resultCode, data)
             }
         }
@@ -141,7 +141,8 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
     }
 
     override fun onShowNextFragment(containerId: Int, state: Int, addToBackStack: Boolean, clearBackStack: Boolean, bundle: Bundle?): Boolean {
-        return activityResource?.fragmentFlow?.onShowNextFragment(containerId, state, addToBackStack, clearBackStack, bundle) ?: false
+        return activityResource?.fragmentFlow?.onShowNextFragment(containerId, state, addToBackStack, clearBackStack, bundle)
+                ?: false
     }
 
     open fun getActivityResource(): ActivityResource<ViewModel>? {

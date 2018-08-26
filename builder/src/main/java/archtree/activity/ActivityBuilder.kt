@@ -43,7 +43,7 @@ open class ActivityBuilder<ViewModel : BaseViewModel> : ArchTreeBuilder<ViewMode
     }
 
     open fun build(): ActivityResource<ViewModel> {
-        internalBuild(object: ActivityLayer<ViewModel>(){
+        internalBuild(object : ActivityLayer<ViewModel>() {
 
         })
         return ActivityResource(this)

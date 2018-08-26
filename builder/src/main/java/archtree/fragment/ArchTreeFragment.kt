@@ -28,18 +28,18 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
         val toolbarViewId = getFragmentResource()?.toolbarViewId
         val toolbarTitle = getFragmentResource()?.toolbarTitle
 
-        if(toolbarViewId != null) {
+        if (toolbarViewId != null) {
             val supportActivity = activity as? AppCompatActivity
 
             supportActivity?.setSupportActionBar(supportActivity.findViewById(toolbarViewId))
             supportActivity?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-            if(toolbarTitle != null) {
+            if (toolbarTitle != null) {
                 supportActivity?.supportActionBar?.title = toolbarTitle
             }
 
             val toolbarIcon = getFragmentResource()?.toolbarIcon
-            if(toolbarIcon != null) {
+            if (toolbarIcon != null) {
                 supportActivity?.supportActionBar?.setIcon(toolbarIcon)
             }
         } else if (toolbarTitle != null) {
@@ -97,7 +97,8 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        getViewModel()?.onActivityResult(requestCode, resultCode, data, getBundle())
+        super.onActivityResult(requestCode, resultCode, data)
+        getViewModel()?.onActivityResult(requestCode, resultCode, data)
     }
 
     open fun getFragmentResource(): FragmentResource<ViewModel>? {
