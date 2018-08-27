@@ -3,12 +3,26 @@ package archtree.action
 import java.util.*
 
 abstract class Action<T> {
+    private var timeSinceLastClick = System.currentTimeMillis()
+
     val listeners = LinkedList<OnConditionChangedListener<T>>()
 
-    abstract fun execute(parameter: T?)
+    fun execute(parameter: T?) {
+        val currentTime = System.currentTimeMillis()
+        if(currentTime - timeSinceLastClick > provideClickIntervalTime()) {
+            timeSinceLastClick = currentTime
+            onExecute(parameter)
+        }
+    }
+
+    abstract fun onExecute(parameter: T?)
 
     open fun canExecute(parameter: T?): Boolean {
         return true
+    }
+
+    open fun provideClickIntervalTime(): Long {
+        return 1000
     }
 
     fun notifyConditionChanged() {
