@@ -6,6 +6,7 @@ import android.os.Build
 import android.support.v4.content.ContextCompat
 import android.support.v4.content.res.ResourcesCompat
 import android.text.Html
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 
@@ -56,4 +57,24 @@ fun setTextRes(view: TextView, value: Int?) {
             ""
         }
     }
+}
+
+@BindingAdapter("archtree_textColorRes")
+fun setTextColorRes(view: TextView, value: Int?) {
+    value?.run {
+        val textColor = try {
+            ContextCompat.getColor(view.context, value)
+        } catch (e: Resources.NotFoundException) {
+            null
+        }
+
+        if(textColor != null) view.setTextColor(textColor)
+    }
+}
+
+@BindingAdapter("archtree_backgroundRes")
+fun setBackgroundRes(view: View, value: Int?) {
+    value?.run {
+        view.setBackgroundResource(value)
+    } ?: view.setBackgroundResource(0)
 }
