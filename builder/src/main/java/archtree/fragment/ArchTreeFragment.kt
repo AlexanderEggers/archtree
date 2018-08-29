@@ -11,7 +11,7 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import archknife.extension.Injectable
+import archknife.annotation.util.Injectable
 import archtree.viewmodel.BaseViewModel
 import javax.inject.Inject
 
