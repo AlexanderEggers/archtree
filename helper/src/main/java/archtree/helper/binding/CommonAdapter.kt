@@ -62,13 +62,13 @@ fun setTextRes(view: TextView, value: Int?) {
 @BindingAdapter("archtree_textColorRes")
 fun setTextColorRes(view: TextView, value: Int?) {
     value?.run {
-        val textColor = try {
+        try {
             ContextCompat.getColor(view.context, value)
         } catch (e: Resources.NotFoundException) {
             null
+        }?.let { textColor ->
+            view.setTextColor(textColor)
         }
-
-        if(textColor != null) view.setTextColor(textColor)
     }
 }
 
