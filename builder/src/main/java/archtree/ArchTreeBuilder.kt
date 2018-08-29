@@ -32,13 +32,13 @@ abstract class ArchTreeBuilder<ViewModel : BaseViewModel, out Builder> {
 
     var toolbarViewId: Int? = null
         private set
-    var toolbarTitle: String = ""
+    var toolbarTitle: String? = null
         private set
     var toolbarIcon: Int? = null
         private set
 
     @JvmOverloads
-    open fun setToolbar(@IdRes viewId: Int = 0, title: String = "", icon: Int? = null): Builder {
+    open fun setToolbar(@IdRes viewId: Int? = null, title: String? = null, icon: Int? = null): Builder {
         this.toolbarViewId = viewId
         this.toolbarTitle = title
         this.toolbarIcon = icon

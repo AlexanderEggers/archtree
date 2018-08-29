@@ -37,7 +37,7 @@ abstract class ArchTreeResource<ViewModel : BaseViewModel> constructor(builder: 
 
     var toolbarViewId: Int? = builder.toolbarViewId
         private set
-    var toolbarTitle: String = builder.toolbarTitle
+    var toolbarTitle: String? = builder.toolbarTitle
         private set
     var toolbarIcon: Int? = builder.toolbarIcon
         private set
