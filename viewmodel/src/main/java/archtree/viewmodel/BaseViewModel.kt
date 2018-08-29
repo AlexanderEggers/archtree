@@ -8,12 +8,13 @@ import android.view.MenuItem
 
 abstract class BaseViewModel : ViewModel() {
 
-    private var hasInitialised: Boolean = false
+    var isInitialised: Boolean = false
+        private set
 
     @JvmOverloads
     fun init(forceInit: Boolean = false, bundle: Bundle? = null) {
-        if (!hasInitialised || forceInit) {
-            hasInitialised = true
+        if (!isInitialised || forceInit) {
+            isInitialised = true
             onInit(bundle)
         }
     }
