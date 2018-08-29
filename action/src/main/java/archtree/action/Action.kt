@@ -15,7 +15,7 @@ abstract class Action<T> {
         }
     }
 
-    abstract fun onExecute(parameter: T?)
+    protected abstract fun onExecute(parameter: T?)
 
     open fun canExecute(parameter: T?): Boolean {
         return true
