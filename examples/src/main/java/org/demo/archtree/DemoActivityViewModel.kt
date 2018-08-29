@@ -16,7 +16,7 @@ class DemoActivityViewModel @Inject constructor(private val targetService: Targe
 
     val action: Action<Any> = object: Action<Any>() {
 
-        override fun execute(parameter: Any?) {
+        override fun onExecute(parameter: Any?) {
             targetService.execute(FragmentTargets.showDemoFragment())
         }
     }
