@@ -9,6 +9,8 @@ import android.support.v4.content.ContextCompat
 import android.support.v4.content.res.ResourcesCompat
 import android.text.Html
 import android.text.Spanned
+import java.io.IOException
+import java.io.InputStream
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -167,5 +169,17 @@ open class ResourceAccessor
      */
     open fun getDimension(@DimenRes res: Int): Float {
         return context.resources.getDimension(res)
+    }
+
+    /**
+     * Returns an input stream for an asset file.
+     *
+     * @param fileName name of the file that will be used to open the input stream.
+     * @return a new input stream
+     * @since 1.0.0
+     */
+    @Throws(IOException::class)
+    open fun getAsset(fileName: String): InputStream {
+        return context.assets.open(fileName)
     }
 }
