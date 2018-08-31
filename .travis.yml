@@ -43,9 +43,14 @@ android:
  - chmod +x gradlew
 
 before_script:
-- echo no | android create avd --force -n test -t android-25 --abi $ANDROID_ABI
+- android list sdk --extended --no-ui --all
+- echo "y" | android update sdk -a --no-ui --filter sys-img-armeabi-v7a-android-22,sys-img-x86_64-android-22
+- echo "n" | android create avd --name myandroid22 -t "android-22"
+- android list targets
+- echo "n" | android create avd --name myandroid22 -t "android-22" --abi "default/armeabi-v7a"
 - emulator -avd test -no-skin -no-audio -no-window &
 - android-wait-for-emulator
+- adb shell input keyevent 82 &
 
 script:
 - "./gradlew clean build connectedCheck -PdisablePreDex --stacktrace"
