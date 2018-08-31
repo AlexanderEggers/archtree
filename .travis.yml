@@ -1,16 +1,48 @@
 language: android
+sudo: required
+jdk: oraclejdk8
+
+before_cache:
+ - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+ - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+
+cache:
+
+ directories:
+ - $HOME/.gradle/caches/
+ - $HOME/.gradle/wrapper/
+
+env:
+
+ global:
+ - ANDROID_API_LEVEL=27
+ - EMULATOR_API_LEVEL=14
+ - ANDROID_BUILD_TOOLS=27.0.3
+ - ADB_INSTALL_TIMEOUT=5 # minutes
 
 android:
-  components:
-    # Update Android SDK Tools
-    - tools
 
-    - build-tools-27.0.3
-    - android-27
+ components:
+ - tools
+ - platform-tools
+ - build-tools-$ANDROID_BUILD_TOOLS
+ - android-$ANDROID_API
+ - android-$EMULATOR_API_LEVEL
+ - extra-google-m2repository
+ - extra-android-m2repository # for design library
+ - sys-img-armeabi-v7a-addon-google_apis-google-$ANDROID_API_LEVEL
+ - sys-img-armeabi-v7a-addon-google_apis-google-$EMULATOR_API_LEVEL
 
-    # Support library
-    - extra-android-support
-    - extra-android-m2repository
-    
+ licenses:
+ - android-sdk-preview-license-.+
+ - android-sdk-license-.+
+ - google-gdk-license-.+
+
+before_script:
+- echo no | android create avd --force -n test -t android-21 --abi armeabi-v7a
+- emulator -avd test -no-skin -no-audio -no-window &
+- android-wait-for-emulator
+- adb shell input keyevent 82 &
+
 script:
-- chmod +x ./gradlew
+- "./gradlew clean build connectedCheck -PdisablePreDex --stacktrace"
