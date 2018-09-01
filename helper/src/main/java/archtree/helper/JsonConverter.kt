@@ -14,7 +14,7 @@ open class JsonConverter
 @Inject constructor(private val gson: Gson) {
 
     @WorkerThread
-    open fun <T> convertJson(value: String, type: Type): T {
+    open fun <T> convertJson(value: String, type: Type): T? {
         return gson.fromJson(value, type)
     }
     
