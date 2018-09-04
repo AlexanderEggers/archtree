@@ -48,6 +48,7 @@ before_install:
 install: ./gradlew clean assemble assembleAndroidTest --stacktrace
 
 before_script:
+  - touch local.properties
   - echo "y" | android update sdk -a --no-ui --filter android-24
   - echo "y" | android update sdk -a --no-ui --filter sys-img-armeabi-v7a-android-24
   - android list targets | grep -E '^id:' | awk -F '"' '{$1=""; print $2}' # list all targets
