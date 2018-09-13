@@ -59,7 +59,9 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
 
             if (toolbarViewId != null) {
                 setSupportActionBar(findViewById(toolbarViewId))
-                supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+                val displayHomeAsUpEnabled = getActivityResource()?.displayHomeAsUpEnabled ?: false
+                supportActionBar?.setDisplayHomeAsUpEnabled(displayHomeAsUpEnabled)
 
                 if (toolbarTitle != null) {
                     supportActionBar?.title = toolbarTitle

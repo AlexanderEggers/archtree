@@ -17,30 +17,24 @@ abstract class ArchTreeResource<ViewModel : BaseViewModel> constructor(builder: 
 
     var view: View? = null
         private set
-    var layoutId: Int = builder.layoutId
-        private set
-    var bindingKey: Int = builder.bindingKey
-        private set
-
-    var viewModelClass: Class<ViewModel>? = builder.viewModelClass
-        private set
     var binding: ViewDataBinding? = null
         private set
-    var skipViewModelInit: Boolean = builder.skipViewModelInit
-        private set
 
-    var dataBindingComponent: DataBindingComponent? = builder.dataBindingComponent
-    var dataBindingComponentBindingKey: Int = builder.dataBindingComponentBindingKey
+    val layoutId: Int = builder.layoutId
+    val bindingKey: Int = builder.bindingKey
 
-    var bundle: Bundle? = builder.bundle
-        private set
+    val viewModelClass: Class<ViewModel>? = builder.viewModelClass
+    val skipViewModelInit: Boolean = builder.skipViewModelInit
 
-    var toolbarViewId: Int? = builder.toolbarViewId
-        private set
-    var toolbarTitle: String? = builder.toolbarTitle
-        private set
-    var toolbarIcon: Int? = builder.toolbarIcon
-        private set
+    val dataBindingComponent: DataBindingComponent? = builder.dataBindingComponent
+    val dataBindingComponentBindingKey: Int = builder.dataBindingComponentBindingKey
+
+    val bundle: Bundle? = builder.bundle
+
+    val toolbarViewId: Int? = builder.toolbarViewId
+    val toolbarTitle: String? = builder.toolbarTitle
+    val toolbarIcon: Int? = builder.toolbarIcon
+    val displayHomeAsUpEnabled: Boolean = builder.displayHomeAsUpEnabled
 
     @SuppressLint("LogNotTimber")
     open fun onCreateView(inflater: LayoutInflater, container: ViewGroup?): View? {

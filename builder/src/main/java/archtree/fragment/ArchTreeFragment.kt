@@ -32,7 +32,9 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
             val supportActivity = activity as? AppCompatActivity
 
             supportActivity?.setSupportActionBar(supportActivity.findViewById(toolbarViewId))
-            supportActivity?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+            val displayHomeAsUpEnabled = getFragmentResource()?.displayHomeAsUpEnabled ?: false
+            supportActivity?.supportActionBar?.setDisplayHomeAsUpEnabled(displayHomeAsUpEnabled)
 
             if (toolbarTitle != null) {
                 supportActivity?.supportActionBar?.title = toolbarTitle
@@ -43,7 +45,7 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
                 supportActivity?.supportActionBar?.setIcon(toolbarIcon)
             }
         } else if (toolbarTitle != null) {
-            activity!!.title = toolbarTitle
+            activity?.title = toolbarTitle
         }
 
         if (getBinding() != null) {
@@ -61,7 +63,11 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = fragmentResource!!.onCreateView(inflater, container)
+        return fragmentResource!!.onCreateView(inflater, container)
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
 
         if (fragmentResource?.viewModelClass != null) {
             fragmentResource?.onCreateViewModel(this, viewModelFactory)
@@ -72,8 +78,6 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
         } else {
             fragmentResource?.getLayer()?.onCreate(getViewModel(), view, getBundle())
         }
-
-        return view
     }
 
     @CallSuper

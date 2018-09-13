@@ -3,6 +3,7 @@ package archtree
 import android.annotation.SuppressLint
 import android.databinding.DataBindingComponent
 import android.os.Bundle
+import android.support.annotation.DrawableRes
 import android.support.annotation.IdRes
 import android.util.Log
 import archtree.viewmodel.BaseViewModel
@@ -36,12 +37,16 @@ abstract class ArchTreeBuilder<ViewModel : BaseViewModel, out Builder> {
         private set
     var toolbarIcon: Int? = null
         private set
+    var displayHomeAsUpEnabled: Boolean = false
+        private set
 
     @JvmOverloads
-    open fun setToolbar(@IdRes viewId: Int? = null, title: String? = null, icon: Int? = null): Builder {
+    open fun setToolbar(@IdRes viewId: Int? = null, title: String? = null, @DrawableRes icon: Int? = null,
+                        displayHomeAsUpEnabled: Boolean = false): Builder {
         this.toolbarViewId = viewId
         this.toolbarTitle = title
         this.toolbarIcon = icon
+        this.displayHomeAsUpEnabled = displayHomeAsUpEnabled
         return this as Builder
     }
 
