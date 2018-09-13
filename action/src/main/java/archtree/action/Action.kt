@@ -15,6 +15,11 @@ abstract class Action<T> {
         }
     }
 
+    fun forceExecute(parameter: T?) {
+        timeSinceLastClick = System.currentTimeMillis()
+        onExecute(parameter)
+    }
+
     protected abstract fun onExecute(parameter: T?)
 
     open fun canExecute(parameter: T?): Boolean {
