@@ -41,12 +41,12 @@ abstract class ArchTreeBuilder<ViewModel : BaseViewModel, out Builder> {
         private set
 
     @JvmOverloads
-    open fun setToolbar(@IdRes viewId: Int? = null, title: String? = null, @DrawableRes icon: Int? = null,
-                        displayHomeAsUpEnabled: Boolean = false): Builder {
+    open fun setToolbar(@IdRes viewId: Int? = null, title: String? = null,
+                        displayHomeAsUpEnabled: Boolean = false, @DrawableRes icon: Int? = null): Builder {
         this.toolbarViewId = viewId
         this.toolbarTitle = title
-        this.toolbarIcon = icon
         this.displayHomeAsUpEnabled = displayHomeAsUpEnabled
+        this.toolbarIcon = icon
         return this as Builder
     }
 

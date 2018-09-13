@@ -107,8 +107,13 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
         }
 
         if (shouldRunDefaultBackPressed) {
-            super.onBackPressed()
+            onDefaultBackPressed()
         }
+    }
+
+    open fun onDefaultBackPressed() {
+        if(fragmentManager.backStackEntryCount == 1) finish()
+        else super.onBackPressed()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
