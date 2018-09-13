@@ -3,7 +3,6 @@ package archtree.viewmodel
 import android.arch.lifecycle.ViewModel
 import android.content.Intent
 import android.os.Bundle
-import android.support.annotation.CallSuper
 import android.view.MenuItem
 
 abstract class BaseViewModel : ViewModel() {
@@ -19,22 +18,18 @@ abstract class BaseViewModel : ViewModel() {
         }
     }
 
-    @CallSuper
     protected open fun onInit(bundle: Bundle?) {
         //do nothing by default
     }
 
-    @CallSuper
     open fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         //do nothing by default
     }
 
-    @CallSuper
     open fun onOptionsItemSelected(item: MenuItem?) {
         //do nothing by default
     }
 
-    @CallSuper
     open fun onBackPressed(): Boolean {
         return true
     }
