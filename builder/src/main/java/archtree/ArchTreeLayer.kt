@@ -23,11 +23,27 @@ abstract class ArchTreeLayer<in ViewModel : BaseViewModel> {
         //do nothing by default
     }
 
+    open fun onStart(viewModel: ViewModel?, binding: ViewDataBinding?) {
+        //do nothing by default
+    }
+
+    open fun onStart(viewModel: ViewModel?, view: View?) {
+        //do nothing by default
+    }
+
     open fun onStop(viewModel: ViewModel?, binding: ViewDataBinding?) {
         //do nothing by default
     }
 
     open fun onStop(viewModel: ViewModel?, view: View?) {
+        //do nothing by default
+    }
+
+    open fun onDestroy(viewModel: ViewModel?, binding: ViewDataBinding?) {
+        //do nothing by default
+    }
+
+    open fun onDestroy(viewModel: ViewModel?, view: View?) {
         //do nothing by default
     }
 }

@@ -35,6 +35,7 @@ abstract class ArchTreeResource<ViewModel : BaseViewModel> constructor(builder: 
     val toolbarTitle: String? = builder.toolbarTitle
     val toolbarIcon: Int? = builder.toolbarIcon
     val displayHomeAsUpEnabled: Boolean = builder.displayHomeAsUpEnabled
+    val activityToolbar: Boolean = builder.activityToolbar
 
     @SuppressLint("LogNotTimber")
     open fun onCreateView(inflater: LayoutInflater, container: ViewGroup?): View? {

@@ -39,13 +39,17 @@ abstract class ArchTreeBuilder<ViewModel : BaseViewModel, out Builder> {
         private set
     var displayHomeAsUpEnabled: Boolean = false
         private set
+    var activityToolbar: Boolean = false
+        private set
 
     @JvmOverloads
     open fun setToolbar(@IdRes viewId: Int? = null, title: String? = null,
-                        displayHomeAsUpEnabled: Boolean = false, @DrawableRes icon: Int? = null): Builder {
+                        displayHomeAsUpEnabled: Boolean = false, activityToolbar: Boolean = false,
+                        @DrawableRes icon: Int? = null): Builder {
         this.toolbarViewId = viewId
         this.toolbarTitle = title
         this.displayHomeAsUpEnabled = displayHomeAsUpEnabled
+        this.activityToolbar = activityToolbar
         this.toolbarIcon = icon
         return this as Builder
     }

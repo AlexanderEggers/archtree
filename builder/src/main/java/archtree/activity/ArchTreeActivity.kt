@@ -136,13 +136,33 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
         return super.onOptionsItemSelected(item)
     }
 
+    override fun onStart() {
+        super.onStart()
+
+        if (getBinding() != null) {
+            getActivityResource()?.getLayer()?.onStart(getViewModel(), getBinding())
+        } else {
+            getActivityResource()?.getLayer()?.onStart(getViewModel(), getView())
+        }
+    }
+
     override fun onStop() {
         super.onStop()
 
         if (getBinding() != null) {
-            activityResource?.getLayer()?.onStop(getViewModel(), getBinding())
+            getActivityResource()?.getLayer()?.onStop(getViewModel(), getBinding())
         } else {
-            activityResource?.getLayer()?.onStop(getViewModel(), getView())
+            getActivityResource()?.getLayer()?.onStop(getViewModel(), getView())
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        if (getBinding() != null) {
+            getActivityResource()?.getLayer()?.onDestroy(getViewModel(), getBinding())
+        } else {
+            getActivityResource()?.getLayer()?.onDestroy(getViewModel(), getView())
         }
     }
 

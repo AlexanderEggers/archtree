@@ -24,14 +24,27 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
 
     override fun onResume() {
         super.onResume()
+        refreshToolbar()
 
+        if (getBinding() != null) {
+            fragmentResource?.getLayer()?.onResume(getViewModel(), getBinding(), getBundle())
+        } else {
+            fragmentResource?.getLayer()?.onResume(getViewModel(), view, getBundle())
+        }
+    }
+
+    private fun refreshToolbar() {
         val toolbarViewId = getFragmentResource()?.toolbarViewId
         val toolbarTitle = getFragmentResource()?.toolbarTitle
 
         if (toolbarViewId != null) {
             val supportActivity = activity as? AppCompatActivity
 
-            supportActivity?.setSupportActionBar(supportActivity.findViewById(toolbarViewId))
+            if(getFragmentResource()?.activityToolbar == true) {
+                supportActivity?.setSupportActionBar(supportActivity.findViewById(toolbarViewId))
+            } else {
+                supportActivity?.setSupportActionBar(view?.findViewById(toolbarViewId))
+            }
 
             val displayHomeAsUpEnabled = getFragmentResource()?.displayHomeAsUpEnabled ?: false
             supportActivity?.supportActionBar?.setDisplayHomeAsUpEnabled(displayHomeAsUpEnabled)
@@ -46,12 +59,6 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
             }
         } else if (toolbarTitle != null) {
             activity?.title = toolbarTitle
-        }
-
-        if (getBinding() != null) {
-            fragmentResource?.getLayer()?.onResume(getViewModel(), getBinding(), getBundle())
-        } else {
-            fragmentResource?.getLayer()?.onResume(getViewModel(), view, getBundle())
         }
     }
 
@@ -85,6 +92,36 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
         return getViewModel()?.onBackPressed() ?: true
     }
 
+    @CallSuper
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+        if(!hidden) {
+            refreshToolbar()
+
+            if (getBinding() != null) {
+                fragmentResource?.getLayer()?.onShow(getViewModel(), getBinding(), getBundle())
+            } else {
+                fragmentResource?.getLayer()?.onShow(getViewModel(), view, getBundle())
+            }
+        } else {
+            if (getBinding() != null) {
+                fragmentResource?.getLayer()?.onHide(getViewModel(), getBinding(), getBundle())
+            } else {
+                fragmentResource?.getLayer()?.onHide(getViewModel(), view, getBundle())
+            }
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        if (getBinding() != null) {
+            fragmentResource?.getLayer()?.onStart(getViewModel(), getBinding())
+        } else {
+            fragmentResource?.getLayer()?.onStart(getViewModel(), view)
+        }
+    }
+
     override fun onStop() {
         super.onStop()
 
@@ -92,6 +129,16 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
             fragmentResource?.getLayer()?.onStop(getViewModel(), getBinding())
         } else {
             fragmentResource?.getLayer()?.onStop(getViewModel(), view)
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        if (getBinding() != null) {
+            fragmentResource?.getLayer()?.onDestroy(getViewModel(), getBinding())
+        } else {
+            fragmentResource?.getLayer()?.onDestroy(getViewModel(), view)
         }
     }
 
