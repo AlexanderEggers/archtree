@@ -167,8 +167,4 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
     private fun getBundle(): Bundle? {
         return fragmentResource?.bundle
     }
-
-    override fun getView(): View? {
-        return fragmentResource?.view
-    }
 }
