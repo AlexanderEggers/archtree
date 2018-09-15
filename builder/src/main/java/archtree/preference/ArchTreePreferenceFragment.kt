@@ -158,15 +158,9 @@ abstract class ArchTreePreferenceFragment<ViewModel : BaseViewModel> : Preferenc
             refreshToolbar()
 
             if (getBinding() != null) {
-                fragmentResource?.getLayer()?.onShow(getViewModel(), getBinding(), getBundle())
+                fragmentResource?.getLayer()?.onResume(getViewModel(), getBinding(), getBundle())
             } else {
-                fragmentResource?.getLayer()?.onShow(getViewModel(), view, getBundle())
-            }
-        } else {
-            if (getBinding() != null) {
-                fragmentResource?.getLayer()?.onHide(getViewModel(), getBinding(), getBundle())
-            } else {
-                fragmentResource?.getLayer()?.onHide(getViewModel(), view, getBundle())
+                fragmentResource?.getLayer()?.onResume(getViewModel(), view, getBundle())
             }
         }
     }
