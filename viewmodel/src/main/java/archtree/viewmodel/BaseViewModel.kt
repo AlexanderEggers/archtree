@@ -3,6 +3,7 @@ package archtree.viewmodel
 import android.arch.lifecycle.ViewModel
 import android.content.Intent
 import android.os.Bundle
+import android.support.v7.preference.Preference
 import android.view.MenuItem
 
 abstract class BaseViewModel : ViewModel() {
@@ -32,5 +33,9 @@ abstract class BaseViewModel : ViewModel() {
 
     open fun onBackPressed(): Boolean {
         return true
+    }
+
+    open fun onPreferenceTreeClick(preference: Preference?): Boolean {
+        return false
     }
 }

@@ -57,6 +57,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "com.android.support:appcompat-v7:$support_lib_version"
+    implementation "com.android.support:preference-v7:$support_lib_version"
     implementation "android.arch.lifecycle:extensions:$lifecycle_version"
     implementation "org.archknife:archknife-core:$archknife_version"
     implementation "org.autotarget:autotarget-fragment:$autotarget_version"

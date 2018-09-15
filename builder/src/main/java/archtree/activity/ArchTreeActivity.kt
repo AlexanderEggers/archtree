@@ -98,16 +98,17 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
     }
 
     override fun onBackPressed() {
-        var shouldRunDefaultBackPressed = getViewModel()?.onBackPressed() ?: true
+        var shouldRunDefaultViewModelBackPressed = true
         supportFragmentManager.fragments.forEach { fragment ->
             if (fragment is ArchTreeFragment<*>? && fragment?.isVisible == true) {
                 val fragmentShouldRunDefaultBackPressed = fragment.onBackPressed()
-                if (shouldRunDefaultBackPressed) shouldRunDefaultBackPressed = fragmentShouldRunDefaultBackPressed
+                if (shouldRunDefaultViewModelBackPressed) shouldRunDefaultViewModelBackPressed = fragmentShouldRunDefaultBackPressed
             }
         }
 
-        if (shouldRunDefaultBackPressed) {
-            onDefaultBackPressed()
+        if (shouldRunDefaultViewModelBackPressed) {
+            val shouldRunDefaultBackPressed = getViewModel()?.onBackPressed() ?: true
+            if(shouldRunDefaultBackPressed) onDefaultBackPressed()
         }
     }
 

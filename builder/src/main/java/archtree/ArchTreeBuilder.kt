@@ -99,15 +99,10 @@ abstract class ArchTreeBuilder<ViewModel : BaseViewModel, out Builder> {
      *
      * @param layer custom layer which can be used to execute certain operation for the predefined
      * lifecycle methods.
-     * @throws RuntimeException throws exception if the layout for this component is not set.
      * @since 1.0.0
      * @see ArchTreeLayer
      */
     protected open fun internalBuild(layer: ArchTreeLayer<ViewModel>) {
         this.layer = layer
-
-        if (layoutId == -1) {
-            throw RuntimeException("Did you forget to set the layout for this component?")
-        }
     }
 }
