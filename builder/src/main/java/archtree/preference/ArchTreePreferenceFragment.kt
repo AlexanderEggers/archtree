@@ -155,8 +155,6 @@ abstract class ArchTreePreferenceFragment<ViewModel : BaseViewModel> : Preferenc
     override fun onHiddenChanged(hidden: Boolean) {
         super.onHiddenChanged(hidden)
         if (!hidden) {
-            refreshToolbar()
-
             if (getBinding() != null) {
                 fragmentResource?.getLayer()?.onResume(getViewModel(), getBinding(), getBundle())
             } else {

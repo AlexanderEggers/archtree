@@ -95,19 +95,11 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
     @CallSuper
     override fun onHiddenChanged(hidden: Boolean) {
         super.onHiddenChanged(hidden)
-        if(!hidden) {
-            refreshToolbar()
-
+        if (!hidden) {
             if (getBinding() != null) {
-                fragmentResource?.getLayer()?.onShow(getViewModel(), getBinding(), getBundle())
+                fragmentResource?.getLayer()?.onResume(getViewModel(), getBinding(), getBundle())
             } else {
-                fragmentResource?.getLayer()?.onShow(getViewModel(), view, getBundle())
-            }
-        } else {
-            if (getBinding() != null) {
-                fragmentResource?.getLayer()?.onHide(getViewModel(), getBinding(), getBundle())
-            } else {
-                fragmentResource?.getLayer()?.onHide(getViewModel(), view, getBundle())
+                fragmentResource?.getLayer()?.onResume(getViewModel(), view, getBundle())
             }
         }
     }
