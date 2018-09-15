@@ -227,8 +227,4 @@ abstract class ArchTreePreferenceFragment<ViewModel : BaseViewModel> : Preferenc
     private fun getBundle(): Bundle? {
         return fragmentResource?.bundle
     }
-
-    override fun getView(): View? {
-        return fragmentResource?.view
-    }
 }
