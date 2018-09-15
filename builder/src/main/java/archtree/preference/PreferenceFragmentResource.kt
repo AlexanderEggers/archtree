@@ -2,7 +2,6 @@ package archtree.preference
 
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
-import android.graphics.drawable.Drawable
 import android.support.v4.app.Fragment
 import android.util.Log
 import archtree.ArchTreeResource
@@ -18,6 +17,7 @@ constructor(builder: PreferenceFragmentBuilder<ViewModel>) : ArchTreeResource<Vi
     val dividerHeight: Int = builder.dividerHeight
 
     val staticPreferenceValues = builder.staticPreferenceValues
+    val staticPreferenceValuesVisiblity = builder.staticPreferenceValuesVisibility
 
     var viewModel: ViewModel? = null
         private set

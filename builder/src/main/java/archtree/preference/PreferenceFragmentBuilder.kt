@@ -17,10 +17,13 @@ open class PreferenceFragmentBuilder<ViewModel : BaseViewModel> : ArchTreeBuilde
     var dividerHeight: Int = -1
         private set
 
-    val staticPreferenceValues = HashMap<String, String>()
+    val staticPreferenceValues = HashMap<String, String?>()
+    val staticPreferenceValuesVisibility = HashMap<String, Boolean>()
 
-    open fun addStaticPreferenceValue(key: String, value: String): PreferenceFragmentBuilder<ViewModel> {
+    @JvmOverloads
+    open fun addStaticPreferenceValue(key: String, value: String? = null, visible: Boolean = true): PreferenceFragmentBuilder<ViewModel> {
         staticPreferenceValues[key] = value
+        staticPreferenceValuesVisibility[key] = visible
         return this
     }
 

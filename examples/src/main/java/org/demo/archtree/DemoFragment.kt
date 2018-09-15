@@ -13,7 +13,7 @@ class DemoFragment: ArchTreePreferenceFragment<HasNoViewModel>() {
     override fun provideFragmentResource(builder: PreferenceFragmentBuilder<HasNoViewModel>): PreferenceFragmentResource<HasNoViewModel> {
         return builder.setLayoutId(R.layout.fragment_layout)
                 .setPreferenceFromResource(R.xml.demo_settings, R.id.settings_container)
-                .addStaticPreferenceValue("build_number", BuildConfig.APPLICATION_ID)
+                .addStaticPreferenceValue("build_number", BuildConfig.APPLICATION_ID, false)
                 .build()
     }
 }
