@@ -60,7 +60,6 @@ dependencies {
     implementation "android.arch.lifecycle:extensions:$lifecycle_version"
     implementation "org.archknife:archknife-core:$archknife_version"
     implementation "org.autotarget:autotarget-fragment:$autotarget_version"
-
     api "com.android.support:preference-v7:$support_lib_version"
 
     api project(':archtree-viewmodel')
