@@ -65,14 +65,10 @@ abstract class ArchTreePreferenceFragment<ViewModel : BaseViewModel> : Preferenc
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
+    override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         val builder = PreferenceFragmentBuilder<ViewModel>()
         fragmentResource = provideFragmentResource(builder)
-    }
 
-    override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         val preferenceFromResource = fragmentResource?.preferenceFromResource ?: -1
         if (preferenceFromResource != -1) {
             addPreferencesFromResource(preferenceFromResource)
