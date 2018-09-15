@@ -155,11 +155,7 @@ abstract class ArchTreePreferenceFragment<ViewModel : BaseViewModel> : Preferenc
     override fun onHiddenChanged(hidden: Boolean) {
         super.onHiddenChanged(hidden)
         if (!hidden) {
-            if (getBinding() != null) {
-                fragmentResource?.getLayer()?.onResume(getViewModel(), getBinding(), getBundle())
-            } else {
-                fragmentResource?.getLayer()?.onResume(getViewModel(), view, getBundle())
-            }
+            onResume()
         }
     }
 
