@@ -107,18 +107,18 @@ abstract class ArchTreePreferenceFragment<ViewModel : BaseViewModel> : Preferenc
         super.onActivityCreated(savedInstanceState)
 
         val visibilityMap = fragmentResource?.staticPreferenceValuesVisiblity
-        fragmentResource?.staticPreferenceValues?.forEach { key, value ->
-            val preferenceField = findPreference(key)
+        fragmentResource?.staticPreferenceValues?.forEach {
+            val preferenceField = findPreference(it.key)
 
             if (preferenceField == null) {
                 Log.d(ArchTreePreferenceFragment::class.java.name, "Cannot find preference " +
                         "field. Are you sure that you added that field to your preference xml?")
             } else {
-                val visibility = visibilityMap?.get(key) ?: true
+                val visibility = visibilityMap?.get(it.key) ?: true
                 preferenceField.isVisible = visibility
 
-                if(value != null) {
-                    preferenceField.summary = value
+                if(it.value != null) {
+                    preferenceField.summary = it.value
                 }
             }
         }
