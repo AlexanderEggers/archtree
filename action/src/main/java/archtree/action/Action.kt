@@ -27,7 +27,7 @@ abstract class Action<T> {
     }
 
     open fun provideClickIntervalTime(): Long {
-        return 1000
+        return 500
     }
 
     fun notifyConditionChanged() {
