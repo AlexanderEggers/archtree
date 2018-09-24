@@ -1,6 +1,7 @@
 package archtree
 
 import android.annotation.SuppressLint
+import android.arch.lifecycle.LifecycleOwner
 import android.databinding.DataBindingComponent
 import android.os.Bundle
 import android.support.annotation.DrawableRes
@@ -24,6 +25,11 @@ abstract class ArchTreeBuilder<ViewModel : BaseViewModel, out Builder> {
     var dataBindingComponent: DataBindingComponent? = null
         private set
     var dataBindingComponentBindingKey: Int = -1
+        private set
+
+    var lifecycleOwner: LifecycleOwner? = null
+        private set
+    var lifecycleOwnerBindingKey: Int = -1
         private set
 
     var bundle: Bundle? = null
@@ -82,13 +88,19 @@ abstract class ArchTreeBuilder<ViewModel : BaseViewModel, out Builder> {
         return this as Builder
     }
 
+    open fun setLifecycleOwner(lifecycleOwner: LifecycleOwner, bindingKey: Int): Builder {
+        this.lifecycleOwner = lifecycleOwner
+        lifecycleOwnerBindingKey = bindingKey
+        return this as Builder
+    }
+
     @Deprecated("Use setToolbar(title) instead.", ReplaceWith(expression = "setToolbar(title)"))
     open fun setTitle(title: String): Builder {
         this.toolbarTitle = title
         return this as Builder
     }
 
-    open fun setBundle(bundle: Bundle): Builder {
+    open fun setBundle(bundle: Bundle?): Builder {
         this.bundle = bundle
         return this as Builder
     }

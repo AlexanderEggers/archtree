@@ -9,7 +9,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import archtree.fragment.ArchTreeFragment
+import archtree.fragment.ArchTreeFragmentCommunicator
 import archtree.viewmodel.BaseViewModel
 import autotarget.util.HasFragmentFlow
 import dagger.android.AndroidInjector
@@ -30,12 +30,7 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
 
     override fun onResume() {
         super.onResume()
-
-        if (getBinding() != null) {
-            activityResource?.getLayer()?.onResume(getViewModel(), getBinding(), getBundle())
-        } else {
-            activityResource?.getLayer()?.onResume(getViewModel(), getView(), getBundle())
-        }
+        activityResource?.getLayer()?.onResume(getViewModel(), getBundle())
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -81,11 +76,7 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
             window.decorView.systemUiVisibility = systemUiVisibility
         }
 
-        if (getBinding() != null) {
-            activityResource?.getLayer()?.onCreate(getViewModel(), getBinding(), getBundle())
-        } else {
-            activityResource?.getLayer()?.onCreate(getViewModel(), getView(), getBundle())
-        }
+        activityResource?.getLayer()?.onCreate(getViewModel(), getBundle())
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -98,17 +89,23 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
     }
 
     override fun onBackPressed() {
-        var shouldRunDefaultViewModelBackPressed = true
+        var shouldRunDefaultViewModelBackPressed = false
         supportFragmentManager.fragments.forEach { fragment ->
-            if (fragment is ArchTreeFragment<*>? && fragment?.isVisible == true) {
+            if (fragment is ArchTreeFragmentCommunicator? && fragment?.isVisible == true) {
                 val fragmentShouldRunDefaultBackPressed = fragment.onBackPressed()
-                if (shouldRunDefaultViewModelBackPressed) shouldRunDefaultViewModelBackPressed = fragmentShouldRunDefaultBackPressed
+                if (!shouldRunDefaultViewModelBackPressed) {
+                    shouldRunDefaultViewModelBackPressed = fragmentShouldRunDefaultBackPressed
+
+                    if (fragmentShouldRunDefaultBackPressed) {
+                        return //has been handled by fragment
+                    }
+                }
             }
         }
 
         if (shouldRunDefaultViewModelBackPressed) {
-            val shouldRunDefaultBackPressed = getViewModel()?.onBackPressed() ?: true
-            if(shouldRunDefaultBackPressed) onDefaultBackPressed()
+            val shouldRunDefaultBackPressed = getViewModel()?.onBackPressed() ?: false
+            if (!shouldRunDefaultBackPressed) onDefaultBackPressed()
         }
     }
 
@@ -117,14 +114,55 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        getViewModel()?.onActivityResult(requestCode, resultCode, data)
-
+        var hasHandledActivityResult = false
         supportFragmentManager.fragments.forEach { fragment ->
-            if (fragment is ArchTreeFragment<*>? && fragment?.isVisible == true) {
-                fragment.onActivityResult(requestCode, resultCode, data)
+            if (fragment is ArchTreeFragmentCommunicator? && fragment?.isVisible == true) {
+                val fragmentHasHandledActivityResult = fragment.onFragmentActivityResult(requestCode, resultCode, data)
+                if (!hasHandledActivityResult) {
+                    hasHandledActivityResult = fragmentHasHandledActivityResult
+
+                    if (fragmentHasHandledActivityResult) {
+                        return //has been handled by fragment
+                    }
+                }
             }
         }
+
+        if (!hasHandledActivityResult) {
+            val shouldRunDefaultActivityResult = getViewModel()?.onActivityResult(requestCode, resultCode, data)
+                    ?: false
+            if (!shouldRunDefaultActivityResult) onDefaultActivityResult(requestCode, resultCode, data)
+        }
+    }
+
+    open fun onDefaultActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        var hasHandledRequestPermissionResult = false
+        supportFragmentManager.fragments.forEach { fragment ->
+            if (fragment is ArchTreeFragmentCommunicator? && fragment?.isVisible == true) {
+                val fragmentHasHandledRequestPermissionResult = fragment.onFragmentRequestPermissionsResult(requestCode, permissions, grantResults)
+                if (!hasHandledRequestPermissionResult) {
+                    hasHandledRequestPermissionResult = fragmentHasHandledRequestPermissionResult
+
+                    if (fragmentHasHandledRequestPermissionResult) {
+                        return //has been handled by fragment
+                    }
+                }
+            }
+        }
+
+        if (!hasHandledRequestPermissionResult) {
+            val shouldRunDefaultRequestPermissionsResult = getViewModel()?.onRequestPermissionsResult(requestCode, permissions, grantResults)
+                    ?: false
+            if (!shouldRunDefaultRequestPermissionsResult) onDefaultRequestPermissionsResult(requestCode, permissions, grantResults)
+        }
+    }
+
+    open fun onDefaultRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -139,32 +177,17 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
 
     override fun onStart() {
         super.onStart()
-
-        if (getBinding() != null) {
-            getActivityResource()?.getLayer()?.onStart(getViewModel(), getBinding())
-        } else {
-            getActivityResource()?.getLayer()?.onStart(getViewModel(), getView())
-        }
+        getActivityResource()?.getLayer()?.onStart(getViewModel())
     }
 
     override fun onStop() {
         super.onStop()
-
-        if (getBinding() != null) {
-            getActivityResource()?.getLayer()?.onStop(getViewModel(), getBinding())
-        } else {
-            getActivityResource()?.getLayer()?.onStop(getViewModel(), getView())
-        }
+        getActivityResource()?.getLayer()?.onStop(getViewModel())
     }
 
     override fun onDestroy() {
         super.onDestroy()
-
-        if (getBinding() != null) {
-            getActivityResource()?.getLayer()?.onDestroy(getViewModel(), getBinding())
-        } else {
-            getActivityResource()?.getLayer()?.onDestroy(getViewModel(), getView())
-        }
+        getActivityResource()?.getLayer()?.onDestroy(getViewModel())
     }
 
     override fun onShowNextFragment(containerId: Int, state: Int, addToBackStack: Boolean, clearBackStack: Boolean, bundle: Bundle?): Boolean {

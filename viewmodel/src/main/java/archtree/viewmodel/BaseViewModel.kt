@@ -23,8 +23,8 @@ abstract class BaseViewModel : ViewModel() {
         //do nothing by default
     }
 
-    open fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        //do nothing by default
+    open fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?): Boolean {
+        return false
     }
 
     open fun onOptionsItemSelected(item: MenuItem?) {
@@ -32,10 +32,14 @@ abstract class BaseViewModel : ViewModel() {
     }
 
     open fun onBackPressed(): Boolean {
-        return true
+        return false
     }
 
     open fun onPreferenceTreeClick(preference: Preference?): Boolean {
+        return false
+    }
+
+    open fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray): Boolean {
         return false
     }
 }
