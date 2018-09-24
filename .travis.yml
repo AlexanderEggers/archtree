@@ -42,3 +42,5 @@ before_install:
   - chmod +x gradlew
   
 install: ./gradlew clean assemble assembleAndroidTest --stacktrace
+
+script: ./gradlew assembleDebug
