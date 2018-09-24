@@ -20,14 +20,14 @@ class DemoActivityViewModelTest: ArchTreeBaseTest() {
     @Test
     fun testOnActionClick() {
         initialiseTestData()
-        viewModel.action.execute(null)
+        viewModel.action.forceExecute(null)
 
         val fragmentTargetArgumentCaptor: ArgumentCaptor<FragmentTarget> = ArgumentCaptor.forClass(FragmentTarget::class.java)
         verify(targetServiceMock).execute(capture(fragmentTargetArgumentCaptor), anyInt(),
                 anyBoolean(), anyBoolean())
 
         val fragmentTarget = fragmentTargetArgumentCaptor.value
-        assertEquals(2131165242, fragmentTarget.containerId)
+        assertEquals(2131165243, fragmentTarget.containerId)
         assertEquals(-1, fragmentTarget.state)
         assertEquals("undefined", fragmentTarget.tag)
     }

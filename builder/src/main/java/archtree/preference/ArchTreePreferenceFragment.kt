@@ -4,7 +4,6 @@ import android.arch.lifecycle.ViewModelProvider
 import android.content.Intent
 import android.databinding.ViewDataBinding
 import android.os.Bundle
-import android.support.annotation.CallSuper
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.preference.Preference
@@ -15,10 +14,12 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import archknife.annotation.util.Injectable
+import archtree.fragment.ArchTreeFragmentCommunicator
 import archtree.viewmodel.BaseViewModel
 import javax.inject.Inject
 
-abstract class ArchTreePreferenceFragment<ViewModel : BaseViewModel> : PreferenceFragmentCompat(), Injectable, HasPreferenceFragmentBuilder<ViewModel> {
+abstract class ArchTreePreferenceFragment<ViewModel : BaseViewModel> : PreferenceFragmentCompat(),
+        Injectable, HasPreferenceFragmentBuilder<ViewModel>, ArchTreeFragmentCommunicator {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -28,12 +29,7 @@ abstract class ArchTreePreferenceFragment<ViewModel : BaseViewModel> : Preferenc
     override fun onResume() {
         super.onResume()
         refreshToolbar()
-
-        if (getBinding() != null) {
-            fragmentResource?.getLayer()?.onResume(getViewModel(), getBinding(), getBundle())
-        } else {
-            fragmentResource?.getLayer()?.onResume(getViewModel(), view, getBundle())
-        }
+        fragmentResource?.getLayer()?.onResume(getViewModel(), getBundle())
     }
 
     private fun refreshToolbar() {
@@ -117,7 +113,7 @@ abstract class ArchTreePreferenceFragment<ViewModel : BaseViewModel> : Preferenc
                 val visibility = visibilityMap?.get(it.key) ?: true
                 preferenceField.isVisible = visibility
 
-                if(it.value != null) {
+                if (it.value != null) {
                     preferenceField.summary = it.value
                 }
             }
@@ -139,19 +135,13 @@ abstract class ArchTreePreferenceFragment<ViewModel : BaseViewModel> : Preferenc
             fragmentResource?.onCreateViewModel(this, viewModelFactory)
         }
 
-        if (getBinding() != null) {
-            fragmentResource?.getLayer()?.onCreate(getViewModel(), getBinding(), getBundle())
-        } else {
-            fragmentResource?.getLayer()?.onCreate(getViewModel(), view, getBundle())
-        }
+        fragmentResource?.getLayer()?.onCreate(getViewModel(), getBundle())
     }
 
-    @CallSuper
-    open fun onBackPressed(): Boolean {
-        return getViewModel()?.onBackPressed() ?: true
+    override fun onBackPressed(): Boolean {
+        return getViewModel()?.onBackPressed() ?: false
     }
 
-    @CallSuper
     override fun onHiddenChanged(hidden: Boolean) {
         super.onHiddenChanged(hidden)
         if (!hidden) {
@@ -161,32 +151,17 @@ abstract class ArchTreePreferenceFragment<ViewModel : BaseViewModel> : Preferenc
 
     override fun onStart() {
         super.onStart()
-
-        if (getBinding() != null) {
-            fragmentResource?.getLayer()?.onStart(getViewModel(), getBinding())
-        } else {
-            fragmentResource?.getLayer()?.onStart(getViewModel(), view)
-        }
+        fragmentResource?.getLayer()?.onStart(getViewModel())
     }
 
     override fun onStop() {
         super.onStop()
-
-        if (getBinding() != null) {
-            fragmentResource?.getLayer()?.onStop(getViewModel(), getBinding())
-        } else {
-            fragmentResource?.getLayer()?.onStop(getViewModel(), view)
-        }
+        fragmentResource?.getLayer()?.onStop(getViewModel())
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-
-        if (getBinding() != null) {
-            fragmentResource?.getLayer()?.onDestroy(getViewModel(), getBinding())
-        } else {
-            fragmentResource?.getLayer()?.onDestroy(getViewModel(), view)
-        }
+        fragmentResource?.getLayer()?.onDestroy(getViewModel())
     }
 
     override fun onPreferenceTreeClick(preference: Preference?): Boolean {
@@ -198,9 +173,13 @@ abstract class ArchTreePreferenceFragment<ViewModel : BaseViewModel> : Preferenc
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        getViewModel()?.onActivityResult(requestCode, resultCode, data)
+    override fun onFragmentActivityResult(requestCode: Int, resultCode: Int, data: Intent?): Boolean {
+        return getViewModel()?.onActivityResult(requestCode, resultCode, data) ?: false
+    }
+
+    override fun onFragmentRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray): Boolean {
+        return getViewModel()?.onRequestPermissionsResult(requestCode, permissions, grantResults)
+                ?: false
     }
 
     open fun getFragmentResource(): PreferenceFragmentResource<ViewModel>? {

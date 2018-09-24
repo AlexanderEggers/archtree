@@ -29,6 +29,8 @@ abstract class ArchTreeResource<ViewModel : BaseViewModel> constructor(builder: 
     val dataBindingComponent: DataBindingComponent? = builder.dataBindingComponent
     val dataBindingComponentBindingKey: Int = builder.dataBindingComponentBindingKey
 
+    val lifecycleOwnerBindingKey: Int = builder.lifecycleOwnerBindingKey
+
     val bundle: Bundle? = builder.bundle
 
     val toolbarViewId: Int? = builder.toolbarViewId

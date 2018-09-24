@@ -6,20 +6,30 @@ buildscript {
         kotlin_version = '1.2.70'
         android_studio_version = "3.1.4"
 
-        support_lib_version = "27.1.1"
+        support_lib_version = "28.0.0"
         dagger_version = '2.17'
         lifecycle_version = '1.1.1'
         gson_version = '2.8.5'
         room_version = '1.1.1'
 
         archknife_version = '0.7.0'
-        autotarget_version = '0.7.2'
+        autotarget_version = '0.8.0'
 
         junit_version = "4.12"
         mockito_version = '2.21.0'
         powermock_version = '2.0.0-beta.5'
 
-        archtree_library_version = "0.10.3"
+        archtree_library_version = "0.11.0"
+
+        obtainDevEmailAddress = { ->
+            def result = ""
+
+            if (project.hasProperty("user.email")) {
+                result = project.getProperties().get("user.email")
+            }
+
+            return result
+        }
     }
 
     repositories {

@@ -23,14 +23,14 @@ public class DemoActivityViewModelJavaTest extends ArchTreeBaseTest {
     @Test
     public void testDemo() {
         initialiseTestData();
-        viewModel.getAction().execute(null);
+        viewModel.getAction().forceExecute(null);
 
         ArgumentCaptor<FragmentTarget> fragmentTargetArgumentCaptor = ArgumentCaptor.forClass(FragmentTarget.class);
         verify(targetServiceMock).execute(fragmentTargetArgumentCaptor.capture(), anyInt(),
                 anyBoolean(), anyBoolean());
 
         FragmentTarget fragmentTarget = fragmentTargetArgumentCaptor.getValue();
-        assertEquals(2131165242, fragmentTarget.getContainerId());
+        assertEquals(2131165243, fragmentTarget.getContainerId());
         assertEquals(-1, fragmentTarget.getState());
         assertEquals("undefined", fragmentTarget.getTag());
     }

@@ -21,7 +21,6 @@ class DemoActivityViewModel @Inject constructor(private val targetService: Targe
         }
     }
 
-
     override fun onInit(bundle: Bundle?) {
         super.onInit(bundle)
         observableArrayList.add(BindableListItemImpl("Test1"))
