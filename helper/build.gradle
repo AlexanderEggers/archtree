@@ -29,7 +29,7 @@ ext {
 
 android {
     compileSdkVersion 28
-    buildToolsVersion "28.0.2"
+    buildToolsVersion "28.0.3"
 
     defaultConfig {
         minSdkVersion 14
@@ -62,8 +62,6 @@ dependencies {
     implementation "com.android.support:appcompat-v7:$support_lib_version"
     implementation "com.android.support:transition:$support_lib_version"
     implementation "com.google.code.gson:gson:$gson_version"
-
-    kapt "com.android.databinding:compiler:$android_studio_version"
 }
 
 if (project.rootProject.file('local.properties').exists()) {

@@ -29,7 +29,7 @@ ext {
 
 android {
     compileSdkVersion 28
-    buildToolsVersion "28.0.2"
+    buildToolsVersion "28.0.3"
 
     defaultConfig {
         minSdkVersion 14
@@ -63,8 +63,6 @@ dependencies {
 
     implementation project(":archtree-viewmodel")
     //implementation "org.archtree:archtree-viewmodel:$archtree_library_version"
-
-    kapt "com.android.databinding:compiler:$android_studio_version"
 }
 
 if (project.rootProject.file('local.properties').exists()) {
