@@ -103,7 +103,7 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
             }
         }
 
-        if (hasHandledBackPressed) {
+        if (!hasHandledBackPressed) {
             val shouldRunDefaultBackPressed = getViewModel()?.onBackPressed() ?: false
             if (!shouldRunDefaultBackPressed) onDefaultBackPressed()
         }
