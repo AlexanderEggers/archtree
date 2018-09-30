@@ -5,12 +5,12 @@ import archtree.viewmodel.BaseViewModel
 
 abstract class ArchTreeLayer<in ViewModel : BaseViewModel> {
 
-    open fun onResume(viewModel: ViewModel?, bundle: Bundle?) {
+    open fun onResume(viewModel: ViewModel?) {
         //do nothing by default
     }
 
 
-    open fun onCreate(viewModel: ViewModel?, bundle: Bundle?) {
+    open fun onCreate(viewModel: ViewModel?, savedInstanceState: Bundle?) {
         //do nothing by default
     }
 
@@ -20,6 +20,10 @@ abstract class ArchTreeLayer<in ViewModel : BaseViewModel> {
     }
 
     open fun onStop(viewModel: ViewModel?) {
+        //do nothing by default
+    }
+
+    open fun onPause(viewModel: ViewModel?) {
         //do nothing by default
     }
 

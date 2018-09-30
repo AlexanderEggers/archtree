@@ -21,7 +21,7 @@ constructor(builder: FragmentBuilder<ViewModel>) : ArchTreeResource<ViewModel>(b
         else Log.w(FragmentResource::class.java.name, "ViewModel is not attached to layout.")
 
         binding?.setLifecycleOwner(fragment)
-        if(lifecycleOwnerBindingKey != -1) binding?.setVariable(lifecycleOwnerBindingKey, fragment as LifecycleOwner)
+        if (lifecycleOwnerBindingKey != -1) binding?.setVariable(lifecycleOwnerBindingKey, fragment as LifecycleOwner)
 
         if (!skipViewModelInit) {
             viewModel?.init(false, bundle)

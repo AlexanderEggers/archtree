@@ -2,6 +2,7 @@ package archtree.activity
 
 import android.arch.lifecycle.ViewModelProvider
 import android.content.Intent
+import android.content.res.Configuration
 import android.databinding.ViewDataBinding
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -30,7 +31,7 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
 
     override fun onResume() {
         super.onResume()
-        activityResource?.getLayer()?.onResume(getViewModel(), getBundle())
+        activityResource?.getLayer()?.onResume(getViewModel())
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,20 +50,20 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
         if (activityResource?.hideSupportBar == true) {
             supportActionBar?.hide()
         } else {
-            val toolbarViewId = getActivityResource()?.toolbarViewId
-            val toolbarTitle = getActivityResource()?.toolbarTitle
+            val toolbarViewId = activityResource?.toolbarViewId
+            val toolbarTitle = activityResource?.toolbarTitle
 
             if (toolbarViewId != null) {
                 setSupportActionBar(findViewById(toolbarViewId))
 
-                val displayHomeAsUpEnabled = getActivityResource()?.displayHomeAsUpEnabled ?: false
+                val displayHomeAsUpEnabled = activityResource?.displayHomeAsUpEnabled ?: false
                 supportActionBar?.setDisplayHomeAsUpEnabled(displayHomeAsUpEnabled)
 
                 if (toolbarTitle != null) {
                     supportActionBar?.title = toolbarTitle
                 }
 
-                val toolbarIcon = getActivityResource()?.toolbarIcon
+                val toolbarIcon = activityResource?.toolbarIcon
                 if (toolbarIcon != null) {
                     supportActionBar?.setIcon(toolbarIcon)
                 }
@@ -71,12 +72,12 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
             }
         }
 
-        val systemUiVisibility = getActivityResource()?.systemUiVisibility
+        val systemUiVisibility = activityResource?.systemUiVisibility
         if (systemUiVisibility != null && systemUiVisibility != 0) {
             window.decorView.systemUiVisibility = systemUiVisibility
         }
 
-        activityResource?.getLayer()?.onCreate(getViewModel(), getBundle())
+        activityResource?.getLayer()?.onCreate(getViewModel(), savedInstanceState)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -165,6 +166,32 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
+    override fun onConfigurationChanged(newConfig: Configuration?) {
+        var hasConfigurationChanged = false
+        supportFragmentManager.fragments.forEach { fragment ->
+            if (fragment is ArchTreeFragmentCommunicator? && fragment?.isVisible == true) {
+                val fragmentHasConfigurationChanged = fragment.onFragmentConfigurationChanged(newConfig)
+                if (!hasConfigurationChanged) {
+                    hasConfigurationChanged = fragmentHasConfigurationChanged
+
+                    if (fragmentHasConfigurationChanged) {
+                        return //has been handled by fragment
+                    }
+                }
+            }
+        }
+
+        if (!hasConfigurationChanged) {
+            val shouldRunDefaultConfigurationChanged = getViewModel()?.onConfigurationChanged(newConfig)
+                    ?: false
+            if (!shouldRunDefaultConfigurationChanged) onDefaultConfigurationChanged(newConfig)
+        }
+    }
+
+    open fun onDefaultConfigurationChanged(newConfig: Configuration?) {
+        super.onConfigurationChanged(newConfig)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
@@ -177,17 +204,22 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
 
     override fun onStart() {
         super.onStart()
-        getActivityResource()?.getLayer()?.onStart(getViewModel())
+        activityResource?.getLayer()?.onStart(getViewModel())
     }
 
     override fun onStop() {
         super.onStop()
-        getActivityResource()?.getLayer()?.onStop(getViewModel())
+        activityResource?.getLayer()?.onStop(getViewModel())
+    }
+
+    override fun onPause() {
+        super.onPause()
+        activityResource?.getLayer()?.onPause(getViewModel())
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        getActivityResource()?.getLayer()?.onDestroy(getViewModel())
+        activityResource?.getLayer()?.onDestroy(getViewModel())
     }
 
     override fun onShowNextFragment(containerId: Int, state: Int, addToBackStack: Boolean, clearBackStack: Boolean, bundle: Bundle?): Boolean {

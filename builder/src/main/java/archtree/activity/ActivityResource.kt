@@ -30,7 +30,7 @@ constructor(builder: ActivityBuilder<ViewModel>) : ArchTreeResource<ViewModel>(b
         else Log.w(ActivityResource::class.java.name, "ViewModel is not attached to layout.")
 
         binding?.setLifecycleOwner(activity)
-        if(lifecycleOwnerBindingKey != -1) binding?.setVariable(lifecycleOwnerBindingKey, activity as LifecycleOwner)
+        if (lifecycleOwnerBindingKey != -1) binding?.setVariable(lifecycleOwnerBindingKey, activity as LifecycleOwner)
 
         if (!skipViewModelInit) {
             viewModel?.init(false, bundle)

@@ -2,6 +2,7 @@ package archtree.fragment
 
 import android.arch.lifecycle.ViewModelProvider
 import android.content.Intent
+import android.content.res.Configuration
 import android.databinding.ViewDataBinding
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -25,30 +26,30 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
     override fun onResume() {
         super.onResume()
         refreshToolbar()
-        fragmentResource?.getLayer()?.onResume(getViewModel(), getBundle())
+        fragmentResource?.getLayer()?.onResume(getViewModel())
     }
 
     private fun refreshToolbar() {
-        val toolbarViewId = getFragmentResource()?.toolbarViewId
-        val toolbarTitle = getFragmentResource()?.toolbarTitle
+        val toolbarViewId = fragmentResource?.toolbarViewId
+        val toolbarTitle = fragmentResource?.toolbarTitle
 
         if (toolbarViewId != null) {
             val supportActivity = activity as? AppCompatActivity
 
-            if (getFragmentResource()?.activityToolbar == true) {
+            if (fragmentResource?.activityToolbar == true) {
                 supportActivity?.setSupportActionBar(supportActivity.findViewById(toolbarViewId))
             } else {
                 supportActivity?.setSupportActionBar(view?.findViewById(toolbarViewId))
             }
 
-            val displayHomeAsUpEnabled = getFragmentResource()?.displayHomeAsUpEnabled ?: false
+            val displayHomeAsUpEnabled = fragmentResource?.displayHomeAsUpEnabled ?: false
             supportActivity?.supportActionBar?.setDisplayHomeAsUpEnabled(displayHomeAsUpEnabled)
 
             if (toolbarTitle != null) {
                 supportActivity?.supportActionBar?.title = toolbarTitle
             }
 
-            val toolbarIcon = getFragmentResource()?.toolbarIcon
+            val toolbarIcon = fragmentResource?.toolbarIcon
             if (toolbarIcon != null) {
                 supportActivity?.supportActionBar?.setIcon(toolbarIcon)
             }
@@ -75,7 +76,7 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
             fragmentResource?.onCreateViewModel(this, viewModelFactory)
         }
 
-        fragmentResource?.getLayer()?.onCreate(getViewModel(), getBundle())
+        fragmentResource?.getLayer()?.onCreate(getViewModel(), savedInstanceState)
     }
 
     override fun onBackPressed(): Boolean {
@@ -99,6 +100,11 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
         fragmentResource?.getLayer()?.onStop(getViewModel())
     }
 
+    override fun onPause() {
+        super.onPause()
+        fragmentResource?.getLayer()?.onPause(getViewModel())
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         fragmentResource?.getLayer()?.onDestroy(getViewModel())
@@ -116,6 +122,10 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
     override fun onFragmentRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray): Boolean {
         return getViewModel()?.onRequestPermissionsResult(requestCode, permissions, grantResults)
                 ?: false
+    }
+
+    override fun onFragmentConfigurationChanged(newConfig: Configuration?): Boolean {
+        return getViewModel()?.onConfigurationChanged(newConfig) ?: false
     }
 
     open fun getFragmentResource(): FragmentResource<ViewModel>? {
