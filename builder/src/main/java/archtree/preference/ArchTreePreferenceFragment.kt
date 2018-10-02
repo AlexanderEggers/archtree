@@ -6,7 +6,6 @@ import android.content.res.Configuration
 import android.databinding.ViewDataBinding
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.preference.Preference
 import android.support.v7.preference.PreferenceFragmentCompat
 import android.util.Log
@@ -16,6 +15,7 @@ import android.view.View
 import android.view.ViewGroup
 import archknife.annotation.util.Injectable
 import archtree.fragment.ArchTreeFragmentCommunicator
+import archtree.fragment.refreshFragmentToolbar
 import archtree.viewmodel.BaseViewModel
 import javax.inject.Inject
 
@@ -29,37 +29,8 @@ abstract class ArchTreePreferenceFragment<ViewModel : BaseViewModel> : Preferenc
 
     override fun onResume() {
         super.onResume()
-        refreshToolbar()
+        refreshFragmentToolbar(activity, view, fragmentResource)
         fragmentResource?.getLayer()?.onResume(getViewModel())
-    }
-
-    private fun refreshToolbar() {
-        val toolbarViewId = fragmentResource?.toolbarViewId
-        val toolbarTitle = fragmentResource?.toolbarTitle
-
-        if (toolbarViewId != null) {
-            val supportActivity = activity as? AppCompatActivity
-
-            if (fragmentResource?.activityToolbar == true) {
-                supportActivity?.setSupportActionBar(supportActivity.findViewById(toolbarViewId))
-            } else {
-                supportActivity?.setSupportActionBar(view?.findViewById(toolbarViewId))
-            }
-
-            val displayHomeAsUpEnabled = fragmentResource?.displayHomeAsUpEnabled ?: false
-            supportActivity?.supportActionBar?.setDisplayHomeAsUpEnabled(displayHomeAsUpEnabled)
-
-            if (toolbarTitle != null) {
-                supportActivity?.supportActionBar?.title = toolbarTitle
-            }
-
-            val toolbarIcon = fragmentResource?.toolbarIcon
-            if (toolbarIcon != null) {
-                supportActivity?.supportActionBar?.setIcon(toolbarIcon)
-            }
-        } else if (toolbarTitle != null) {
-            activity?.title = toolbarTitle
-        }
     }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
@@ -79,7 +50,7 @@ abstract class ArchTreePreferenceFragment<ViewModel : BaseViewModel> : Preferenc
         val preferenceAttachViewId = fragmentResource?.attachPreferenceLayoutToViewId ?: -1
 
         return if (layoutId != -1 && preferenceAttachViewId != -1) {
-            val mainView = fragmentResource!!.onCreateView(inflater, container)
+            val mainView = fragmentResource?.onCreateView(inflater, container)
 
             val attachView = mainView?.findViewById<View>(preferenceAttachViewId)
             if (attachView != null && attachView is ViewGroup) {
@@ -103,7 +74,7 @@ abstract class ArchTreePreferenceFragment<ViewModel : BaseViewModel> : Preferenc
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val visibilityMap = fragmentResource?.staticPreferenceValuesVisiblity
+        val visibilityMap = fragmentResource?.staticPreferenceValuesVisibility
         fragmentResource?.staticPreferenceValues?.forEach {
             val preferenceField = findPreference(it.key)
 

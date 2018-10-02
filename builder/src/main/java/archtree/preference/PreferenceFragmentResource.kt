@@ -1,10 +1,12 @@
 package archtree.preference
 
+import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.support.v4.app.Fragment
 import android.util.Log
 import archtree.ArchTreeResource
+import archtree.fragment.FragmentResource
 import archtree.viewmodel.BaseViewModel
 
 open class PreferenceFragmentResource<ViewModel : BaseViewModel>
@@ -17,7 +19,7 @@ constructor(builder: PreferenceFragmentBuilder<ViewModel>) : ArchTreeResource<Vi
     val dividerHeight: Int = builder.dividerHeight
 
     val staticPreferenceValues = builder.staticPreferenceValues
-    val staticPreferenceValuesVisiblity = builder.staticPreferenceValuesVisibility
+    val staticPreferenceValuesVisibility = builder.staticPreferenceValuesVisibility
 
     var viewModel: ViewModel? = null
         private set
@@ -25,12 +27,14 @@ constructor(builder: PreferenceFragmentBuilder<ViewModel>) : ArchTreeResource<Vi
     open fun onCreateViewModel(fragment: Fragment, factory: ViewModelProvider.Factory) {
         viewModel = ViewModelProviders.of(fragment, factory).get(viewModelClass!!)
 
-        if (binding != null && bindingKey != -1) binding!!.setVariable(bindingKey, viewModel)
-        else Log.w(PreferenceFragmentResource::class.java.name, "ViewModel is not attached to layout.")
+        if (binding != null && bindingKey != -1) binding?.setVariable(bindingKey, viewModel)
+        else Log.w(FragmentResource::class.java.name, "ViewModel is not attached to layout.")
+
+        binding?.setLifecycleOwner(fragment)
+        if (lifecycleOwnerBindingKey != -1) binding?.setVariable(lifecycleOwnerBindingKey, fragment as LifecycleOwner)
 
         if (!skipViewModelInit) {
             viewModel?.init(false, bundle)
-            binding?.setLifecycleOwner(fragment)
         }
     }
 

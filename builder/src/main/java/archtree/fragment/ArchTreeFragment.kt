@@ -6,7 +6,6 @@ import android.content.res.Configuration
 import android.databinding.ViewDataBinding
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -25,37 +24,8 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
 
     override fun onResume() {
         super.onResume()
-        refreshToolbar()
+        refreshFragmentToolbar(activity, view, fragmentResource)
         fragmentResource?.getLayer()?.onResume(getViewModel())
-    }
-
-    private fun refreshToolbar() {
-        val toolbarViewId = fragmentResource?.toolbarViewId
-        val toolbarTitle = fragmentResource?.toolbarTitle
-
-        if (toolbarViewId != null) {
-            val supportActivity = activity as? AppCompatActivity
-
-            if (fragmentResource?.activityToolbar == true) {
-                supportActivity?.setSupportActionBar(supportActivity.findViewById(toolbarViewId))
-            } else {
-                supportActivity?.setSupportActionBar(view?.findViewById(toolbarViewId))
-            }
-
-            val displayHomeAsUpEnabled = fragmentResource?.displayHomeAsUpEnabled ?: false
-            supportActivity?.supportActionBar?.setDisplayHomeAsUpEnabled(displayHomeAsUpEnabled)
-
-            if (toolbarTitle != null) {
-                supportActivity?.supportActionBar?.title = toolbarTitle
-            }
-
-            val toolbarIcon = fragmentResource?.toolbarIcon
-            if (toolbarIcon != null) {
-                supportActivity?.supportActionBar?.setIcon(toolbarIcon)
-            }
-        } else if (toolbarTitle != null) {
-            activity?.title = toolbarTitle
-        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,7 +36,7 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return fragmentResource!!.onCreateView(inflater, container)
+        return fragmentResource?.onCreateView(inflater, container)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
