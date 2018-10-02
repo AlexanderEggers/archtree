@@ -1,6 +1,49 @@
 Change Log
 ==========
 
+Version 0.11.1 *(2018-09-25)*
+----------------------------
+- **NEW:** Tweaking default action click internal time.
+- **NEW:** Added support for permission requests inside viewmodels. ViewModels have now a new method onRequestPermissionsResult. Each ArchTree component will retrieve permission results even if the request has been made using the ActivityCompat.
+- **FIX:** Fixed onHiddenChanged not updating toolbar - onHiddenChanged will now use the app onResume.
+- **FIX:** Fixed NoClassDefFound when using a specific forEach function.
+- **MISC:** Added support for the latest Android Studio and Gradle Plugin version. I also updated the support library to version 28.0.0 and Kotlin to version 1.2.71.
+
+Version 0.10.2 *(2018-09-15)*
+----------------------------
+- **NEW** Added option to preference fragment to change visiblity of preference entries.
+- **BUGFIX**: Fixed several bugs inside preference fragment.
+
+Version 0.10.0 *(2018-09-15)*
+----------------------------
+- **NEW:** Added support for PreferenceFragmentCompat.
+
+Version 0.9.3 *(2018-09-15)*
+----------------------------
+- **NEW:** Added forceExecute method to the action object.
+- **NEW:** Added helper method for retrieving assets.
+- **NEW**: Added flag to control if toolbar is inside fragment or activity.
+- **FIX:** Made Action.onExecute protected to avoid misuse of this method.
+- **MISC:** Removed several CallSuper annotations.
+
+Version 0.9.0 *(2018-08-29)*
+----------------------------
+- **NEW:** Prevent double click when using the action pattern. Each action will have 1000ms difference between clicks by default. You can change this value by using the method provideClickIntervalTime() which is provided by your abstract action implementation.
+- **NEW:** Added more binding helper functions.
+- **NEW:** Added public getter to check if a certain viewmodel has been initialised.
+- **MISC:** Updated dagger and archknife dependencies.
+
+Version 0.8.0 *(2018-08-26)*
+----------------------------
+- **BREAKING:** Tweaking list related binding adapter names.
+- **BREAKING:** Moved several classes of the list artifact to a new subfolder.
+- **BREAKING:** Removed bundle from BaseViewModel.onActivityResult
+- **NEW:** Handling onActivityResult and onOptionsItemSelected for ArchTreeFragments
+- **NEW:** Made toolbar setter available for fragments. ArchFragments will recreate the toolbar content using the onResume method.
+- **NEW:** Added builder impl to add databinding components to the layout. This databinding component could be use for views that are created using databinding and require a databinding component instance in order to work. Inside the layout the databinding component has to be from type java.lang.Object, else the databinding processor won't reconize the type.
+- **BUGFIX:** Tweaking binding methods to prevent layout crashes if using wrong res values
+- **BUGFIX:** Ensured that only active and visible fragments can get backpress and activityresult events.
+
 Version 0.7.0 *(2018-08-19)*
 ----------------------------
 - **NEW:** Added new artifact 'testing'. This artifact will help you with testing your app. It provides you with a ArchTreeBaseTest. This artifact will get more useful helper and methods in the next pre-1.0.0 releases.
