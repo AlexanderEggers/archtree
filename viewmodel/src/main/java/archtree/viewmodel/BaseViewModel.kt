@@ -23,12 +23,12 @@ abstract class BaseViewModel : ViewModel() {
         }
     }
 
-    fun requestPermissions(activity: Activity, permissions: Array<String>, @IntRange(from = 0) requestCode: Int) {
-        ActivityCompat.requestPermissions(activity, permissions, requestCode)
-    }
-
     protected open fun onInit(bundle: Bundle?) {
         //do nothing by default
+    }
+
+    protected fun requestPermissions(activity: Activity, permissions: Array<String>, @IntRange(from = 0) requestCode: Int) {
+        ActivityCompat.requestPermissions(activity, permissions, requestCode)
     }
 
     open fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?): Boolean {

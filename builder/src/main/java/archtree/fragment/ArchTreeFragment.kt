@@ -85,9 +85,11 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
 
     override fun onHiddenChanged(hidden: Boolean) {
         super.onHiddenChanged(hidden)
-        if (!hidden) {
-            onResume()
-        }
+        if (!hidden) onResume()
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        getViewModel()?.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
     override fun onStart() {
