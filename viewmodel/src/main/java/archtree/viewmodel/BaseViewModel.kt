@@ -54,4 +54,8 @@ abstract class BaseViewModel : ViewModel() {
     open fun onConfigurationChanged(newConfig: Configuration?): Boolean {
         return false
     }
+
+    open fun onNewIntent(intent: Intent?): Boolean {
+        return false
+    }
 }

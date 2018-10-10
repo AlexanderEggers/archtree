@@ -192,6 +192,32 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
         super.onConfigurationChanged(newConfig)
     }
 
+    override fun onNewIntent(intent: Intent?) {
+        var hasNewIntentHandled = false
+        supportFragmentManager.fragments.forEach { fragment ->
+            if (fragment is ArchTreeFragmentCommunicator? && fragment?.isVisible == true) {
+                val fragmentHasNewIntentHandled = fragment.onFragmentNewIntent(intent)
+                if (!hasNewIntentHandled) {
+                    hasNewIntentHandled = fragmentHasNewIntentHandled
+
+                    if (fragmentHasNewIntentHandled) {
+                        return //has been handled by fragment
+                    }
+                }
+            }
+        }
+
+        if (!hasNewIntentHandled) {
+            val shouldRunDefaultNewIntent = getViewModel()?.onNewIntent(intent)
+                    ?: false
+            if (!shouldRunDefaultNewIntent) onDefaultNewIntent(intent)
+        }
+    }
+
+    open fun onDefaultNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {

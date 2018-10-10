@@ -100,6 +100,10 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
         return getViewModel()?.onConfigurationChanged(newConfig) ?: false
     }
 
+    override fun onFragmentNewIntent(intent: Intent?): Boolean {
+        return getViewModel()?.onNewIntent(intent) ?: false
+    }
+
     open fun getFragmentResource(): FragmentResource<ViewModel>? {
         return fragmentResource
     }

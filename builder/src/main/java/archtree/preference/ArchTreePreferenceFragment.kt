@@ -165,6 +165,10 @@ abstract class ArchTreePreferenceFragment<ViewModel : BaseViewModel> : Preferenc
         return getViewModel()?.onConfigurationChanged(newConfig) ?: false
     }
 
+    override fun onFragmentNewIntent(intent: Intent?): Boolean {
+        return getViewModel()?.onNewIntent(intent) ?: false
+    }
+
     open fun getFragmentResource(): PreferenceFragmentResource<ViewModel>? {
         return fragmentResource
     }
