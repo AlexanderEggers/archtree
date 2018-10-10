@@ -1,6 +1,17 @@
 Change Log
 ==========
 
+Version 0.12.1 *(2018-10-10)*
+----------------------------
+- **IMPORTANT BREAKING:** Several ActivityLayer and FragmentLayer method signaturs have been changed. For example onResume does not get a bundle object anymore. **Important note: onCreate still gets a bundle object but from now this bundle object is your savedInstanceState.**
+- **NEW:** Added support for onNewIntent. onNewIntent is a base method of the default Android Activity class. ArchTree extends the default support to your fragments and viewmodels. ViewModel has the new method onNewIntent and fragments can implement the onFragmentNewIntent.
+- **NEW:** Added support for the onConfigurationChanged so that fragments and viewmodels get changes from it's activity.
+- **NEW:** Added new ActivityLayer and FragmentLayer method onPause.
+- **NEW:** Added new method requestPermission to the BaseViewModel class which can be used to easly request permission within your viewmodels.
+- **NEW:** The fragment default method onRequestPermissionsResult will now call the viewmodels onRequestPermissionsResult by default.
+- **FIX:** Fixed missing LifecycleOwner for PreferenceFragment.
+- **FIX:** Fixed missing resource bundle getter.
+
 Version 0.11.1 *(2018-09-25)*
 ----------------------------
 - **NEW:** Tweaking default action click internal time.
