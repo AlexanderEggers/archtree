@@ -116,7 +116,7 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
         return fragmentResource?.binding
     }
 
-    private fun getBundle(): Bundle? {
+    open fun getResourceBundle(): Bundle? {
         return fragmentResource?.bundle
     }
 }

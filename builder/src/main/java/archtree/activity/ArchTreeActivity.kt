@@ -273,7 +273,7 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
         return activityResource?.binding
     }
 
-    private fun getBundle(): Bundle? {
+    open fun getResourceBundle(): Bundle? {
         return activityResource?.bundle
     }
 }
