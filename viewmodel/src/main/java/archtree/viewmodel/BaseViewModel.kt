@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.support.annotation.IntRange
 import android.support.v4.app.ActivityCompat
 import android.support.v7.preference.Preference
+import android.view.Menu
 import android.view.MenuItem
 
 abstract class BaseViewModel : ViewModel() {
@@ -35,8 +36,12 @@ abstract class BaseViewModel : ViewModel() {
         return false
     }
 
-    open fun onOptionsItemSelected(item: MenuItem?) {
-        //do nothing by default
+    open fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        return false
+    }
+
+    open fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        return false
     }
 
     open fun onBackPressed(): Boolean {

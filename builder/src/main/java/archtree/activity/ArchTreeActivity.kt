@@ -85,7 +85,32 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
         if (menuId != null) {
             val inflater = menuInflater
             inflater.inflate(menuId, menu)
+
+            var hasHandledCreateOptionsMenu = false
+            supportFragmentManager.fragments.forEach { fragment ->
+                if (fragment is ArchTreeFragmentCommunicator? && fragment?.isVisible == true) {
+                    val fragmentHasHandledCreateOptionsMenu = fragment.onFragmentCreateOptionsMenu(menu)
+                    if (!hasHandledCreateOptionsMenu) {
+                        hasHandledCreateOptionsMenu = fragmentHasHandledCreateOptionsMenu
+
+                        if (fragmentHasHandledCreateOptionsMenu) {
+                            return true //has been handled by fragment
+                        }
+                    }
+                }
+            }
+
+            if (!hasHandledCreateOptionsMenu) {
+                val shouldRunDefaultCreateOptionsMenu = getViewModel()?.onCreateOptionsMenu(menu) ?: false
+                if (!shouldRunDefaultCreateOptionsMenu) return onDefaultCreateOptionsMenu(menu)
+            }
+
+            return true
         }
+        return false
+    }
+
+    open fun onDefaultCreateOptionsMenu(menu: Menu?): Boolean {
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -219,6 +244,30 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        var hasHandledOptionsItemSelected = false
+        supportFragmentManager.fragments.forEach { fragment ->
+            if (fragment is ArchTreeFragmentCommunicator? && fragment?.isVisible == true) {
+                val fragmentHasHandledOptionsItemSelected = fragment.onOptionsItemSelected(item)
+                if (!hasHandledOptionsItemSelected) {
+                    hasHandledOptionsItemSelected = fragmentHasHandledOptionsItemSelected
+
+                    if (fragmentHasHandledOptionsItemSelected) {
+                        return true //has been handled by fragment
+                    }
+                }
+            }
+        }
+
+        if (!hasHandledOptionsItemSelected) {
+            val shouldRunDefaultOptionsItemSelected = getViewModel()?.onOptionsItemSelected(item)
+                    ?: false
+            if (!shouldRunDefaultOptionsItemSelected) return onDefaultOptionsItemSelected(item)
+        }
+
+        return true
+    }
+
+    open fun onDefaultOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
                 onBackPressed()

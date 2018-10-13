@@ -9,10 +9,7 @@ import android.support.v4.content.ContextCompat
 import android.support.v7.preference.Preference
 import android.support.v7.preference.PreferenceFragmentCompat
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import archknife.annotation.util.Injectable
 import archtree.fragment.ArchTreeFragmentCommunicator
 import archtree.fragment.refreshFragmentToolbar
@@ -25,7 +22,11 @@ abstract class ArchTreePreferenceFragment<ViewModel : BaseViewModel> : Preferenc
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    private var fragmentResource: PreferenceFragmentResource<ViewModel>? = null
+    var fragmentResource: PreferenceFragmentResource<ViewModel>? = null
+        private set
+
+    var menu: Menu? = null
+        private set
 
     override fun onResume() {
         super.onResume()
@@ -147,9 +148,18 @@ abstract class ArchTreePreferenceFragment<ViewModel : BaseViewModel> : Preferenc
         return getViewModel()?.onPreferenceTreeClick(preference) ?: false
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        this.menu = menu
+
+        val menuId = fragmentResource?.menuId
+        if (menuId != null) {
+            inflater?.inflate(menuId, menu)
+        }
+        getViewModel()?.onCreateOptionsMenu(menu)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        getViewModel()?.onOptionsItemSelected(item)
-        return super.onOptionsItemSelected(item)
+        return getViewModel()?.onOptionsItemSelected(item) ?: false
     }
 
     override fun onFragmentActivityResult(requestCode: Int, resultCode: Int, data: Intent?): Boolean {
@@ -169,8 +179,8 @@ abstract class ArchTreePreferenceFragment<ViewModel : BaseViewModel> : Preferenc
         return getViewModel()?.onNewIntent(intent) ?: false
     }
 
-    open fun getFragmentResource(): PreferenceFragmentResource<ViewModel>? {
-        return fragmentResource
+    override fun onFragmentCreateOptionsMenu(menu: Menu?): Boolean {
+        return getViewModel()?.onCreateOptionsMenu(menu) ?: false
     }
 
     open fun getViewModel(): ViewModel? {
