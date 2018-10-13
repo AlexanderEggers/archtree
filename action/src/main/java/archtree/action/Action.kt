@@ -7,7 +7,8 @@ abstract class Action<T> {
 
     val listeners = LinkedList<OnConditionChangedListener<T>>()
 
-    fun execute(parameter: T?) {
+    @JvmOverloads
+    fun execute(parameter: T? = null) {
         val currentTime = System.currentTimeMillis()
         if(currentTime - timeSinceLastClick > provideClickIntervalTime()) {
             timeSinceLastClick = currentTime
@@ -15,14 +16,16 @@ abstract class Action<T> {
         }
     }
 
-    fun forceExecute(parameter: T?) {
+    @JvmOverloads
+    fun forceExecute(parameter: T? = null) {
         timeSinceLastClick = System.currentTimeMillis()
         onExecute(parameter)
     }
 
     protected abstract fun onExecute(parameter: T?)
 
-    open fun canExecute(parameter: T?): Boolean {
+    @JvmOverloads
+    open fun canExecute(parameter: T? = null): Boolean {
         return true
     }
 

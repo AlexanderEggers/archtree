@@ -85,29 +85,28 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
         if (menuId != null) {
             val inflater = menuInflater
             inflater.inflate(menuId, menu)
+        }
 
-            var hasHandledCreateOptionsMenu = false
-            supportFragmentManager.fragments.forEach { fragment ->
-                if (fragment is ArchTreeFragmentCommunicator? && fragment?.isVisible == true) {
-                    val fragmentHasHandledCreateOptionsMenu = fragment.onFragmentCreateOptionsMenu(menu)
-                    if (!hasHandledCreateOptionsMenu) {
-                        hasHandledCreateOptionsMenu = fragmentHasHandledCreateOptionsMenu
+        var hasHandledCreateOptionsMenu = false
+        supportFragmentManager.fragments.forEach { fragment ->
+            if (fragment is ArchTreeFragmentCommunicator? && fragment?.isVisible == true) {
+                val fragmentHasHandledCreateOptionsMenu = fragment.onFragmentCreateOptionsMenu(menu)
+                if (!hasHandledCreateOptionsMenu) {
+                    hasHandledCreateOptionsMenu = fragmentHasHandledCreateOptionsMenu
 
-                        if (fragmentHasHandledCreateOptionsMenu) {
-                            return true //has been handled by fragment
-                        }
+                    if (fragmentHasHandledCreateOptionsMenu) {
+                        return true //has been handled by fragment
                     }
                 }
             }
-
-            if (!hasHandledCreateOptionsMenu) {
-                val shouldRunDefaultCreateOptionsMenu = getViewModel()?.onCreateOptionsMenu(menu) ?: false
-                if (!shouldRunDefaultCreateOptionsMenu) return onDefaultCreateOptionsMenu(menu)
-            }
-
-            return true
         }
-        return false
+
+        if (!hasHandledCreateOptionsMenu) {
+            val shouldRunDefaultCreateOptionsMenu = getViewModel()?.onCreateOptionsMenu(menu) ?: false
+            if (!shouldRunDefaultCreateOptionsMenu) return onDefaultCreateOptionsMenu(menu)
+        }
+
+        return true
     }
 
     open fun onDefaultCreateOptionsMenu(menu: Menu?): Boolean {
