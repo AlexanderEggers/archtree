@@ -244,21 +244,21 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        var haHandledOptionsItemSelected = false
+        var hasHandledOptionsItemSelected = false
         supportFragmentManager.fragments.forEach { fragment ->
             if (fragment is ArchTreeFragmentCommunicator? && fragment?.isVisible == true) {
-                val fragmentHaHandledOptionsItemSelected = fragment.onOptionsItemSelected(item)
-                if (!haHandledOptionsItemSelected) {
-                    haHandledOptionsItemSelected = fragmentHaHandledOptionsItemSelected
+                val fragmentHasHandledOptionsItemSelected = fragment.onOptionsItemSelected(item)
+                if (!hasHandledOptionsItemSelected) {
+                    hasHandledOptionsItemSelected = fragmentHasHandledOptionsItemSelected
 
-                    if (fragmentHaHandledOptionsItemSelected) {
+                    if (fragmentHasHandledOptionsItemSelected) {
                         return true //has been handled by fragment
                     }
                 }
             }
         }
 
-        if (!haHandledOptionsItemSelected) {
+        if (!hasHandledOptionsItemSelected) {
             val shouldRunDefaultOptionsItemSelected = getViewModel()?.onOptionsItemSelected(item)
                     ?: false
             if (!shouldRunDefaultOptionsItemSelected) return onDefaultOptionsItemSelected(item)
