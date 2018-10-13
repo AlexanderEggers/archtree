@@ -23,6 +23,8 @@ abstract class ArchTreeResource<ViewModel : BaseViewModel> constructor(builder: 
     val layoutId: Int = builder.layoutId
     val bindingKey: Int = builder.bindingKey
 
+    val menuId: Int? = builder.menuId
+
     val viewModelClass: Class<ViewModel>? = builder.viewModelClass
     val skipViewModelInit: Boolean = builder.skipViewModelInit
 

@@ -5,6 +5,7 @@ import android.databinding.DataBindingComponent
 import android.os.Bundle
 import android.support.annotation.DrawableRes
 import android.support.annotation.IdRes
+import android.support.annotation.MenuRes
 import android.util.Log
 import archtree.viewmodel.BaseViewModel
 
@@ -19,6 +20,9 @@ abstract class ArchTreeBuilder<ViewModel : BaseViewModel, out Builder> {
     var bindingKey = -1
         private set
     var skipViewModelInit: Boolean = false
+        private set
+
+    var menuId: Int? = null
         private set
 
     var dataBindingComponent: DataBindingComponent? = null
@@ -98,6 +102,11 @@ abstract class ArchTreeBuilder<ViewModel : BaseViewModel, out Builder> {
 
     open fun setBundle(bundle: Bundle?): Builder {
         this.bundle = bundle
+        return this as Builder
+    }
+
+    open fun setMenu(@MenuRes menuId: Int): Builder {
+        this.menuId = menuId
         return this as Builder
     }
 

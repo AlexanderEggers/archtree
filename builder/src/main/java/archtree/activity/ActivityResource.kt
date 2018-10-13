@@ -17,7 +17,6 @@ constructor(builder: ActivityBuilder<ViewModel>) : ArchTreeResource<ViewModel>(b
         private set
 
     val fragmentFlow: HasFragmentFlow? = builder.fragmentFlow
-    val menuId: Int? = builder.menuId
     val systemUiVisibility: Int = builder.systemUiVisibility
 
     val hideSupportBar: Boolean = builder.hideSupportBar

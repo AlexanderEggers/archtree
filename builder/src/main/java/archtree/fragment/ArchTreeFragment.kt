@@ -6,10 +6,7 @@ import android.content.res.Configuration
 import android.databinding.ViewDataBinding
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import archknife.annotation.util.Injectable
 import archtree.viewmodel.BaseViewModel
 import javax.inject.Inject
@@ -20,7 +17,11 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    private var fragmentResource: FragmentResource<ViewModel>? = null
+    var fragmentResource: FragmentResource<ViewModel>? = null
+        private set
+
+    var menu: Menu? = null
+        private set
 
     override fun onResume() {
         super.onResume()
@@ -82,9 +83,18 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
         fragmentResource?.getLayer()?.onDestroy(getViewModel())
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        this.menu = menu
+
+        val menuId = fragmentResource?.menuId
+        if (menuId != null) {
+            inflater?.inflate(menuId, menu)
+        }
+        getViewModel()?.onCreateOptionsMenu(menu)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        getViewModel()?.onOptionsItemSelected(item)
-        return super.onOptionsItemSelected(item)
+        return getViewModel()?.onOptionsItemSelected(item) ?: false
     }
 
     override fun onFragmentActivityResult(requestCode: Int, resultCode: Int, data: Intent?): Boolean {
@@ -104,8 +114,8 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
         return getViewModel()?.onNewIntent(intent) ?: false
     }
 
-    open fun getFragmentResource(): FragmentResource<ViewModel>? {
-        return fragmentResource
+    override fun onFragmentCreateOptionsMenu(menu: Menu?): Boolean {
+        return getViewModel()?.onCreateOptionsMenu(menu) ?: false
     }
 
     open fun getViewModel(): ViewModel? {
