@@ -19,7 +19,7 @@ buildscript {
         mockito_version = '2.21.0'
         powermock_version = '2.0.0-beta.5'
 
-        archtree_library_version = "0.13.0"
+        archtree_library_version = "0.13.1"
 
         obtainDevEmailAddress = { ->
             def result = ""
@@ -41,7 +41,7 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:$android_studio_version"
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
