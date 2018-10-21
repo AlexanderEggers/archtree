@@ -6,12 +6,13 @@ import android.os.Build
 import android.support.v4.content.ContextCompat
 import android.support.v4.content.res.ResourcesCompat
 import android.text.Html
+import android.text.method.LinkMovementMethod
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 
 @Suppress("DEPRECATION")
-@BindingAdapter("archtree_setHtml")
+@BindingAdapter("archtree_htmlText")
 fun setHtml(textView: TextView, html: String?) {
     if (html != null) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -19,10 +20,11 @@ fun setHtml(textView: TextView, html: String?) {
         } else {
             textView.text = Html.fromHtml(html)
         }
+        textView.movementMethod = LinkMovementMethod.getInstance()
     }
 }
 
-@BindingAdapter("archtree_custom_font")
+@BindingAdapter("archtree_customFont")
 fun setFont(view: TextView, value: Int?) {
     value?.run {
         val typeface = try {
@@ -36,7 +38,7 @@ fun setFont(view: TextView, value: Int?) {
     }
 }
 
-@BindingAdapter("archtree_icon_src")
+@BindingAdapter("archtree_iconRes")
 fun setIcon(view: ImageView, icon: Int?) {
     icon?.run {
         val drawable = try {
