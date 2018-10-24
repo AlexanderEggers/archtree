@@ -83,16 +83,6 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
         fragmentResource?.getLayer()?.onDestroy(getViewModel())
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        this.menu = menu
-
-        val menuId = fragmentResource?.menuId
-        if (menuId != null) {
-            inflater?.inflate(menuId, menu)
-        }
-        getViewModel()?.onCreateOptionsMenu(menu)
-    }
-
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         return getViewModel()?.onOptionsItemSelected(item) ?: false
     }
@@ -115,6 +105,13 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
     }
 
     override fun onFragmentCreateOptionsMenu(menu: Menu?): Boolean {
+        this.menu = menu
+
+        val menuId = fragmentResource?.menuId
+        if (menuId != null) {
+            activity?.menuInflater?.inflate(menuId, menu)
+        }
+
         return getViewModel()?.onCreateOptionsMenu(menu) ?: false
     }
 
