@@ -25,7 +25,6 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
 
     override fun onResume() {
         super.onResume()
-        refreshFragmentToolbar(activity, view, fragmentResource)
         fragmentResource?.getLayer()?.onResume(getViewModel())
     }
 
@@ -47,6 +46,7 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
             fragmentResource?.onCreateViewModel(this, viewModelFactory)
         }
 
+        refreshFragmentToolbar(activity, view, fragmentResource)
         fragmentResource?.getLayer()?.onCreate(getViewModel(), savedInstanceState)
     }
 
@@ -56,7 +56,10 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
 
     override fun onHiddenChanged(hidden: Boolean) {
         super.onHiddenChanged(hidden)
-        if (!hidden) onResume()
+        if (!hidden) {
+            refreshFragmentToolbar(activity, view, fragmentResource)
+            fragmentResource?.getLayer()?.onResume(getViewModel())
+        }
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
