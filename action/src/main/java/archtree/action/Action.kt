@@ -3,7 +3,7 @@ package archtree.action
 import java.util.*
 
 abstract class Action<T> {
-    private var timeSinceLastClick = System.currentTimeMillis()
+    private var timeSinceLastClick = 0L
 
     val listeners = LinkedList<OnConditionChangedListener<T>>()
 
