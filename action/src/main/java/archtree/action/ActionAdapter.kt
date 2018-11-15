@@ -11,7 +11,7 @@ fun <T> setAction(view: View, action: Action<T>?, actionParameter: T?) {
 }
 
 @BindingAdapter("archtree_action")
-fun setAction(view: View, action: Action<Any>?) {
+fun <T> setAction(view: View, action: Action<T>?) {
     setAction(view, action, null)
 }
 
