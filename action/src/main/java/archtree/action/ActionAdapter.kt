@@ -3,16 +3,11 @@ package archtree.action
 import android.databinding.BindingAdapter
 import android.view.View
 
-@BindingAdapter("archtree_action", "archtree_actionParameter")
+@BindingAdapter("archtree_action", "archtree_actionParameter", requireAll = false)
 fun <T> setAction(view: View, action: Action<T>?, actionParameter: T?) {
     action?.let {
         view.setOnClickListener(ActionListener(view, it, actionParameter))
     } ?: throw IllegalStateException("Action object should not be null.")
-}
-
-@BindingAdapter("archtree_action")
-fun <T> setAction(view: View, action: Action<T>?) {
-    setAction(view, action, null)
 }
 
 private class ActionListener<T>

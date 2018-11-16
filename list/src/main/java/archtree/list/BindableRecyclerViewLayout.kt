@@ -23,47 +23,8 @@ class BindableRecyclerViewLayout : RecyclerView {
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 }
 
-@BindingAdapter("archtree_listSource", "archtree_listItemTemplate")
-fun <T : BindableListItem> bindItemsSource(
-        container: RecyclerView,
-        oldItems: List<T>?,
-        @LayoutRes oldItemLayout: Int,
-        newItems: List<T>?,
-        @LayoutRes newItemLayout: Int) {
-    bindItemsSource<T, ViewModel, Any>(container, oldItems, oldItemLayout,
-            null, null, newItems, newItemLayout,
-            null, null)
-}
-
-@BindingAdapter("archtree_listSource", "archtree_listItemTemplate", "archtree_listViewModel")
-fun <T : BindableListItem, V : ViewModel> bindItemsSource(
-        container: RecyclerView,
-        oldItems: List<T>?,
-        @LayoutRes oldItemLayout: Int,
-        oldViewModel: V?,
-        newItems: List<T>?,
-        @LayoutRes newItemLayout: Int,
-        newViewModel: V?) {
-    bindItemsSource<T, ViewModel, Any>(container, oldItems, oldItemLayout,
-            oldViewModel, null, newItems, newItemLayout,
-            newViewModel, null)
-}
-
-@BindingAdapter("archtree_listSource", "archtree_listItemTemplate", "archtree_listDataBindingComponent")
-fun <T : BindableListItem, D: Any> bindItemsSource(
-        container: RecyclerView,
-        oldItems: List<T>?,
-        @LayoutRes oldItemLayout: Int,
-        oldDatabindingComponent: D?,
-        newItems: List<T>?,
-        @LayoutRes newItemLayout: Int,
-        newDatabindingComponent: D?) {
-    bindItemsSource<T, ViewModel, D>(container, oldItems, oldItemLayout,
-            null, oldDatabindingComponent, newItems, newItemLayout,
-            null, newDatabindingComponent)
-}
-
-@BindingAdapter("archtree_listSource", "archtree_listItemTemplate", "archtree_listViewModel", "archtree_listDataBindingComponent")
+@BindingAdapter("archtree_listSource", "archtree_listItemTemplate", "archtree_listViewModel",
+        "archtree_listDataBindingComponent", requireAll = false)
 fun <T : BindableListItem, V : ViewModel, D: Any> bindItemsSource(
         container: RecyclerView,
         oldItems: List<T>?,

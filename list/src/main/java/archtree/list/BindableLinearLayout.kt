@@ -28,48 +28,8 @@ class BindableLinearLayout : LinearLayout {
     }
 }
 
-@BindingAdapter("archtree_listSource", "archtree_listItemTemplate")
-fun <T : BindableListItem> bindItemsSource(
-        container: BindableLinearLayout,
-        oldItems: List<T>?,
-        @LayoutRes oldItemLayout: Int,
-        newItems: List<T>?,
-        @LayoutRes newItemLayout: Int) {
-    bindItemsSource<T, ViewModel, Any>(container, oldItems, oldItemLayout,
-            null, null, newItems, newItemLayout,
-            null, null)
-}
-
-@BindingAdapter("archtree_listSource", "archtree_listItemTemplate", "archtree_listViewModel")
-fun <T : BindableListItem, V : ViewModel> bindItemsSource(
-        container: BindableLinearLayout,
-        oldItems: List<T>?,
-        @LayoutRes oldItemLayout: Int,
-        oldViewModel: V?,
-        newItems: List<T>?,
-        @LayoutRes newItemLayout: Int,
-        newViewModel: V?) {
-    bindItemsSource<T, ViewModel, Any>(container, oldItems, oldItemLayout,
-            oldViewModel, null, newItems, newItemLayout,
-            newViewModel, null)
-}
-
-@BindingAdapter("archtree_listSource", "archtree_listItemTemplate", "archtree_listDataBindingComponent")
-fun <T : BindableListItem, D: Any> bindItemsSource(
-        container: BindableLinearLayout,
-        oldItems: List<T>?,
-        @LayoutRes oldItemLayout: Int,
-        oldDataBindingComponent: D?,
-        newItems: List<T>?,
-        @LayoutRes newItemLayout: Int,
-        newDataBindingComponent: D?) {
-    bindItemsSource<T, ViewModel, D>(container, oldItems, oldItemLayout,
-            null, oldDataBindingComponent, newItems, newItemLayout,
-            null, newDataBindingComponent)
-}
-
 @BindingAdapter("archtree_listSource", "archtree_listItemTemplate", "archtree_listViewModel",
-        "archtree_listDataBindingComponent")
+        "archtree_listDataBindingComponent", requireAll = false)
 fun <T : BindableListItem, V : ViewModel, D: Any> bindItemsSource(
         container: BindableLinearLayout,
         oldItems: List<T>?,
