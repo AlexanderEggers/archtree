@@ -38,8 +38,8 @@ fun setFont(view: TextView, value: Int?) {
     }
 }
 
-@BindingAdapter("archtree_iconRes")
-fun setIcon(view: ImageView, icon: Int?) {
+@BindingAdapter("archtree_drawableRes")
+fun setDrawableRes(view: ImageView, icon: Int?) {
     icon?.run {
         val drawable = try {
             ContextCompat.getDrawable(view.context, icon)

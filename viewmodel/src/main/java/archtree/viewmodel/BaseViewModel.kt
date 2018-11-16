@@ -7,7 +7,6 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.support.annotation.IntRange
 import android.support.v4.app.ActivityCompat
-import android.support.v7.preference.Preference
 import android.view.Menu
 import android.view.MenuItem
 
@@ -45,10 +44,6 @@ abstract class BaseViewModel : ViewModel() {
     }
 
     open fun onBackPressed(): Boolean {
-        return false
-    }
-
-    open fun onPreferenceTreeClick(preference: Preference?): Boolean {
         return false
     }
 

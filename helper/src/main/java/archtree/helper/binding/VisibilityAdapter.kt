@@ -4,7 +4,6 @@ import android.databinding.BindingAdapter
 import android.support.annotation.NonNull
 import android.support.transition.*
 import android.support.v4.view.ViewCompat
-import android.view.Gravity.TOP
 import android.view.View
 import android.view.ViewGroup
 
@@ -15,13 +14,10 @@ fun setVisibility(@NonNull view: View, visible: Boolean?) {
     }
 }
 
-@BindingAdapter("archtree_visibilityAnim")
-fun setVisibilityWithAnimation(@NonNull view: View, visible: Boolean?) {
+@BindingAdapter("archtree_visibility", "archtree_visibilityTransition")
+fun setVisibilityWithAnimation(@NonNull view: View, visible: Boolean?, transition: Transition) {
     visible?.run {
-        setVisibilityWithAnimation(view, visible, transitionSet(
-                Slide(TOP),
-                Fade()
-        ))
+        setVisibilityWithAnimation(view, visible, transition)
     }
 }
 
@@ -33,7 +29,7 @@ private fun setVisibilityWithAnimation(@NonNull view: View, visible: Boolean, tr
     view.visibility = if (visible) View.VISIBLE else View.GONE
 }
 
-private fun transitionSet(vararg transitions: Transition): Transition {
+fun transitionSet(vararg transitions: Transition): Transition {
     val transitionSet = TransitionSet()
 
     for (transition in transitions) {
