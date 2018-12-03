@@ -3,7 +3,7 @@ package archtree.action
 import android.databinding.BindingAdapter
 import android.view.View
 
-@BindingAdapter("archtree_action", "archtree_actionParameter", requireAll = false)
+@BindingAdapter("archtree_clickAction", "archtree_actionParameter", requireAll = false)
 fun <T> setAction(view: View, action: Action<T>?, actionParameter: T?) {
     action?.let {
         view.setOnClickListener(ActionListener(view, it, actionParameter))
@@ -12,7 +12,7 @@ fun <T> setAction(view: View, action: Action<T>?, actionParameter: T?) {
 
 private class ActionListener<T>
 internal constructor(private val view: View, private val action: Action<T>,
-                     private val actionParameter: T?) : View.OnClickListener, OnConditionChangedListener<T> {
+                     private val actionParameter: T?) : View.OnClickListener, OnConditionChangedListener<T>, View.OnLongClickListener {
 
     init {
         this.action.listeners.add(this)
@@ -29,7 +29,13 @@ internal constructor(private val view: View, private val action: Action<T>,
 
     override fun onClick(view: View) {
         if (this.action.canExecute(this.actionParameter)) {
-            this.action.execute(this.actionParameter)
+            this.action.click(this.actionParameter)
         }
+    }
+
+    override fun onLongClick(v: View?): Boolean {
+        return if (this.action.canExecute(this.actionParameter)) {
+            this.action.longClick(this.actionParameter)
+        } else false
     }
 }
