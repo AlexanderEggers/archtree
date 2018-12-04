@@ -36,11 +36,11 @@ abstract class Action<T> {
         longClick(parameter)
     }
 
-    protected fun onClick(parameter: T?) {
+    protected open fun onClick(parameter: T?) {
         //do nothing
     }
 
-    protected fun onLongClick(parameter: T?): Boolean {
+    protected open fun onLongClick(parameter: T?): Boolean {
         return false
     }
 

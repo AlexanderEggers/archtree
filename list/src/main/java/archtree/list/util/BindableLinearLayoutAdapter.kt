@@ -8,7 +8,7 @@ import java.util.ArrayList
 abstract class BindableLinearLayoutAdapter: BindableListAdapter {
 
     private val mViewHolderList = ArrayList<RecyclerView.ViewHolder>()
-    private lateinit var viewGroup: ViewGroup
+    private var viewGroup: ViewGroup? = null
 
     protected abstract val itemCount: Int
 
@@ -18,21 +18,22 @@ abstract class BindableLinearLayoutAdapter: BindableListAdapter {
 
     open fun bindViewGroup(viewGroup: ViewGroup) {
         this.viewGroup = viewGroup
-        notifyDataSetChanged()
     }
 
     override fun notifyDataSetChanged() {
-        viewGroup.removeAllViews()
-        mViewHolderList.clear()
+        viewGroup?.run {
+            removeAllViews()
+            mViewHolderList.clear()
 
-        for (i in 0 until itemCount) {
-            mViewHolderList.add(onCreateViewHolder(viewGroup, getType(i)))
-        }
+            for (i in 0 until itemCount) {
+                mViewHolderList.add(onCreateViewHolder(this, getType(i)))
+            }
 
-        for (i in mViewHolderList.indices) {
-            val viewHolder = mViewHolderList[i]
-            onBindViewHolder(viewHolder, i)
-            viewGroup.addView(viewHolder.itemView)
+            for (i in mViewHolderList.indices) {
+                val viewHolder = mViewHolderList[i]
+                onBindViewHolder(viewHolder, i)
+                addView(viewHolder.itemView)
+            }
         }
     }
 

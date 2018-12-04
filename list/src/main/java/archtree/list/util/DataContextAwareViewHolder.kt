@@ -5,11 +5,11 @@ import android.databinding.ViewDataBinding
 import android.support.v7.widget.RecyclerView
 import archtree.viewmodel.BaseViewModel
 
-open class DataContextAwareViewHolder<T : BindableListItem, V : ViewModel>
+open class DataContextAwareViewHolder
 constructor(private val binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root) {
 
-    open fun bind(item: T, viewModel: V?) {
+    open fun bind(item: BindableListItem, viewModel: ViewModel?) {
         item.bind(viewModel, binding)
-        (item as? BaseViewModel)?.init()
+        if(item is BaseViewModel) item.init()
     }
 }

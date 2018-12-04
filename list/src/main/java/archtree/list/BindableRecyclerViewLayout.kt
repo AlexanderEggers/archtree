@@ -7,13 +7,13 @@ import android.databinding.BindingAdapter
 import android.databinding.DataBindingComponent
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
-import android.databinding.adapters.ListenerUtil
 import android.support.annotation.LayoutRes
 import android.support.v7.widget.RecyclerView
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import archtree.list.util.*
+import android.support.v7.util.DiffUtil
 
 class BindableRecyclerViewLayout : RecyclerView {
 
@@ -54,28 +54,44 @@ fun <T : BindableListItem, V : ViewModel, D : Any> bindItemsSource(
     }
 
     if (container.adapter == null || container.adapter !is BindableListAdapter) {
-        val adapter = createPrivateAdapter(container, newItems, newItemLayout, newViewModel,
-                newDataBindingComponent, newLifecycleOwner)
+        createDefaultAdapter(container)
+    }
 
-        val listener: OnListChangedCallbackAdapter<T>? = ListenerUtil.getListener(container, R.id.listChangedListener)
-        BindableListUtil.initialiseListBinding(oldItems, newItems, listener, adapter, container)
+    val adapter = container.adapter
+    if(newItems != null && adapter != null && adapter is BindableListAdapter) {
+        (adapter as BindableListAdapter).onUpdate(newItems, newItemLayout, newViewModel,
+                newDataBindingComponent, newLifecycleOwner)
     }
 }
 
-private fun <T : BindableListItem, V : ViewModel, D : Any> createPrivateAdapter(
-        container: RecyclerView,
-        newItems: List<T>?,
-        @LayoutRes newItemLayout: Int,
-        newViewModel: V?,
-        newDataBindingComponent: D?,
-        newLifecycleOwner: LifecycleOwner?): BindableListAdapter {
+private fun createDefaultAdapter(container: RecyclerView) {
 
     val adapter = object : RecyclerView.Adapter<RecyclerView.ViewHolder>(), BindableListAdapter {
 
+        private val itemList = ArrayList<BindableListItem>()
+        private var itemLayout: Int = 0
+        private var viewModel: ViewModel? = null
+        private var dataBindingComponent: Any? = null
+        private var lifecycleOwner: LifecycleOwner? = null
+
+        override fun onUpdate(list: List<BindableListItem>, itemLayout: Int, viewModel: ViewModel?,
+                              dataBindingComponent: Any?, lifecycleOwner: LifecycleOwner?) {
+
+            this.itemLayout = itemLayout
+            this.viewModel = viewModel
+            this.dataBindingComponent = dataBindingComponent
+            this.lifecycleOwner = lifecycleOwner
+
+            if(itemList.isNotEmpty()) {
+                val diffResult = DiffUtil.calculateDiff(DefaultDiffCallback(this.itemList, list))
+                diffResult.dispatchUpdatesTo(this)
+            } else itemList.addAll(list)
+        }
+
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-            val realDataBindingComponent: DataBindingComponent? = if (newDataBindingComponent != null) {
+            val realDataBindingComponent: DataBindingComponent? = if (dataBindingComponent != null) {
                 try {
-                    newDataBindingComponent as? DataBindingComponent?
+                    dataBindingComponent as? DataBindingComponent?
                 } catch (e: ClassCastException) {
                     null
                 }
@@ -83,29 +99,25 @@ private fun <T : BindableListItem, V : ViewModel, D : Any> createPrivateAdapter(
 
             val binding = DataBindingUtil.inflate<ViewDataBinding>(
                     LayoutInflater.from(container.context),
-                    newItemLayout,
+                    itemLayout,
                     parent,
                     false,
                     realDataBindingComponent
             )
 
-            if (newLifecycleOwner != null) binding.setLifecycleOwner(newLifecycleOwner)
+            if (lifecycleOwner != null) binding.setLifecycleOwner(lifecycleOwner)
 
-            return DataContextAwareViewHolder<T, V>(binding)
+            return DataContextAwareViewHolder(binding)
         }
 
-        @Suppress("UNCHECKED_CAST")
         override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
-            if (viewHolder is DataContextAwareViewHolder<*, *>) {
-                (viewHolder as DataContextAwareViewHolder<T, V>).bind(newItems!![position], newViewModel)
-            }
+            if (viewHolder is DataContextAwareViewHolder) viewHolder.bind(itemList[position], viewModel)
         }
 
         override fun getItemCount(): Int {
-            return newItems?.size ?: 0
+            return itemList.size
         }
     }
 
     container.adapter = adapter
-    return adapter
 }
