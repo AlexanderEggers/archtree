@@ -1,4 +1,4 @@
-package org.demo.archtree
+package org.demo.archtree.app
 
 import archknife.annotation.ProvideApplication
 import archknife.extension.ArchknifeApplication
