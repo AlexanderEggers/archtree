@@ -33,25 +33,11 @@ fun bindListAdapter(container: RecyclerView, adapter: BindableListAdapter?) {
         "archtree_listDataBindingComponent", "archtree_listLifecycleOwner", requireAll = false)
 fun <T : BindableListItem, V : ViewModel, D : Any> bindItemsSource(
         container: RecyclerView,
-        oldItems: List<T>?,
-        @LayoutRes oldItemLayout: Int,
-        oldViewModel: V?,
-        oldDataBindingComponent: D?,
-        oldLifecycleOwner: LifecycleOwner?,
         newItems: List<T>?,
         @LayoutRes newItemLayout: Int,
         newViewModel: V?,
         newDataBindingComponent: D?,
         newLifecycleOwner: LifecycleOwner?) {
-
-    if (oldItems === newItems
-            && oldItemLayout == newItemLayout
-            && oldViewModel == newViewModel
-            && oldDataBindingComponent == newDataBindingComponent
-            && oldLifecycleOwner == newLifecycleOwner) {
-        // Nothing changed
-        return
-    }
 
     if (container.adapter == null || container.adapter !is BindableListAdapter) {
         createDefaultAdapter(container)
@@ -68,7 +54,7 @@ private fun createDefaultAdapter(container: RecyclerView) {
 
     val adapter = object : RecyclerView.Adapter<RecyclerView.ViewHolder>(), BindableListAdapter {
 
-        private val itemList = ArrayList<BindableListItem>()
+        private var itemList = ArrayList<BindableListItem>()
         private var itemLayout: Int = 0
         private var viewModel: ViewModel? = null
         private var dataBindingComponent: Any? = null
@@ -84,6 +70,9 @@ private fun createDefaultAdapter(container: RecyclerView) {
 
             if(itemList.isNotEmpty()) {
                 val diffResult = DiffUtil.calculateDiff(DefaultDiffCallback(this.itemList, list))
+
+                itemList.clear()
+                itemList.addAll(list)
                 diffResult.dispatchUpdatesTo(this)
             } else itemList.addAll(list)
         }

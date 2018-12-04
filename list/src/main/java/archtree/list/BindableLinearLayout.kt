@@ -37,25 +37,11 @@ fun bindListAdapter(container: BindableLinearLayout, adapter: BindableLinearLayo
         "archtree_listDataBindingComponent", "archtree_listLifecycleOwner", requireAll = false)
 fun <T : BindableListItem, V : ViewModel, D: Any> bindItemsSource(
         container: BindableLinearLayout,
-        oldItems: List<T>?,
-        @LayoutRes oldItemLayout: Int,
-        oldViewModel: V?,
-        oldDataBindingComponent: D?,
-        oldLifecycleOwner: LifecycleOwner?,
         newItems: List<T>?,
         @LayoutRes newItemLayout: Int,
         newViewModel: V?,
         newDataBindingComponent: D?,
         newLifecycleOwner: LifecycleOwner?) {
-
-    if (oldItems === newItems
-            && oldItemLayout == newItemLayout
-            && oldViewModel == newViewModel
-            && oldDataBindingComponent == newDataBindingComponent
-            && oldLifecycleOwner == newLifecycleOwner) {
-        // Nothing changed
-        return
-    }
 
     if (container.adapter == null || container.adapter !is BindableListAdapter) {
         createDefaultAdapter(container)
