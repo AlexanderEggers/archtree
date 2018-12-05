@@ -37,16 +37,29 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val activityBuilder = ActivityBuilder<ViewModel>()
-        activityResource = provideActivityResource(activityBuilder)
+        if(savedInstanceState == null) {
+            val activityBuilder = ActivityBuilder<ViewModel>()
+            activityResource = provideActivityResource(activityBuilder)
 
-        val view = activityResource?.onCreateView(layoutInflater, null)
-        setContentView(view)
+            val view = activityResource?.onCreateView(layoutInflater, null)
+            setContentView(view)
 
-        if (activityResource?.viewModelClass != null) {
-            activityResource?.onCreateViewModel(this, viewModelFactory)
+            if (activityResource?.viewModelClass != null) {
+                activityResource?.onCreateViewModel(this, viewModelFactory)
+            }
+
+            initialiseToolbar()
+
+            val systemUiVisibility = activityResource?.systemUiVisibility
+            if (systemUiVisibility != null && systemUiVisibility != 0) {
+                window.decorView.systemUiVisibility = systemUiVisibility
+            }
         }
 
+        activityResource?.getLayer()?.onCreate(getViewModel(), savedInstanceState)
+    }
+
+    private fun initialiseToolbar() {
         if (activityResource?.hideSupportBar == true) {
             supportActionBar?.hide()
         } else {
@@ -71,13 +84,6 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
                 title = toolbarTitle
             }
         }
-
-        val systemUiVisibility = activityResource?.systemUiVisibility
-        if (systemUiVisibility != null && systemUiVisibility != 0) {
-            window.decorView.systemUiVisibility = systemUiVisibility
-        }
-
-        activityResource?.getLayer()?.onCreate(getViewModel(), savedInstanceState)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

@@ -1,13 +1,16 @@
 package archtree.fragment
 
+import android.app.Activity
 import android.arch.lifecycle.ViewModelProvider
 import android.content.Intent
 import android.content.res.Configuration
 import android.databinding.ViewDataBinding
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
 import android.view.*
 import archknife.annotation.util.Injectable
+import archtree.ArchTreeResource
 import archtree.viewmodel.BaseViewModel
 import javax.inject.Inject
 
@@ -31,8 +34,10 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val builder = FragmentBuilder<ViewModel>()
-        fragmentResource = provideFragmentResource(builder)
+        if(savedInstanceState == null) {
+            val builder = FragmentBuilder<ViewModel>()
+            fragmentResource = provideFragmentResource(builder)
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -42,11 +47,14 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        if (fragmentResource?.viewModelClass != null) {
-            fragmentResource?.onCreateViewModel(this, viewModelFactory)
+        if(savedInstanceState == null) {
+            if (fragmentResource?.viewModelClass != null) {
+                fragmentResource?.onCreateViewModel(this, viewModelFactory)
+            }
+
+            refreshFragmentToolbar(activity, view, fragmentResource)
         }
 
-        refreshFragmentToolbar(activity, view, fragmentResource)
         fragmentResource?.getLayer()?.onCreate(getViewModel(), savedInstanceState)
     }
 
@@ -59,6 +67,35 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
         if (!hidden) {
             refreshFragmentToolbar(activity, view, fragmentResource)
             fragmentResource?.getLayer()?.onResume(getViewModel())
+        }
+    }
+
+    private fun refreshFragmentToolbar(activity: Activity?, rootView: View?, fragmentResource: ArchTreeResource<*>?) {
+        val toolbarViewId = fragmentResource?.toolbarViewId
+        val toolbarTitle = fragmentResource?.toolbarTitle
+
+        if (toolbarViewId != null) {
+            val supportActivity = activity as? AppCompatActivity
+
+            if (fragmentResource.activityToolbar) {
+                supportActivity?.setSupportActionBar(supportActivity.findViewById(toolbarViewId))
+            } else {
+                supportActivity?.setSupportActionBar(rootView?.findViewById(toolbarViewId))
+            }
+
+            val displayHomeAsUpEnabled = fragmentResource.displayHomeAsUpEnabled
+            supportActivity?.supportActionBar?.setDisplayHomeAsUpEnabled(displayHomeAsUpEnabled)
+
+            if (toolbarTitle != null) {
+                supportActivity?.supportActionBar?.title = toolbarTitle
+            }
+
+            val toolbarIcon = fragmentResource.toolbarIcon
+            if (toolbarIcon != null) {
+                supportActivity?.supportActionBar?.setIcon(toolbarIcon)
+            }
+        } else if (toolbarTitle != null) {
+            activity?.title = toolbarTitle
         }
     }
 
