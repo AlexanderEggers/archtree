@@ -34,10 +34,8 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if(savedInstanceState == null) {
-            val builder = FragmentBuilder<ViewModel>()
-            fragmentResource = provideFragmentResource(builder)
-        }
+        val builder = FragmentBuilder<ViewModel>()
+        fragmentResource = provideFragmentResource(builder)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -47,13 +45,11 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        if(savedInstanceState == null) {
-            if (fragmentResource?.viewModelClass != null) {
-                fragmentResource?.onCreateViewModel(this, viewModelFactory)
-            }
-
-            refreshFragmentToolbar(activity, view, fragmentResource)
+        if (fragmentResource?.viewModelClass != null) {
+            fragmentResource?.onCreateViewModel(this, viewModelFactory)
         }
+
+        refreshFragmentToolbar(activity, view, fragmentResource)
 
         fragmentResource?.getLayer()?.onCreate(getViewModel(), savedInstanceState)
     }
@@ -74,25 +70,23 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
         val toolbarViewId = fragmentResource?.toolbarViewId
         val toolbarTitle = fragmentResource?.toolbarTitle
 
-        if (toolbarViewId != null) {
-            val supportActivity = activity as? AppCompatActivity
-
+        if (toolbarViewId != null && activity != null && activity is AppCompatActivity) {
             if (fragmentResource.activityToolbar) {
-                supportActivity?.setSupportActionBar(supportActivity.findViewById(toolbarViewId))
+                activity.setSupportActionBar(activity.findViewById(toolbarViewId))
             } else {
-                supportActivity?.setSupportActionBar(rootView?.findViewById(toolbarViewId))
+                activity.setSupportActionBar(rootView?.findViewById(toolbarViewId))
             }
 
             val displayHomeAsUpEnabled = fragmentResource.displayHomeAsUpEnabled
-            supportActivity?.supportActionBar?.setDisplayHomeAsUpEnabled(displayHomeAsUpEnabled)
+            activity.supportActionBar?.setDisplayHomeAsUpEnabled(displayHomeAsUpEnabled)
 
             if (toolbarTitle != null) {
-                supportActivity?.supportActionBar?.title = toolbarTitle
+                activity.supportActionBar?.title = toolbarTitle
             }
 
             val toolbarIcon = fragmentResource.toolbarIcon
             if (toolbarIcon != null) {
-                supportActivity?.supportActionBar?.setIcon(toolbarIcon)
+                activity.supportActionBar?.setIcon(toolbarIcon)
             }
         } else if (toolbarTitle != null) {
             activity?.title = toolbarTitle
