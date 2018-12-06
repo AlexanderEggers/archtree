@@ -41,4 +41,4 @@ before_install:
   - echo y | $ANDROID_HOME/tools/bin/sdkmanager "extras;m2repository;com;android;support;constraint;constraint-layout-solver;1.0.2"
   - chmod +x gradlew
   
-install: ./gradlew clean assemble assembleAndroidTest --stacktrace
+install: ./gradlew clean assembleDebug
