@@ -5,7 +5,7 @@ import archtree.testing.ArchTreeBaseTest
 import archtree.testing.capture
 import autotarget.service.FragmentTarget
 import autotarget.service.TargetService
-import junit.framework.Assert.assertEquals
+import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.mockito.ArgumentCaptor
 import org.mockito.Mock
