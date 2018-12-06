@@ -16,14 +16,14 @@ abstract class BaseViewModel : ViewModel() {
         private set
 
     @JvmOverloads
-    fun init(forceInit: Boolean = false, bundle: Bundle? = null) {
+    fun init(forceInit: Boolean = false, resourceBundle: Bundle? = null, savedInstanceBundle: Bundle? = null) {
         if (!isInitialised || forceInit) {
             isInitialised = true
-            onInit(bundle)
+            onInit(resourceBundle, savedInstanceBundle)
         }
     }
 
-    protected open fun onInit(bundle: Bundle?) {
+    protected open fun onInit(resourceBundle: Bundle?, savedInstanceBundle: Bundle?) {
         //do nothing by default
     }
 

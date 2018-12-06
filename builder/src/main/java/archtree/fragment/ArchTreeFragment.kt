@@ -46,7 +46,7 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
         super.onActivityCreated(savedInstanceState)
 
         if (fragmentResource?.viewModelClass != null) {
-            fragmentResource?.onCreateViewModel(this, viewModelFactory)
+            fragmentResource?.onCreateViewModel(this, viewModelFactory, savedInstanceState)
         }
 
         refreshFragmentToolbar(activity, view, fragmentResource)

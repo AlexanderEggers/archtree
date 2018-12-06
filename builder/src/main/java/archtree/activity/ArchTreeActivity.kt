@@ -44,7 +44,7 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
         setContentView(view)
 
         if (activityResource?.viewModelClass != null) {
-            activityResource?.onCreateViewModel(this, viewModelFactory)
+            activityResource?.onCreateViewModel(this, viewModelFactory, savedInstanceState)
         }
 
         initialiseToolbar()
