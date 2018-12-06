@@ -28,15 +28,10 @@ abstract class ArchTreeBaseTest {
     /**
      * Should include all relevant test initialisations and mock creations.
      *
-     *
      * <u>Example:</u>
      *
-     *
      * when(repository.getData("myString")).thenReturn(...);
-     *
-     *
      * viewModel = new MyViewModel(...);
-     * });
      */
     abstract fun initialiseTestData()
 }
