@@ -33,7 +33,7 @@ abstract class ArchTreeBuilder<ViewModel : BaseViewModel, out Builder> {
     var lifecycleOwnerBindingKey: Int = -1
         private set
 
-    var bundle: Bundle? = null
+    var resourceBundle: Bundle? = null
         private set
     var layer: ArchTreeLayer<ViewModel>? = null
         private set
@@ -94,14 +94,8 @@ abstract class ArchTreeBuilder<ViewModel : BaseViewModel, out Builder> {
         return this as Builder
     }
 
-    @Deprecated("Use setToolbar(title) instead.", ReplaceWith(expression = "setToolbar(title)"))
-    open fun setTitle(title: String): Builder {
-        this.toolbarTitle = title
-        return this as Builder
-    }
-
-    open fun setBundle(bundle: Bundle?): Builder {
-        this.bundle = bundle
+    open fun setResourceBundle(bundle: Bundle?): Builder {
+        this.resourceBundle = bundle
         return this as Builder
     }
 

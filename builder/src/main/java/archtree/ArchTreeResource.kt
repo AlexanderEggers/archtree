@@ -33,7 +33,7 @@ abstract class ArchTreeResource<ViewModel : BaseViewModel> constructor(builder: 
 
     val lifecycleOwnerBindingKey: Int = builder.lifecycleOwnerBindingKey
 
-    val bundle: Bundle? = builder.bundle
+    val resourceBundle: Bundle? = builder.resourceBundle
 
     val toolbarViewId: Int? = builder.toolbarViewId
     val toolbarTitle: String? = builder.toolbarTitle

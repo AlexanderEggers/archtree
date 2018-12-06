@@ -28,7 +28,7 @@ constructor(builder: FragmentBuilder<ViewModel>) : ArchTreeResource<ViewModel>(b
         binding?.setLifecycleOwner(fragment)
         if (lifecycleOwnerBindingKey != -1) binding?.setVariable(lifecycleOwnerBindingKey, fragment as LifecycleOwner)
 
-        if (!skipViewModelInit) viewModel?.init(false, bundle, savedInstanceBundle)
+        if (!skipViewModelInit) viewModel?.init(false, resourceBundle, savedInstanceBundle)
     }
 
     open fun getLayer(): FragmentLayer<ViewModel> {

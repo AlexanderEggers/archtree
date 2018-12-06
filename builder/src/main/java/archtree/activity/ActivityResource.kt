@@ -34,7 +34,7 @@ constructor(builder: ActivityBuilder<ViewModel>) : ArchTreeResource<ViewModel>(b
         binding?.setLifecycleOwner(activity)
         if (lifecycleOwnerBindingKey != -1) binding?.setVariable(lifecycleOwnerBindingKey, activity as LifecycleOwner)
 
-        if (!skipViewModelInit) viewModel?.init(false, bundle, savedInstanceBundle)
+        if (!skipViewModelInit) viewModel?.init(false, resourceBundle, savedInstanceBundle)
     }
 
     open fun getLayer(): ActivityLayer<ViewModel> {
