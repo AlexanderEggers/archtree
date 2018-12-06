@@ -1,12 +1,9 @@
 package archtree.viewmodel
 
-import android.app.Activity
 import android.arch.lifecycle.ViewModel
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
-import android.support.annotation.IntRange
-import android.support.v4.app.ActivityCompat
 import android.view.Menu
 import android.view.MenuItem
 
@@ -25,10 +22,6 @@ abstract class BaseViewModel : ViewModel() {
 
     protected open fun onInit(resourceBundle: Bundle?, savedInstanceBundle: Bundle?) {
         //do nothing by default
-    }
-
-    protected fun requestPermissions(activity: Activity, permissions: Array<String>, @IntRange(from = 0) requestCode: Int) {
-        ActivityCompat.requestPermissions(activity, permissions, requestCode)
     }
 
     open fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?): Boolean {
