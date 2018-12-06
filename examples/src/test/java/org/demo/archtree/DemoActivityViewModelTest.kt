@@ -1,5 +1,6 @@
 package org.demo.archtree
 
+import archknife.context.ContextProvider
 import archtree.testing.ArchTreeBaseTest
 import archtree.testing.capture
 import autotarget.service.FragmentTarget
@@ -9,6 +10,7 @@ import org.junit.Test
 import org.mockito.ArgumentCaptor
 import org.mockito.Mock
 import org.mockito.Mockito.*
+import org.powermock.reflect.Whitebox
 
 class DemoActivityViewModelTest: ArchTreeBaseTest() {
 
@@ -19,12 +21,14 @@ class DemoActivityViewModelTest: ArchTreeBaseTest() {
 
     @Test
     fun testOnActionClick() {
+        Whitebox.setInternalState(targetServiceMock, "contextProvider", ContextProvider)
+
         initialiseTestData()
-        viewModel.action.forceExecute(null)
+        viewModel.action.forceClick()
 
         val fragmentTargetArgumentCaptor: ArgumentCaptor<FragmentTarget> = ArgumentCaptor.forClass(FragmentTarget::class.java)
         verify(targetServiceMock).execute(capture(fragmentTargetArgumentCaptor), anyInt(),
-                anyBoolean(), anyBoolean())
+                anyBoolean(), anyBoolean(), any())
 
         val fragmentTarget = fragmentTargetArgumentCaptor.value
         assertEquals(2131165243, fragmentTarget.containerId)

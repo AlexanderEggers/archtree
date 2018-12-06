@@ -27,13 +27,13 @@ abstract class Action<T> {
     @JvmOverloads
     fun forceClick(parameter: T? = null) {
         timeSinceLastClick = System.currentTimeMillis()
-        click(parameter)
+        onClick(parameter)
     }
 
     @JvmOverloads
     fun forceLongPress(parameter: T? = null) {
         timeSinceLastClick = System.currentTimeMillis()
-        longClick(parameter)
+        onLongClick(parameter)
     }
 
     protected open fun onClick(parameter: T?) {
