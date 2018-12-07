@@ -15,27 +15,25 @@ internal constructor(private val view: View, private val action: Action<T>,
                      private val actionParameter: T?) : View.OnClickListener, OnConditionChangedListener<T>, View.OnLongClickListener {
 
     init {
-        this.action.listeners.add(this)
-        this.updateView()
+        action.listeners.add(this)
+        view.isClickable = action.canExecuteClick(actionParameter)
+        view.isLongClickable = action.canExecuteLongClick(actionParameter)
     }
 
-    private fun updateView() {
-        this.view.isEnabled = this.action.canExecute(this.actionParameter)
+    override fun onClickConditionChanged(action: Action<T>) {
+        view.isClickable = action.canExecuteClick(actionParameter)
     }
 
-    override fun onConditionChanged(action: Action<T>) {
-        this.updateView()
+    override fun onLongClickConditionChanged(action: Action<T>) {
+        view.isLongClickable = action.canExecuteLongClick(actionParameter)
     }
 
     override fun onClick(view: View) {
-        if (this.action.canExecute(this.actionParameter)) {
-            this.action.click(this.actionParameter)
-        }
+        if (action.canExecuteClick(actionParameter)) action.click(actionParameter)
     }
 
     override fun onLongClick(v: View?): Boolean {
-        return if (this.action.canExecute(this.actionParameter)) {
-            this.action.longClick(this.actionParameter)
-        } else false
+        return if (action.canExecuteLongClick(actionParameter)) action.longClick(actionParameter)
+        else false
     }
 }

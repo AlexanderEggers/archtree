@@ -9,11 +9,9 @@ abstract class ArchTreeLayer<in ViewModel : BaseViewModel> {
         //do nothing by default
     }
 
-
     open fun onCreate(viewModel: ViewModel?, savedInstanceState: Bundle?) {
         //do nothing by default
     }
-
 
     open fun onStart(viewModel: ViewModel?) {
         //do nothing by default

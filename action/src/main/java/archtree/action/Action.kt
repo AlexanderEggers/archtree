@@ -16,12 +16,9 @@ abstract class Action<T> {
         }
     }
 
+    @JvmOverloads
     fun longClick(parameter: T? = null): Boolean {
-        val currentTime = System.currentTimeMillis()
-        return if(currentTime - timeSinceLastClick > provideClickIntervalTime()) {
-            timeSinceLastClick = currentTime
-            onLongClick(parameter)
-        } else false
+        return onLongClick(parameter)
     }
 
     @JvmOverloads
@@ -32,8 +29,7 @@ abstract class Action<T> {
 
     @JvmOverloads
     fun forceLongPress(parameter: T? = null) {
-        timeSinceLastClick = System.currentTimeMillis()
-        onLongClick(parameter)
+        longClick()
     }
 
     protected open fun onClick(parameter: T?) {
@@ -45,7 +41,12 @@ abstract class Action<T> {
     }
 
     @JvmOverloads
-    open fun canExecute(parameter: T? = null): Boolean {
+    open fun canExecuteClick(parameter: T? = null): Boolean {
+        return true
+    }
+
+    @JvmOverloads
+    open fun canExecuteLongClick(parameter: T? = null): Boolean {
         return true
     }
 
@@ -53,9 +54,15 @@ abstract class Action<T> {
         return 500
     }
 
-    fun notifyConditionChanged() {
+    fun notifyClickConditionChanged() {
         listeners.forEach {
-            it.onConditionChanged(this)
+            it.onClickConditionChanged(this)
+        }
+    }
+
+    fun notifyLongClickConditionChanged() {
+        listeners.forEach {
+            it.onLongClickConditionChanged(this)
         }
     }
 }

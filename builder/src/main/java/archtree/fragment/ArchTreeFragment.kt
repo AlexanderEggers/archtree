@@ -15,7 +15,7 @@ import archtree.viewmodel.BaseViewModel
 import javax.inject.Inject
 
 abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injectable,
-        HasFragmentBuilder<ViewModel>, ArchTreeFragmentCommunicator {
+        HasFragmentBuilder<ViewModel> {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -54,7 +54,7 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
         fragmentResource?.getLayer()?.onCreate(getViewModel(), savedInstanceState)
     }
 
-    override fun onBackPressed(): Boolean {
+    open fun onBackPressed(): Boolean {
         return getViewModel()?.onBackPressed() ?: false
     }
 
@@ -121,24 +121,24 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
         return getViewModel()?.onOptionsItemSelected(item) ?: false
     }
 
-    override fun onFragmentActivityResult(requestCode: Int, resultCode: Int, data: Intent?): Boolean {
+    open fun onFragmentActivityResult(requestCode: Int, resultCode: Int, data: Intent?): Boolean {
         return getViewModel()?.onActivityResult(requestCode, resultCode, data) ?: false
     }
 
-    override fun onFragmentRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray): Boolean {
+    open fun onFragmentRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray): Boolean {
         return getViewModel()?.onRequestPermissionsResult(requestCode, permissions, grantResults)
                 ?: false
     }
 
-    override fun onFragmentConfigurationChanged(newConfig: Configuration?): Boolean {
+    open fun onFragmentConfigurationChanged(newConfig: Configuration?): Boolean {
         return getViewModel()?.onConfigurationChanged(newConfig) ?: false
     }
 
-    override fun onFragmentNewIntent(intent: Intent?): Boolean {
+    open fun onFragmentNewIntent(intent: Intent?): Boolean {
         return getViewModel()?.onNewIntent(intent) ?: false
     }
 
-    override fun onFragmentCreateOptionsMenu(menu: Menu?): Boolean {
+    open fun onFragmentCreateOptionsMenu(menu: Menu?): Boolean {
         this.menu = menu
 
         val menuId = fragmentResource?.menuId

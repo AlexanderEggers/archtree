@@ -1,5 +1,6 @@
 package archtree.action
 
 interface OnConditionChangedListener<T> {
-    fun onConditionChanged(action: Action<T>)
+    fun onClickConditionChanged(action: Action<T>)
+    fun onLongClickConditionChanged(action: Action<T>)
 }
