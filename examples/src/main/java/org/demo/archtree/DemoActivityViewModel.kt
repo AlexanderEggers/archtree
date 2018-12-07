@@ -17,15 +17,15 @@ class DemoActivityViewModel @Inject constructor(private val targetService: Targe
     val action: Action<Any> = object: Action<Any>() {
 
         override fun onClick(parameter: Any?) {
-            targetService.execute(FragmentTargets.showDemoFragment())
+            //targetService.execute(FragmentTargets.showDemoFragment())
 
-            /*observableArrayList.clear()
+            observableArrayList.clear()
             observableArrayList.add(BindableListItemImpl("Test1"))
             observableArrayList.add(BindableListItemImpl("Test2"))
             observableArrayList.add(BindableListItemImpl("Test3"))
             observableArrayList.add(BindableListItemImpl("Test4"))
             observableArrayList.add(BindableListItemImpl("Test5"))
-            observableArrayList.add(BindableListItemImpl("Test7"))*/
+            observableArrayList.add(BindableListItemImpl("Test7"))
         }
     }
 

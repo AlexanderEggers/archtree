@@ -3,8 +3,9 @@ package org.demo.archtree
 import android.arch.lifecycle.ViewModel
 import android.databinding.ViewDataBinding
 import archtree.list.util.BindableListItem
+import archtree.list.util.BindableListItemAdapter
 
-class BindableListItemImpl(private val value: String): BindableListItem() {
+class BindableListItemImpl(private val value: String): BindableListItemAdapter() {
 
     override fun areItemsTheSame(newItem: BindableListItem): Boolean {
         return if(newItem is BindableListItemImpl) value == newItem.value
