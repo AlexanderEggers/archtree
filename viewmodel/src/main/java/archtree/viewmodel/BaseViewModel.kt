@@ -51,4 +51,8 @@ abstract class BaseViewModel : ViewModel() {
     open fun onNewIntent(intent: Intent?): Boolean {
         return false
     }
+
+    open fun onSaveInstanceState(outState: Bundle?) {
+        //do nothing by default
+    }
 }
