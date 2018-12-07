@@ -3,11 +3,17 @@ package archtree.list.util
 import android.arch.lifecycle.ViewModel
 import android.databinding.ViewDataBinding
 
-interface BindableListItem {
+abstract class BindableListItem {
 
-    fun areItemsTheSame(newItem: BindableListItem): Boolean
+    open fun areItemsTheSame(newItem: BindableListItem): Boolean {
+        return false
+    }
 
-    fun areContentsTheSame(newItem: BindableListItem): Boolean
+    open fun areContentsTheSame(newItem: BindableListItem): Boolean {
+        return false
+    }
 
-    fun bind(viewModel: ViewModel?, binding: ViewDataBinding)
+    open fun bind(viewModel: ViewModel?, binding: ViewDataBinding) {
+        //do nothing by default
+    }
 }

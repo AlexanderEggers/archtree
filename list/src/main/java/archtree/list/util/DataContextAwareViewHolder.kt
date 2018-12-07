@@ -10,6 +10,5 @@ constructor(private val binding: ViewDataBinding) : RecyclerView.ViewHolder(bind
 
     open fun bind(item: BindableListItem, viewModel: ViewModel?) {
         item.bind(viewModel, binding)
-        if(item is BaseViewModel) item.init()
     }
 }
