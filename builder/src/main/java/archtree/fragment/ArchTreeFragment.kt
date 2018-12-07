@@ -154,6 +154,11 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
         getViewModel()?.onSaveInstanceState(outState)
     }
 
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        getViewModel()?.onRestoreInstanceState(savedInstanceState)
+        super.onViewStateRestored(savedInstanceState)
+    }
+
     open fun getViewModel(): ViewModel? {
         return fragmentResource?.viewModel
     }

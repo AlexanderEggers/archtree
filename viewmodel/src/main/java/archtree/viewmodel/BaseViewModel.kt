@@ -55,4 +55,8 @@ abstract class BaseViewModel : ViewModel() {
     open fun onSaveInstanceState(outState: Bundle?) {
         //do nothing by default
     }
+
+    open fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        //do nothing by default
+    }
 }

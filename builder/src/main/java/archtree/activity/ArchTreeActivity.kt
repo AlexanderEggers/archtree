@@ -286,6 +286,11 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
         super.onSaveInstanceState(outState)
     }
 
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        getViewModel()?.onRestoreInstanceState(savedInstanceState)
+        super.onRestoreInstanceState(savedInstanceState)
+    }
+
     override fun onStart() {
         super.onStart()
         activityResource?.getLayer()?.onStart(getViewModel())
