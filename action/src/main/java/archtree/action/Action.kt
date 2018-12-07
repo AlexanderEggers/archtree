@@ -29,7 +29,7 @@ abstract class Action<T> {
 
     @JvmOverloads
     fun forceLongPress(parameter: T? = null) {
-        longClick()
+        longClick(parameter)
     }
 
     protected open fun onClick(parameter: T?) {
