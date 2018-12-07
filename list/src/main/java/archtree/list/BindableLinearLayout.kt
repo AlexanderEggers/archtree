@@ -49,6 +49,7 @@ fun <T : BindableListItem, V : ViewModel, D: Any> bindItemsSource(
 
     val adapter = container.adapter
     if(newItems != null && adapter != null) {
+        adapter.bindViewGroup(container)
         (adapter as BindableListAdapter).onUpdate(newItems, newItemLayout, newViewModel,
                 newDataBindingComponent, newLifecycleOwner)
     }
