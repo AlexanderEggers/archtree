@@ -6,7 +6,9 @@ import android.view.View
 @BindingAdapter("archtree_action", "archtree_actionParameter", requireAll = false)
 fun <T> setAction(view: View, action: Action<T>?, actionParameter: T?) {
     action?.let {
-        view.setOnClickListener(ActionListener(view, it, actionParameter))
+        val actionListener = ActionListener(view, it, actionParameter)
+        view.setOnClickListener(actionListener)
+        view.setOnLongClickListener(actionListener)
     } ?: throw IllegalStateException("Action object should not be null.")
 }
 
