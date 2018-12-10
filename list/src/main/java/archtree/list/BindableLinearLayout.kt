@@ -19,7 +19,6 @@ import java.util.ArrayList
 class BindableLinearLayout : LinearLayout {
 
     var adapter: BindableLinearLayoutAdapter? = null
-    set(value) = value!!.bindViewGroup(this)
 
     constructor(context: Context) : super(context)
 

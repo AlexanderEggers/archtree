@@ -39,13 +39,13 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" />
 
-        <archtree.list.BindableRecyclerViewLayout
+        <archtree.list.BindableLinearLayout
             archtree_listItemTemplate="@{R.layout.demo_list_item_layout}"
             archtree_listSource="@{viewModel.observableArrayList}"
             archtree_listDataBindingComponent="@{dataBindingComponent}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
+            android:orientation="vertical" />
 
     </LinearLayout>
 
