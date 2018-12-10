@@ -41,6 +41,11 @@ abstract class Action<T> {
     }
 
     @JvmOverloads
+    open fun isEnabled(parameter: T? = null): Boolean {
+        return true
+    }
+
+    @JvmOverloads
     open fun canExecuteClick(parameter: T? = null): Boolean {
         return true
     }
@@ -63,6 +68,12 @@ abstract class Action<T> {
     fun notifyLongClickConditionChanged() {
         listeners.forEach {
             it.onLongClickConditionChanged(this)
+        }
+    }
+
+    fun notifyEnabledConditionChanged() {
+        listeners.forEach {
+            it.onEnabledConditionChanged(this)
         }
     }
 }

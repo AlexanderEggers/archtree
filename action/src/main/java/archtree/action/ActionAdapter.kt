@@ -18,7 +18,8 @@ internal constructor(private val view: View, private val action: Action<T>,
 
     init {
         action.listeners.add(this)
-        view.isEnabled = action.canExecuteClick(actionParameter)
+        view.isEnabled = action.isEnabled(actionParameter)
+        view.isClickable = action.canExecuteClick(actionParameter)
         view.isLongClickable = action.canExecuteLongClick(actionParameter)
     }
 
@@ -28,6 +29,10 @@ internal constructor(private val view: View, private val action: Action<T>,
 
     override fun onLongClickConditionChanged(action: Action<T>) {
         view.isLongClickable = action.canExecuteLongClick(actionParameter)
+    }
+
+    override fun onEnabledConditionChanged(action: Action<T>) {
+        view.isEnabled = action.isEnabled(actionParameter)
     }
 
     override fun onClick(view: View) {
