@@ -74,6 +74,7 @@ private fun createDefaultAdapter(container: RecyclerView) {
                 itemList.clear()
                 itemList.addAll(list)
                 diffResult.dispatchUpdatesTo(this)
+                container.scheduleLayoutAnimation()
             } else itemList.addAll(list)
         }
 
