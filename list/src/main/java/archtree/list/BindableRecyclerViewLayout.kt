@@ -39,14 +39,16 @@ fun <T : BindableListItem, V : ViewModel, D : Any> bindItemsSource(
         newDataBindingComponent: D?,
         newLifecycleOwner: LifecycleOwner?) {
 
-    if (container.adapter == null || container.adapter !is BindableListAdapter) {
-        createDefaultAdapter(container)
-    }
+    if(newItems != null) {
+        if (container.adapter == null || container.adapter !is BindableListAdapter) {
+            createDefaultAdapter(container)
+        }
 
-    val adapter = container.adapter
-    if(newItems != null && adapter != null && adapter is BindableListAdapter) {
-        (adapter as BindableListAdapter).onUpdate(newItems, newItemLayout, newViewModel,
-                newDataBindingComponent, newLifecycleOwner)
+        val adapter = container.adapter
+        if(adapter != null && adapter is BindableListAdapter) {
+            (adapter as BindableListAdapter).onUpdate(newItems, newItemLayout, newViewModel,
+                    newDataBindingComponent, newLifecycleOwner)
+        }
     }
 }
 
