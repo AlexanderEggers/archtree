@@ -1,8 +1,7 @@
 package archtree.testing
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MediatorLiveData
-import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.*
+import org.powermock.api.mockito.PowerMockito
 
 import java.util.Arrays
 
@@ -27,4 +26,12 @@ fun <T> rawLiveDataOf(value: T): MediatorLiveData<T> {
     val data = MediatorLiveData<T>()
     data.value = value
     return data
+}
+
+fun <T> observeLiveData(liveData: LiveData<T>) {
+    val lifecycle = LifecycleRegistry(PowerMockito.mock(LifecycleOwner::class.java))
+    lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
+    liveData.observe({lifecycle}) {
+        //do nothing - this observer will only be used to fake layout activity
+    }
 }

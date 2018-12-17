@@ -172,14 +172,19 @@ open class ResourceAccessor
     }
 
     /**
-     * Returns an input stream for an asset file.
+     * Returns a string for the given resource.
      *
-     * @param fileName name of the file that will be used to open the input stream.
-     * @return a new input stream
+     * @param fileName name of the file which content should be converted into a string
+     * @return a new string
      * @since 1.0.0
      */
-    @Throws(IOException::class)
-    open fun getAsset(fileName: String): InputStream {
-        return context.assets.open(fileName)
+    open fun getJsonStringFromFile(context: Context, fileName: String): String? {
+        return try {
+            context.assets.open(fileName).bufferedReader().use { reader ->
+                reader.readText()
+            }
+        } catch (ignore: Exception) {
+            null
+        }
     }
 }

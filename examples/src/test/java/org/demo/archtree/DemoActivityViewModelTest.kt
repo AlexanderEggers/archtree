@@ -2,7 +2,7 @@ package org.demo.archtree
 
 import archknife.context.ContextProvider
 import archtree.testing.ArchTreeBaseTest
-import archtree.testing.capture
+import archtree.testing.mockito.capture
 import autotarget.service.FragmentTarget
 import autotarget.service.TargetService
 import org.junit.Assert.assertEquals
