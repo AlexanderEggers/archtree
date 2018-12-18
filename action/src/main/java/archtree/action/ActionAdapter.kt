@@ -36,11 +36,11 @@ internal constructor(private val view: View, private val action: Action<T>,
     }
 
     override fun onClick(view: View) {
-        if (action.canExecuteClick(actionParameter)) action.click(actionParameter)
+        if (action.canExecuteClick(actionParameter)) view.post { action.click(actionParameter) }
     }
 
     override fun onLongClick(v: View?): Boolean {
-        return if (action.canExecuteLongClick(actionParameter)) action.longClick(actionParameter)
+        return if (action.canExecuteLongClick(actionParameter)) view.post { action.longClick(actionParameter) }
         else false
     }
 }
