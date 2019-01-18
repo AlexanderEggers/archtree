@@ -9,8 +9,6 @@ import android.support.v4.content.ContextCompat
 import android.support.v4.content.res.ResourcesCompat
 import android.text.Html
 import android.text.Spanned
-import java.io.IOException
-import java.io.InputStream
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -178,7 +176,7 @@ open class ResourceAccessor
      * @return a new string
      * @since 1.0.0
      */
-    open fun getJsonStringFromFile(context: Context, fileName: String): String? {
+    open fun getJsonStringFromFile(fileName: String): String? {
         return try {
             context.assets.open(fileName).bufferedReader().use { reader ->
                 reader.readText()
