@@ -1,6 +1,6 @@
 package org.demo.archtree
 
-import archknife.context.ContextProvider
+import archknife.context.ContextProviderCommunicator
 import archtree.testing.ArchTreeBaseTest
 import archtree.testing.mockito.capture
 import autotarget.service.FragmentTarget
@@ -17,11 +17,14 @@ class DemoActivityViewModelTest: ArchTreeBaseTest() {
     @Mock
     private lateinit var targetServiceMock: TargetService
 
+    @Mock
+    private lateinit var contextProviderCommunicator: ContextProviderCommunicator
+
     private lateinit var viewModel: DemoActivityViewModel
 
     @Test
     fun testOnActionClick() {
-        Whitebox.setInternalState(targetServiceMock, "contextProvider", ContextProvider)
+        Whitebox.setInternalState(targetServiceMock, "contextProvider", contextProviderCommunicator)
 
         initialiseTestData()
         viewModel.action.forceClick()

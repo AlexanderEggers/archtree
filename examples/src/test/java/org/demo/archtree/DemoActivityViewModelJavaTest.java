@@ -7,7 +7,7 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.powermock.reflect.Whitebox;
 
-import archknife.context.ContextProvider;
+import archknife.context.ContextProviderCommunicator;
 import archtree.testing.ArchTreeBaseTest;
 import autotarget.service.FragmentTarget;
 import autotarget.service.TargetService;
@@ -23,11 +23,14 @@ public class DemoActivityViewModelJavaTest extends ArchTreeBaseTest {
     @Mock
     private TargetService targetServiceMock;
 
+    @Mock
+    private ContextProviderCommunicator contextProviderCommunicator;
+
     private DemoActivityViewModel viewModel;
 
     @Test
     public void testDemo() {
-        Whitebox.setInternalState(targetServiceMock, "contextProvider", ContextProvider.INSTANCE);
+        Whitebox.setInternalState(targetServiceMock, "contextProvider", contextProviderCommunicator);
 
         initialiseTestData();
         viewModel.getAction().forceClick();
