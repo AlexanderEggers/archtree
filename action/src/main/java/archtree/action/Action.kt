@@ -59,6 +59,14 @@ abstract class Action<T> {
         return 500
     }
 
+    open fun provideClickDelayTime(): Long {
+        return 0
+    }
+
+    open fun provideLongClickDelayTime(): Long {
+        return 0
+    }
+
     fun notifyClickConditionChanged() {
         listeners.forEach {
             it.onClickConditionChanged(this)
