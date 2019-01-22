@@ -4,9 +4,9 @@ import android.content.Context
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.os.Build
-import android.support.annotation.*
-import android.support.v4.content.ContextCompat
-import android.support.v4.content.res.ResourcesCompat
+import androidx.annotation.*
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import android.text.Html
 import android.text.Spanned
 import javax.inject.Inject

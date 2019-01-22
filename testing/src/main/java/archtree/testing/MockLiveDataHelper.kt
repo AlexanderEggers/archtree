@@ -1,6 +1,6 @@
 package archtree.testing
 
-import android.arch.lifecycle.*
+import androidx.lifecycle.*
 import org.powermock.api.mockito.PowerMockito
 
 import java.util.Arrays

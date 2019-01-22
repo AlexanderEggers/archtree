@@ -1,8 +1,8 @@
 package archtree.list.util
 
-import android.arch.lifecycle.LifecycleOwner
-import android.arch.lifecycle.ViewModel
-import android.support.annotation.LayoutRes
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.ViewModel
+import androidx.annotation.LayoutRes
 
 interface BindableListAdapter {
 

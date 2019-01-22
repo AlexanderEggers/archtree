@@ -1,6 +1,6 @@
 package archtree.viewmodel
 
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.ViewModel
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle

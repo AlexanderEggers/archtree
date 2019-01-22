@@ -56,9 +56,9 @@ dependencies {
 
     api "junit:junit:$junit_version"
     api "org.mockito:mockito-core:$mockito_version"
-    api "android.arch.lifecycle:livedata:$lifecycle_version"
-    api "android.arch.core:core-testing:$lifecycle_version"
-    api "android.arch.persistence.room:testing:$room_version"
+    api "androidx.lifecycle:lifecycle-livedata:$lifecycle_version"
+    api "androidx.arch.core:core-testing:$lifecycle_version"
+    api "androidx.room:room-testing:$room_version"
     api "org.powermock:powermock-api-mockito2:$powermock_version"
     api "org.powermock:powermock-module-junit4:$powermock_version"
 

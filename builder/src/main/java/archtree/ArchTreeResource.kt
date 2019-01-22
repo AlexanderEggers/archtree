@@ -1,9 +1,9 @@
 package archtree
 
 import android.annotation.SuppressLint
-import android.databinding.DataBindingComponent
-import android.databinding.DataBindingUtil
-import android.databinding.ViewDataBinding
+import androidx.databinding.DataBindingComponent
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater

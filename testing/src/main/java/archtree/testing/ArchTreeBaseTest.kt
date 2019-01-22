@@ -1,6 +1,6 @@
 package archtree.testing
 
-import android.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import org.junit.Before
 import org.junit.Rule
 import org.mockito.MockitoAnnotations

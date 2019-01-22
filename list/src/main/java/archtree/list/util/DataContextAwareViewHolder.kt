@@ -1,8 +1,8 @@
 package archtree.list.util
 
-import android.arch.lifecycle.ViewModel
-import android.databinding.ViewDataBinding
-import android.support.v7.widget.RecyclerView
+import androidx.lifecycle.ViewModel
+import androidx.databinding.ViewDataBinding
+import androidx.recyclerview.widget.RecyclerView
 
 open class DataContextAwareViewHolder
 constructor(private val binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root) {

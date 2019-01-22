@@ -1,6 +1,6 @@
 package archtree.action
 
-import android.databinding.BindingAdapter
+import androidx.databinding.BindingAdapter
 import android.view.View
 
 @BindingAdapter("archtree_action", "archtree_actionParameter", requireAll = false)

@@ -1,6 +1,6 @@
 package archtree.helper
 
-import android.support.annotation.WorkerThread
+import androidx.annotation.WorkerThread
 import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.JsonArray

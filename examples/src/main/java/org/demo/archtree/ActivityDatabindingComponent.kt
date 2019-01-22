@@ -1,7 +1,7 @@
 package org.demo.archtree
 
 import android.app.Activity
-import android.databinding.DataBindingComponent
+import androidx.databinding.DataBindingComponent
 
 class ActivityDatabindingComponent(activity: Activity): DataBindingComponent {
 
