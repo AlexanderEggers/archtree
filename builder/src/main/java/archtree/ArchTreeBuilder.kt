@@ -1,11 +1,11 @@
 package archtree
 
 import android.annotation.SuppressLint
-import android.databinding.DataBindingComponent
+import androidx.databinding.DataBindingComponent
 import android.os.Bundle
-import android.support.annotation.DrawableRes
-import android.support.annotation.IdRes
-import android.support.annotation.MenuRes
+import androidx.annotation.DrawableRes
+import androidx.annotation.IdRes
+import androidx.annotation.MenuRes
 import android.util.Log
 import archtree.viewmodel.BaseViewModel
 

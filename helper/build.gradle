@@ -59,8 +59,8 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "com.google.dagger:dagger:$dagger_version"
-    implementation "com.android.support:appcompat-v7:$support_lib_version"
-    implementation "com.android.support:transition:$support_lib_version"
+    implementation "androidx.appcompat:appcompat:$support_lib_appcompat_version"
+    implementation "androidx.transition:transition:$support_lib_version"
     implementation "com.google.code.gson:gson:$gson_version"
     implementation "org.archknife:archknife-context:$archknife_version"
 }

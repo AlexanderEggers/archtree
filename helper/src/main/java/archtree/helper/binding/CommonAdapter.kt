@@ -1,10 +1,10 @@
 package archtree.helper.binding
 
 import android.content.res.Resources
-import android.databinding.BindingAdapter
+import androidx.databinding.BindingAdapter
 import android.os.Build
-import android.support.v4.content.ContextCompat
-import android.support.v4.content.res.ResourcesCompat
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import android.text.Html
 import android.text.method.LinkMovementMethod
 import android.view.View

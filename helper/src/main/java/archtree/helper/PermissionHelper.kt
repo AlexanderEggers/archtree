@@ -1,6 +1,6 @@
 package archtree.helper
 
-import android.support.v4.app.ActivityCompat
+import androidx.core.app.ActivityCompat
 import archknife.context.ContextProvider
 import javax.inject.Inject
 import javax.inject.Singleton

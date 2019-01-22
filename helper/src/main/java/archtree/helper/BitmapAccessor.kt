@@ -3,7 +3,7 @@ package archtree.helper
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.support.annotation.DrawableRes
+import androidx.annotation.DrawableRes
 import javax.inject.Inject
 import javax.inject.Singleton
 

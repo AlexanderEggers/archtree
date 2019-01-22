@@ -1,7 +1,7 @@
 package org.demo.archtree
 
-import android.arch.lifecycle.ViewModel
-import android.databinding.ViewDataBinding
+import androidx.lifecycle.ViewModel
+import androidx.databinding.ViewDataBinding
 import archtree.list.util.BindableListItem
 import archtree.list.util.BindableListItemAdapter
 

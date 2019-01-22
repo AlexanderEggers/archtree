@@ -1,6 +1,6 @@
 package archtree.list.util
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.ViewGroup
 
 import java.util.ArrayList

@@ -1,7 +1,7 @@
 package org.demo.archtree
 
 import android.app.Activity
-import android.databinding.BindingAdapter
+import androidx.databinding.BindingAdapter
 import android.widget.TextView
 
 class ActivityDemoAdapter(private val activity: Activity) {

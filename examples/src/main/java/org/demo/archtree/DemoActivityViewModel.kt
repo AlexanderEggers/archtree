@@ -1,6 +1,6 @@
 package org.demo.archtree
 
-import android.databinding.ObservableArrayList
+import androidx.databinding.ObservableArrayList
 import android.os.Bundle
 import archknife.annotation.ProvideViewModel
 import archtree.action.Action
