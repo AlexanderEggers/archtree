@@ -8,6 +8,7 @@ buildscript {
         maven_plugin_version = "2.1"
 
         support_lib_appcompat_version = '1.0.2'
+        support_lib_transition_version = '1.0.1'
         support_lib_version = '1.0.0'
 
         kotlin_version = '1.3.20'
@@ -17,7 +18,7 @@ buildscript {
         room_version = '2.0.0'
 
         archknife_version = '0.10.0'
-        autotarget_version = '0.14.0'
+        autotarget_version = '0.14.1'
 
         junit_version = "4.12"
         mockito_version = '2.23.4'
