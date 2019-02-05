@@ -17,7 +17,7 @@ fun setAccessibilityAction(view: View, clickAction: Int?, longClickAction: Int?)
 
             if (clickAction != null) {
                 val click = AccessibilityNodeInfoCompat.AccessibilityActionCompat(
-                        AccessibilityNodeInfo.ACTION_LONG_CLICK,
+                        AccessibilityNodeInfo.ACTION_CLICK,
                         host.resources?.getString(clickAction))
                 info.addAction(click)
             }
