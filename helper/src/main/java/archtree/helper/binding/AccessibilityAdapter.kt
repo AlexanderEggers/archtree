@@ -8,7 +8,7 @@ import androidx.core.view.accessibility.AccessibilityNodeInfoCompat
 import androidx.databinding.BindingAdapter
 
 @BindingAdapter("archtree_accessibilityClickAction", "archtree_accessibilityLongClickAction", requireAll = false)
-fun setAccessibilityAction(view: View, clickAction: Int?, longClickAction: Int?) {
+fun setAccessibilityActions(view: View, clickAction: Int?, longClickAction: Int?) {
 
     ViewCompat.setAccessibilityDelegate(view, object : AccessibilityDelegateCompat() {
 
