@@ -19,7 +19,7 @@ abstract class ArchTreeBuilder<ViewModel : BaseViewModel, out Builder> {
         private set
     var bindingKey = -1
         private set
-    var viewModelInitMode: ViewModelInitMode = ViewModelInitMode.FORCE_INIT
+    var viewModelInitMode: ViewModelInitMode = ViewModelInitMode.NON_FORCE_INIT
         private set
 
     var menuId: Int? = null
@@ -68,7 +68,7 @@ abstract class ArchTreeBuilder<ViewModel : BaseViewModel, out Builder> {
 
     @JvmOverloads
     open fun setViewModel(viewModelClass: Class<ViewModel>, bindingKey: Int = -1,
-                          viewModelInitMode: ViewModelInitMode = ViewModelInitMode.FORCE_INIT): Builder {
+                          viewModelInitMode: ViewModelInitMode = ViewModelInitMode.NON_FORCE_INIT): Builder {
         this.viewModelClass = viewModelClass
         this.bindingKey = bindingKey
         this.viewModelInitMode = viewModelInitMode
