@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.LifecycleOwner
 import archtree.viewmodel.BaseViewModel
 
 abstract class ArchTreeResource<ViewModel : BaseViewModel> constructor(builder: ArchTreeBuilder<ViewModel, *>) {
@@ -26,7 +27,7 @@ abstract class ArchTreeResource<ViewModel : BaseViewModel> constructor(builder: 
     val menuId: Int? = builder.menuId
 
     val viewModelClass: Class<ViewModel>? = builder.viewModelClass
-    val skipViewModelInit: Boolean = builder.skipViewModelInit
+    val viewModelInitMode: ViewModelInitMode = builder.viewModelInitMode
 
     val dataBindingComponent: DataBindingComponent? = builder.dataBindingComponent
     val dataBindingComponentBindingKey: Int = builder.dataBindingComponentBindingKey
@@ -59,5 +60,10 @@ abstract class ArchTreeResource<ViewModel : BaseViewModel> constructor(builder: 
         }
 
         return view
+    }
+
+    open fun onAttachLifecycleOwner(lifecycleOwner: LifecycleOwner) {
+        binding?.lifecycleOwner = lifecycleOwner
+        if (lifecycleOwnerBindingKey != -1) binding?.setVariable(lifecycleOwnerBindingKey, lifecycleOwner)
     }
 }

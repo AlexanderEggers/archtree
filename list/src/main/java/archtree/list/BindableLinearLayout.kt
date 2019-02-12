@@ -96,7 +96,7 @@ private fun createDefaultAdapter(container: BindableLinearLayout) {
                     realDataBindingComponent
             )
 
-            if (lifecycleOwner != null) binding.setLifecycleOwner(lifecycleOwner)
+            if (lifecycleOwner != null) binding.lifecycleOwner = lifecycleOwner
 
             return DataContextAwareViewHolder(binding)
         }

@@ -43,9 +43,8 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
         val view = activityResource?.onCreateView(layoutInflater, null)
         setContentView(view)
 
-        if (activityResource?.viewModelClass != null) {
-            activityResource?.onCreateViewModel(this, viewModelFactory, savedInstanceState)
-        }
+        activityResource?.onCreateViewModel(this, viewModelFactory, savedInstanceState)
+        activityResource?.onAttachLifecycleOwner(this)
 
         initialiseToolbar()
 

@@ -45,12 +45,10 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        if (fragmentResource?.viewModelClass != null) {
-            fragmentResource?.onCreateViewModel(this, viewModelFactory, savedInstanceState)
-        }
+        fragmentResource?.onCreateViewModel(this, viewModelFactory, savedInstanceState)
+        fragmentResource?.onAttachLifecycleOwner(this)
 
         refreshFragmentToolbar(activity, view, fragmentResource)
-
         fragmentResource?.getLayer()?.onCreate(getViewModel(), savedInstanceState)
     }
 

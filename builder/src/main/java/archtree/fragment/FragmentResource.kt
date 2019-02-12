@@ -1,13 +1,13 @@
 package archtree.fragment
 
 import android.annotation.SuppressLint
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.util.Log
 import archtree.ArchTreeResource
+import archtree.ViewModelInitMode
 import archtree.viewmodel.BaseViewModel
 
 open class FragmentResource<ViewModel : BaseViewModel>
@@ -20,15 +20,15 @@ constructor(builder: FragmentBuilder<ViewModel>) : ArchTreeResource<ViewModel>(b
     open fun onCreateViewModel(fragment: Fragment, factory: ViewModelProvider.Factory,
                                savedInstanceBundle: Bundle?) {
 
-        viewModel = ViewModelProviders.of(fragment, factory).get(viewModelClass!!)
+        if(viewModelClass != null) {
+            viewModel = ViewModelProviders.of(fragment, factory).get(viewModelClass)
 
-        if (binding != null && bindingKey != -1) binding?.setVariable(bindingKey, viewModel)
-        else Log.w(FragmentResource::class.java.name, "ViewModel is not attached to layout.")
+            if (binding != null && bindingKey != -1) binding?.setVariable(bindingKey, viewModel)
+            else Log.w(FragmentResource::class.java.name, "ViewModel is not attached to layout.")
 
-        binding?.setLifecycleOwner(fragment)
-        if (lifecycleOwnerBindingKey != -1) binding?.setVariable(lifecycleOwnerBindingKey, fragment as LifecycleOwner)
-
-        if (!skipViewModelInit) viewModel?.init(false, resourceBundle, savedInstanceBundle)
+            if (viewModelInitMode == ViewModelInitMode.FORCE_INIT) viewModel?.init(true, resourceBundle, savedInstanceBundle)
+            else if(viewModelInitMode == ViewModelInitMode.NON_FORCE_INIT) viewModel?.init(false, resourceBundle, savedInstanceBundle)
+        }
     }
 
     open fun getLayer(): FragmentLayer<ViewModel> {

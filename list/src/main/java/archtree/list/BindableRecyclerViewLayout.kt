@@ -97,7 +97,7 @@ private fun createDefaultAdapter(container: RecyclerView) {
                     realDataBindingComponent
             )
 
-            if (lifecycleOwner != null) binding.setLifecycleOwner(lifecycleOwner)
+            if (lifecycleOwner != null) binding.lifecycleOwner = lifecycleOwner
 
             return DataContextAwareViewHolder(binding)
         }

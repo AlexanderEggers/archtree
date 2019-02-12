@@ -19,7 +19,7 @@ abstract class ArchTreeBuilder<ViewModel : BaseViewModel, out Builder> {
         private set
     var bindingKey = -1
         private set
-    var skipViewModelInit: Boolean = false
+    var viewModelInitMode: ViewModelInitMode = ViewModelInitMode.FORCE_INIT
         private set
 
     var menuId: Int? = null
@@ -68,10 +68,10 @@ abstract class ArchTreeBuilder<ViewModel : BaseViewModel, out Builder> {
 
     @JvmOverloads
     open fun setViewModel(viewModelClass: Class<ViewModel>, bindingKey: Int = -1,
-                          skipViewModelInit: Boolean = false): Builder {
+                          viewModelInitMode: ViewModelInitMode = ViewModelInitMode.FORCE_INIT): Builder {
         this.viewModelClass = viewModelClass
         this.bindingKey = bindingKey
-        this.skipViewModelInit = skipViewModelInit
+        this.viewModelInitMode = viewModelInitMode
         return this as Builder
     }
 
