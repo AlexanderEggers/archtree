@@ -168,21 +168,4 @@ open class ResourceAccessor
     open fun getDimension(@DimenRes res: Int): Float {
         return context.resources.getDimension(res)
     }
-
-    /**
-     * Returns a string for the given resource.
-     *
-     * @param fileName name of the file which content should be converted into a string
-     * @return a new string
-     * @since 1.0.0
-     */
-    open fun getJsonStringFromFile(fileName: String): String? {
-        return try {
-            context.assets.open(fileName).bufferedReader().use { reader ->
-                reader.readText()
-            }
-        } catch (ignore: Exception) {
-            null
-        }
-    }
 }

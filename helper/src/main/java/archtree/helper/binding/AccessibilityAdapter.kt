@@ -8,7 +8,20 @@ import androidx.core.view.accessibility.AccessibilityNodeInfoCompat
 import androidx.databinding.BindingAdapter
 
 @BindingAdapter("archtree_accessibilityClickAction", "archtree_accessibilityLongClickAction", requireAll = false)
-fun setAccessibilityActions(view: View, clickAction: Int?, longClickAction: Int?) {
+fun setAccessibilityActions(view: View, clickAction: String?, longClickAction: String?) {
+    assignAccessibilityActionsToView(view, clickAction, longClickAction)
+}
+
+@BindingAdapter("archtree_accessibilityClickActionRes", "archtree_accessibilityLongClickActionRes", requireAll = false)
+fun setAccessibilityActionsRes(view: View, clickAction: Int?, longClickAction: Int?) {
+
+    val clickActionValue = if(clickAction != null) view.resources.getString(clickAction) else null
+    val longClickActionValue = if(longClickAction != null) view.resources.getString(longClickAction) else null
+
+    assignAccessibilityActionsToView(view, clickActionValue, longClickActionValue)
+}
+
+fun assignAccessibilityActionsToView(view: View, clickAction: String?, longClickAction: String?) {
 
     ViewCompat.setAccessibilityDelegate(view, object : AccessibilityDelegateCompat() {
 
@@ -18,14 +31,14 @@ fun setAccessibilityActions(view: View, clickAction: Int?, longClickAction: Int?
             if (clickAction != null) {
                 val click = AccessibilityNodeInfoCompat.AccessibilityActionCompat(
                         AccessibilityNodeInfo.ACTION_CLICK,
-                        host.resources?.getString(clickAction))
+                        clickAction)
                 info.addAction(click)
             }
 
             if (longClickAction != null) {
                 val longClick = AccessibilityNodeInfoCompat.AccessibilityActionCompat(
                         AccessibilityNodeInfo.ACTION_LONG_CLICK,
-                        host.resources?.getString(longClickAction))
+                        longClickAction)
                 info.addAction(longClick)
             }
         }
