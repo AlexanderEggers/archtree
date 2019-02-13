@@ -9,7 +9,7 @@ fun <T> setClickAction(view: View, action: Action<T>?, actionParameter: T?) {
         val actionListener = ActionListener(view, it, actionParameter)
         actionListener.initialiseClick()
         view.setOnClickListener(actionListener)
-    }
+    } ?: run { view.setOnClickListener(null) }
 }
 
 @BindingAdapter("archtree_clickLongAction", "archtree_clickLongActionParameter", requireAll = false)
@@ -18,7 +18,7 @@ fun <T> setClickLongAction(view: View, action: Action<T>?, actionParameter: T?) 
         val actionListener = ActionListener(view, it, actionParameter)
         actionListener.initialiseLongClick()
         view.setOnLongClickListener(actionListener)
-    }
+    } ?: run { view.setOnLongClickListener(null) }
 }
 
 private class ActionListener<T>
