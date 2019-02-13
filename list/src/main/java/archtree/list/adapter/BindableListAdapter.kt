@@ -1,8 +1,9 @@
-package archtree.list.util
+package archtree.list.adapter
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModel
 import androidx.annotation.LayoutRes
+import archtree.list.item.BindableListItem
 
 interface BindableListAdapter {
 

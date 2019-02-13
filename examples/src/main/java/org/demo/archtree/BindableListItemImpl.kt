@@ -2,8 +2,8 @@ package org.demo.archtree
 
 import androidx.lifecycle.ViewModel
 import androidx.databinding.ViewDataBinding
-import archtree.list.util.BindableListItem
-import archtree.list.util.BindableListItemAdapter
+import archtree.list.item.BindableListItem
+import archtree.list.item.BindableListItemAdapter
 
 class BindableListItemImpl(private val value: String): BindableListItemAdapter() {
 

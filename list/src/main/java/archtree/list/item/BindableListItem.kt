@@ -1,4 +1,4 @@
-package archtree.list.util
+package archtree.list.item
 
 import androidx.lifecycle.ViewModel
 import androidx.databinding.ViewDataBinding

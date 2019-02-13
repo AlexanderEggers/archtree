@@ -1,4 +1,4 @@
-package archtree.list.util
+package archtree.list.item
 
 abstract class BindableListItemAdapter: BindableListItem {
 

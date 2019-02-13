@@ -1,4 +1,4 @@
-package archtree.list.util
+package archtree.list.adapter
 
 import androidx.recyclerview.widget.RecyclerView
 import android.view.ViewGroup

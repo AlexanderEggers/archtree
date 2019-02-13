@@ -1,6 +1,7 @@
 package archtree.list.util
 
 import androidx.recyclerview.widget.DiffUtil
+import archtree.list.item.BindableListItem
 
 class DefaultDiffCallback(private val oldList: List<BindableListItem>,
                           private val newList: List<BindableListItem>): DiffUtil.Callback() {

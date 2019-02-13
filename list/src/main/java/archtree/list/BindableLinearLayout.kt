@@ -1,20 +1,16 @@
 package archtree.list
 
+import android.content.Context
+import android.util.AttributeSet
+import android.widget.LinearLayout
+import androidx.annotation.LayoutRes
+import androidx.databinding.BindingAdapter
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModel
-import android.content.Context
-import androidx.databinding.BindingAdapter
-import androidx.databinding.DataBindingComponent
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
-import androidx.annotation.LayoutRes
-import androidx.recyclerview.widget.RecyclerView
-import android.util.AttributeSet
-import android.view.LayoutInflater
-import android.view.ViewGroup
-import android.widget.LinearLayout
-import archtree.list.util.*
-import java.util.ArrayList
+import archtree.list.adapter.BindableLinearLayoutAdapter
+import archtree.list.adapter.BindableListAdapter
+import archtree.list.item.BindableListItem
+import archtree.list.adapter.DefaultBindableLinearLayoutAdapter
 
 class BindableLinearLayout : LinearLayout {
 
@@ -29,12 +25,12 @@ class BindableLinearLayout : LinearLayout {
 
 @BindingAdapter("archtree_listAdapter")
 fun bindListAdapter(container: BindableLinearLayout, adapter: BindableLinearLayoutAdapter?) {
-    if (adapter != null && adapter is RecyclerView.Adapter<*>) container.adapter = adapter
+    if (adapter != null) container.adapter = adapter
 }
 
 @BindingAdapter("archtree_listSource", "archtree_listItemTemplate", "archtree_listViewModel",
         "archtree_listDataBindingComponent", "archtree_listLifecycleOwner", requireAll = false)
-fun <T : BindableListItem, V : ViewModel, D: Any> bindItemsSource(
+fun <T : BindableListItem, V : ViewModel, D : Any> bindItemsSource(
         container: BindableLinearLayout,
         newItems: List<T>?,
         @LayoutRes newItemLayout: Int,
@@ -42,74 +38,16 @@ fun <T : BindableListItem, V : ViewModel, D: Any> bindItemsSource(
         newDataBindingComponent: D?,
         newLifecycleOwner: LifecycleOwner?) {
 
-    if(newItems != null) {
+    if (newItems != null) {
         if (container.adapter == null || container.adapter !is BindableListAdapter) {
-            createDefaultAdapter(container)
+            container.adapter = DefaultBindableLinearLayoutAdapter(container.context)
         }
 
         val adapter = container.adapter
-        if(adapter != null) {
+        if (adapter != null) {
             adapter.bindViewGroup(container)
             (adapter as BindableListAdapter).onUpdate(newItems, newItemLayout, newViewModel,
                     newDataBindingComponent, newLifecycleOwner)
         }
     }
-}
-
-private fun createDefaultAdapter(container: BindableLinearLayout) {
-    val adapter = object : BindableLinearLayoutAdapter() {
-
-        private val itemList = ArrayList<BindableListItem>()
-        private var itemLayout: Int = 0
-        private var viewModel: ViewModel? = null
-        private var dataBindingComponent: Any? = null
-        private var lifecycleOwner: LifecycleOwner? = null
-
-        override fun onUpdate(list: List<BindableListItem>, itemLayout: Int, viewModel: ViewModel?,
-                              dataBindingComponent: Any?, lifecycleOwner: LifecycleOwner?) {
-
-            this.itemLayout = itemLayout
-            this.viewModel = viewModel
-            this.dataBindingComponent = dataBindingComponent
-            this.lifecycleOwner = lifecycleOwner
-
-            itemList.clear()
-            itemList.addAll(list)
-
-            notifyDataSetChanged()
-        }
-
-        override fun onCreateViewHolder(viewGroup: ViewGroup, type: Int): RecyclerView.ViewHolder {
-            val realDataBindingComponent: DataBindingComponent? = if(dataBindingComponent != null) {
-                try {
-                    dataBindingComponent as? DataBindingComponent?
-                } catch (e: ClassCastException) {
-                    null
-                }
-            } else null
-
-            val binding = DataBindingUtil.inflate<ViewDataBinding>(
-                    LayoutInflater.from(container.context),
-                    itemLayout,
-                    viewGroup,
-                    false,
-                    realDataBindingComponent
-            )
-
-            if (lifecycleOwner != null) binding.lifecycleOwner = lifecycleOwner
-
-            return DataContextAwareViewHolder(binding)
-        }
-
-        override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
-            if (viewHolder is DataContextAwareViewHolder) {
-                viewHolder.bind(itemList[position], viewModel)
-            }
-        }
-
-        override val itemCount: Int
-            get() = itemList.size
-    }
-
-    container.adapter = adapter
 }
