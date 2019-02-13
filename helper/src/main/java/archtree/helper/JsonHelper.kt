@@ -1,7 +1,6 @@
 package archtree.helper
 
 import android.content.Context
-import archknife.context.ContextProvider
 import javax.inject.Inject
 import javax.inject.Singleton
 
