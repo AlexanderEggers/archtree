@@ -1,11 +1,41 @@
 package archtree.helper
 
 import android.content.Context
+import android.util.Log
+import androidx.annotation.WorkerThread
+import com.google.gson.Gson
+import com.google.gson.JsonArray
+import java.lang.reflect.Type
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class JsonHelper @Inject constructor(private val context: Context) {
+class JsonHelper
+@Inject constructor(private val context: Context,
+                    private val gson: Gson) {
+
+    @WorkerThread
+    fun <T> convertJson(value: String, type: Type): T? {
+        return try {
+            gson.fromJson(value, type)
+        } catch (e: Exception) {
+            null
+        }
+    }
+
+    @WorkerThread
+    fun toJsonTree(value: List<*>): JsonArray? {
+        return try {
+            gson.toJsonTree(value).asJsonArray
+        } catch (e: Exception) {
+            null
+        }
+    }
+
+    @WorkerThread
+    fun toJson(value: Any): String {
+        return gson.toJson(value)
+    }
 
     /**
      * Returns a string for the given resource.
