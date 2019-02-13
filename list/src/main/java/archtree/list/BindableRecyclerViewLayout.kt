@@ -48,3 +48,13 @@ fun <T : BindableListItem, V : ViewModel, D : Any> bindItemsSource(
         }
     }
 }
+
+@BindingAdapter("archtree_recyclerViewItemAnimator")
+fun setRecyclerViewItemAnimator(view: BindableRecyclerViewLayout, animator: RecyclerView.ItemAnimator?) {
+    view.itemAnimator = animator
+}
+
+@BindingAdapter("archtree_recyclerViewScrollToPosition")
+fun setRecyclerViewScrollToPosition(view: BindableRecyclerViewLayout, scrollToPosition: Int?) {
+    scrollToPosition?.run { view.scrollToPosition(scrollToPosition) }
+}
