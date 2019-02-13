@@ -1,11 +1,12 @@
 package archtree.helper
 
+import android.content.Context
 import archknife.context.ContextProvider
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class JsonHelper @Inject constructor(private val contextProvider: ContextProvider) {
+class JsonHelper @Inject constructor(private val context: Context) {
 
     /**
      * Returns a string for the given resource.
@@ -14,9 +15,9 @@ class JsonHelper @Inject constructor(private val contextProvider: ContextProvide
      * @return a new string
      * @since 1.0.0
      */
-    fun getJsonString(fileName: String): String? {
+    fun getJsonStringFromFile(fileName: String): String? {
         return try {
-            contextProvider.applicationContext?.assets?.open(fileName)?.bufferedReader()?.use { reader ->
+            context.assets?.open(fileName)?.bufferedReader()?.use { reader ->
                 reader.readText()
             }
         } catch (ignore: Exception) {
