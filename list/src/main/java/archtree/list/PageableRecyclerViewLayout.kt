@@ -6,12 +6,14 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModel
+import androidx.paging.PagedList
 import androidx.recyclerview.widget.RecyclerView
 import archtree.list.adapter.bindable.BindableRecyclerViewAdapter
-import archtree.list.adapter.bindable.DefaultBindableRecyclerViewLayoutAdapter
+import archtree.list.adapter.pageable.DefaultPageableRecyclerViewLayoutAdapter
+import archtree.list.adapter.pageable.PageableRecyclerViewAdapter
 import archtree.list.item.BindableListItem
 
-class BindableRecyclerViewLayout : RecyclerView {
+class PageableRecyclerViewLayout : RecyclerView {
 
     constructor(context: Context) : super(context)
 
@@ -20,16 +22,16 @@ class BindableRecyclerViewLayout : RecyclerView {
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 }
 
-@BindingAdapter("archtree_listAdapter")
-fun bindListAdapter(container: RecyclerView, adapter: BindableRecyclerViewAdapter?) {
+@BindingAdapter("archtree_pagedListAdapter")
+fun bindListAdapter(container: RecyclerView, adapter: PageableRecyclerViewAdapter?) {
     if (adapter != null) container.adapter = adapter
 }
 
-@BindingAdapter("archtree_listSource", "archtree_listItemTemplate", "archtree_listViewModel",
-        "archtree_listDataBindingComponent", "archtree_listLifecycleOwner", requireAll = false)
-fun <T : BindableListItem, V : ViewModel, D : Any> bindItemsSource(
+@BindingAdapter("archtree_pagedListSource", "archtree_pagedListItemTemplate", "archtree_pagedListViewModel",
+        "archtree_pagedListDataBindingComponent", "archtree_pagedListLifecycleOwner", requireAll = false)
+fun <V : ViewModel, D : Any> bindItemsSource(
         container: RecyclerView,
-        newItems: List<T>?,
+        newItems: PagedList<BindableListItem>?,
         @LayoutRes newItemLayout: Int,
         newViewModel: V?,
         newDataBindingComponent: D?,
@@ -37,24 +39,14 @@ fun <T : BindableListItem, V : ViewModel, D : Any> bindItemsSource(
 
     if (newItems != null) {
         if (container.adapter == null || container.adapter !is BindableRecyclerViewAdapter) {
-            container.adapter = DefaultBindableRecyclerViewLayoutAdapter(container.context)
+            container.adapter = DefaultPageableRecyclerViewLayoutAdapter(container.context)
         }
 
         val adapter = container.adapter
-        if (adapter != null && adapter is BindableRecyclerViewAdapter) {
+        if (adapter != null && adapter is PageableRecyclerViewAdapter) {
             adapter.bindRecyclerView(container)
             adapter.onUpdate(newItems, newItemLayout, newViewModel,
                     newDataBindingComponent, newLifecycleOwner)
         }
     }
-}
-
-@BindingAdapter("archtree_recyclerViewItemAnimator")
-fun setRecyclerViewItemAnimator(view: RecyclerView, animator: RecyclerView.ItemAnimator?) {
-    view.itemAnimator = animator
-}
-
-@BindingAdapter("archtree_recyclerViewScrollToPosition")
-fun setRecyclerViewScrollToPosition(view: RecyclerView, scrollToPosition: Int?) {
-    scrollToPosition?.run { view.scrollToPosition(scrollToPosition) }
 }

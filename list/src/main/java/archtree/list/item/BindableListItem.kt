@@ -1,7 +1,7 @@
 package archtree.list.item
 
-import androidx.lifecycle.ViewModel
 import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.ViewModel
 
 interface BindableListItem {
 

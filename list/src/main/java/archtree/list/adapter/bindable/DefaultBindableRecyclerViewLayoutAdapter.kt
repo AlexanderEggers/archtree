@@ -1,4 +1,4 @@
-package archtree.list.adapter
+package archtree.list.adapter.bindable
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,18 +8,26 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModel
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import archtree.list.item.BindableListItem
 import archtree.list.item.DataContextAwareViewHolder
-import java.util.ArrayList
+import archtree.list.util.BindableRecyclerViewDiffCallback
+import java.lang.ref.WeakReference
 
-open class DefaultBindableLinearLayoutAdapter(private val context: Context): BindableLinearLayoutAdapter() {
+open class DefaultBindableRecyclerViewLayoutAdapter(private val context: Context) : BindableRecyclerViewAdapter() {
 
-    private val itemList = ArrayList<BindableListItem>()
+    private var itemList = ArrayList<BindableListItem>()
     private var itemLayout: Int = 0
     private var viewModel: ViewModel? = null
     private var dataBindingComponent: Any? = null
     private var lifecycleOwner: LifecycleOwner? = null
+
+    private var recyclerViewRef = WeakReference<RecyclerView?>(null)
+
+    override fun bindRecyclerView(view: RecyclerView) {
+        recyclerViewRef = WeakReference(view)
+    }
 
     override fun onUpdate(list: List<BindableListItem>, itemLayout: Int, viewModel: ViewModel?,
                           dataBindingComponent: Any?, lifecycleOwner: LifecycleOwner?) {
@@ -29,14 +37,18 @@ open class DefaultBindableLinearLayoutAdapter(private val context: Context): Bin
         this.dataBindingComponent = dataBindingComponent
         this.lifecycleOwner = lifecycleOwner
 
-        itemList.clear()
-        itemList.addAll(list)
+        if (itemList.isNotEmpty()) {
+            val diffResult = DiffUtil.calculateDiff(BindableRecyclerViewDiffCallback(this.itemList, list))
 
-        notifyDataSetChanged()
+            itemList.clear()
+            itemList.addAll(list)
+            diffResult.dispatchUpdatesTo(this)
+            recyclerViewRef.get()?.scheduleLayoutAnimation()
+        } else itemList.addAll(list)
     }
 
-    override fun onCreateViewHolder(viewGroup: ViewGroup, type: Int): RecyclerView.ViewHolder {
-        val realDataBindingComponent: DataBindingComponent? = if(dataBindingComponent != null) {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        val realDataBindingComponent: DataBindingComponent? = if (dataBindingComponent != null) {
             try {
                 dataBindingComponent as? DataBindingComponent?
             } catch (e: ClassCastException) {
@@ -47,7 +59,7 @@ open class DefaultBindableLinearLayoutAdapter(private val context: Context): Bin
         val binding = DataBindingUtil.inflate<ViewDataBinding>(
                 LayoutInflater.from(context),
                 itemLayout,
-                viewGroup,
+                parent,
                 false,
                 realDataBindingComponent
         )
@@ -58,11 +70,10 @@ open class DefaultBindableLinearLayoutAdapter(private val context: Context): Bin
     }
 
     override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
-        if (viewHolder is DataContextAwareViewHolder) {
-            viewHolder.bind(itemList[position], viewModel)
-        }
+        if (viewHolder is DataContextAwareViewHolder) viewHolder.bind(itemList[position], viewModel)
     }
 
-    override val itemCount: Int
-        get() = itemList.size
+    override fun getItemCount(): Int {
+        return itemList.size
+    }
 }

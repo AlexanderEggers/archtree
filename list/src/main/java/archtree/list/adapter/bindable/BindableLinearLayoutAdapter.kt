@@ -1,11 +1,10 @@
-package archtree.list.adapter
+package archtree.list.adapter.bindable
 
-import androidx.recyclerview.widget.RecyclerView
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import java.util.*
 
-import java.util.ArrayList
-
-abstract class BindableLinearLayoutAdapter: BindableListAdapter {
+abstract class BindableLinearLayoutAdapter : BindableListAdapter {
 
     private val mViewHolderList = ArrayList<RecyclerView.ViewHolder>()
     private var viewGroup: ViewGroup? = null

@@ -1,4 +1,4 @@
-package archtree.list.adapter
+package archtree.list.adapter.pageable
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,14 +8,13 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModel
-import androidx.recyclerview.widget.DiffUtil
+import androidx.paging.PagedList
 import androidx.recyclerview.widget.RecyclerView
 import archtree.list.item.BindableListItem
 import archtree.list.item.DataContextAwareViewHolder
-import archtree.list.util.DefaultDiffCallback
 import java.lang.ref.WeakReference
 
-open class DefaultRecyclerViewLayoutAdapter(private val context: Context): BindableRecyclerViewAdapter() {
+open class DefaultPageableRecyclerViewLayoutAdapter(private val context: Context) : PageableRecyclerViewAdapter() {
 
     private var itemList = ArrayList<BindableListItem>()
     private var itemLayout: Int = 0
@@ -29,7 +28,7 @@ open class DefaultRecyclerViewLayoutAdapter(private val context: Context): Binda
         recyclerViewRef = WeakReference(view)
     }
 
-    override fun onUpdate(list: List<BindableListItem>, itemLayout: Int, viewModel: ViewModel?,
+    override fun onUpdate(list: PagedList<BindableListItem>, itemLayout: Int, viewModel: ViewModel?,
                           dataBindingComponent: Any?, lifecycleOwner: LifecycleOwner?) {
 
         this.itemLayout = itemLayout
@@ -37,14 +36,8 @@ open class DefaultRecyclerViewLayoutAdapter(private val context: Context): Binda
         this.dataBindingComponent = dataBindingComponent
         this.lifecycleOwner = lifecycleOwner
 
-        if(itemList.isNotEmpty()) {
-            val diffResult = DiffUtil.calculateDiff(DefaultDiffCallback(this.itemList, list))
-
-            itemList.clear()
-            itemList.addAll(list)
-            diffResult.dispatchUpdatesTo(this)
-            recyclerViewRef.get()?.scheduleLayoutAnimation()
-        } else itemList.addAll(list)
+        submitList(list)
+        recyclerViewRef.get()?.scheduleLayoutAnimation()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {

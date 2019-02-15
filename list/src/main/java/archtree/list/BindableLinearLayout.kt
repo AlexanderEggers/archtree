@@ -7,10 +7,10 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModel
-import archtree.list.adapter.BindableLinearLayoutAdapter
-import archtree.list.adapter.BindableListAdapter
+import archtree.list.adapter.bindable.BindableLinearLayoutAdapter
+import archtree.list.adapter.bindable.BindableListAdapter
+import archtree.list.adapter.bindable.DefaultBindableLinearLayoutAdapter
 import archtree.list.item.BindableListItem
-import archtree.list.adapter.DefaultBindableLinearLayoutAdapter
 
 class BindableLinearLayout : LinearLayout {
 
