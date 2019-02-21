@@ -1,14 +1,14 @@
 package archtree.fragment
 
 import android.app.Activity
-import androidx.lifecycle.ViewModelProvider
 import android.content.Intent
 import android.content.res.Configuration
-import androidx.databinding.ViewDataBinding
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.appcompat.app.AppCompatActivity
 import android.view.*
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import archknife.annotation.util.Injectable
 import archtree.ArchTreeResource
 import archtree.viewmodel.BaseViewModel
@@ -25,11 +25,6 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
 
     var menu: Menu? = null
         private set
-
-    override fun onResume() {
-        super.onResume()
-        fragmentResource?.getLayer()?.onResume(getViewModel())
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +43,7 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
         fragmentResource?.onCreateViewModel(this, viewModelFactory, savedInstanceState)
         fragmentResource?.onAttachLifecycleOwner(this)
 
-        refreshFragmentToolbar(activity, view, fragmentResource)
+        if (isVisible) refreshFragmentToolbar(activity, view, fragmentResource)
         fragmentResource?.getLayer()?.onCreate(getViewModel(), savedInstanceState)
     }
 
