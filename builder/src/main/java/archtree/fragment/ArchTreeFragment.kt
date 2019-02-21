@@ -43,7 +43,7 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
         fragmentResource?.onCreateViewModel(this, viewModelFactory, savedInstanceState)
         fragmentResource?.onAttachLifecycleOwner(this)
 
-        if (isVisible) refreshFragmentToolbar(activity, view, fragmentResource)
+        if (!isHidden) refreshFragmentToolbar(activity, view, fragmentResource)
         fragmentResource?.getLayer()?.onCreate(getViewModel(), savedInstanceState)
     }
 
