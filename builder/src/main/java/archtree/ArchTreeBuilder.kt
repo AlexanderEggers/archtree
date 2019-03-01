@@ -89,7 +89,7 @@ abstract class ArchTreeBuilder<ViewModel : BaseViewModel, out Builder> {
         return this as Builder
     }
 
-    open fun bindLifecycleOwner(bindingKey: Int): Builder {
+    open fun setLifecycleOwner(bindingKey: Int): Builder {
         lifecycleOwnerBindingKey = bindingKey
         return this as Builder
     }
