@@ -1,15 +1,15 @@
 package archtree.helper.binding
 
 import android.content.res.Resources
-import androidx.databinding.BindingAdapter
 import android.os.Build
-import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
 import android.text.Html
 import android.text.method.LinkMovementMethod
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
+import androidx.databinding.BindingAdapter
 
 @Suppress("DEPRECATION")
 @BindingAdapter("archtree_htmlText")
@@ -77,6 +77,10 @@ fun setTextColorRes(view: TextView, value: Int?) {
 @BindingAdapter("archtree_backgroundRes")
 fun setBackgroundRes(view: View, value: Int?) {
     value?.run {
-        view.setBackgroundResource(value)
+        try {
+            view.setBackgroundResource(value)
+        } catch (e: Resources.NotFoundException) {
+            view.setBackgroundResource(0)
+        }
     } ?: view.setBackgroundResource(0)
 }
