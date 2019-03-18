@@ -52,17 +52,14 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
         initialiseToolbar()
 
         val systemUiVisibility = activityResource?.systemUiVisibility
-        if (systemUiVisibility != null && systemUiVisibility != 0) {
-            window.decorView.systemUiVisibility = systemUiVisibility
-        }
+        if (systemUiVisibility != null && systemUiVisibility != 0) window.decorView.systemUiVisibility = systemUiVisibility
 
         activityResource?.getLayer()?.onCreate(getViewModel(), savedInstanceState)
     }
 
     private fun initialiseToolbar() {
-        if (activityResource?.hideSupportBar == true) {
-            supportActionBar?.hide()
-        } else {
+        if (activityResource?.hideSupportBar == true) supportActionBar?.hide()
+        else {
             val toolbarViewId = activityResource?.toolbarViewId
             val toolbarTitle = activityResource?.toolbarTitle
 
@@ -72,17 +69,11 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
                 val displayHomeAsUpEnabled = activityResource?.displayHomeAsUpEnabled ?: false
                 supportActionBar?.setDisplayHomeAsUpEnabled(displayHomeAsUpEnabled)
 
-                if (toolbarTitle != null) {
-                    supportActionBar?.title = toolbarTitle
-                }
+                if (toolbarTitle != null) supportActionBar?.title = toolbarTitle
 
                 val toolbarIcon = activityResource?.toolbarIcon
-                if (toolbarIcon != null) {
-                    supportActionBar?.setIcon(toolbarIcon)
-                }
-            } else if (toolbarTitle != null) {
-                title = toolbarTitle
-            }
+                if (toolbarIcon != null) supportActionBar?.setIcon(toolbarIcon)
+            } else if (toolbarTitle != null) title = toolbarTitle
         }
     }
 
@@ -100,9 +91,7 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
                 if (!hasHandledCreateOptionsMenu) {
                     hasHandledCreateOptionsMenu = fragmentHasHandledCreateOptionsMenu
 
-                    if (fragmentHasHandledCreateOptionsMenu) {
-                        return true //has been handled by fragment
-                    }
+                    if (fragmentHasHandledCreateOptionsMenu) return true //has been handled by fragment
                 }
             }
         }
@@ -128,9 +117,7 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
                 if (!hasHandledBackPressed) {
                     hasHandledBackPressed = fragmentHasHandledBackPressed
 
-                    if (fragmentHasHandledBackPressed) {
-                        return //has been handled by fragment
-                    }
+                    if (fragmentHasHandledBackPressed) return //has been handled by fragment
                 }
             }
         }
@@ -153,9 +140,7 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
                 if (!hasHandledActivityResult) {
                     hasHandledActivityResult = fragmentHasHandledActivityResult
 
-                    if (fragmentHasHandledActivityResult) {
-                        return //has been handled by fragment
-                    }
+                    if (fragmentHasHandledActivityResult) return //has been handled by fragment
                 }
             }
         }
@@ -179,9 +164,7 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
                 if (!hasHandledRequestPermissionResult) {
                     hasHandledRequestPermissionResult = fragmentHasHandledRequestPermissionResult
 
-                    if (fragmentHasHandledRequestPermissionResult) {
-                        return //has been handled by fragment
-                    }
+                    if (fragmentHasHandledRequestPermissionResult) return //has been handled by fragment
                 }
             }
         }
@@ -205,9 +188,7 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
                 if (!hasConfigurationChanged) {
                     hasConfigurationChanged = fragmentHasConfigurationChanged
 
-                    if (fragmentHasConfigurationChanged) {
-                        return //has been handled by fragment
-                    }
+                    if (fragmentHasConfigurationChanged) return //has been handled by fragment
                 }
             }
         }
@@ -231,9 +212,7 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
                 if (!hasNewIntentHandled) {
                     hasNewIntentHandled = fragmentHasNewIntentHandled
 
-                    if (fragmentHasNewIntentHandled) {
-                        return //has been handled by fragment
-                    }
+                    if (fragmentHasNewIntentHandled) return //has been handled by fragment
                 }
             }
         }
@@ -275,9 +254,7 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
 
     open fun onDefaultOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            android.R.id.home -> {
-                onBackPressed()
-            }
+            android.R.id.home -> onBackPressed()
             else -> getViewModel()?.onOptionsItemSelected(item)
         }
         return super.onOptionsItemSelected(item)
