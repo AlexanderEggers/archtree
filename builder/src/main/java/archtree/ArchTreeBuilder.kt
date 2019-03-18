@@ -1,12 +1,12 @@
 package archtree
 
 import android.annotation.SuppressLint
-import androidx.databinding.DataBindingComponent
 import android.os.Bundle
+import android.util.Log
 import androidx.annotation.DrawableRes
 import androidx.annotation.IdRes
 import androidx.annotation.MenuRes
-import android.util.Log
+import androidx.databinding.DataBindingComponent
 import archtree.viewmodel.BaseViewModel
 
 @Suppress("UNCHECKED_CAST")

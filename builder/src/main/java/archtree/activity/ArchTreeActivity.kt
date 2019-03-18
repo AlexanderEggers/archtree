@@ -1,15 +1,15 @@
 package archtree.activity
 
-import androidx.lifecycle.ViewModelProvider
 import android.content.Intent
 import android.content.res.Configuration
-import androidx.databinding.ViewDataBinding
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import archtree.fragment.ArchTreeFragment
 import archtree.viewmodel.BaseViewModel
 import autotarget.util.HasFragmentFlow
@@ -39,6 +39,9 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
 
         val activityBuilder = ActivityBuilder<ViewModel>()
         activityResource = provideActivityResource(activityBuilder)
+
+        val themeRes = activityBuilder.themeRes
+        if (themeRes != 0) setTheme(themeRes)
 
         val view = activityResource?.onCreateView(layoutInflater, null)
         setContentView(view)
