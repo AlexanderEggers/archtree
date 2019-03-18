@@ -68,20 +68,14 @@ abstract class Action<T> {
     }
 
     fun notifyClickConditionChanged() {
-        listeners.forEach {
-            it.onClickConditionChanged(this)
-        }
+        listeners.forEach { it.onClickConditionChanged(this) }
     }
 
     fun notifyLongClickConditionChanged() {
-        listeners.forEach {
-            it.onLongClickConditionChanged(this)
-        }
+        listeners.forEach { it.onLongClickConditionChanged(this) }
     }
 
     fun notifyEnabledConditionChanged() {
-        listeners.forEach {
-            it.onEnabledConditionChanged(this)
-        }
+        listeners.forEach { it.onEnabledConditionChanged(this) }
     }
 }
