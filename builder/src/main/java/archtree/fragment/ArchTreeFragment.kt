@@ -64,26 +64,17 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
         val toolbarTitle = fragmentResource?.toolbarTitle
 
         if (toolbarViewId != null && activity != null && activity is AppCompatActivity) {
-            if (fragmentResource.activityToolbar) {
-                activity.setSupportActionBar(activity.findViewById(toolbarViewId))
-            } else {
-                activity.setSupportActionBar(rootView?.findViewById(toolbarViewId))
-            }
+            if (fragmentResource.activityToolbar) activity.setSupportActionBar(activity.findViewById(toolbarViewId))
+            else activity.setSupportActionBar(rootView?.findViewById(toolbarViewId))
 
             val displayHomeAsUpEnabled = fragmentResource.displayHomeAsUpEnabled
             activity.supportActionBar?.setDisplayHomeAsUpEnabled(displayHomeAsUpEnabled)
 
-            if (toolbarTitle != null) {
-                activity.supportActionBar?.title = toolbarTitle
-            }
+            if (toolbarTitle != null) activity.supportActionBar?.title = toolbarTitle
 
             val toolbarIcon = fragmentResource.toolbarIcon
-            if (toolbarIcon != null) {
-                activity.supportActionBar?.setIcon(toolbarIcon)
-            }
-        } else if (toolbarTitle != null) {
-            activity?.title = toolbarTitle
-        }
+            if (toolbarIcon != null) activity.supportActionBar?.setIcon(toolbarIcon)
+        } else if (toolbarTitle != null) activity?.title = toolbarTitle
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -135,9 +126,7 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
         this.menu = menu
 
         val menuId = fragmentResource?.menuId
-        if (menuId != null) {
-            activity?.menuInflater?.inflate(menuId, menu)
-        }
+        if (menuId != null) activity?.menuInflater?.inflate(menuId, menu)
 
         return getViewModel()?.onCreateOptionsMenu(menu) ?: false
     }
