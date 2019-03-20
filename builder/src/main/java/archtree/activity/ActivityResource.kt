@@ -9,15 +9,14 @@ import androidx.lifecycle.ViewModelProviders
 import archtree.ArchTreeResource
 import archtree.ViewModelInitMode
 import archtree.viewmodel.BaseViewModel
-import autotarget.util.HasFragmentFlow
 
 open class ActivityResource<ViewModel : BaseViewModel>
 constructor(builder: ActivityBuilder<ViewModel>) : ArchTreeResource<ViewModel>(builder) {
 
+    val layer = super.componentLayer as ActivityComponentLayer<ViewModel>
     var viewModel: ViewModel? = null
         private set
 
-    val fragmentFlow: HasFragmentFlow? = builder.fragmentFlow
     val systemUiVisibility: Int = builder.systemUiVisibility
     var themeRes: Int = builder.themeRes
 
@@ -36,9 +35,5 @@ constructor(builder: ActivityBuilder<ViewModel>) : ArchTreeResource<ViewModel>(b
             if (viewModelInitMode == ViewModelInitMode.FORCE_INIT) viewModel?.init(true, resourceBundle, savedInstanceBundle)
             else if (viewModelInitMode == ViewModelInitMode.NON_FORCE_INIT) viewModel?.init(false, resourceBundle, savedInstanceBundle)
         }
-    }
-
-    open fun getLayer(): ActivityLayer<ViewModel> {
-        return super.layer as ActivityLayer<ViewModel>
     }
 }

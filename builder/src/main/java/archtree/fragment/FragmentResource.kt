@@ -13,6 +13,7 @@ import archtree.viewmodel.BaseViewModel
 open class FragmentResource<ViewModel : BaseViewModel>
 constructor(builder: FragmentBuilder<ViewModel>) : ArchTreeResource<ViewModel>(builder) {
 
+    val layer = super.componentLayer as FragmentComponentLayer<ViewModel>
     var viewModel: ViewModel? = null
         private set
 
@@ -29,9 +30,5 @@ constructor(builder: FragmentBuilder<ViewModel>) : ArchTreeResource<ViewModel>(b
             if (viewModelInitMode == ViewModelInitMode.FORCE_INIT) viewModel?.init(true, resourceBundle, savedInstanceBundle)
             else if (viewModelInitMode == ViewModelInitMode.NON_FORCE_INIT) viewModel?.init(false, resourceBundle, savedInstanceBundle)
         }
-    }
-
-    open fun getLayer(): FragmentLayer<ViewModel> {
-        return super.layer as FragmentLayer<ViewModel>
     }
 }

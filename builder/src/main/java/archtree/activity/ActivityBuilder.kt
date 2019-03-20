@@ -2,12 +2,9 @@ package archtree.activity
 
 import archtree.ArchTreeBuilder
 import archtree.viewmodel.BaseViewModel
-import autotarget.util.HasFragmentFlow
 
 open class ActivityBuilder<ViewModel : BaseViewModel> : ArchTreeBuilder<ViewModel, ActivityBuilder<ViewModel>>() {
 
-    var fragmentFlow: HasFragmentFlow? = null
-        private set
     var systemUiVisibility: Int = 0
         private set
     var themeRes: Int = 0
@@ -15,11 +12,6 @@ open class ActivityBuilder<ViewModel : BaseViewModel> : ArchTreeBuilder<ViewMode
 
     var hideSupportBar: Boolean = false
         private set
-
-    open fun setFragmentFlow(fragmentFlow: HasFragmentFlow): ActivityBuilder<ViewModel> {
-        this.fragmentFlow = fragmentFlow
-        return this
-    }
 
     open fun setHideSupportBar(hideSupportBar: Boolean): ActivityBuilder<ViewModel> {
         this.hideSupportBar = hideSupportBar
@@ -36,13 +28,13 @@ open class ActivityBuilder<ViewModel : BaseViewModel> : ArchTreeBuilder<ViewMode
         return this
     }
 
-    open fun build(layer: ActivityLayer<ViewModel>): ActivityResource<ViewModel> {
+    open fun build(layer: ActivityComponentLayer<ViewModel>): ActivityResource<ViewModel> {
         internalBuild(layer)
         return ActivityResource(this)
     }
 
     open fun build(): ActivityResource<ViewModel> {
-        internalBuild(object : ActivityLayer<ViewModel>() {
+        internalBuild(object : ActivityComponentLayer<ViewModel>() {
 
         })
         return ActivityResource(this)
