@@ -27,11 +27,12 @@ fun bindListAdapter(container: RecyclerView, adapter: PageableRecyclerViewAdapte
     if (adapter != null) container.adapter = adapter
 }
 
+@Suppress("UNCHECKED_CAST")
 @BindingAdapter("archtree_pagedListSource", "archtree_pagedListItemTemplate", "archtree_pagedListViewModel",
         "archtree_pagedListDataBindingComponent", "archtree_pagedListLifecycleOwner", requireAll = false)
-fun <V : ViewModel, D : Any> bindItemsSource(
+fun <T : BindableListItem, V : ViewModel, D : Any> bindItemsSource(
         container: RecyclerView,
-        newItems: PagedList<BindableListItem>?,
+        newItems: PagedList<T>?,
         @LayoutRes newItemLayout: Int,
         newViewModel: V?,
         newDataBindingComponent: D?,
@@ -45,7 +46,7 @@ fun <V : ViewModel, D : Any> bindItemsSource(
         val adapter = container.adapter
         if (adapter != null && adapter is PageableRecyclerViewAdapter) {
             adapter.bindRecyclerView(container)
-            adapter.onUpdate(newItems, newItemLayout, newViewModel,
+            adapter.onUpdate(newItems as PagedList<BindableListItem>, newItemLayout, newViewModel,
                     newDataBindingComponent, newLifecycleOwner)
         }
     }
