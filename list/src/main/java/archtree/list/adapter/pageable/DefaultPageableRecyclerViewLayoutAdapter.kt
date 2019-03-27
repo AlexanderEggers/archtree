@@ -16,7 +16,6 @@ import java.lang.ref.WeakReference
 
 open class DefaultPageableRecyclerViewLayoutAdapter(private val context: Context) : PageableRecyclerViewAdapter() {
 
-    private var itemList = ArrayList<BindableListItem>()
     private var itemLayout: Int = 0
     private var viewModel: ViewModel? = null
     private var dataBindingComponent: Any? = null
@@ -63,10 +62,7 @@ open class DefaultPageableRecyclerViewLayoutAdapter(private val context: Context
     }
 
     override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
-        if (viewHolder is DataContextAwareViewHolder) viewHolder.bind(itemList[position], viewModel)
-    }
-
-    override fun getItemCount(): Int {
-        return itemList.size
+        val item = getItem(position)
+        if (item!= null && viewHolder is DataContextAwareViewHolder) viewHolder.bind(item, viewModel)
     }
 }

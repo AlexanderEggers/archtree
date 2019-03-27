@@ -39,7 +39,7 @@ fun <T : BindableListItem, V : ViewModel, D : Any> bindItemsSource(
         newLifecycleOwner: LifecycleOwner?) {
 
     if (newItems != null) {
-        if (container.adapter == null || container.adapter !is BindableRecyclerViewAdapter) {
+        if (container.adapter == null || container.adapter !is PageableRecyclerViewAdapter) {
             container.adapter = DefaultPageableRecyclerViewLayoutAdapter(container.context)
         }
 
