@@ -8,7 +8,8 @@ import archtree.list.item.BindableListItem
 interface BindableListAdapter {
 
     fun onUpdate(list: List<BindableListItem>, @LayoutRes itemLayout: Int, viewModel: ViewModel?,
-                 dataBindingComponent: Any?, lifecycleOwner: LifecycleOwner?)
+                 dataBindingComponent: Any?, dataBindingComponentKey: Int?,
+                 lifecycleOwner: LifecycleOwner?, lifecycleOwnerKey: Int?)
 
     fun notifyDataSetChanged()
 }

@@ -2,7 +2,6 @@ ArchTree
 =====
 
 [![Download](https://api.bintray.com/packages/mordag/android/archtree-core/images/download.svg) ](https://bintray.com/mordag/android/archtree-core/_latestVersion)
-[![Build Status](https://travis-ci.org/Mordag/archtree.svg?branch=master)](https://travis-ci.org/Mordag/archtree)
 
 Android library which is a collection of APIs which can help you to simplify the development of your app. The focus of this library is to struture the architecture of your app by using different helper classes to introduce the MVVM pattern.
 
@@ -14,9 +13,9 @@ repositories {
 }
 
 dependencies {
-  def archtree_version = "0.20.0"
+  def archtree_version = "0.20.2"
 
-  //includes all library artifacts
+  //includes all library artifacts (except testing)
   implementation "org.archtree:archtree-core:$archtree_version"
   
   //just builder (base, activity and fragment) and viewmodel classes
@@ -29,12 +28,13 @@ dependencies {
   implementation "org.archtree:archtree-helper:$archtree_version"
   //just databinding list classes
   implementation "org.archtree:archtree-list:$archtree_version"
+  
   //just testing helper
-  implementation "org.archtree:archtree-testing:$archtree_version"
+  testImplementation "org.archtree:archtree-testing:$archtree_version"
 }
 ```
 
-How do I use ArchTree? (Step-by-step introduction for 0.20.0)
+How do I use ArchTree? (Step-by-step introduction for 0.20.2)
 -------------------
 Coming soon! For now, use the [example project][3] as a reference.
 

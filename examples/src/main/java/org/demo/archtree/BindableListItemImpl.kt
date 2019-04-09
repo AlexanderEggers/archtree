@@ -17,7 +17,7 @@ class BindableListItemImpl(private val value: String): BindableListItemAdapter()
         else false
     }
 
-    override fun bind(viewModel: ViewModel?, binding: ViewDataBinding) {
+    override fun onBind(viewModel: ViewModel?, binding: ViewDataBinding) {
         binding.setVariable(BR.value, value)
     }
 }
