@@ -59,7 +59,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "androidx.appcompat:appcompat:$support_lib_appcompat_version"
-    api "androidx.paging:paging-runtime-ktx:$support_lib_paging_version"
+    api "androidx.paging:paging-runtime:$support_lib_paging_version"
     api "androidx.recyclerview:recyclerview:$support_lib_version"
 }
 

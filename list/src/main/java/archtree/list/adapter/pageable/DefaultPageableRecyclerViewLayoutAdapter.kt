@@ -3,6 +3,7 @@ package archtree.list.adapter.pageable
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -21,19 +22,25 @@ open class DefaultPageableRecyclerViewLayoutAdapter(private val context: Context
     private var dataBindingComponent: Any? = null
     private var lifecycleOwner: LifecycleOwner? = null
 
+    private var dataBindingComponentKey: Int? = null
+    private var lifecycleOwnerKey: Int? = null
+
     private var recyclerViewRef = WeakReference<RecyclerView?>(null)
 
     override fun bindRecyclerView(view: RecyclerView) {
         recyclerViewRef = WeakReference(view)
     }
 
-    override fun onUpdate(list: PagedList<BindableListItem>, itemLayout: Int, viewModel: ViewModel?,
-                          dataBindingComponent: Any?, lifecycleOwner: LifecycleOwner?) {
+    override fun onUpdate(list: PagedList<BindableListItem>, @LayoutRes itemLayout: Int, viewModel: ViewModel?,
+                          dataBindingComponent: Any?, dataBindingComponentKey: Int?,
+                          lifecycleOwner: LifecycleOwner?, lifecycleOwnerKey: Int?) {
 
         this.itemLayout = itemLayout
         this.viewModel = viewModel
         this.dataBindingComponent = dataBindingComponent
         this.lifecycleOwner = lifecycleOwner
+        this.dataBindingComponentKey = dataBindingComponentKey
+        this.lifecycleOwnerKey = lifecycleOwnerKey
 
         submitList(list)
         recyclerViewRef.get()?.scheduleLayoutAnimation()
@@ -56,6 +63,12 @@ open class DefaultPageableRecyclerViewLayoutAdapter(private val context: Context
                 realDataBindingComponent
         )
 
+        val dataBindingKey = dataBindingComponentKey
+        if (dataBindingKey != null) binding.setVariable(dataBindingKey, realDataBindingComponent)
+
+        val lifecycleKey = lifecycleOwnerKey
+        if (lifecycleKey != null) binding.setVariable(lifecycleKey, lifecycleOwner)
+
         if (lifecycleOwner != null) binding.lifecycleOwner = lifecycleOwner
 
         return DataContextAwareViewHolder(binding)
@@ -63,6 +76,6 @@ open class DefaultPageableRecyclerViewLayoutAdapter(private val context: Context
 
     override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
         val item = getItem(position)
-        if (item!= null && viewHolder is DataContextAwareViewHolder) viewHolder.bind(item, viewModel)
+        if (item != null && viewHolder is DataContextAwareViewHolder) viewHolder.onBind(item, viewModel)
     }
 }

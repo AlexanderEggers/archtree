@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 open class DataContextAwareViewHolder
 constructor(private val binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root) {
 
-    open fun bind(item: BindableListItem, viewModel: ViewModel?) {
-        item.bind(viewModel, binding)
+    open fun onBind(item: BindableListItem, viewModel: ViewModel?) {
+        item.onBind(viewModel, binding)
     }
 }
