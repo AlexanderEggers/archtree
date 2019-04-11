@@ -1,6 +1,7 @@
 package archtree.helper.binding
 
 import android.content.res.Resources
+import android.graphics.PorterDuff
 import android.os.Build
 import android.text.Html
 import android.text.method.LinkMovementMethod
@@ -83,4 +84,11 @@ fun setBackgroundRes(view: View, value: Int?) {
             view.setBackgroundResource(0)
         }
     } ?: view.setBackgroundResource(0)
+}
+
+@BindingAdapter("archtree_imageTintColor")
+fun setTintColor(view: ImageView, value: Int?) {
+    value?.run {
+        view.setColorFilter(ContextCompat.getColor(view.context, value), PorterDuff.Mode.MULTIPLY)
+    }
 }
