@@ -7,10 +7,13 @@ ext {
     bintrayName = 'archtree-list'
 
     publishedGroupId = 'org.archtree'
-    libraryName = 'archtree-list'
+    libraryName = 'ArchTree List Artifact'
     artifact = 'archtree-list'
+    libraryYear = '2019'
 
-    libraryDescription = 'Android library that simplifies the usage of Activities, Fragments and ViewModels.'
+    libraryDescription = 'The ArchTree List Artifact is simplifying the usage of list components ' +
+            'inside a MVVM architecture allowing the usage of DataBinding for' +
+            'RecyclerViews, LinearLayouts and PagedLists.'
 
     siteUrl = 'https://github.com/Mordag/archtree'
     gitUrl = 'https://github.com/Mordag/archtree.git'
@@ -20,7 +23,7 @@ ext {
     developerId = 'mordag'
     developerName = 'Alexander Eggers'
 
-    developerEmail = obtainDevEmailAddress()
+    developerEmail = ''
 
     licenseName = 'The Apache Software License, Version 2.0'
     licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'

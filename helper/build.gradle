@@ -7,10 +7,12 @@ ext {
     bintrayName = 'archtree-helper'
 
     publishedGroupId = 'org.archtree'
-    libraryName = 'archtree-helper'
+    libraryName = 'ArchTree Helper Artifact'
     artifact = 'archtree-helper'
+    libraryYear = '2019'
 
-    libraryDescription = 'Android library that simplifies the usage of Activities, Fragments and ViewModels.'
+    libraryDescription = 'The ArchTree Helper Artifact is simplifying the usage of ' +
+            'different Android specific features like DataBinding, resource handling and more.'
 
     siteUrl = 'https://github.com/Mordag/archtree'
     gitUrl = 'https://github.com/Mordag/archtree.git'
@@ -20,7 +22,7 @@ ext {
     developerId = 'mordag'
     developerName = 'Alexander Eggers'
 
-    developerEmail = obtainDevEmailAddress()
+    developerEmail = ''
 
     licenseName = 'The Apache Software License, Version 2.0'
     licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
