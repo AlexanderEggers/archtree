@@ -15,6 +15,7 @@ buildscript {
         kotlin_version = '1.3.21'
         dagger_version = '2.21'
         lifecycle_version = '2.0.0'
+        lifecycle_testing_version = '2.0.1'
         gson_version = '2.8.5'
         room_version = '2.0.0'
 
@@ -25,7 +26,7 @@ buildscript {
         mockito_version = '2.23.4'
         powermock_version = '2.0.0'
 
-        archtree_library_version = "0.19.4"
+        archtree_library_version = "0.21.0"
 
         obtainDevEmailAddress = { ->
             def result = ""

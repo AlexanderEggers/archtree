@@ -9,5 +9,5 @@ interface BindableListItem {
 
     fun areContentsTheSame(newItem: BindableListItem): Boolean
 
-    fun bind(viewModel: ViewModel?, binding: ViewDataBinding)
+    fun onBind(viewModel: ViewModel?, binding: ViewDataBinding)
 }

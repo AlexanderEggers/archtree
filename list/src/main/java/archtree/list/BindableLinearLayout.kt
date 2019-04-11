@@ -12,9 +12,9 @@ import archtree.list.adapter.bindable.BindableListAdapter
 import archtree.list.adapter.bindable.DefaultBindableLinearLayoutAdapter
 import archtree.list.item.BindableListItem
 
-class BindableLinearLayout : LinearLayout {
+open class BindableLinearLayout : LinearLayout {
 
-    var adapter: BindableLinearLayoutAdapter? = null
+    open var adapter: BindableLinearLayoutAdapter? = null
 
     constructor(context: Context) : super(context)
 
@@ -29,14 +29,17 @@ fun bindListAdapter(container: BindableLinearLayout, adapter: BindableLinearLayo
 }
 
 @BindingAdapter("archtree_listSource", "archtree_listItemTemplate", "archtree_listViewModel",
-        "archtree_listDataBindingComponent", "archtree_listLifecycleOwner", requireAll = false)
+        "archtree_listDataBindingComponent", "archtree_listDataBindingComponentKey",
+        "archtree_listLifecycleOwner", "archtree_listLifecycleOwnerKey", requireAll = false)
 fun <T : BindableListItem, V : ViewModel, D : Any> bindItemsSource(
         container: BindableLinearLayout,
         newItems: List<T>?,
         @LayoutRes newItemLayout: Int,
         newViewModel: V?,
         newDataBindingComponent: D?,
-        newLifecycleOwner: LifecycleOwner?) {
+        newDataBindingComponentKey: Int?,
+        newLifecycleOwner: LifecycleOwner?,
+        newLifecycleOwnerKey: Int?) {
 
     if (newItems != null) {
         if (container.adapter == null || container.adapter !is BindableListAdapter) {
@@ -47,7 +50,8 @@ fun <T : BindableListItem, V : ViewModel, D : Any> bindItemsSource(
         if (adapter != null) {
             adapter.bindViewGroup(container)
             (adapter as BindableListAdapter).onUpdate(newItems, newItemLayout, newViewModel,
-                    newDataBindingComponent, newLifecycleOwner)
+                    newDataBindingComponent, newDataBindingComponentKey, newLifecycleOwner,
+                    newLifecycleOwnerKey)
         }
     }
 }

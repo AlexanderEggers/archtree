@@ -3,6 +3,7 @@ package archtree.list.adapter.bindable
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -21,13 +22,19 @@ open class DefaultBindableLinearLayoutAdapter(private val context: Context) : Bi
     private var dataBindingComponent: Any? = null
     private var lifecycleOwner: LifecycleOwner? = null
 
-    override fun onUpdate(list: List<BindableListItem>, itemLayout: Int, viewModel: ViewModel?,
-                          dataBindingComponent: Any?, lifecycleOwner: LifecycleOwner?) {
+    private var dataBindingComponentKey: Int? = null
+    private var lifecycleOwnerKey: Int? = null
+
+    override fun onUpdate(list: List<BindableListItem>, @LayoutRes itemLayout: Int, viewModel: ViewModel?,
+                          dataBindingComponent: Any?, dataBindingComponentKey: Int?,
+                          lifecycleOwner: LifecycleOwner?, lifecycleOwnerKey: Int?) {
 
         this.itemLayout = itemLayout
         this.viewModel = viewModel
         this.dataBindingComponent = dataBindingComponent
         this.lifecycleOwner = lifecycleOwner
+        this.dataBindingComponentKey = dataBindingComponentKey
+        this.lifecycleOwnerKey = lifecycleOwnerKey
 
         itemList.clear()
         itemList.addAll(list)
@@ -52,15 +59,19 @@ open class DefaultBindableLinearLayoutAdapter(private val context: Context) : Bi
                 realDataBindingComponent
         )
 
+        val dataBindingKey = dataBindingComponentKey
+        if (dataBindingKey != null) binding.setVariable(dataBindingKey, realDataBindingComponent)
+
+        val lifecycleKey = lifecycleOwnerKey
+        if (lifecycleKey != null) binding.setVariable(lifecycleKey, lifecycleOwner)
+
         if (lifecycleOwner != null) binding.lifecycleOwner = lifecycleOwner
 
         return DataContextAwareViewHolder(binding)
     }
 
     override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
-        if (viewHolder is DataContextAwareViewHolder) {
-            viewHolder.bind(itemList[position], viewModel)
-        }
+        if (viewHolder is DataContextAwareViewHolder) viewHolder.onBind(itemList[position], viewModel)
     }
 
     override val itemCount: Int

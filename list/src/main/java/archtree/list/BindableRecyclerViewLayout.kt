@@ -11,7 +11,7 @@ import archtree.list.adapter.bindable.BindableRecyclerViewAdapter
 import archtree.list.adapter.bindable.DefaultBindableRecyclerViewLayoutAdapter
 import archtree.list.item.BindableListItem
 
-class BindableRecyclerViewLayout : RecyclerView {
+open class BindableRecyclerViewLayout : RecyclerView {
 
     constructor(context: Context) : super(context)
 
@@ -26,14 +26,17 @@ fun bindListAdapter(container: RecyclerView, adapter: BindableRecyclerViewAdapte
 }
 
 @BindingAdapter("archtree_listSource", "archtree_listItemTemplate", "archtree_listViewModel",
-        "archtree_listDataBindingComponent", "archtree_listLifecycleOwner", requireAll = false)
+        "archtree_listDataBindingComponent", "archtree_listDataBindingComponentKey",
+        "archtree_listLifecycleOwner", "archtree_listLifecycleOwnerKey", requireAll = false)
 fun <T : BindableListItem, V : ViewModel, D : Any> bindItemsSource(
-        container: RecyclerView,
+        container: BindableRecyclerViewLayout,
         newItems: List<T>?,
         @LayoutRes newItemLayout: Int,
         newViewModel: V?,
         newDataBindingComponent: D?,
-        newLifecycleOwner: LifecycleOwner?) {
+        newDataBindingComponentKey: Int?,
+        newLifecycleOwner: LifecycleOwner?,
+        newLifecycleOwnerKey: Int?) {
 
     if (newItems != null) {
         if (container.adapter == null || container.adapter !is BindableRecyclerViewAdapter) {
@@ -44,7 +47,8 @@ fun <T : BindableListItem, V : ViewModel, D : Any> bindItemsSource(
         if (adapter != null && adapter is BindableRecyclerViewAdapter) {
             adapter.bindRecyclerView(container)
             adapter.onUpdate(newItems, newItemLayout, newViewModel,
-                    newDataBindingComponent, newLifecycleOwner)
+                    newDataBindingComponent, newDataBindingComponentKey, newLifecycleOwner,
+                    newLifecycleOwnerKey)
         }
     }
 }
