@@ -64,7 +64,6 @@ dependencies {
     implementation "androidx.appcompat:appcompat:$support_lib_appcompat_version"
     implementation "androidx.transition:transition:$support_lib_transition_version"
     implementation "com.google.code.gson:gson:$gson_version"
-    implementation "org.archknife:archknife-context:$archknife_version"
 }
 
 if (project.rootProject.file('local.properties').exists()) {
