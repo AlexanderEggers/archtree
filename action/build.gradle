@@ -7,10 +7,12 @@ ext {
     bintrayName = 'archtree-action'
 
     publishedGroupId = 'org.archtree'
-    libraryName = 'archtree-action'
+    libraryName = 'ArchTree Action Artifact'
     artifact = 'archtree-action'
+    libraryYear = '2019'
 
-    libraryDescription = 'Android library that simplifies the usage of Activities, Fragments and ViewModels.'
+    libraryDescription = 'The ArchTree Action Artifact is simplifying the usage of ' +
+            'onClickListener inside a MVVM architecture using databinding.'
 
     siteUrl = 'https://github.com/Mordag/archtree'
     gitUrl = 'https://github.com/Mordag/archtree.git'
@@ -20,7 +22,7 @@ ext {
     developerId = 'mordag'
     developerName = 'Alexander Eggers'
 
-    developerEmail = obtainDevEmailAddress()
+    developerEmail = ''
 
     licenseName = 'The Apache Software License, Version 2.0'
     licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
@@ -61,6 +63,6 @@ dependencies {
 }
 
 if (project.rootProject.file('local.properties').exists()) {
-    apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
-    apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
+    apply from: 'https://raw.githubusercontent.com/Mordag/JCenter/master/install.gradle'
+    apply from: 'https://raw.githubusercontent.com/Mordag/JCenter/master/bintray.gradle'
 }

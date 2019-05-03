@@ -6,10 +6,12 @@ ext {
     bintrayName = 'archtree-core'
 
     publishedGroupId = 'org.archtree'
-    libraryName = 'archtree-core'
+    libraryName = 'ArchTree Core Artifact'
     artifact = 'archtree-core'
+    libraryYear = '2019'
 
-    libraryDescription = 'Android library that simplifies the usage of Activities, Fragments and ViewModels.'
+    libraryDescription = 'The ArchTree Android library simplifies the usage of Activities, ' +
+            'Fragments, ViewModels and DataBinding components.'
 
     siteUrl = 'https://github.com/Mordag/archtree'
     gitUrl = 'https://github.com/Mordag/archtree.git'
@@ -19,7 +21,7 @@ ext {
     developerId = 'mordag'
     developerName = 'Alexander Eggers'
 
-    developerEmail = obtainDevEmailAddress()
+    developerEmail = ''
 
     licenseName = 'The Apache Software License, Version 2.0'
     licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'

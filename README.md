@@ -13,7 +13,7 @@ repositories {
 }
 
 dependencies {
-  def archtree_version = "0.20.2"
+  def archtree_version = "0.21.0"
 
   //includes all library artifacts (except testing)
   implementation "org.archtree:archtree-core:$archtree_version"
@@ -34,7 +34,7 @@ dependencies {
 }
 ```
 
-How do I use ArchTree? (Step-by-step introduction for 0.20.2)
+How do I use ArchTree? (Step-by-step introduction for 0.21.0)
 -------------------
 Coming soon! For now, use the [example project][3] as a reference.
 

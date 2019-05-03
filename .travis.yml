@@ -1,44 +1,31 @@
 language: android
-sudo: false
-jdk:
-  - oraclejdk8
-
-before_cache:
- - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
- - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
-
-cache:
-  directories:
-    - $HOME/.gradle/caches/
-    - $HOME/.gradle/wrapper/
-    - $HOME/.android/build-cache
-
+jdk: oraclejdk8
 env:
  global:
- - ANDROID_API=26
- - ANDROID_BUILD_TOOLS=26.0.0
- - ADB_INSTALL_TIMEOUT=5
-
+    - ANDROID_API_LEVEL=25
+    - ANDROID_BUILD_TOOLS_VERSION=25.0.2
 android:
- components:
- - tools
- - platform-tools
- - build-tools-$ANDROID_BUILD_TOOLS
- - android-$ANDROID_API
- - extra-google-m2repository
- - extra-android-m2repository # for design library
- - addon-google_apis-google-26 # google play services
-
-licenses:
- - android-sdk-preview-license-.+
- - android-sdk-license-.+
- - google-gdk-license-.+
-
-before_install:
+  licenses:
+     - android-sdk-preview-license-.+
+     - android-sdk-license-.+
+     - google-gdk-license-.+
+  components:
+      - tools
+      - platform-tools
+      # The BuildTools version used by your project
+      - build-tools-$ANDROID_BUILD_TOOLS_VERSION
+      # The SDK version used to compile your project
+      - android-$ANDROID_API_LEVEL
+      # Additional components
+      - extra-google-google_play_services
+      - extra-google-m2repository
+      - extra-android-m2repository
+      - addon-google_apis-google-$ANDROID_API_LEVEL
+before_script:
   - mkdir "$ANDROID_HOME/licenses" || true
   - echo "d56f5187479451eabf01fb78af6dfcb131a6481e" > "$ANDROID_HOME/licenses/android-sdk-license"
   - echo y | android update sdk --no-ui --all --filter "tool,extra-android-m2repository,extra-android-support,extra-google-google_play_services,extra-google-m2repository"
   - echo y | $ANDROID_HOME/tools/bin/sdkmanager "extras;m2repository;com;android;support;constraint;constraint-layout-solver;1.0.2"
   - chmod +x gradlew
-  
-install: ./gradlew clean assembleDebug
+script:
+    - ./gradlew build check

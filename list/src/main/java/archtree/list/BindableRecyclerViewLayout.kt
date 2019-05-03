@@ -60,5 +60,16 @@ fun setRecyclerViewItemAnimator(view: RecyclerView, animator: RecyclerView.ItemA
 
 @BindingAdapter("archtree_recyclerViewScrollToPosition")
 fun setRecyclerViewScrollToPosition(view: RecyclerView, scrollToPosition: Int?) {
-    scrollToPosition?.run { view.scrollToPosition(scrollToPosition) }
+    scrollToPosition?.run {
+        view.stopScroll()
+        view.scrollToPosition(scrollToPosition)
+    }
+}
+
+@BindingAdapter("archtree_recyclerViewSmoothScrollToPosition")
+fun setRecyclerViewSmoothScrollToPosition(view: RecyclerView, scrollToPosition: Int?) {
+    scrollToPosition?.run {
+        view.stopScroll()
+        view.smoothScrollToPosition(scrollToPosition)
+    }
 }
