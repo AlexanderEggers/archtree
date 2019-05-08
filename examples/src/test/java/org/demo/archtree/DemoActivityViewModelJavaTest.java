@@ -45,8 +45,7 @@ public class DemoActivityViewModelJavaTest extends ArchTreeBaseTest {
         assertEquals("undefined", fragmentTarget.getTag());
     }
 
-    @Override
-    public void initialiseTestData() {
+    private void initialiseTestData() {
         viewModel = new DemoActivityViewModel(targetServiceMock);
     }
 }

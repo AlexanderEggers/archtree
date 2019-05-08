@@ -10,16 +10,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import archtree.FragmentDispatcher
 import archtree.fragment.ArchTreeFragment
 import archtree.viewmodel.BaseViewModel
-import autotarget.util.HasFragmentFlow
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import javax.inject.Inject
 
 abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity(),
-        HasSupportFragmentInjector, HasFragmentFlow, HasActivityBuilder<ViewModel> {
+        HasSupportFragmentInjector, FragmentDispatcher, HasActivityBuilder<ViewModel> {
 
     @Inject
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
@@ -27,11 +27,13 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    private var activityResource: ActivityResource<ViewModel>? = null
+    @Suppress
+    var activityResource: ActivityResource<ViewModel>? = null
+        private set
 
     override fun onResume() {
         super.onResume()
-        activityResource?.getLayer()?.onResume(getViewModel())
+        activityResource?.layer?.onResume(getViewModel())
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,8 +42,8 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
         val activityBuilder = ActivityBuilder<ViewModel>()
         activityResource = provideActivityResource(activityBuilder)
 
-        val themeRes = activityBuilder.themeRes
-        if (themeRes != 0) setTheme(themeRes)
+        val themeRes = activityResource?.themeRes
+        if (themeRes != null && themeRes != 0) setTheme(themeRes)
 
         val view = activityResource?.onCreateView(layoutInflater, null)
         setContentView(view)
@@ -54,7 +56,7 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
         val systemUiVisibility = activityResource?.systemUiVisibility
         if (systemUiVisibility != null && systemUiVisibility != 0) window.decorView.systemUiVisibility = systemUiVisibility
 
-        activityResource?.getLayer()?.onCreate(getViewModel(), savedInstanceState)
+        activityResource?.layer?.onCreate(getViewModel(), savedInstanceState)
     }
 
     private fun initialiseToolbar() {
@@ -272,31 +274,31 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
 
     override fun onStart() {
         super.onStart()
-        activityResource?.getLayer()?.onStart(getViewModel())
+        activityResource?.layer?.onStart(getViewModel())
     }
 
     override fun onStop() {
         super.onStop()
-        activityResource?.getLayer()?.onStop(getViewModel())
+        activityResource?.layer?.onStop(getViewModel())
     }
 
     override fun onPause() {
         super.onPause()
-        activityResource?.getLayer()?.onPause(getViewModel())
+        activityResource?.layer?.onPause(getViewModel())
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        activityResource?.getLayer()?.onDestroy(getViewModel())
+        activityResource?.layer?.onDestroy(getViewModel())
     }
 
-    override fun onShowNextFragment(containerId: Int, state: Int, addToBackStack: Boolean, clearBackStack: Boolean, bundle: Bundle?): Boolean {
-        return activityResource?.fragmentFlow?.onShowNextFragment(containerId, state, addToBackStack, clearBackStack, bundle)
+    override fun showFragment(containerId: Int, state: Enum<*>, bundle: Bundle?): Boolean {
+        return showFragment(containerId, state.ordinal, bundle)
+    }
+
+    override fun showFragment(containerId: Int, state: Int, bundle: Bundle?): Boolean {
+        return activityResource?.fragmentDispatcherLayer?.onCreateFragment(containerId, state, bundle)
                 ?: false
-    }
-
-    open fun getActivityResource(): ActivityResource<ViewModel>? {
-        return activityResource
     }
 
     override fun supportFragmentInjector(): AndroidInjector<Fragment> {

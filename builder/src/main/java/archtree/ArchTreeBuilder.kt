@@ -35,7 +35,9 @@ abstract class ArchTreeBuilder<ViewModel : BaseViewModel, out Builder> {
 
     var resourceBundle: Bundle? = null
         private set
-    var layer: ArchTreeLayer<ViewModel>? = null
+    var fragmentDispatcherLayer: FragmentDispatcherLayer? = null
+        private set
+    var componentLayer: ComponentLayer<ViewModel>? = null
         private set
 
     var toolbarViewId: Int? = null
@@ -104,16 +106,21 @@ abstract class ArchTreeBuilder<ViewModel : BaseViewModel, out Builder> {
         return this as Builder
     }
 
+    open fun setFragmentDispatcherLayer(fragmentDispatcherLayer: FragmentDispatcherLayer): Builder {
+        this.fragmentDispatcherLayer = fragmentDispatcherLayer
+        return this as Builder
+    }
+
     /**
      * Internal method used to execute some common operations if the build() method of
      * ActivityBuilder/FragmentBuilder is called.
      *
-     * @param layer custom layer which can be used to execute certain operation for the predefined
+     * @param layer custom componentLayer which can be used to execute certain operation for the predefined
      * lifecycle methods.
      * @since 1.0.0
-     * @see ArchTreeLayer
+     * @see ComponentLayer
      */
-    protected open fun internalBuild(layer: ArchTreeLayer<ViewModel>) {
-        this.layer = layer
+    protected open fun internalBuild(layer: ComponentLayer<ViewModel>) {
+        this.componentLayer = componentLayer
     }
 }

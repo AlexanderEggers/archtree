@@ -11,11 +11,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import archknife.annotation.util.Injectable
 import archtree.ArchTreeResource
+import archtree.FragmentDispatcher
 import archtree.viewmodel.BaseViewModel
 import javax.inject.Inject
 
 abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injectable,
-        HasFragmentBuilder<ViewModel> {
+        FragmentDispatcher, HasFragmentBuilder<ViewModel> {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -44,7 +45,7 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
         fragmentResource?.onAttachLifecycleOwner(this)
 
         if (!isHidden) refreshFragmentToolbar(activity, view, fragmentResource)
-        fragmentResource?.getLayer()?.onCreate(getViewModel(), savedInstanceState)
+        fragmentResource?.layer?.onCreate(getViewModel(), savedInstanceState)
     }
 
     open fun onBackPressed(): Boolean {
@@ -55,7 +56,7 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
         super.onHiddenChanged(hidden)
         if (!hidden) {
             refreshFragmentToolbar(activity, view, fragmentResource)
-            fragmentResource?.getLayer()?.onResume(getViewModel())
+            fragmentResource?.layer?.onResume(getViewModel())
         }
     }
 
@@ -83,22 +84,22 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
 
     override fun onStart() {
         super.onStart()
-        fragmentResource?.getLayer()?.onStart(getViewModel())
+        fragmentResource?.layer?.onStart(getViewModel())
     }
 
     override fun onStop() {
         super.onStop()
-        fragmentResource?.getLayer()?.onStop(getViewModel())
+        fragmentResource?.layer?.onStop(getViewModel())
     }
 
     override fun onPause() {
         super.onPause()
-        fragmentResource?.getLayer()?.onPause(getViewModel())
+        fragmentResource?.layer?.onPause(getViewModel())
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        fragmentResource?.getLayer()?.onDestroy(getViewModel())
+        fragmentResource?.layer?.onDestroy(getViewModel())
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -139,6 +140,14 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
     override fun onViewStateRestored(savedInstanceState: Bundle?) {
         getViewModel()?.onRestoreInstanceState(savedInstanceState)
         super.onViewStateRestored(savedInstanceState)
+    }
+
+    override fun showFragment(containerId: Int, state: Enum<*>, bundle: Bundle?): Boolean {
+        return showFragment(containerId, state.ordinal, bundle)
+    }
+
+    override fun showFragment(containerId: Int, state: Int, bundle: Bundle?): Boolean {
+        return fragmentResource?.fragmentDispatcherLayer?.onCreateFragment(containerId, state, bundle) ?: false
     }
 
     open fun getViewModel(): ViewModel? {

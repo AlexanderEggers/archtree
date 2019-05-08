@@ -3,7 +3,7 @@ package archtree
 import android.os.Bundle
 import archtree.viewmodel.BaseViewModel
 
-abstract class ArchTreeLayer<in ViewModel : BaseViewModel> {
+abstract class ComponentLayer<in ViewModel : BaseViewModel> {
 
     open fun onResume(viewModel: ViewModel?) {
         //do nothing by default

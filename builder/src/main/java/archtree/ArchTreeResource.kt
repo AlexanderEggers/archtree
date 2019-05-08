@@ -14,7 +14,8 @@ import archtree.viewmodel.BaseViewModel
 
 abstract class ArchTreeResource<ViewModel : BaseViewModel> constructor(builder: ArchTreeBuilder<ViewModel, *>) {
 
-    protected var layer: ArchTreeLayer<ViewModel>? = builder.layer
+    protected var componentLayer: ComponentLayer<ViewModel>? = builder.componentLayer
+    val fragmentDispatcherLayer: FragmentDispatcherLayer? = builder.fragmentDispatcherLayer
 
     var view: View? = null
         private set

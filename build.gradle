@@ -17,7 +17,6 @@ buildscript {
         lifecycle_version = '2.0.0'
         lifecycle_testing_version = '2.0.1'
         gson_version = '2.8.5'
-        room_version = '2.0.0'
 
         archknife_version = '0.11.0'
         autotarget_version = '0.14.1'
@@ -26,7 +25,7 @@ buildscript {
         mockito_version = '2.23.4'
         powermock_version = '2.0.0'
 
-        archtree_library_version = "0.21.1"
+        archtree_library_version = "0.22.0"
     }
 
     repositories {

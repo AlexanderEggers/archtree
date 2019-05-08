@@ -5,13 +5,13 @@ import archtree.viewmodel.BaseViewModel
 
 open class FragmentBuilder<ViewModel : BaseViewModel> : ArchTreeBuilder<ViewModel, FragmentBuilder<ViewModel>>() {
 
-    open fun build(layer: FragmentLayer<ViewModel>): FragmentResource<ViewModel> {
+    open fun build(layer: FragmentComponentLayer<ViewModel>): FragmentResource<ViewModel> {
         internalBuild(layer)
         return FragmentResource(this)
     }
 
     open fun build(): FragmentResource<ViewModel> {
-        internalBuild(object : FragmentLayer<ViewModel>() {
+        internalBuild(object : FragmentComponentLayer<ViewModel>() {
 
         })
         return FragmentResource(this)
