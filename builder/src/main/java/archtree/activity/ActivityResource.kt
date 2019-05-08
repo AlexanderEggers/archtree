@@ -13,7 +13,7 @@ import archtree.viewmodel.BaseViewModel
 open class ActivityResource<ViewModel : BaseViewModel>
 constructor(builder: ActivityBuilder<ViewModel>) : ArchTreeResource<ViewModel>(builder) {
 
-    val layer = super.componentLayer as ActivityComponentLayer<ViewModel>
+    val layer = super.componentLayer as ActivityComponentLayer<ViewModel>?
     var viewModel: ViewModel? = null
         private set
 

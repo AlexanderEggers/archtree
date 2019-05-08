@@ -13,7 +13,7 @@ import archtree.viewmodel.BaseViewModel
 open class FragmentResource<ViewModel : BaseViewModel>
 constructor(builder: FragmentBuilder<ViewModel>) : ArchTreeResource<ViewModel>(builder) {
 
-    val layer = super.componentLayer as FragmentComponentLayer<ViewModel>
+    val layer = super.componentLayer as FragmentComponentLayer<ViewModel>?
     var viewModel: ViewModel? = null
         private set
 
