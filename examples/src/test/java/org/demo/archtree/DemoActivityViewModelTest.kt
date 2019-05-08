@@ -39,7 +39,5 @@ class DemoActivityViewModelTest: ArchTreeBaseTest() {
         assertEquals("undefined", fragmentTarget.tag)
     }
 
-    override fun initialiseTestData() {
-        viewModel = DemoActivityViewModel(targetServiceMock)
-    }
+    private fun initialiseTestData() { viewModel = DemoActivityViewModel(targetServiceMock) }
 }
