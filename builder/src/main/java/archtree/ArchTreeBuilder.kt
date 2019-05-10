@@ -114,6 +114,6 @@ abstract class ArchTreeBuilder<ViewModel : BaseViewModel, out Builder> {
      * @see ComponentLayer
      */
     protected open fun internalBuild(layer: ComponentLayer<ViewModel>) {
-        this.componentLayer = componentLayer
+        this.componentLayer = layer
     }
 }
