@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import archtree.ArchTreeResource
+import archtree.FragmentDispatcherLayer
 import archtree.ViewModelInitMode
 import archtree.viewmodel.BaseViewModel
 
@@ -14,6 +15,8 @@ open class ActivityResource<ViewModel : BaseViewModel>
 constructor(builder: ActivityBuilder<ViewModel>) : ArchTreeResource<ViewModel>(builder) {
 
     val layer = super.componentLayer as ActivityComponentLayer<ViewModel>?
+    val fragmentDispatcherLayer: FragmentDispatcherLayer? = builder.fragmentDispatcherLayer
+
     var viewModel: ViewModel? = null
         private set
 

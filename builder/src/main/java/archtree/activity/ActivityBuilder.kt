@@ -1,6 +1,7 @@
 package archtree.activity
 
 import archtree.ArchTreeBuilder
+import archtree.FragmentDispatcherLayer
 import archtree.viewmodel.BaseViewModel
 
 open class ActivityBuilder<ViewModel : BaseViewModel> : ArchTreeBuilder<ViewModel, ActivityBuilder<ViewModel>>() {
@@ -8,6 +9,9 @@ open class ActivityBuilder<ViewModel : BaseViewModel> : ArchTreeBuilder<ViewMode
     var systemUiVisibility: Int = 0
         private set
     var themeRes: Int = 0
+        private set
+
+    var fragmentDispatcherLayer: FragmentDispatcherLayer? = null
         private set
 
     var hideSupportBar: Boolean = false
@@ -25,6 +29,11 @@ open class ActivityBuilder<ViewModel : BaseViewModel> : ArchTreeBuilder<ViewMode
 
     open fun setThemeRes(themeRes: Int): ActivityBuilder<ViewModel> {
         this.themeRes = themeRes
+        return this
+    }
+
+    open fun setFragmentDispatcherLayer(fragmentDispatcherLayer: FragmentDispatcherLayer): ActivityBuilder<ViewModel> {
+        this.fragmentDispatcherLayer = fragmentDispatcherLayer
         return this
     }
 

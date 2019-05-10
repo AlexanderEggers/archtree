@@ -11,12 +11,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import archknife.annotation.util.Injectable
 import archtree.ArchTreeResource
-import archtree.FragmentDispatcher
 import archtree.viewmodel.BaseViewModel
 import javax.inject.Inject
 
-abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injectable,
-        FragmentDispatcher, HasFragmentBuilder<ViewModel> {
+abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injectable, HasFragmentBuilder<ViewModel> {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -140,14 +138,6 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
     override fun onViewStateRestored(savedInstanceState: Bundle?) {
         getViewModel()?.onRestoreInstanceState(savedInstanceState)
         super.onViewStateRestored(savedInstanceState)
-    }
-
-    override fun showFragment(containerId: Int, state: Enum<*>, bundle: Bundle?): Boolean {
-        return showFragment(containerId, state.ordinal, bundle)
-    }
-
-    override fun showFragment(containerId: Int, state: Int, bundle: Bundle?): Boolean {
-        return fragmentResource?.fragmentDispatcherLayer?.onCreateFragment(containerId, state, bundle) ?: false
     }
 
     open fun getViewModel(): ViewModel? {
