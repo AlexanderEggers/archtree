@@ -8,19 +8,26 @@ import android.text.method.LinkMovementMethod
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.text.PrecomputedTextCompat
+import androidx.core.widget.TextViewCompat
 import androidx.databinding.BindingAdapter
 
 @Suppress("DEPRECATION")
-@BindingAdapter("archtree_htmlText")
-fun setHtml(textView: TextView, html: String?) {
+@BindingAdapter("archtree_htmlText", "archtree_htmlTextAsync", requireAll = false)
+fun setHtml(textView: TextView, html: String?, isAsync: Boolean?) {
     if (html != null) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            textView.text = Html.fromHtml(html, Html.FROM_HTML_MODE_LEGACY)
-        } else {
-            textView.text = Html.fromHtml(html)
-        }
+        val text = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            Html.fromHtml(html, Html.FROM_HTML_MODE_LEGACY)
+        } else Html.fromHtml(html)
+
+        if (isAsync == true && textView is AppCompatTextView) {
+            val params = TextViewCompat.getTextMetricsParams(textView)
+            textView.setTextFuture(PrecomputedTextCompat.getTextFuture(text, params, null))
+        } else textView.text = text
+
         textView.movementMethod = LinkMovementMethod.getInstance()
     }
 }
@@ -51,14 +58,27 @@ fun setDrawableRes(view: ImageView, icon: Int?) {
     } ?: view.setImageBitmap(null)
 }
 
-@BindingAdapter("archtree_textRes")
-fun setTextRes(view: TextView, value: Int?) {
+@BindingAdapter("archtree_textRes", "archtree_textResAsync", requireAll = false)
+fun setTextRes(view: TextView, value: Int?, isAsync: Boolean?) {
     value?.run {
-        view.text = try {
+        val text = try {
             view.resources.getString(value)
         } catch (e: Resources.NotFoundException) {
             ""
         }
+
+        if (isAsync == true && view is AppCompatTextView) {
+            val params = TextViewCompat.getTextMetricsParams(view)
+            view.setTextFuture(PrecomputedTextCompat.getTextFuture(text, params, null))
+        } else view.text = text
+    }
+}
+
+@BindingAdapter("archtree_asyncText")
+fun setAsyncText(view: AppCompatTextView, text: String?) {
+    text?.run {
+        val params = TextViewCompat.getTextMetricsParams(view)
+        view.setTextFuture(PrecomputedTextCompat.getTextFuture(text, params, null))
     }
 }
 
