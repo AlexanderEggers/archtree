@@ -51,7 +51,10 @@ open class DefaultBindableRecyclerViewLayoutAdapter(private val context: Context
             itemList.addAll(list)
             diffResult.dispatchUpdatesTo(this)
             recyclerViewRef.get()?.scheduleLayoutAnimation()
-        } else itemList.addAll(list)
+        } else {
+            itemList.addAll(list)
+            notifyDataSetChanged()
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
