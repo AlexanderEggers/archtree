@@ -37,6 +37,8 @@ abstract class ArchTreeBuilder<ViewModel : BaseViewModel, out Builder> {
         private set
     var componentLayer: ComponentLayer<ViewModel>? = null
         private set
+    var fragmentDispatcherLayer: FragmentDispatcherLayer? = null
+        private set
 
     var toolbarViewId: Int? = null
         private set
@@ -101,6 +103,11 @@ abstract class ArchTreeBuilder<ViewModel : BaseViewModel, out Builder> {
 
     open fun setMenu(@MenuRes menuId: Int): Builder {
         this.menuId = menuId
+        return this as Builder
+    }
+
+    open fun setFragmentDispatcherLayer(fragmentDispatcherLayer: FragmentDispatcherLayer): Builder {
+        this.fragmentDispatcherLayer = fragmentDispatcherLayer
         return this as Builder
     }
 
