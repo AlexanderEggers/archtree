@@ -11,7 +11,6 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import archtree.FragmentDispatcher
-import archtree.FragmentDispatcherLayer
 import archtree.fragment.ArchTreeFragment
 import archtree.viewmodel.BaseViewModel
 import dagger.android.AndroidInjector
@@ -262,7 +261,7 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
     override fun showFragment(containerId: Int, state: Int, bundle: Bundle?): Boolean {
         var hasHandledShowFragment = false
         supportFragmentManager.fragments.forEach { fragment ->
-            if (fragment is FragmentDispatcher? && fragment?.isVisible == true) {
+            if (fragment is ArchTreeFragment<*>? && fragment?.isVisible == true) {
                 val fragmentHasHandledShowFragment = fragment.showFragment(containerId, state, bundle)
                 if (!hasHandledShowFragment) {
                     hasHandledShowFragment = fragmentHasHandledShowFragment
