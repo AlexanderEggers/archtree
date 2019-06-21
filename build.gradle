@@ -12,7 +12,7 @@ buildscript {
         support_lib_paging_version = "2.1.0"
         support_lib_version = '1.0.0'
 
-        kotlin_version = '1.3.31'
+        kotlin_version = '1.3.40'
         dagger_version = '2.22.1'
         lifecycle_version = '2.0.0'
         lifecycle_testing_version = '2.0.1'
