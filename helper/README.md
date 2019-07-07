@@ -46,12 +46,12 @@ These binding adapter improve assigning a click (single or long) action accessib
 * ***archtree_visibilityTransition (Transition)*** - expects a transition object that can be used when showing/hiding the view.
 
 ## Helper Classes
-* AccessibiltyHelper - Helper methods to determine if a accessibilty service is enabled or not, including the ability to use livedata to observe any changes.
-* BitmapAccessor - Helper to access bitmaps.
-* ConnectivityHelper - Helper to determine the current network state.
-* JsonHelper - Helper to access and work with jsons (serialization and deserialization)
-* ResourceAccessor- Helper to access project related resource
-* TimeHelper - Helper class to access the current times in millis. That should make unit tests much easier when working with this specific use case.
+* ***AccessibiltyHelper*** - Helper methods to determine if a accessibilty service is enabled or not, including the ability to use livedata to observe any changes.
+* ***BitmapAccessor*** - Helper to access bitmaps.
+* ***ConnectivityHelper*** - Helper to determine the current network state.
+* ***JsonHelper*** - Helper to access and work with jsons (serialization and deserialization)
+* ***ResourceAccessor***- Helper to access project related resource
+* ***TimeHelper*** - Helper class to access the current times in millis. That should make unit tests much easier when working with this specific use case.
 
 ## View Helper Classes
-* BoundedCoordinatorLayout
+* ***BoundedCoordinatorLayout***
