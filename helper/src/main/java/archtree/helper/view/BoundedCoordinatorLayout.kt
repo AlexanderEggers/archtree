@@ -2,7 +2,6 @@ package archtree.helper.view
 
 import android.content.Context
 import android.util.AttributeSet
-import android.view.View
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import archtree.helper.R
 
@@ -28,17 +27,17 @@ class BoundedCoordinatorLayout : CoordinatorLayout {
         var newHeightMeasureSpec = heightMeasureSpec
 
         // Adjust width as necessary
-        val measuredWidth = View.MeasureSpec.getSize(widthMeasureSpec)
-        if (boundedWidth in 1..(measuredWidth - 1)) {
-            val measureMode = View.MeasureSpec.getMode(widthMeasureSpec)
-            newWidthMeasureSpec = View.MeasureSpec.makeMeasureSpec(boundedWidth, measureMode)
+        val measuredWidth = MeasureSpec.getSize(widthMeasureSpec)
+        if (boundedWidth in 1 until measuredWidth) {
+            val measureMode = MeasureSpec.getMode(widthMeasureSpec)
+            newWidthMeasureSpec = MeasureSpec.makeMeasureSpec(boundedWidth, measureMode)
         }
 
         // Adjust height as necessary
-        val measuredHeight = View.MeasureSpec.getSize(heightMeasureSpec)
-        if (boundedHeight in 1..(measuredHeight - 1)) {
-            val measureMode = View.MeasureSpec.getMode(heightMeasureSpec)
-            newHeightMeasureSpec = View.MeasureSpec.makeMeasureSpec(boundedHeight, measureMode)
+        val measuredHeight = MeasureSpec.getSize(heightMeasureSpec)
+        if (boundedHeight in 1 until measuredHeight) {
+            val measureMode = MeasureSpec.getMode(heightMeasureSpec)
+            newHeightMeasureSpec = MeasureSpec.makeMeasureSpec(boundedHeight, measureMode)
         }
 
         super.onMeasure(newWidthMeasureSpec, newHeightMeasureSpec)

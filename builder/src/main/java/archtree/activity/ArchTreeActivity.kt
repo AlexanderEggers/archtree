@@ -1,5 +1,6 @@
 package archtree.activity
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
@@ -134,6 +135,7 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
         super.onBackPressed()
     }
 
+    @SuppressLint("MissingSuperCall")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         var hasHandledActivityResult = false
         supportFragmentManager.fragments.forEach { fragment ->
@@ -182,7 +184,7 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
-    override fun onConfigurationChanged(newConfig: Configuration?) {
+    override fun onConfigurationChanged(newConfig: Configuration) {
         var hasConfigurationChanged = false
         supportFragmentManager.fragments.forEach { fragment ->
             if (fragment is ArchTreeFragment<*>? && fragment?.isVisible == true) {
@@ -202,10 +204,11 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
         }
     }
 
-    open fun onDefaultConfigurationChanged(newConfig: Configuration?) {
+    open fun onDefaultConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
     }
 
+    @SuppressLint("MissingSuperCall")
     override fun onNewIntent(intent: Intent?) {
         var hasNewIntentHandled = false
         supportFragmentManager.fragments.forEach { fragment ->
@@ -289,7 +292,7 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onSaveInstanceState(outState: Bundle?) {
+    override fun onSaveInstanceState(outState: Bundle) {
         getViewModel()?.onSaveInstanceState(outState)
         super.onSaveInstanceState(outState)
     }

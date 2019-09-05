@@ -102,7 +102,7 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
         fragmentResource?.layer?.onDestroy(getViewModel())
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return getViewModel()?.onOptionsItemSelected(item) ?: false
     }
 
@@ -115,7 +115,7 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
                 ?: false
     }
 
-    open fun onFragmentConfigurationChanged(newConfig: Configuration?): Boolean {
+    open fun onFragmentConfigurationChanged(newConfig: Configuration): Boolean {
         return getViewModel()?.onConfigurationChanged(newConfig) ?: false
     }
 

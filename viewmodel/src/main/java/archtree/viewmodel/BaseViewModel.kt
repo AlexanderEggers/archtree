@@ -32,7 +32,7 @@ abstract class BaseViewModel : ViewModel() {
         return false
     }
 
-    open fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    open fun onOptionsItemSelected(item: MenuItem): Boolean {
         return false
     }
 
@@ -44,7 +44,7 @@ abstract class BaseViewModel : ViewModel() {
         return false
     }
 
-    open fun onConfigurationChanged(newConfig: Configuration?): Boolean {
+    open fun onConfigurationChanged(newConfig: Configuration): Boolean {
         return false
     }
 
@@ -52,7 +52,7 @@ abstract class BaseViewModel : ViewModel() {
         return false
     }
 
-    open fun onSaveInstanceState(outState: Bundle?) {
+    open fun onSaveInstanceState(outState: Bundle) {
         //do nothing by default
     }
 
