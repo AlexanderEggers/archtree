@@ -17,6 +17,8 @@ constructor(builder: FragmentBuilder<ViewModel>) : ArchTreeResource<ViewModel>(b
     val layer = super.componentLayer as FragmentComponentLayer<ViewModel>?
     val fragmentDispatcherLayer: FragmentDispatcherLayer? = builder.fragmentDispatcherLayer
 
+    val hasOptionsMenu = builder.menuId != null
+
     var viewModel: ViewModel? = null
         private set
 
