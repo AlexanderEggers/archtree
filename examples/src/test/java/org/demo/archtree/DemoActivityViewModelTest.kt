@@ -30,7 +30,7 @@ class DemoActivityViewModelTest {
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
     @Before
-    open fun setup() = MockitoAnnotations.initMocks(this)
+    fun setup() = MockitoAnnotations.initMocks(this)
 
     @Test
     fun testOnActionClick() {
@@ -44,7 +44,7 @@ class DemoActivityViewModelTest {
                 anyBoolean(), anyBoolean(), any())
 
         val fragmentTarget = fragmentTargetArgumentCaptor.value
-        assertEquals(2131165243, fragmentTarget.containerId)
+        assertEquals(2131230827, fragmentTarget.containerId)
         assertEquals(-1, fragmentTarget.state)
         assertEquals("undefined", fragmentTarget.tag)
     }

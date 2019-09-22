@@ -35,7 +35,7 @@ public class DemoActivityViewModelJavaTest {
 
     @Rule
     @JvmField
-    private InstantTaskExecutorRule instantTaskExecutorRule;
+    public InstantTaskExecutorRule instantTaskExecutorRule;
 
     @Before
     public void setup() {
@@ -54,7 +54,7 @@ public class DemoActivityViewModelJavaTest {
                 anyBoolean(), anyBoolean(), (Context) isNull());
 
         FragmentTarget fragmentTarget = fragmentTargetArgumentCaptor.getValue();
-        assertEquals(2131165243, fragmentTarget.getContainerId());
+        assertEquals(2131230827, fragmentTarget.getContainerId());
         assertEquals(-1, fragmentTarget.getState());
         assertEquals("undefined", fragmentTarget.getTag());
     }
