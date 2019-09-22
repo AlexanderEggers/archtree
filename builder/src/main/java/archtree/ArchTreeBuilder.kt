@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.annotation.DrawableRes
 import androidx.annotation.IdRes
+import androidx.annotation.LayoutRes
 import androidx.annotation.MenuRes
 import androidx.databinding.DataBindingComponent
 import archtree.viewmodel.BaseViewModel
@@ -48,26 +49,52 @@ abstract class ArchTreeBuilder<ViewModel : BaseViewModel, out Builder> {
         private set
     var displayHomeAsUpEnabled: Boolean = false
         private set
-    var activityToolbar: Boolean = false
+    var parentHasToolbarView: Boolean = false
         private set
 
+    /**
+     * This method defines a toolbar for the given component.
+     *
+     * @param viewId View id of the toolbar for this component.
+     * @param title Title of the toolbar for this component.
+     * @param displayHomeAsUpEnabled
+     * @param parentHasToolbarView If the actual toolbar is not hosted by the current component
+     * and is hosted by the parent component/view, set parentHasToolbarView to true.
+     * @param icon Icon of the toolbar for this component.
+     */
     @JvmOverloads
     open fun setToolbar(@IdRes viewId: Int? = null, title: String? = null,
-                        displayHomeAsUpEnabled: Boolean = false, activityToolbar: Boolean = false,
+                        displayHomeAsUpEnabled: Boolean = false, parentHasToolbarView: Boolean = false,
                         @DrawableRes icon: Int? = null): Builder {
         this.toolbarViewId = viewId
         this.toolbarTitle = title
         this.displayHomeAsUpEnabled = displayHomeAsUpEnabled
-        this.activityToolbar = activityToolbar
+        this.parentHasToolbarView = parentHasToolbarView
         this.toolbarIcon = icon
         return this as Builder
     }
 
-    open fun setLayoutId(layoutId: Int): Builder {
+    /**
+     * This method defines the layout id that will be used by this component.
+     *
+     * @param layoutId Layout id will be used by this component.
+     */
+    open fun setLayoutId(@LayoutRes layoutId: Int): Builder {
         this.layoutId = layoutId
         return this as Builder
     }
 
+    /**
+     * This method defines the viewmodel for this component.
+     *
+     * @param viewModelClass Class for the related viewmodel.
+     * @param bindingKey If the viewmodel should be attached to the related component layout, define
+     * the relevant binding key here.
+     * @param viewModelInitMode This value defines the initialise mode for this viewmodel. This can
+     * be used to always force to re-initialise the viewmodel base parameters (in case of
+     * re-creating the component). But it can also be used to define the init mode as custom so that
+     * you can set the exact BaseViewModel.init() yourself.
+     */
     @JvmOverloads
     open fun setViewModel(viewModelClass: Class<ViewModel>, bindingKey: Int = -1,
                           viewModelInitMode: ViewModelInitMode = ViewModelInitMode.NON_FORCE_INIT): Builder {
@@ -77,6 +104,13 @@ abstract class ArchTreeBuilder<ViewModel : BaseViewModel, out Builder> {
         return this as Builder
     }
 
+    /**
+     * This method attaches a databinding component to this component.
+     *
+     * @param dataBindingComponent Instance of a DataBindingComponent that will be attached
+     * @param bindingKey If the DataBindingComponent should be attached to the related component
+     * layout, define the relevant binding key here.
+     */
     @SuppressLint("LogNotTimber")
     @JvmOverloads
     open fun setDatabindingComponent(dataBindingComponent: Any?, bindingKey: Int = -1): Builder {
@@ -91,21 +125,43 @@ abstract class ArchTreeBuilder<ViewModel : BaseViewModel, out Builder> {
         return this as Builder
     }
 
+    /**
+     * This method attaches a LifecycleOwner to the component layout.
+     *
+     * @param bindingKey Binding key that will be used to attach the LifecycleOwner to the layout.
+     */
     open fun setLifecycleOwner(bindingKey: Int): Builder {
         lifecycleOwnerBindingKey = bindingKey
         return this as Builder
     }
 
+    /**
+     * This method defines a custom resource bundle that will be used when initialising the
+     * viewmodel.
+     *
+     * @param bindingKey Bundle object that will be used for the viewmodel.
+     */
     open fun setResourceBundle(bundle: Bundle?): Builder {
         this.resourceBundle = bundle
         return this as Builder
     }
 
+    /**
+     * This method defines a menu for the component.
+     *
+     * @param menuId Menu resource id that will be used to initialise the menu for this component.
+     */
     open fun setMenu(@MenuRes menuId: Int): Builder {
         this.menuId = menuId
         return this as Builder
     }
 
+    /**
+     * This method defines a FragmentDispatcherLayer for this component. The FragmentDispatcherLayer
+     * can be used to start new fragments using the base method showFragment.
+     *
+     * @param bindingKey Bundle object that will be used for the viewmodel.
+     */
     open fun setFragmentDispatcherLayer(fragmentDispatcherLayer: FragmentDispatcherLayer): Builder {
         this.fragmentDispatcherLayer = fragmentDispatcherLayer
         return this as Builder

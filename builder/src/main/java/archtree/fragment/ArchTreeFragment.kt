@@ -65,7 +65,7 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
         val toolbarTitle = fragmentResource?.toolbarTitle
 
         if (toolbarViewId != null && activity != null && activity is AppCompatActivity) {
-            if (fragmentResource.activityToolbar) activity.setSupportActionBar(activity.findViewById(toolbarViewId))
+            if (fragmentResource.parentHasToolbarView) activity.setSupportActionBar(activity.findViewById(toolbarViewId))
             else activity.setSupportActionBar(rootView?.findViewById(toolbarViewId))
 
             val displayHomeAsUpEnabled = fragmentResource.displayHomeAsUpEnabled

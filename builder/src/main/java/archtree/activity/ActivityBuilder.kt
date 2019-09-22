@@ -1,7 +1,6 @@
 package archtree.activity
 
 import archtree.ArchTreeBuilder
-import archtree.FragmentDispatcherLayer
 import archtree.viewmodel.BaseViewModel
 
 open class ActivityBuilder<ViewModel : BaseViewModel> : ArchTreeBuilder<ViewModel, ActivityBuilder<ViewModel>>() {
@@ -14,30 +13,45 @@ open class ActivityBuilder<ViewModel : BaseViewModel> : ArchTreeBuilder<ViewMode
     var hideSupportBar: Boolean = false
         private set
 
+    /**
+     * This method hides the support bar for this activity.
+     *
+     * @param hideSupportBar Hides the support bar if true.
+     */
     open fun setHideSupportBar(hideSupportBar: Boolean): ActivityBuilder<ViewModel> {
         this.hideSupportBar = hideSupportBar
         return this
     }
 
+    /**
+     * This method sets the system ui visibility flags.
+     *
+     * @param systemUiVisibility Int that defines the ui visibility
+     */
     open fun setSystemUiVisibility(systemUiVisibility: Int): ActivityBuilder<ViewModel> {
         this.systemUiVisibility = systemUiVisibility
         return this
     }
 
+    /**
+     * This method sets the system ui visibility flags.
+     *
+     * @param systemUiVisibility Int that defines the ui visibility
+     */
     open fun setThemeRes(themeRes: Int): ActivityBuilder<ViewModel> {
         this.themeRes = themeRes
         return this
     }
 
-    open fun build(layer: ActivityComponentLayer<ViewModel>): ActivityResource<ViewModel> {
+    /**
+     * This method builds a new activity resource. This object will be used for the activity
+     * lifecycle.
+     *
+     * @param layer Optional layer provider to simplify the usage accessing the viewmodel.
+     */
+    open fun build(layer: ActivityComponentLayer<ViewModel> =
+                           object : ActivityComponentLayer<ViewModel>() {}): ActivityResource<ViewModel> {
         internalBuild(layer)
-        return ActivityResource(this)
-    }
-
-    open fun build(): ActivityResource<ViewModel> {
-        internalBuild(object : ActivityComponentLayer<ViewModel>() {
-
-        })
         return ActivityResource(this)
     }
 }
