@@ -32,6 +32,9 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
 
         val builder = FragmentBuilder<ViewModel>()
         fragmentResource = provideFragmentResource(builder)
+
+        val hasOptionsMenu = fragmentResource?.hasOptionsMenu
+        if (hasOptionsMenu != null) setHasOptionsMenu(hasOptionsMenu)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -102,6 +105,23 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
         fragmentResource?.layer?.onDestroy(getViewModel())
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        createFragmentMenu(menu, inflater)
+    }
+
+    open fun onFragmentCreateOptionsMenu(menu: Menu?): Boolean {
+        return createFragmentMenu(menu, activity?.menuInflater)
+    }
+
+    private fun createFragmentMenu(menu: Menu?, inflater: MenuInflater?): Boolean {
+        this.menu = menu
+
+        val menuId = fragmentResource?.menuId
+        if (menuId != null) inflater?.inflate(menuId, menu)
+
+        return getViewModel()?.onCreateOptionsMenu(menu) ?: false
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return getViewModel()?.onOptionsItemSelected(item) ?: false
     }
@@ -121,15 +141,6 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
 
     open fun onFragmentNewIntent(intent: Intent?): Boolean {
         return getViewModel()?.onNewIntent(intent) ?: false
-    }
-
-    open fun onFragmentCreateOptionsMenu(menu: Menu?): Boolean {
-        this.menu = menu
-
-        val menuId = fragmentResource?.menuId
-        if (menuId != null) activity?.menuInflater?.inflate(menuId, menu)
-
-        return getViewModel()?.onCreateOptionsMenu(menu) ?: false
     }
 
     override fun showFragment(containerId: Int, state: Enum<*>, bundle: Bundle?): Boolean {
