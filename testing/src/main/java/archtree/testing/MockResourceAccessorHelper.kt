@@ -11,7 +11,7 @@ import org.mockito.ArgumentMatchers.anyString
 import org.mockito.stubbing.Answer
 
 fun mockResourceAccessor(resourceAccessor: ResourceAccessor) {
-    `when`(resourceAccessor.getString(anyInt(), archtree.testing.mockito.any())).thenAnswer { invocation ->
+    `when`(resourceAccessor.getString(anyInt(), any())).thenAnswer { invocation ->
         val builder = StringBuilder()
         for (argument in invocation.arguments) {
             builder.append(argument)
@@ -26,7 +26,7 @@ fun mockResourceAccessor(resourceAccessor: ResourceAccessor) {
         spanned
     }
 
-    `when`(resourceAccessor.getPlural(anyInt(), anyInt(), archtree.testing.mockito.any())).thenAnswer { invocation ->
+    `when`(resourceAccessor.getPlural(anyInt(), anyInt(), any())).thenAnswer { invocation ->
         val builder = StringBuilder()
         for (argument in invocation.arguments) {
             builder.append(argument)

@@ -2,15 +2,20 @@ package org.demo.archtree;
 
 import android.content.Context;
 
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
+
+import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.powermock.reflect.Whitebox;
 
 import archknife.context.ContextProviderCommunicator;
-import archtree.testing.ArchTreeBaseTest;
 import autotarget.service.FragmentTarget;
 import autotarget.service.TargetService;
+import kotlin.jvm.JvmField;
 
 import static junit.framework.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.anyBoolean;
@@ -18,7 +23,7 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.isNull;
 import static org.mockito.Mockito.verify;
 
-public class DemoActivityViewModelJavaTest extends ArchTreeBaseTest {
+public class DemoActivityViewModelJavaTest {
 
     @Mock
     private TargetService targetServiceMock;
@@ -27,6 +32,15 @@ public class DemoActivityViewModelJavaTest extends ArchTreeBaseTest {
     private ContextProviderCommunicator contextProviderCommunicator;
 
     private DemoActivityViewModel viewModel;
+
+    @Rule
+    @JvmField
+    private InstantTaskExecutorRule instantTaskExecutorRule;
+
+    @Before
+    public void setup() {
+        MockitoAnnotations.initMocks(this);
+    }
 
     @Test
     public void testDemo() {

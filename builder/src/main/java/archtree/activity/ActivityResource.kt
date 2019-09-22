@@ -35,8 +35,9 @@ constructor(builder: ActivityBuilder<ViewModel>) : ArchTreeResource<ViewModel>(b
             if (binding != null && bindingKey != -1) binding?.setVariable(bindingKey, viewModel)
             else Log.w(ActivityResource::class.java.name, "ViewModel is not attached to layout.")
 
-            if (viewModelInitMode == ViewModelInitMode.FORCE_INIT) viewModel?.init(true, resourceBundle, savedInstanceBundle)
-            else if (viewModelInitMode == ViewModelInitMode.NON_FORCE_INIT) viewModel?.init(false, resourceBundle, savedInstanceBundle)
+            val viewModelBundle = resourceBundle ?: activity.intent.extras
+            if (viewModelInitMode == ViewModelInitMode.FORCE_INIT) viewModel?.init(true, viewModelBundle, savedInstanceBundle)
+            else if (viewModelInitMode == ViewModelInitMode.NON_FORCE_INIT) viewModel?.init(false, viewModelBundle, savedInstanceBundle)
         }
     }
 }

@@ -13,7 +13,7 @@ fun <T> liveDataOfList(list: List<T>): LiveData<List<T>> {
 
 @SafeVarargs
 fun <T> liveDataOfList(vararg values: T): LiveData<List<T>> {
-    return liveDataOfList(Arrays.asList(*values))
+    return liveDataOfList(listOf(*values))
 }
 
 fun <T> liveDataOf(value: T): LiveData<T> {

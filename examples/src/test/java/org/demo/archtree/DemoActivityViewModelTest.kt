@@ -1,18 +1,21 @@
 package org.demo.archtree
 
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import archknife.context.ContextProviderCommunicator
-import archtree.testing.ArchTreeBaseTest
 import archtree.testing.mockito.capture
 import autotarget.service.FragmentTarget
 import autotarget.service.TargetService
 import org.junit.Assert.assertEquals
+import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.mockito.ArgumentCaptor
 import org.mockito.Mock
 import org.mockito.Mockito.*
+import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
 
-class DemoActivityViewModelTest: ArchTreeBaseTest() {
+class DemoActivityViewModelTest {
 
     @Mock
     private lateinit var targetServiceMock: TargetService
@@ -21,6 +24,13 @@ class DemoActivityViewModelTest: ArchTreeBaseTest() {
     private lateinit var contextProviderCommunicator: ContextProviderCommunicator
 
     private lateinit var viewModel: DemoActivityViewModel
+
+    @Rule
+    @JvmField
+    var instantTaskExecutorRule = InstantTaskExecutorRule()
+
+    @Before
+    open fun setup() = MockitoAnnotations.initMocks(this)
 
     @Test
     fun testOnActionClick() {
@@ -39,5 +49,7 @@ class DemoActivityViewModelTest: ArchTreeBaseTest() {
         assertEquals("undefined", fragmentTarget.tag)
     }
 
-    private fun initialiseTestData() { viewModel = DemoActivityViewModel(targetServiceMock) }
+    private fun initialiseTestData() {
+        viewModel = DemoActivityViewModel(targetServiceMock)
+    }
 }
