@@ -3,13 +3,12 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 28
-    buildToolsVersion "28.0.3"
+    compileSdkVersion 29
 
     defaultConfig {
         applicationId "org.demo.archtree"
         minSdkVersion 16
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode 1
 
         testInstrumentationRunner "android.test.InstrumentationTestRunner"
@@ -17,11 +16,6 @@ android {
         testOptions {
             unitTests.returnDefaultValues = true
         }
-    }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_7
-        targetCompatibility JavaVersion.VERSION_1_7
     }
 
     dataBinding {
@@ -40,7 +34,6 @@ android {
             keyPassword 'android'
         }
     }
-
 
     buildTypes {
         release {
