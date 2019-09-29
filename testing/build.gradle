@@ -57,7 +57,7 @@ dependencies {
     api "org.powermock:powermock-api-mockito2:$powermock_version"
     api "org.powermock:powermock-module-junit4:$powermock_version"
 
-    implementation project(":archtree-helper")
+    implementation project(":archtree-helper-core")
     //implementation "org.archtree:archtree-helper:$archtree_library_version"
 }
 

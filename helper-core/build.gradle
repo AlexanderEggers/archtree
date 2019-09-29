@@ -4,14 +4,14 @@ apply plugin: 'kotlin-kapt'
 
 ext {
     bintrayRepo = 'android'
-    bintrayName = 'archtree-helper'
+    bintrayName = 'archtree-helper-core'
 
     publishedGroupId = 'org.archtree'
-    libraryName = 'ArchTree Helper Artifact'
-    artifact = 'archtree-helper'
+    libraryName = 'ArchTree Helper Core Artifact'
+    artifact = 'archtree-helper-core'
     libraryYear = '2019'
 
-    libraryDescription = 'The ArchTree Helper Artifact is simplifying the usage of ' +
+    libraryDescription = 'The ArchTree Helper Core Artifact is simplifying the usage of ' +
             'different Android specific features like DataBinding, resource handling and more.'
 
     siteUrl = 'https://github.com/Mordag/archtree'
