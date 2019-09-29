@@ -11,6 +11,4 @@ interface PageableListAdapter {
     fun onUpdate(list: PagedList<BindableListItem>, @LayoutRes itemLayout: Int, viewModel: ViewModel?,
                  dataBindingComponent: Any?, dataBindingComponentKey: Int?,
                  lifecycleOwner: LifecycleOwner?, lifecycleOwnerKey: Int?)
-
-    fun notifyDataSetChanged()
 }
