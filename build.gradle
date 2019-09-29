@@ -14,21 +14,22 @@ buildscript {
         support_lib_paging_version = "2.1.0"
         support_lib_transition_version = "1.1.0"
         support_lib_version = '1.0.0'
+        support_lib_core_version = '1.1.0'
 
         kotlin_version = '1.3.50'
-        dagger_version = '2.22.1'
+        dagger_version = '2.24'
         lifecycle_version = '2.1.0'
         lifecycle_testing_version = '2.1.0'
         gson_version = '2.8.5'
 
-        archknife_version = '0.11.0'
+        archknife_version = '1.0.0-rc1'
         autotarget_version = '0.14.1'
 
         junit_version = "4.12"
         mockito_version = '3.0.0'
         powermock_version = '2.0.2'
 
-        archtree_library_version = "0.24.0"
+        archtree_library_version = "0.25.0"
     }
 
     repositories {

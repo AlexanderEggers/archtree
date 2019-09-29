@@ -64,6 +64,7 @@ dependencies {
     implementation "androidx.appcompat:appcompat:$support_lib_appcompat_version"
     implementation "androidx.transition:transition:$support_lib_transition_version"
     implementation "com.google.android.material:material:$support_lib_version"
+    implementation "androidx.core:core:$support_lib_core_version"
 
     implementation "com.google.code.gson:gson:$gson_version"
 }

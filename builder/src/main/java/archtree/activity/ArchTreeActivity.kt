@@ -9,21 +9,20 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ViewDataBinding
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import archtree.FragmentDispatcher
 import archtree.fragment.ArchTreeFragment
 import archtree.viewmodel.BaseViewModel
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
-import dagger.android.support.HasSupportFragmentInjector
+import dagger.android.HasAndroidInjector
 import javax.inject.Inject
 
 abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity(),
-        HasSupportFragmentInjector, FragmentDispatcher, HasActivityBuilder<ViewModel> {
+        HasAndroidInjector, FragmentDispatcher, HasActivityBuilder<ViewModel> {
 
     @Inject
-    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
+    lateinit var androidInjector: DispatchingAndroidInjector<Any>
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -322,8 +321,8 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
         activityResource?.layer?.onDestroy(getViewModel())
     }
 
-    override fun supportFragmentInjector(): AndroidInjector<Fragment> {
-        return dispatchingAndroidInjector
+    override fun androidInjector(): AndroidInjector<Any> {
+        return androidInjector
     }
 
     open fun getView(): View? {
