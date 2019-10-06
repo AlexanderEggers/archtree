@@ -2,7 +2,6 @@ package archtree
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import androidx.annotation.DrawableRes
 import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
@@ -118,8 +117,8 @@ abstract class ArchTreeBuilder<ViewModel : BaseViewModel, out Builder> {
 
         try {
             this.dataBindingComponent = dataBindingComponent as? DataBindingComponent?
-        } catch (e: ClassCastException) {
-            Log.e(ArchTreeBuilder::class.java.name, e.message)
+        } catch (ignore: ClassCastException) {
+            //do nothing
         }
 
         return this as Builder

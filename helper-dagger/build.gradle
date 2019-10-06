@@ -59,6 +59,7 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
 
     implementation project(":archtree-helper-core")
+    //implementation "org.archtree:archtree-helper-core:$archtree_library_version"
 }
 
 if (project.rootProject.file('local.properties').exists()) {

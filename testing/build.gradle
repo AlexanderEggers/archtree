@@ -56,7 +56,7 @@ dependencies {
     implementation "org.powermock:powermock-api-mockito2:$powermock_version"
 
     implementation project(":archtree-helper-core")
-    //implementation "org.archtree:archtree-helper:$archtree_library_version"
+    //implementation "org.archtree:archtree-helper-core:$archtree_library_version"
 }
 
 if (project.rootProject.file('local.properties').exists()) {
