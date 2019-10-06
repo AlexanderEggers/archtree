@@ -3,7 +3,7 @@ package archtree.helper.view
 import android.content.Context
 import android.util.AttributeSet
 import androidx.coordinatorlayout.widget.CoordinatorLayout
-import archtree.helper.R
+import archtree.helper.core.R
 
 class BoundedCoordinatorLayout : CoordinatorLayout {
 

@@ -8,7 +8,7 @@ import autotarget.annotation.ActivityTarget
 
 @ActivityTarget
 @ProvideActivity
-class DemoActivity: ArchTreeActivity<DemoActivityViewModel>() {
+class DemoActivity : ArchTreeActivity<DemoActivityViewModel>() {
 
     override fun provideActivityResource(builder: ActivityBuilder<DemoActivityViewModel>): ActivityResource<DemoActivityViewModel> {
         return builder.setViewModel(DemoActivityViewModel::class.java, BR.viewModel)

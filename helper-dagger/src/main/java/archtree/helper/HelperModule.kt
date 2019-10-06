@@ -1,7 +1,6 @@
 package archtree.helper
 
 import android.content.Context
-import archknife.annotation.ProvideModule
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
@@ -14,7 +13,6 @@ import javax.inject.Singleton
  * @since 1.0.0
  */
 @Module
-@ProvideModule
 class HelperModule {
 
     @Singleton

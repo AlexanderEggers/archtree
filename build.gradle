@@ -22,8 +22,8 @@ buildscript {
         lifecycle_testing_version = '2.1.0'
         gson_version = '2.8.5'
 
-        archknife_version = '1.0.0-rc1'
-        autotarget_version = '0.14.1'
+        archknife_version = '1.0.0-rc2'
+        autotarget_version = '0.16.0'
 
         junit_version = "4.12"
         mockito_version = '3.0.0'

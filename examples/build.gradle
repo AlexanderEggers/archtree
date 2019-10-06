@@ -50,8 +50,12 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "androidx.appcompat:appcompat:$support_lib_appcompat_version"
 
-    implementation project(path: ':archtree-core')
-    //implementation "org.archtree:archtree-core:$archtree_library_version"
+    implementation project(path: ':archtree-action')
+    implementation project(path: ':archtree-builder')
+    implementation project(path: ':archtree-helper-core')
+    implementation project(path: ':archtree-helper-dagger')
+    implementation project(path: ':archtree-list')
+    implementation project(path: ':archtree-viewmodel')
 
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
     kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
