@@ -12,7 +12,7 @@ ext {
     libraryYear = '2019'
 
     libraryDescription = 'The ArchTree Helper Dagger Artifact is using the Helper Core Artifact ' +
-            'and provides simplified access by providing dagger-v2 modules.'
+            'and provides simplified singleton access by providing a dagger-v2 module.'
 
     siteUrl = 'https://github.com/Mordag/archtree'
     gitUrl = 'https://github.com/Mordag/archtree.git'
@@ -55,6 +55,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
+    implementation "org.archknife:archknife-annotation:$archknife_version"
     implementation "com.google.dagger:dagger-android:$dagger_version"
     implementation project(":archtree-helper-core")
 

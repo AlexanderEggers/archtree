@@ -9,12 +9,8 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import android.text.Html
 import android.text.Spanned
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-open class ResourceAccessor
-@Inject constructor(private val context: Context) {
+open class ResourceAccessor(private val context: Context) {
 
     /**
      * Generates a Spanned object for the given text.

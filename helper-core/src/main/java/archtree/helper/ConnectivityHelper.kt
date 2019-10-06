@@ -3,19 +3,27 @@ package archtree.helper
 import android.Manifest.permission.ACCESS_NETWORK_STATE
 import android.content.Context
 import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.Build
 import androidx.annotation.RequiresPermission
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-class ConnectivityHelper
-@Inject constructor(private val context: Context) {
+class ConnectivityHelper(private val context: Context) {
 
+    /**
+     * Get the current device network state.
+     *
+     * @return True if the device is online, false otherwise.
+     */
     @RequiresPermission(ACCESS_NETWORK_STATE)
+    @Suppress("DEPRECATION")
     fun isOnline(): Boolean {
         val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as? ConnectivityManager?
-        val netInfo = cm?.activeNetworkInfo
-        //should check null because in airplane mode it will be null
-        return netInfo != null && netInfo.isConnected
+        return if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            cm?.activeNetworkInfo?.isConnected ?: false
+        } else {
+            val an = cm?.activeNetwork ?: return false
+            val capabilities = cm.getNetworkCapabilities(an) ?: return false
+            capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED)
+        }
     }
 }
