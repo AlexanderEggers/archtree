@@ -9,7 +9,9 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.NavHostFragment
 import archtree.FragmentDispatcher
 import archtree.fragment.ArchTreeFragment
 import archtree.viewmodel.BaseViewModel
@@ -79,6 +81,14 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
         }
     }
 
+    private fun getFragments(): List<Fragment?> {
+        val hasNavHostFragment = activityResource?.hasNavHostFragment
+        return if (hasNavHostFragment == true) {
+            val navHostFragment = supportFragmentManager.fragments.firstOrNull() as? NavHostFragment
+            navHostFragment?.childFragmentManager?.fragments ?: emptyList()
+        } else supportFragmentManager.fragments
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val menuId = activityResource?.menuId
         if (menuId != null) {
@@ -87,7 +97,7 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
         }
 
         var hasHandledCreateOptionsMenu = false
-        supportFragmentManager.fragments.forEach { fragment ->
+        getFragments().forEach { fragment ->
             if (fragment is ArchTreeFragment<*>? && fragment?.isVisible == true) {
                 val fragmentHasHandledCreateOptionsMenu = fragment.onFragmentCreateOptionsMenu(menu)
                 if (!hasHandledCreateOptionsMenu) {
@@ -113,7 +123,7 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
 
     override fun onBackPressed() {
         var hasHandledBackPressed = false
-        supportFragmentManager.fragments.forEach { fragment ->
+        getFragments().forEach { fragment ->
             if (fragment is ArchTreeFragment<*>? && fragment?.isVisible == true) {
                 val fragmentHasHandledBackPressed = fragment.onBackPressed()
                 if (!hasHandledBackPressed) {
@@ -137,7 +147,7 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
     @SuppressLint("MissingSuperCall")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         var hasHandledActivityResult = false
-        supportFragmentManager.fragments.forEach { fragment ->
+        getFragments().forEach { fragment ->
             if (fragment is ArchTreeFragment<*>? && fragment?.isVisible == true) {
                 val fragmentHasHandledActivityResult = fragment.onFragmentActivityResult(requestCode, resultCode, data)
                 if (!hasHandledActivityResult) {
@@ -161,7 +171,7 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         var hasHandledRequestPermissionResult = false
-        supportFragmentManager.fragments.forEach { fragment ->
+        getFragments().forEach { fragment ->
             if (fragment is ArchTreeFragment<*>? && fragment?.isVisible == true) {
                 val fragmentHasHandledRequestPermissionResult = fragment.onFragmentRequestPermissionsResult(requestCode, permissions, grantResults)
                 if (!hasHandledRequestPermissionResult) {
@@ -185,7 +195,7 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         var hasConfigurationChanged = false
-        supportFragmentManager.fragments.forEach { fragment ->
+        getFragments().forEach { fragment ->
             if (fragment is ArchTreeFragment<*>? && fragment?.isVisible == true) {
                 val fragmentHasConfigurationChanged = fragment.onFragmentConfigurationChanged(newConfig)
                 if (!hasConfigurationChanged) {
@@ -210,7 +220,7 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
     @SuppressLint("MissingSuperCall")
     override fun onNewIntent(intent: Intent?) {
         var hasNewIntentHandled = false
-        supportFragmentManager.fragments.forEach { fragment ->
+        getFragments().forEach { fragment ->
             if (fragment is ArchTreeFragment<*>? && fragment?.isVisible == true) {
                 val fragmentHasNewIntentHandled = fragment.onFragmentNewIntent(intent)
                 if (!hasNewIntentHandled) {
@@ -234,7 +244,7 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         var hasHandledOptionsItemSelected = false
-        supportFragmentManager.fragments.forEach { fragment ->
+        getFragments().forEach { fragment ->
             if (fragment is ArchTreeFragment<*>? && fragment?.isVisible == true) {
                 val fragmentHasHandledOptionsItemSelected = fragment.onOptionsItemSelected(item)
                 if (!hasHandledOptionsItemSelected) {
@@ -262,7 +272,7 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
 
     override fun showFragment(containerId: Int, state: Int, bundle: Bundle?): Boolean {
         var hasHandledShowFragment = false
-        supportFragmentManager.fragments.forEach { fragment ->
+        getFragments().forEach { fragment ->
             if (fragment is ArchTreeFragment<*>? && fragment?.isVisible == true) {
                 val fragmentHasHandledShowFragment = fragment.showFragment(containerId, state, bundle)
                 if (!hasHandledShowFragment) {

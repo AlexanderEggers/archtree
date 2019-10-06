@@ -1,5 +1,6 @@
 package archtree.activity
 
+import androidx.navigation.fragment.NavHostFragment
 import archtree.ArchTreeBuilder
 import archtree.viewmodel.BaseViewModel
 
@@ -11,6 +12,9 @@ open class ActivityBuilder<ViewModel : BaseViewModel> : ArchTreeBuilder<ViewMode
         private set
 
     var hideSupportBar: Boolean = false
+        private set
+
+    var hasNavHostFragment: Boolean = false
         private set
 
     /**
@@ -40,6 +44,18 @@ open class ActivityBuilder<ViewModel : BaseViewModel> : ArchTreeBuilder<ViewMode
      */
     open fun setThemeRes(themeRes: Int): ActivityBuilder<ViewModel> {
         this.themeRes = themeRes
+        return this
+    }
+
+    /**
+     * This method sets a flag that indicates if the activity is using the
+     * "Android Navigation Architecture Component". By assigning it to "true", the underlying
+     * implementation will try to retrieve the [NavHostFragment]. By default this flag is "false".
+     *
+     * @param hasNavHostFragment Uses the [NavHostFragment] implementation if true.
+     */
+    open fun setHasNavHostFragment(hasNavHostFragment: Boolean): ActivityBuilder<ViewModel> {
+        this.hasNavHostFragment = hasNavHostFragment
         return this
     }
 

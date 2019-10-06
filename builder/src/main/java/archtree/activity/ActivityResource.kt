@@ -16,6 +16,7 @@ constructor(builder: ActivityBuilder<ViewModel>) : ArchTreeResource<ViewModel>(b
 
     val layer = super.componentLayer as ActivityComponentLayer<ViewModel>?
     val fragmentDispatcherLayer: FragmentDispatcherLayer? = builder.fragmentDispatcherLayer
+    var hasNavHostFragment: Boolean = builder.hasNavHostFragment
 
     var viewModel: ViewModel? = null
         private set
