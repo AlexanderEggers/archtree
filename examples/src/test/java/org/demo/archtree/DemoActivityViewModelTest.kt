@@ -40,8 +40,7 @@ class DemoActivityViewModelTest {
         viewModel.action.forceClick()
 
         val fragmentTargetArgumentCaptor: ArgumentCaptor<FragmentTarget> = ArgumentCaptor.forClass(FragmentTarget::class.java)
-        verify(targetServiceMock).execute(capture(fragmentTargetArgumentCaptor), anyInt(),
-                anyBoolean(), anyBoolean(), any())
+        verify(targetServiceMock).execute(capture(fragmentTargetArgumentCaptor), anyInt(), any())
 
         val fragmentTarget = fragmentTargetArgumentCaptor.value
         assertEquals(2131230827, fragmentTarget.containerId)

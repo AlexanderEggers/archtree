@@ -18,7 +18,6 @@ import autotarget.service.TargetService;
 import kotlin.jvm.JvmField;
 
 import static junit.framework.Assert.assertEquals;
-import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.isNull;
 import static org.mockito.Mockito.verify;
@@ -50,8 +49,7 @@ public class DemoActivityViewModelJavaTest {
         viewModel.getAction().forceClick();
 
         ArgumentCaptor<FragmentTarget> fragmentTargetArgumentCaptor = ArgumentCaptor.forClass(FragmentTarget.class);
-        verify(targetServiceMock).execute(fragmentTargetArgumentCaptor.capture(), anyInt(),
-                anyBoolean(), anyBoolean(), (Context) isNull());
+        verify(targetServiceMock).execute(fragmentTargetArgumentCaptor.capture(), anyInt(), (Context) isNull());
 
         FragmentTarget fragmentTarget = fragmentTargetArgumentCaptor.getValue();
         assertEquals(2131230827, fragmentTarget.getContainerId());
