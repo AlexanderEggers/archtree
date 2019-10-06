@@ -1,7 +1,7 @@
 ArchTree
 =====
 
-[![Download](https://api.bintray.com/packages/mordag/android/archtree-core/images/download.svg) ](https://bintray.com/mordag/android/archtree-core/_latestVersion)
+[![Download](https://api.bintray.com/packages/mordag/android/archtree-builder/images/download.svg) ](https://bintray.com/mordag/android/archtree-builder/_latestVersion)
 
 Android library which is a collection of APIs which can help you to simplify the development of your app. The focus of this library is to struture the architecture of your app by using different helper classes to introduce the MVVM pattern.
 
@@ -13,28 +13,25 @@ repositories {
 }
 
 dependencies {
-  def archtree_version = "0.23.1"
-
-  //includes all library artifacts (except testing)
-  implementation "org.archtree:archtree-core:$archtree_version"
+  def archtree_version = "0.24.0"
   
-  //just builder (base, activity and fragment) and viewmodel classes
+  //builder classes (base, activity and fragment) and viewmodel classes
   implementation "org.archtree:archtree-builder:$archtree_version"
-  //just viewmodel classes
+  //viewmodel classes
   implementation "org.archtree:archtree-viewmodel:$archtree_version"
-  //just action classes
+  //action classes
   implementation "org.archtree:archtree-action:$archtree_version"
-  //just helper classes
+  //helper classes
   implementation "org.archtree:archtree-helper:$archtree_version"
-  //just databinding list classes
+  //databinding list classes
   implementation "org.archtree:archtree-list:$archtree_version"
   
-  //just testing helper
+  //testing helper
   testImplementation "org.archtree:archtree-testing:$archtree_version"
 }
 ```
 
-How do I use ArchTree? (Step-by-step introduction for 0.23.1)
+How do I use ArchTree? (Step-by-step introduction for 0.24.0)
 -------------------
 Coming soon! For now, use the [example project][3] as a reference.
 
@@ -60,6 +57,6 @@ License
 Apache 2.0. See the [LICENSE][1] file for details.
 
 
-[1]: https://github.com/Mordag/archtree/blob/master/LICENSE
+[1]: https://github.com/Mordag/archtree/blob/develop/LICENSE
 [2]: https://github.com/Mordag
-[3]: https://github.com/Mordag/archtree/tree/master/examples
+[3]: https://github.com/Mordag/archtree/tree/develop/examples
