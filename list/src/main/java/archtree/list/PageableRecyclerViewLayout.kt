@@ -33,7 +33,7 @@ fun bindListAdapter(container: RecyclerView, adapter: PageableRecyclerViewAdapte
 fun <T : BindableListItem, V : ViewModel, D : Any> bindItemsSource(
         container: PageableRecyclerViewLayout,
         newItems: PagedList<T>?,
-        @LayoutRes newItemLayout: Int,
+        @LayoutRes newItemLayout: Int?,
         newViewModel: V?,
         newDataBindingComponent: D?,
         newDataBindingComponentKey: Int?,

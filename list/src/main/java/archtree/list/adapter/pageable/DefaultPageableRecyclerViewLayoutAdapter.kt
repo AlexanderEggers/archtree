@@ -31,11 +31,11 @@ open class DefaultPageableRecyclerViewLayoutAdapter(private val context: Context
         recyclerViewRef = WeakReference(view)
     }
 
-    override fun onUpdate(list: PagedList<BindableListItem>, @LayoutRes itemLayout: Int, viewModel: ViewModel?,
+    override fun onUpdate(list: PagedList<BindableListItem>, @LayoutRes itemLayout: Int?, viewModel: ViewModel?,
                           dataBindingComponent: Any?, dataBindingComponentKey: Int?,
                           lifecycleOwner: LifecycleOwner?, lifecycleOwnerKey: Int?) {
 
-        this.itemLayout = itemLayout
+        this.itemLayout = itemLayout ?: 0
         this.viewModel = viewModel
         this.dataBindingComponent = dataBindingComponent
         this.lifecycleOwner = lifecycleOwner
@@ -47,6 +47,9 @@ open class DefaultPageableRecyclerViewLayoutAdapter(private val context: Context
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        //use the first item in list to determine the correct item layout that should be used
+        val itemLayoutRes = getItem(0)?.onDetermineLayoutRes(viewType) ?: itemLayout
+
         val realDataBindingComponent: DataBindingComponent? = if (dataBindingComponent != null) {
             try {
                 dataBindingComponent as? DataBindingComponent?
@@ -57,7 +60,7 @@ open class DefaultPageableRecyclerViewLayoutAdapter(private val context: Context
 
         val binding = DataBindingUtil.inflate<ViewDataBinding>(
                 LayoutInflater.from(context),
-                itemLayout,
+                itemLayoutRes,
                 parent,
                 false,
                 realDataBindingComponent
@@ -71,11 +74,15 @@ open class DefaultPageableRecyclerViewLayoutAdapter(private val context: Context
 
         if (lifecycleOwner != null) binding.lifecycleOwner = lifecycleOwner
 
-        return DataContextAwareViewHolder(binding)
+        return DataContextAwareViewHolder(binding, viewType)
     }
 
     override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
         val item = getItem(position)
         if (item != null && viewHolder is DataContextAwareViewHolder) viewHolder.onBind(item, viewModel)
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return getItem(position)?.getItemViewType() ?: 0
     }
 }

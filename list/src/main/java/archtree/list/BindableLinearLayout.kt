@@ -34,7 +34,7 @@ fun bindListAdapter(container: BindableLinearLayout, adapter: BindableLinearLayo
 fun <T : BindableListItem, V : ViewModel, D : Any> bindItemsSource(
         container: BindableLinearLayout,
         newItems: List<T>?,
-        @LayoutRes newItemLayout: Int,
+        @LayoutRes newItemLayout: Int?,
         newViewModel: V?,
         newDataBindingComponent: D?,
         newDataBindingComponentKey: Int?,

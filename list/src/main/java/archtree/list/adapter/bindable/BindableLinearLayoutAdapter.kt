@@ -11,7 +11,7 @@ abstract class BindableLinearLayoutAdapter : BindableListAdapter {
 
     protected abstract val itemCount: Int
 
-    protected abstract fun onCreateViewHolder(viewGroup: ViewGroup, type: Int): RecyclerView.ViewHolder
+    protected abstract fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): RecyclerView.ViewHolder
 
     protected abstract fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int)
 

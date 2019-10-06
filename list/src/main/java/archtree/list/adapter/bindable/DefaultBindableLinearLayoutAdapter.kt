@@ -25,11 +25,11 @@ open class DefaultBindableLinearLayoutAdapter(private val context: Context) : Bi
     private var dataBindingComponentKey: Int? = null
     private var lifecycleOwnerKey: Int? = null
 
-    override fun onUpdate(list: List<BindableListItem>, @LayoutRes itemLayout: Int, viewModel: ViewModel?,
+    override fun onUpdate(list: List<BindableListItem>, @LayoutRes itemLayout: Int?, viewModel: ViewModel?,
                           dataBindingComponent: Any?, dataBindingComponentKey: Int?,
                           lifecycleOwner: LifecycleOwner?, lifecycleOwnerKey: Int?) {
 
-        this.itemLayout = itemLayout
+        this.itemLayout = itemLayout ?: 0
         this.viewModel = viewModel
         this.dataBindingComponent = dataBindingComponent
         this.lifecycleOwner = lifecycleOwner
@@ -42,7 +42,10 @@ open class DefaultBindableLinearLayoutAdapter(private val context: Context) : Bi
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(viewGroup: ViewGroup, type: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        //use the first item in list to determine the correct item layout that should be used
+        val itemLayoutRes = itemList.firstOrNull()?.onDetermineLayoutRes(viewType) ?: itemLayout
+
         val realDataBindingComponent: DataBindingComponent? = if (dataBindingComponent != null) {
             try {
                 dataBindingComponent as? DataBindingComponent?
@@ -53,7 +56,7 @@ open class DefaultBindableLinearLayoutAdapter(private val context: Context) : Bi
 
         val binding = DataBindingUtil.inflate<ViewDataBinding>(
                 LayoutInflater.from(context),
-                itemLayout,
+                itemLayoutRes,
                 viewGroup,
                 false,
                 realDataBindingComponent
@@ -67,7 +70,7 @@ open class DefaultBindableLinearLayoutAdapter(private val context: Context) : Bi
 
         if (lifecycleOwner != null) binding.lifecycleOwner = lifecycleOwner
 
-        return DataContextAwareViewHolder(binding)
+        return DataContextAwareViewHolder(binding, viewType)
     }
 
     override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
@@ -76,4 +79,8 @@ open class DefaultBindableLinearLayoutAdapter(private val context: Context) : Bi
 
     override val itemCount: Int
         get() = itemList.size
+
+    override fun getType(position: Int): Int {
+        return itemList[position].getItemViewType()
+    }
 }

@@ -31,7 +31,7 @@ fun bindListAdapter(container: RecyclerView, adapter: BindableRecyclerViewAdapte
 fun <T : BindableListItem, V : ViewModel, D : Any> bindItemsSource(
         container: BindableRecyclerViewLayout,
         newItems: List<T>?,
-        @LayoutRes newItemLayout: Int,
+        @LayoutRes newItemLayout: Int?,
         newViewModel: V?,
         newDataBindingComponent: D?,
         newDataBindingComponentKey: Int?,

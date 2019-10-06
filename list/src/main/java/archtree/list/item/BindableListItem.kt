@@ -1,13 +1,19 @@
 package archtree.list.item
 
+import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
 
 interface BindableListItem {
 
-    fun areItemsTheSame(newItem: BindableListItem): Boolean
+    fun onBind(viewModel: ViewModel?, binding: ViewDataBinding, viewType: Int)
 
-    fun areContentsTheSame(newItem: BindableListItem): Boolean
+    fun areItemsTheSame(newItem: BindableListItem): Boolean = false
 
-    fun onBind(viewModel: ViewModel?, binding: ViewDataBinding)
+    fun areContentsTheSame(newItem: BindableListItem): Boolean = false
+
+    @LayoutRes
+    fun onDetermineLayoutRes(viewType: Int): Int? = null
+
+    fun getItemViewType(): Int = 0
 }

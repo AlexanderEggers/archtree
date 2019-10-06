@@ -3,9 +3,8 @@ package org.demo.archtree
 import androidx.lifecycle.ViewModel
 import androidx.databinding.ViewDataBinding
 import archtree.list.item.BindableListItem
-import archtree.list.item.BindableListItemAdapter
 
-class BindableListItemImpl(private val value: String): BindableListItemAdapter() {
+class BindableListItemImpl(private val value: String): BindableListItem {
 
     override fun areItemsTheSame(newItem: BindableListItem): Boolean {
         return if(newItem is BindableListItemImpl) value == newItem.value
@@ -17,7 +16,7 @@ class BindableListItemImpl(private val value: String): BindableListItemAdapter()
         else false
     }
 
-    override fun onBind(viewModel: ViewModel?, binding: ViewDataBinding) {
+    override fun onBind(viewModel: ViewModel?, binding: ViewDataBinding, viewType: Int) {
         binding.setVariable(BR.value, value)
     }
 }
