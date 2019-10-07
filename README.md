@@ -21,8 +21,10 @@ dependencies {
   implementation "org.archtree:archtree-viewmodel:$archtree_version"
   //action classes
   implementation "org.archtree:archtree-action:$archtree_version"
-  //helper classes
-  implementation "org.archtree:archtree-helper:$archtree_version"
+  //helper core classes
+  implementation "org.archtree:archtree-helper-core:$archtree_version"
+  //helper dagger classes
+  implementation "org.archtree:archtree-helper-dagger:$archtree_version"
   //databinding list classes
   implementation "org.archtree:archtree-list:$archtree_version"
   
