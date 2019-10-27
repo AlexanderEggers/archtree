@@ -23,7 +23,7 @@ buildscript {
         lifecycle_testing_version = '2.1.0'
         gson_version = '2.8.6'
 
-        archknife_version = '1.0.0-rc2'
+        archknife_version = '1.0.0'
         autotarget_version = '0.16.0'
 
         junit_version = "4.12"
