@@ -6,7 +6,7 @@ import archknife.annotation.ProvideViewModel
 import archtree.action.Action
 import archtree.viewmodel.BaseViewModel
 import autotarget.generated.FragmentTargets
-import autotarget.service.TargetService
+import autotarget.target.TargetService
 import javax.inject.Inject
 
 @ProvideViewModel

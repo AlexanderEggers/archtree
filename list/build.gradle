@@ -58,7 +58,7 @@ dependencies {
     implementation "androidx.appcompat:appcompat:$support_lib_appcompat_version"
     implementation "androidx.core:core:$support_lib_core_version"
     api "androidx.paging:paging-runtime:$support_lib_paging_version"
-    api "androidx.recyclerview:recyclerview:$support_lib_version"
+    api "androidx.recyclerview:recyclerview:$support_lib_recyclerview_version"
 }
 
 if (project.rootProject.file('local.properties').exists()) {

@@ -1,27 +1,32 @@
 package org.demo.archtree
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import archknife.context.ContextProviderCommunicator
+import archknife.context.ContextProvider
 import archtree.testing.mockito.capture
-import autotarget.service.FragmentTarget
-import autotarget.service.TargetService
+import autotarget.target.FragmentTarget
+import autotarget.target.TargetService
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.mockito.ArgumentCaptor
 import org.mockito.Mock
 import org.mockito.Mockito.*
 import org.mockito.MockitoAnnotations
+import org.powermock.core.classloader.annotations.PrepareForTest
+import org.powermock.modules.junit4.PowerMockRunner
 import org.powermock.reflect.Whitebox
 
+@RunWith(PowerMockRunner::class)
+@PrepareForTest(value = [ContextProvider::class])
 class DemoActivityViewModelTest {
 
     @Mock
     private lateinit var targetServiceMock: TargetService
 
     @Mock
-    private lateinit var contextProviderCommunicator: ContextProviderCommunicator
+    private lateinit var contextProvider: ContextProvider
 
     private lateinit var viewModel: DemoActivityViewModel
 
@@ -34,17 +39,16 @@ class DemoActivityViewModelTest {
 
     @Test
     fun testOnActionClick() {
-        Whitebox.setInternalState(targetServiceMock, "contextProvider", contextProviderCommunicator)
+        Whitebox.setInternalState(targetServiceMock, "contextProvider", contextProvider)
 
         initialiseTestData()
         viewModel.action.forceClick()
 
         val fragmentTargetArgumentCaptor: ArgumentCaptor<FragmentTarget> = ArgumentCaptor.forClass(FragmentTarget::class.java)
-        verify(targetServiceMock).execute(capture(fragmentTargetArgumentCaptor), anyInt(), any())
+        verify(targetServiceMock).execute(capture(fragmentTargetArgumentCaptor))
 
         val fragmentTarget = fragmentTargetArgumentCaptor.value
         assertEquals(2131230827, fragmentTarget.containerId)
-        assertEquals(-1, fragmentTarget.state)
         assertEquals("undefined", fragmentTarget.tag)
     }
 
