@@ -115,6 +115,7 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
 
     private fun createFragmentMenu(menu: Menu?, inflater: MenuInflater?): Boolean {
         this.menu = menu
+        menu?.clear() //ensure that the menu is cleared before inflating it for this fragment
 
         val menuId = fragmentResource?.menuId
         if (menuId != null) inflater?.inflate(menuId, menu)
