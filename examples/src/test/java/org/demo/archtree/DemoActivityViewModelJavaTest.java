@@ -9,11 +9,10 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.powermock.reflect.Whitebox;
 
-import archknife.context.ContextProvider;
+import archknife.context.ContextProviderCommunicator;
 import autotarget.target.FragmentTarget;
 import autotarget.target.TargetService;
 import kotlin.jvm.JvmField;
@@ -22,14 +21,13 @@ import static junit.framework.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest(value = {ContextProvider.class})
 public class DemoActivityViewModelJavaTest {
 
     @Mock
     private TargetService targetServiceMock;
 
     @Mock
-    private ContextProvider contextProvider;
+    private ContextProviderCommunicator contextProvider;
 
     private DemoActivityViewModel viewModel;
 
@@ -53,8 +51,7 @@ public class DemoActivityViewModelJavaTest {
         verify(targetServiceMock).execute(fragmentTargetArgumentCaptor.capture());
 
         FragmentTarget fragmentTarget = fragmentTargetArgumentCaptor.getValue();
-        assertEquals(2131230827, fragmentTarget.getContainerId());
-        assertEquals("undefined", fragmentTarget.getTag());
+        assertEquals(R.id.fragment_container, fragmentTarget.getContainerId());
     }
 
     private void initialiseTestData() {

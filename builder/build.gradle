@@ -60,7 +60,7 @@ dependencies {
     implementation "androidx.fragment:fragment:$support_lib_fragment"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
     implementation "androidx.core:core:$support_lib_core_version"
-    implementation "androidx.navigation:navigation-fragment:$support_nav_version"
+    implementation "androidx.navigation:navigation-fragment:$support_lib_navigation_version"
 
     implementation "org.archknife:archknife-annotation:$archknife_version"
 

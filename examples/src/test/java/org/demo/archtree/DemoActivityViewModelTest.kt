@@ -1,7 +1,7 @@
 package org.demo.archtree
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import archknife.context.ContextProvider
+import archknife.context.ContextProviderCommunicator
 import archtree.testing.mockito.capture
 import autotarget.target.FragmentTarget
 import autotarget.target.TargetService
@@ -12,21 +12,19 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.ArgumentCaptor
 import org.mockito.Mock
-import org.mockito.Mockito.*
+import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
-import org.powermock.core.classloader.annotations.PrepareForTest
 import org.powermock.modules.junit4.PowerMockRunner
 import org.powermock.reflect.Whitebox
 
 @RunWith(PowerMockRunner::class)
-@PrepareForTest(value = [ContextProvider::class])
 class DemoActivityViewModelTest {
 
     @Mock
     private lateinit var targetServiceMock: TargetService
 
     @Mock
-    private lateinit var contextProvider: ContextProvider
+    private lateinit var contextProvider: ContextProviderCommunicator
 
     private lateinit var viewModel: DemoActivityViewModel
 
@@ -48,8 +46,7 @@ class DemoActivityViewModelTest {
         verify(targetServiceMock).execute(capture(fragmentTargetArgumentCaptor))
 
         val fragmentTarget = fragmentTargetArgumentCaptor.value
-        assertEquals(2131230827, fragmentTarget.containerId)
-        assertEquals("undefined", fragmentTarget.tag)
+        assertEquals(R.id.fragment_container, fragmentTarget.containerId)
     }
 
     private fun initialiseTestData() {
