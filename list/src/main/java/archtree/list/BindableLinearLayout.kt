@@ -24,15 +24,14 @@ open class BindableLinearLayout : LinearLayout {
 }
 
 @BindingAdapter("archtree_listAdapter")
-fun bindListAdapter(container: BindableLinearLayout, adapter: BindableLinearLayoutAdapter?) {
-    if (adapter != null) container.adapter = adapter
+fun BindableLinearLayout.bindListAdapter(layoutAdapter: BindableLinearLayoutAdapter?) {
+    adapter = layoutAdapter
 }
 
 @BindingAdapter("archtree_listSource", "archtree_listItemTemplate", "archtree_listViewModel",
         "archtree_listDataBindingComponent", "archtree_listDataBindingComponentKey",
         "archtree_listLifecycleOwner", "archtree_listLifecycleOwnerKey", requireAll = false)
-fun <T : BindableListItem, V : ViewModel, D : Any> bindItemsSource(
-        container: BindableLinearLayout,
+fun <T : BindableListItem, V : ViewModel, D : Any> BindableLinearLayout.bindItemsSource(
         newItems: List<T>?,
         @LayoutRes newItemLayout: Int?,
         newViewModel: V?,
@@ -42,14 +41,12 @@ fun <T : BindableListItem, V : ViewModel, D : Any> bindItemsSource(
         newLifecycleOwnerKey: Int?) {
 
     if (newItems != null) {
-        if (container.adapter == null || container.adapter !is BindableListAdapter) {
-            container.adapter = DefaultBindableLinearLayoutAdapter(container.context)
-        }
+        if (adapter == null) adapter = DefaultBindableLinearLayoutAdapter(context)
 
-        val adapter = container.adapter
-        if (adapter != null) {
-            adapter.bindViewGroup(container)
-            (adapter as BindableListAdapter).onUpdate(newItems, newItemLayout, newViewModel,
+        val listAdapter = adapter
+        if (listAdapter != null) {
+            listAdapter.bindViewGroup(this@bindItemsSource)
+            (listAdapter as BindableListAdapter).onUpdate(newItems, newItemLayout, newViewModel,
                     newDataBindingComponent, newDataBindingComponentKey, newLifecycleOwner,
                     newLifecycleOwnerKey)
         }

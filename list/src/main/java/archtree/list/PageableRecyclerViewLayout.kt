@@ -22,16 +22,15 @@ open class PageableRecyclerViewLayout : RecyclerView {
 }
 
 @BindingAdapter("archtree_pagedListAdapter")
-fun bindListAdapter(container: RecyclerView, adapter: PageableRecyclerViewAdapter?) {
-    if (adapter != null) container.adapter = adapter
+fun PageableRecyclerViewLayout.bindListAdapter(listAdapter: PageableRecyclerViewAdapter?) {
+    adapter = listAdapter
 }
 
 @Suppress("UNCHECKED_CAST")
 @BindingAdapter("archtree_pagedListSource", "archtree_pagedListItemTemplate", "archtree_pagedListViewModel",
         "archtree_pagedListDataBindingComponent", "archtree_pagedListDataBindingComponentKey",
         "archtree_pagedListLifecycleOwner", "archtree_pagedListLifecycleOwnerKey", requireAll = false)
-fun <T : BindableListItem, V : ViewModel, D : Any> bindItemsSource(
-        container: PageableRecyclerViewLayout,
+fun <T : BindableListItem, V : ViewModel, D : Any> PageableRecyclerViewLayout.bindItemsSource(
         newItems: PagedList<T>?,
         @LayoutRes newItemLayout: Int?,
         newViewModel: V?,
@@ -41,14 +40,14 @@ fun <T : BindableListItem, V : ViewModel, D : Any> bindItemsSource(
         newLifecycleOwnerKey: Int?) {
 
     if (newItems != null) {
-        if (container.adapter == null || container.adapter !is PageableRecyclerViewAdapter) {
-            container.adapter = DefaultPageableRecyclerViewLayoutAdapter(container.context)
+        if (adapter == null || adapter !is PageableRecyclerViewAdapter) {
+            adapter = DefaultPageableRecyclerViewLayoutAdapter(context)
         }
 
-        val adapter = container.adapter
-        if (adapter != null && adapter is PageableRecyclerViewAdapter) {
-            adapter.bindRecyclerView(container)
-            adapter.onUpdate(newItems as PagedList<BindableListItem>, newItemLayout, newViewModel,
+        val listAdapter = adapter
+        if (listAdapter != null && listAdapter is PageableRecyclerViewAdapter) {
+            listAdapter.bindRecyclerView(this@bindItemsSource)
+            listAdapter.onUpdate(newItems as PagedList<BindableListItem>, newItemLayout, newViewModel,
                     newDataBindingComponent, newDataBindingComponentKey, newLifecycleOwner,
                     newLifecycleOwnerKey)
         }

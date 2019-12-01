@@ -82,7 +82,5 @@ open class DefaultPageableRecyclerViewLayoutAdapter(private val context: Context
         if (item != null && viewHolder is DataContextAwareViewHolder) viewHolder.onBind(item, viewModel)
     }
 
-    override fun getItemViewType(position: Int): Int {
-        return getItem(position)?.getItemViewType() ?: 0
-    }
+    override fun getItemViewType(position: Int): Int = getItem(position)?.getItemViewType() ?: 0
 }

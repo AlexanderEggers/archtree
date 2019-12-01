@@ -4,21 +4,21 @@ import androidx.databinding.BindingAdapter
 import android.view.View
 
 @BindingAdapter("archtree_clickAction", "archtree_clickActionParameter", requireAll = false)
-fun <T> setClickAction(view: View, action: Action<T>?, actionParameter: T?) {
+fun <T> View.setClickAction(action: Action<T>?, actionParameter: T?) {
     action?.let {
-        val actionListener = ActionListener(view, it, actionParameter)
+        val actionListener = ActionListener(this@setClickAction, it, actionParameter)
         actionListener.initialiseClick()
-        view.setOnClickListener(actionListener)
-    } ?: run { view.setOnClickListener(null) }
+        setOnClickListener(actionListener)
+    } ?: run { setOnClickListener(null) }
 }
 
 @BindingAdapter("archtree_clickLongAction", "archtree_clickLongActionParameter", requireAll = false)
-fun <T> setClickLongAction(view: View, action: Action<T>?, actionParameter: T?) {
+fun <T> View.setClickLongAction(action: Action<T>?, actionParameter: T?) {
     action?.let {
-        val actionListener = ActionListener(view, it, actionParameter)
+        val actionListener = ActionListener(this@setClickLongAction, it, actionParameter)
         actionListener.initialiseLongClick()
-        view.setOnLongClickListener(actionListener)
-    } ?: run { view.setOnLongClickListener(null) }
+        setOnLongClickListener(actionListener)
+    } ?: run { setOnLongClickListener(null) }
 }
 
 private class ActionListener<T>

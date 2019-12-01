@@ -8,22 +8,19 @@ import androidx.core.view.accessibility.AccessibilityNodeInfoCompat
 import androidx.databinding.BindingAdapter
 
 @BindingAdapter("archtree_accessibilityClickAction", "archtree_accessibilityLongClickAction", requireAll = false)
-fun setAccessibilityActions(view: View, clickAction: String?, longClickAction: String?) {
-    assignAccessibilityActionsToView(view, clickAction, longClickAction)
+fun View.setAccessibilityActions(clickAction: String?, longClickAction: String?) {
+    assignAccessibilityActionsToView(clickAction, longClickAction)
 }
 
 @BindingAdapter("archtree_accessibilityClickActionRes", "archtree_accessibilityLongClickActionRes", requireAll = false)
-fun setAccessibilityActionsRes(view: View, clickAction: Int?, longClickAction: Int?) {
-
-    val clickActionValue = if(clickAction != null) view.resources.getString(clickAction) else null
-    val longClickActionValue = if(longClickAction != null) view.resources.getString(longClickAction) else null
-
-    assignAccessibilityActionsToView(view, clickActionValue, longClickActionValue)
+fun View.setAccessibilityActionsRes(clickAction: Int?, longClickAction: Int?) {
+    val clickActionValue = if(clickAction != null) resources.getString(clickAction) else null
+    val longClickActionValue = if(longClickAction != null) resources.getString(longClickAction) else null
+    assignAccessibilityActionsToView(clickActionValue, longClickActionValue)
 }
 
-fun assignAccessibilityActionsToView(view: View, clickAction: String?, longClickAction: String?) {
-
-    ViewCompat.setAccessibilityDelegate(view, object : AccessibilityDelegateCompat() {
+fun View.assignAccessibilityActionsToView(clickAction: String?, longClickAction: String?) {
+    ViewCompat.setAccessibilityDelegate(this, object : AccessibilityDelegateCompat() {
 
         override fun onInitializeAccessibilityNodeInfo(host: View, info: AccessibilityNodeInfoCompat) {
             super.onInitializeAccessibilityNodeInfo(host, info)

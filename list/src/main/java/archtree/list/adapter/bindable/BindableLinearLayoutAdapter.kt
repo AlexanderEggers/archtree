@@ -36,9 +36,7 @@ abstract class BindableLinearLayoutAdapter : BindableListAdapter {
         }
     }
 
-    open fun getType(position: Int): Int {
-        return NO_TYPE_SET
-    }
+    open fun getType(position: Int): Int = NO_TYPE_SET
 
     companion object {
         private const val NO_TYPE_SET = 0

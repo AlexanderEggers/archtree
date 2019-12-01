@@ -25,9 +25,10 @@ open class DefaultBindableLinearLayoutAdapter(private val context: Context) : Bi
     private var dataBindingComponentKey: Int? = null
     private var lifecycleOwnerKey: Int? = null
 
-    override fun onUpdate(list: List<BindableListItem>, @LayoutRes itemLayout: Int?, viewModel: ViewModel?,
-                          dataBindingComponent: Any?, dataBindingComponentKey: Int?,
-                          lifecycleOwner: LifecycleOwner?, lifecycleOwnerKey: Int?) {
+    override fun onUpdate(list: List<BindableListItem>, @LayoutRes itemLayout: Int?,
+                          viewModel: ViewModel?, dataBindingComponent: Any?,
+                          dataBindingComponentKey: Int?, lifecycleOwner: LifecycleOwner?,
+                          lifecycleOwnerKey: Int?) {
 
         this.itemLayout = itemLayout ?: 0
         this.viewModel = viewModel
@@ -77,10 +78,7 @@ open class DefaultBindableLinearLayoutAdapter(private val context: Context) : Bi
         if (viewHolder is DataContextAwareViewHolder) viewHolder.onBind(itemList[position], viewModel)
     }
 
-    override val itemCount: Int
-        get() = itemList.size
+    override val itemCount: Int = itemList.size
 
-    override fun getType(position: Int): Int {
-        return itemList[position].getItemViewType()
-    }
+    override fun getType(position: Int): Int = itemList[position].getItemViewType()
 }

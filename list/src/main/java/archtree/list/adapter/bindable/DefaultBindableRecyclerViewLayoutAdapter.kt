@@ -92,11 +92,7 @@ open class DefaultBindableRecyclerViewLayoutAdapter(private val context: Context
         if (viewHolder is DataContextAwareViewHolder) viewHolder.onBind(itemList[position], viewModel)
     }
 
-    override fun getItemCount(): Int {
-        return itemList.size
-    }
+    override fun getItemCount(): Int = itemList.size
 
-    override fun getItemViewType(position: Int): Int {
-        return itemList[position].getItemViewType()
-    }
+    override fun getItemViewType(position: Int): Int = itemList[position].getItemViewType()
 }

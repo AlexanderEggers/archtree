@@ -12,9 +12,7 @@ fun <T> liveDataOfList(list: List<T>): LiveData<List<T>> {
 }
 
 @SafeVarargs
-fun <T> liveDataOfList(vararg values: T): LiveData<List<T>> {
-    return liveDataOfList(listOf(*values))
-}
+fun <T> liveDataOfList(vararg values: T): LiveData<List<T>> = liveDataOfList(listOf(*values))
 
 fun <T> liveDataOf(value: T): LiveData<T> {
     val data = MutableLiveData<T>()
@@ -32,6 +30,6 @@ fun <T> observeLiveData(liveData: LiveData<T>) {
     val lifecycle = LifecycleRegistry(PowerMockito.mock(LifecycleOwner::class.java))
     lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
     liveData.observe({lifecycle}) {
-        //do nothing - this observer will only be used to fake layout activity
+        //do nothing - this observer will only be used to fake an active observer
     }
 }

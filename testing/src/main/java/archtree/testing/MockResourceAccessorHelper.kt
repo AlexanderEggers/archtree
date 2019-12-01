@@ -37,7 +37,7 @@ fun mockResourceAccessor(resourceAccessor: ResourceAccessor) {
     `when`<Drawable>(resourceAccessor.getDrawable(anyInt())).thenAnswer { invocation ->
         val drawable = mock(Drawable::class.java)
         `when`(drawable.toString())
-                .thenReturn(Integer.toString(invocation.arguments[0] as Int))
+                .thenReturn((invocation.arguments[0] as Int).toString())
         drawable
     }
 

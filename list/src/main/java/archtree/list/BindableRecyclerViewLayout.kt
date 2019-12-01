@@ -21,15 +21,14 @@ open class BindableRecyclerViewLayout : RecyclerView {
 }
 
 @BindingAdapter("archtree_listAdapter")
-fun bindListAdapter(container: RecyclerView, adapter: BindableRecyclerViewAdapter?) {
-    if (adapter != null) container.adapter = adapter
+fun BindableRecyclerViewLayout.bindListAdapter(listAdapter: BindableRecyclerViewAdapter?) {
+    adapter = listAdapter
 }
 
 @BindingAdapter("archtree_listSource", "archtree_listItemTemplate", "archtree_listViewModel",
         "archtree_listDataBindingComponent", "archtree_listDataBindingComponentKey",
         "archtree_listLifecycleOwner", "archtree_listLifecycleOwnerKey", requireAll = false)
-fun <T : BindableListItem, V : ViewModel, D : Any> bindItemsSource(
-        container: BindableRecyclerViewLayout,
+fun <T : BindableListItem, V : ViewModel, D : Any> BindableRecyclerViewLayout.bindItemsSource(
         newItems: List<T>?,
         @LayoutRes newItemLayout: Int?,
         newViewModel: V?,
@@ -39,14 +38,14 @@ fun <T : BindableListItem, V : ViewModel, D : Any> bindItemsSource(
         newLifecycleOwnerKey: Int?) {
 
     if (newItems != null) {
-        if (container.adapter == null || container.adapter !is BindableRecyclerViewAdapter) {
-            container.adapter = DefaultBindableRecyclerViewLayoutAdapter(container.context)
+        if (adapter == null || adapter !is BindableRecyclerViewAdapter) {
+            adapter = DefaultBindableRecyclerViewLayoutAdapter(context)
         }
 
-        val adapter = container.adapter
-        if (adapter != null && adapter is BindableRecyclerViewAdapter) {
-            adapter.bindRecyclerView(container)
-            adapter.onUpdate(newItems, newItemLayout, newViewModel,
+        val listAdapter = adapter
+        if (listAdapter != null && listAdapter is BindableRecyclerViewAdapter) {
+            listAdapter.bindRecyclerView(this@bindItemsSource)
+            listAdapter.onUpdate(newItems, newItemLayout, newViewModel,
                     newDataBindingComponent, newDataBindingComponentKey, newLifecycleOwner,
                     newLifecycleOwnerKey)
         }
@@ -54,22 +53,22 @@ fun <T : BindableListItem, V : ViewModel, D : Any> bindItemsSource(
 }
 
 @BindingAdapter("archtree_recyclerViewItemAnimator")
-fun setRecyclerViewItemAnimator(view: RecyclerView, animator: RecyclerView.ItemAnimator?) {
-    view.itemAnimator = animator
+fun RecyclerView.setRecyclerViewItemAnimator(animator: RecyclerView.ItemAnimator?) {
+    itemAnimator = animator
 }
 
 @BindingAdapter("archtree_recyclerViewScrollToPosition")
-fun setRecyclerViewScrollToPosition(view: RecyclerView, scrollToPosition: Int?) {
+fun RecyclerView.setRecyclerViewScrollToPosition(scrollToPosition: Int?) {
     scrollToPosition?.run {
-        view.stopScroll()
-        view.scrollToPosition(scrollToPosition)
+        stopScroll()
+        scrollToPosition(scrollToPosition)
     }
 }
 
 @BindingAdapter("archtree_recyclerViewSmoothScrollToPosition")
-fun setRecyclerViewSmoothScrollToPosition(view: RecyclerView, scrollToPosition: Int?) {
+fun RecyclerView.setRecyclerViewSmoothScrollToPosition(scrollToPosition: Int?) {
     scrollToPosition?.run {
-        view.stopScroll()
-        view.smoothScrollToPosition(scrollToPosition)
+        stopScroll()
+        smoothScrollToPosition(scrollToPosition)
     }
 }

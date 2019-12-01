@@ -1,5 +1,6 @@
 package archtree.helper.binding
 
+import android.content.res.Resources
 import android.view.View
 import androidx.core.view.ViewCompat
 import androidx.databinding.BindingAdapter
@@ -15,4 +16,15 @@ fun setViewHeightForNotch(view: View, visible: Boolean?) {
             insets
         }
     }
+}
+
+@BindingAdapter("archtree_backgroundRes")
+fun View.setBackgroundRes(value: Int?) {
+    value?.run {
+        try {
+            setBackgroundResource(value)
+        } catch (e: Resources.NotFoundException) {
+            setBackgroundResource(0)
+        }
+    } ?: setBackgroundResource(0)
 }
