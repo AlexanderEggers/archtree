@@ -58,7 +58,7 @@ dependencies {
     implementation "androidx.appcompat:appcompat:$support_lib_appcompat_version"
     implementation "androidx.activity:activity:$support_lib_activity"
     implementation "androidx.fragment:fragment:$support_lib_fragment"
-    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-extensions:$support_lib_lifecycle_version"
     implementation "androidx.core:core:$support_lib_core_version"
     implementation "androidx.navigation:navigation-fragment:$support_lib_navigation_version"
 

@@ -7,7 +7,7 @@ android {
 
     defaultConfig {
         applicationId "org.demo.archtree"
-        minSdkVersion 16
+        minSdkVersion 24
         targetSdkVersion 29
         versionCode 1
 
@@ -47,7 +47,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     implementation "androidx.appcompat:appcompat:$support_lib_appcompat_version"
 
     implementation project(path: ':archtree-action')
@@ -57,8 +57,8 @@ dependencies {
     implementation project(path: ':archtree-list')
     implementation project(path: ':archtree-viewmodel')
 
-    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
-    kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-extensions:$support_lib_lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-common-java8:$support_lib_lifecycle_version"
 
     implementation "org.archknife:archknife-core:$archknife_version"
     kapt "org.archknife:archknife-processor:$archknife_version"
@@ -67,7 +67,7 @@ dependencies {
     kapt "org.autotarget:autotarget-processor:$autotarget_version"
 
     testImplementation project(path: ':archtree-testing')
-    testImplementation "androidx.arch.core:core-testing:$lifecycle_version"
+    testImplementation "androidx.arch.core:core-testing:$support_lib_lifecycle_testing_version"
     testImplementation "org.powermock:powermock-api-mockito2:$powermock_version"
     testImplementation "org.powermock:powermock-module-junit4:$powermock_version"
 }

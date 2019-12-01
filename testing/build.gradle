@@ -52,7 +52,7 @@ dependencies {
 
     implementation "junit:junit:$junit_version"
     implementation "org.mockito:mockito-android:$mockito_version"
-    implementation "androidx.lifecycle:lifecycle-livedata:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-livedata:$support_lib_lifecycle_version"
     implementation "org.powermock:powermock-api-mockito2:$powermock_version"
 
     implementation project(":archtree-helper-core")

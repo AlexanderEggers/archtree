@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import archtree.ArchTreeResource
 import archtree.FragmentDispatcherLayer
 import archtree.ViewModelInitMode
@@ -31,7 +30,7 @@ constructor(builder: ActivityBuilder<ViewModel>) : ArchTreeResource<ViewModel>(b
                                savedInstanceBundle: Bundle?) {
 
         if (viewModelClass != null) {
-            viewModel = ViewModelProviders.of(activity, factory).get(viewModelClass)
+            viewModel = ViewModelProvider(activity.viewModelStore, factory).get(viewModelClass)
 
             if (binding != null && bindingKey != -1) binding?.setVariable(bindingKey, viewModel)
             else Log.w(ActivityResource::class.java.name, "ViewModel is not attached to layout.")

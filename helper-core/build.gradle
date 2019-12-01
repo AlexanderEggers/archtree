@@ -56,7 +56,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "androidx.appcompat:appcompat:$support_lib_appcompat_version"
     implementation "androidx.transition:transition:$support_lib_transition_version"
-    implementation "com.google.android.material:material:$support_lib_version"
+    implementation "com.google.android.material:material:$support_lib_material_version"
     implementation "androidx.core:core:$support_lib_core_version"
 
     api "com.google.code.gson:gson:$gson_version"
