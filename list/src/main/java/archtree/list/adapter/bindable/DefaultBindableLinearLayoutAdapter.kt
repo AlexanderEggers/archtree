@@ -78,7 +78,8 @@ open class DefaultBindableLinearLayoutAdapter(private val context: Context) : Bi
         if (viewHolder is DataContextAwareViewHolder) viewHolder.onBind(itemList[position], viewModel)
     }
 
-    override val itemCount: Int = itemList.size
+    override val itemCount: Int
+        get() = itemList.size
 
     override fun getType(position: Int): Int = itemList[position].getItemViewType()
 }
