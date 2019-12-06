@@ -13,7 +13,7 @@ repositories {
 }
 
 dependencies {
-  def archtree_version = "1.0.0-beta1"
+  def archtree_version = "1.0.0-beta3"
   
   //builder classes (base, activity and fragment) and viewmodel classes
   implementation "org.archtree:archtree-builder:$archtree_version"
@@ -33,7 +33,7 @@ dependencies {
 }
 ```
 
-How do I use ArchTree? (Step-by-step introduction for 1.0.0-beta1)
+How do I use ArchTree? (Step-by-step introduction for 1.0.0-beta3)
 -------------------
 Coming soon! For now, use the [example project][3] as a reference.
 
