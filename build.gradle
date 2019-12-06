@@ -30,7 +30,7 @@ buildscript {
         powermock_version = '2.0.2'
         support_lib_lifecycle_testing_version = '2.1.0'
 
-        archtree_library_version = "1.0.0-beta2"
+        archtree_library_version = "1.0.0-beta4"
     }
 
     repositories {

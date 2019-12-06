@@ -160,8 +160,4 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
     open fun getBinding(): ViewDataBinding? {
         return fragmentResource?.binding
     }
-
-    open fun getResourceBundle(): Bundle? {
-        return fragmentResource?.resourceBundle
-    }
 }

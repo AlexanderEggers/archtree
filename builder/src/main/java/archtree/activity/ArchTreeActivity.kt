@@ -318,8 +318,4 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
     open fun getBinding(): ViewDataBinding? {
         return activityResource?.binding
     }
-
-    open fun getResourceBundle(): Bundle? {
-        return activityResource?.resourceBundle
-    }
 }

@@ -29,7 +29,7 @@ constructor(builder: FragmentBuilder<ViewModel>) : ArchTreeResource<ViewModel>(b
             if (binding != null && bindingKey != -1) binding?.setVariable(bindingKey, viewModel)
             else Log.w(FragmentResource::class.java.name, "ViewModel is not attached to layout.")
 
-            val viewModelBundle = resourceBundle ?: fragment.arguments ?: Bundle()
+            val viewModelBundle = fragment.arguments!!
             if (viewModelInitMode == ViewModelInitMode.FORCE_INIT) viewModel?.init(true, viewModelBundle, savedInstanceBundle)
             else if (viewModelInitMode == ViewModelInitMode.NON_FORCE_INIT) viewModel?.init(false, viewModelBundle, savedInstanceBundle)
         }
