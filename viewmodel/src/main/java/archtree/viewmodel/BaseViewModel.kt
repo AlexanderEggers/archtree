@@ -13,13 +13,26 @@ abstract class BaseViewModel : ViewModel() {
         private set
 
     @JvmOverloads
-    fun init(forceInit: Boolean = false, resourceBundle: Bundle = Bundle(), savedInstanceBundle: Bundle? = null) {
+    fun init(forceInit: Boolean = false, resourceBundle: Bundle? = null, savedInstanceBundle: Bundle? = null) {
         if (!isInitialised || forceInit) {
             isInitialised = true
             onInit(resourceBundle, savedInstanceBundle)
         }
     }
 
+    /**
+     *  Main method for the viewmodel and entry point from the ArchTreeActivity or ArchTreeFragment.
+     *  This method provides a resource bundle and a saved instance bundle. The resource bundle
+     *  is provided by the attached fragment or activity. The saved instance bundle is provided by
+     *  the state of the activity or fragment - this bundle should be used as if you would work
+     *  within e.g. an activity.
+     *
+     *  @param resourceBundle Bundle object that is provided by the attached activity or fragment
+     *  @param savedInstanceBundle Bundle object that is provided by the state of the attached
+     *  activity or fragment
+     *
+     *  @since 1.0.0
+     */
     protected open fun onInit(resourceBundle: Bundle?, savedInstanceBundle: Bundle?) {
         //do nothing by default
     }
