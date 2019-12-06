@@ -6,7 +6,6 @@ import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import archtree.ArchTreeResource
-import archtree.FragmentDispatcherLayer
 import archtree.ViewModelInitMode
 import archtree.viewmodel.BaseViewModel
 
@@ -14,7 +13,6 @@ open class FragmentResource<ViewModel : BaseViewModel>
 constructor(builder: FragmentBuilder<ViewModel>) : ArchTreeResource<ViewModel>(builder) {
 
     val layer = super.componentLayer as FragmentComponentLayer<ViewModel>?
-    val fragmentDispatcherLayer: FragmentDispatcherLayer? = builder.fragmentDispatcherLayer
 
     val hasOptionsMenu = builder.menuId != null
 
@@ -31,7 +29,7 @@ constructor(builder: FragmentBuilder<ViewModel>) : ArchTreeResource<ViewModel>(b
             if (binding != null && bindingKey != -1) binding?.setVariable(bindingKey, viewModel)
             else Log.w(FragmentResource::class.java.name, "ViewModel is not attached to layout.")
 
-            val viewModelBundle = resourceBundle ?: fragment.arguments
+            val viewModelBundle = resourceBundle ?: fragment.arguments ?: Bundle()
             if (viewModelInitMode == ViewModelInitMode.FORCE_INIT) viewModel?.init(true, viewModelBundle, savedInstanceBundle)
             else if (viewModelInitMode == ViewModelInitMode.NON_FORCE_INIT) viewModel?.init(false, viewModelBundle, savedInstanceBundle)
         }

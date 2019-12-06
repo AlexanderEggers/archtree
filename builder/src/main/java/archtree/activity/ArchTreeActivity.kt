@@ -12,7 +12,6 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
-import archtree.FragmentDispatcher
 import archtree.fragment.ArchTreeFragment
 import archtree.viewmodel.BaseViewModel
 import dagger.android.AndroidInjector
@@ -21,7 +20,7 @@ import dagger.android.HasAndroidInjector
 import javax.inject.Inject
 
 abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity(),
-        HasAndroidInjector, FragmentDispatcher, HasActivityBuilder<ViewModel> {
+        HasAndroidInjector, HasActivityBuilder<ViewModel> {
 
     @Inject
     lateinit var androidInjector: DispatchingAndroidInjector<Any>
@@ -264,33 +263,6 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
         }
 
         return true
-    }
-
-    override fun showFragment(containerId: Int, state: Enum<*>, bundle: Bundle?): Boolean {
-        return showFragment(containerId, state.ordinal, bundle)
-    }
-
-    override fun showFragment(containerId: Int, state: Int, bundle: Bundle?): Boolean {
-        var hasHandledShowFragment = false
-        getFragments().forEach { fragment ->
-            if (fragment is ArchTreeFragment<*>? && fragment?.isVisible == true) {
-                val fragmentHasHandledShowFragment = fragment.showFragment(containerId, state, bundle)
-                if (!hasHandledShowFragment) {
-                    hasHandledShowFragment = fragmentHasHandledShowFragment
-
-                    if (fragmentHasHandledShowFragment) {
-                        return true //has been handled by fragment
-                    }
-                }
-            }
-        }
-
-        if (!hasHandledShowFragment) {
-            hasHandledShowFragment = activityResource?.fragmentDispatcherLayer?.onCreateFragment(
-                    containerId, state, bundle) ?: false
-        }
-
-        return hasHandledShowFragment
     }
 
     open fun onDefaultOptionsItemSelected(item: MenuItem): Boolean {

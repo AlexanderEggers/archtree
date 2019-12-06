@@ -13,7 +13,7 @@ abstract class BaseViewModel : ViewModel() {
         private set
 
     @JvmOverloads
-    fun init(forceInit: Boolean = false, resourceBundle: Bundle? = null, savedInstanceBundle: Bundle? = null) {
+    fun init(forceInit: Boolean = false, resourceBundle: Bundle = Bundle(), savedInstanceBundle: Bundle? = null) {
         if (!isInitialised || forceInit) {
             isInitialised = true
             onInit(resourceBundle, savedInstanceBundle)

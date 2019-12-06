@@ -6,7 +6,6 @@ import android.util.Log
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
 import archtree.ArchTreeResource
-import archtree.FragmentDispatcherLayer
 import archtree.ViewModelInitMode
 import archtree.viewmodel.BaseViewModel
 
@@ -14,7 +13,6 @@ open class ActivityResource<ViewModel : BaseViewModel>
 constructor(builder: ActivityBuilder<ViewModel>) : ArchTreeResource<ViewModel>(builder) {
 
     val layer = super.componentLayer as ActivityComponentLayer<ViewModel>?
-    val fragmentDispatcherLayer: FragmentDispatcherLayer? = builder.fragmentDispatcherLayer
     var hasNavHostFragment: Boolean = builder.hasNavHostFragment
 
     var viewModel: ViewModel? = null
@@ -35,7 +33,7 @@ constructor(builder: ActivityBuilder<ViewModel>) : ArchTreeResource<ViewModel>(b
             if (binding != null && bindingKey != -1) binding?.setVariable(bindingKey, viewModel)
             else Log.w(ActivityResource::class.java.name, "ViewModel is not attached to layout.")
 
-            val viewModelBundle = resourceBundle ?: activity.intent.extras
+            val viewModelBundle = resourceBundle ?: activity.intent.extras ?: Bundle()
             if (viewModelInitMode == ViewModelInitMode.FORCE_INIT) viewModel?.init(true, viewModelBundle, savedInstanceBundle)
             else if (viewModelInitMode == ViewModelInitMode.NON_FORCE_INIT) viewModel?.init(false, viewModelBundle, savedInstanceBundle)
         }
