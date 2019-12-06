@@ -23,14 +23,14 @@ buildscript {
         support_lib_material_version = "1.0.0"
 
         archknife_version = '1.0.0'
-        autotarget_version = '1.0.0-rc1'
+        autotarget_version = '1.0.0-rc2'
 
         junit_version = "4.12"
         mockito_version = '3.2.0'
         powermock_version = '2.0.2'
         support_lib_lifecycle_testing_version = '2.1.0'
 
-        archtree_library_version = "1.0.0-beta3"
+        archtree_library_version = "1.0.0-beta2"
     }
 
     repositories {

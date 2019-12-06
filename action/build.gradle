@@ -38,11 +38,6 @@ android {
         consumerProguardFiles 'proguard-rules.pro'
     }
 
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_7
-        targetCompatibility JavaVersion.VERSION_1_7
-    }
-
     dataBinding {
         enabled = true
     }
