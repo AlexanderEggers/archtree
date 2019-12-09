@@ -13,10 +13,10 @@ abstract class BaseViewModel : ViewModel() {
         private set
 
     @JvmOverloads
-    fun init(forceInit: Boolean = false, resourceBundle: Bundle? = null, savedInstanceBundle: Bundle? = null) {
+    fun init(forceInit: Boolean = false, resourceBundle: Bundle? = null, customBundle: Bundle? = null, savedInstanceBundle: Bundle? = null) {
         if (!isInitialised || forceInit) {
             isInitialised = true
-            onInit(resourceBundle, savedInstanceBundle)
+            onInit(resourceBundle, customBundle, savedInstanceBundle)
         }
     }
 
@@ -28,12 +28,13 @@ abstract class BaseViewModel : ViewModel() {
      *  within e.g. an activity.
      *
      *  @param resourceBundle Bundle object that is provided by the attached activity or fragment
+     *  @param customBundle Custom bundle object
      *  @param savedInstanceBundle Bundle object that is provided by the state of the attached
      *  activity or fragment
      *
      *  @since 1.0.0
      */
-    protected open fun onInit(resourceBundle: Bundle?, savedInstanceBundle: Bundle?) {
+    protected open fun onInit(resourceBundle: Bundle?, customBundle: Bundle?, savedInstanceBundle: Bundle?) {
         //do nothing by default
     }
 

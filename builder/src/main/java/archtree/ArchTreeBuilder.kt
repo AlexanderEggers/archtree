@@ -1,6 +1,7 @@
 package archtree
 
 import android.annotation.SuppressLint
+import android.os.Bundle
 import androidx.annotation.DrawableRes
 import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
@@ -32,6 +33,8 @@ abstract class ArchTreeBuilder<ViewModel : BaseViewModel, out Builder> {
     var lifecycleOwnerBindingKey: Int = -1
         private set
 
+    var customBundle: Bundle? = null
+        private set
     var componentLayer: ComponentLayer<ViewModel>? = null
         private set
 
@@ -126,6 +129,16 @@ abstract class ArchTreeBuilder<ViewModel : BaseViewModel, out Builder> {
      */
     open fun setLifecycleOwner(bindingKey: Int): Builder {
         lifecycleOwnerBindingKey = bindingKey
+        return this as Builder
+    }
+
+    /**
+     * This method defines a custom bundle that will be used when initialising the viewmodel.
+     *
+     * @param bundle Bundle object that will be used for the viewmodel.
+     */
+    open fun setCustomBundle(bundle: Bundle?): Builder {
+        this.customBundle = bundle
         return this as Builder
     }
 

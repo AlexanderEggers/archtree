@@ -1,6 +1,7 @@
 package archtree
 
 import android.annotation.SuppressLint
+import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -19,6 +20,8 @@ abstract class ArchTreeResource<ViewModel : BaseViewModel> constructor(builder: 
         private set
     var binding: ViewDataBinding? = null
         private set
+
+    val customBundle: Bundle? = builder.customBundle
 
     val layoutId: Int = builder.layoutId
     val bindingKey: Int = builder.bindingKey
