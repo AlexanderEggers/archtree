@@ -5,7 +5,7 @@ import java.util.*
 abstract class Action<T> {
     private var timeSinceLastClick = 0L
 
-    val listeners = LinkedList<OnConditionChangedListener<T>>()
+    internal val listeners = LinkedList<OnConditionChangedListener<T>>()
 
     @JvmOverloads
     fun click(parameter: T? = null) {
