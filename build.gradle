@@ -3,34 +3,34 @@
 buildscript {
 
     ext {
-        android_studio_version = "3.5.3"
-        bintray_plugin_version = "1.8.4"
+        android_studio_version = "3.6.3"
+        bintray_plugin_version = "1.8.5"
         maven_plugin_version = "2.1"
 
-        kotlin_version = '1.3.61'
-        dagger_version = '2.24'
+        kotlin_version = '1.3.72'
+        dagger_version = '2.27'
         gson_version = '2.8.6'
 
         support_lib_lifecycle_version = '2.2.0'
         support_lib_appcompat_version = '1.1.0'
         support_lib_activity = "1.1.0"
-        support_lib_fragment = '1.2.0'
-        support_lib_transition_version = '1.3.0'
-        support_lib_paging_version = "2.1.1"
-        support_lib_core_version = '1.2.0-rc01'
+        support_lib_fragment = '1.2.4'
+        support_lib_transition_version = '1.3.1'
+        support_lib_paging_version = "2.1.2"
+        support_lib_core_version = '1.3.0-rc01'
         support_lib_recyclerview_version = '1.1.0'
-        support_lib_navigation_version = "2.2.0"
-        support_lib_material_version = "1.0.0"
+        support_lib_navigation_version = "2.2.2"
+        support_lib_material_version = "1.1.0"
 
-        archknife_version = '1.0.0'
-        autotarget_version = '1.0.0-rc3'
+        archknife_version = '1.1.0-rc02'
+        autotarget_version = '1.0.0-rc5'
 
-        junit_version = "4.12"
-        mockito_version = '3.2.4'
+        junit_version = "4.13"
+        mockito_version = '3.3.10'
         powermock_version = '2.0.2'
         support_lib_lifecycle_testing_version = '2.1.0'
 
-        archtree_library_version = "1.0.0-beta7"
+        archtree_library_version = "1.0.0-beta8"
     }
 
     repositories {
@@ -49,7 +49,7 @@ buildscript {
 }
 
 plugins {
-    id "org.sonarqube" version "2.6.2"
+    id "org.sonarqube" version "2.8"
 }
 
 allprojects {

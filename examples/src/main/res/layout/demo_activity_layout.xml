@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
 
@@ -30,7 +31,8 @@
             archtree_clickAction="@{viewModel.action}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Click me!" />
+            android:text="Click me!"
+            tools:ignore="HardcodedText" />
 
         <LinearLayout
             android:id="@+id/fragment_container"
