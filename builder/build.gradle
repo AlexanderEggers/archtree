@@ -9,7 +9,7 @@ ext {
     publishedGroupId = 'org.archtree'
     libraryName = 'ArchTree Builder Artifact'
     artifact = 'archtree-builder'
-    libraryYear = '2019'
+    libraryYear = '2020'
 
     libraryDescription = 'The ArchTree Builder Artifact is simplifying the usage of ' +
             'Activities and Fragments using a builder pattern.'

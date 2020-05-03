@@ -9,7 +9,7 @@ ext {
     publishedGroupId = 'org.archtree'
     libraryName = 'ArchTree Helper Core Artifact'
     artifact = 'archtree-helper-core'
-    libraryYear = '2019'
+    libraryYear = '2020'
 
     libraryDescription = 'The ArchTree Helper Core Artifact is simplifying the usage of ' +
             'different Android specific features like DataBinding, resource handling and more.'

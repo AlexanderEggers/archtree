@@ -9,7 +9,7 @@ ext {
     publishedGroupId = 'org.archtree'
     libraryName = 'ArchTree List Artifact'
     artifact = 'archtree-list'
-    libraryYear = '2019'
+    libraryYear = '2020'
 
     libraryDescription = 'The ArchTree List Artifact is simplifying the usage of list components ' +
             'inside a MVVM architecture allowing the usage of DataBinding for' +

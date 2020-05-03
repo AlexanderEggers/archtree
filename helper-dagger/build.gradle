@@ -9,7 +9,7 @@ ext {
     publishedGroupId = 'org.archtree'
     libraryName = 'ArchTree Helper Dagger Artifact'
     artifact = 'archtree-helper-dagger'
-    libraryYear = '2019'
+    libraryYear = '2020'
 
     libraryDescription = 'The ArchTree Helper Dagger Artifact is using the Helper Core Artifact ' +
             'and provides simplified singleton access by providing a dagger-v2 module.'

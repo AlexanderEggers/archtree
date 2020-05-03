@@ -9,7 +9,7 @@ ext {
     publishedGroupId = 'org.archtree'
     libraryName = 'ArchTree Action Artifact'
     artifact = 'archtree-action'
-    libraryYear = '2019'
+    libraryYear = '2020'
 
     libraryDescription = 'The ArchTree Action Artifact is simplifying the usage of ' +
             'onClickListener inside a MVVM architecture using databinding.'

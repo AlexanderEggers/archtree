@@ -8,7 +8,7 @@ ext {
     publishedGroupId = 'org.archtree'
     libraryName = 'ArchTree ViewModel Artifact'
     artifact = 'archtree-viewmodel'
-    libraryYear = '2019'
+    libraryYear = '2020'
 
     libraryDescription = 'The ArchTree Testing Artifact is simplifying the usage of ' +
             'ViewModels by offering different methods centralise the app logics into these ' +
