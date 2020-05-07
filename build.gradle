@@ -26,11 +26,11 @@ buildscript {
         autotarget_version = '1.0.0-rc5'
 
         junit_version = "4.13"
-        mockito_version = '3.3.10'
+        mockito_version = '3.2.0'
         powermock_version = '2.0.2'
         support_lib_lifecycle_testing_version = '2.1.0'
 
-        archtree_library_version = "1.0.0-beta8"
+        archtree_library_version = "1.0.0-beta9"
     }
 
     repositories {

@@ -1,6 +1,7 @@
 package archtree.helper
 
 import android.content.Context
+import android.util.Log
 import androidx.annotation.WorkerThread
 import com.google.gson.Gson
 import com.google.gson.JsonArray
@@ -13,6 +14,7 @@ class JsonHelper(private val context: Context, private val gson: Gson) {
         return try {
             gson.fromJson(value, type)
         } catch (e: Exception) {
+            Log.e(JsonHelper::class.java.name, "Exception when parsing data: ${e.message} ${e.printStackTrace()}")
             null
         }
     }
@@ -22,6 +24,7 @@ class JsonHelper(private val context: Context, private val gson: Gson) {
         return try {
             gson.toJsonTree(value).asJsonArray
         } catch (e: Exception) {
+            Log.e(JsonHelper::class.java.name, "Exception when parsing data: ${e.message} ${e.printStackTrace()}")
             null
         }
     }
@@ -44,7 +47,8 @@ class JsonHelper(private val context: Context, private val gson: Gson) {
             context.assets?.open(fileName)?.bufferedReader()?.use { reader ->
                 reader.readText()
             }
-        } catch (ignore: Exception) {
+        } catch (e: Exception) {
+            Log.e(JsonHelper::class.java.name, "Exception when parsing data: ${e.message} ${e.printStackTrace()}")
             null
         }
     }
