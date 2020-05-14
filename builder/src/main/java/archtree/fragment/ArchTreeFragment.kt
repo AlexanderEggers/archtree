@@ -43,10 +43,14 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        fragmentResource?.onCreateViewModel(this, viewModelFactory, savedInstanceState)
+        fragmentResource?.onCreateViewModel(this, viewModelFactory)
         fragmentResource?.onAttachLifecycleOwner(this)
 
-        if (!isHidden) refreshFragmentToolbar(activity, view, fragmentResource)
+        if (!isHidden) {
+            refreshFragmentToolbar(activity, view, fragmentResource)
+            fragmentResource?.onInitViewModel(this, savedInstanceState)
+        }
+
         fragmentResource?.layer?.onCreate(getViewModel(), savedInstanceState)
     }
 
@@ -58,6 +62,12 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
         super.onHiddenChanged(hidden)
         if (!hidden) {
             refreshFragmentToolbar(activity, view, fragmentResource)
+
+            //if the viewmodel was not initialised during onCreate, the onResume will try again
+            if(getViewModel() != null && getViewModel()?.isInitialised == false) {
+                fragmentResource?.onInitViewModel(this, null)
+            }
+
             fragmentResource?.layer?.onResume(getViewModel())
         }
     }
