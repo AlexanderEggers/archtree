@@ -19,8 +19,8 @@ import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
 import javax.inject.Inject
 
-abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity(),
-        HasAndroidInjector, HasActivityBuilder<ViewModel> {
+abstract class ArchTreeActivity : AppCompatActivity(),
+        HasAndroidInjector, HasActivityBuilder {
 
     @Inject
     lateinit var androidInjector: DispatchingAndroidInjector<Any>
@@ -29,7 +29,7 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
     @Suppress
-    var activityResource: ActivityResource<ViewModel>? = null
+    var activityResource: ActivityResource? = null
         private set
 
     override fun onResume() {
@@ -40,7 +40,7 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val activityBuilder = ActivityBuilder<ViewModel>()
+        val activityBuilder = ActivityBuilder()
         activityResource = provideActivityResource(activityBuilder)
 
         val themeRes = activityResource?.themeRes
@@ -97,7 +97,7 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
 
         var hasHandledCreateOptionsMenu = false
         getFragments().forEach { fragment ->
-            if (fragment is ArchTreeFragment<*>? && fragment?.isVisible == true) {
+            if (fragment is ArchTreeFragment && fragment.isVisible) {
                 val fragmentHasHandledCreateOptionsMenu = fragment.onFragmentCreateOptionsMenu(menu)
                 if (!hasHandledCreateOptionsMenu) {
                     hasHandledCreateOptionsMenu = fragmentHasHandledCreateOptionsMenu
@@ -123,7 +123,7 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
     override fun onBackPressed() {
         var hasHandledBackPressed = false
         getFragments().forEach { fragment ->
-            if (fragment is ArchTreeFragment<*>? && fragment?.isVisible == true) {
+            if (fragment is ArchTreeFragment && fragment.isVisible) {
                 val fragmentHasHandledBackPressed = fragment.onBackPressed()
                 if (!hasHandledBackPressed) {
                     hasHandledBackPressed = fragmentHasHandledBackPressed
@@ -147,7 +147,7 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         var hasHandledActivityResult = false
         getFragments().forEach { fragment ->
-            if (fragment is ArchTreeFragment<*>? && fragment?.isVisible == true) {
+            if (fragment is ArchTreeFragment && fragment.isVisible) {
                 val fragmentHasHandledActivityResult = fragment.onFragmentActivityResult(requestCode, resultCode, data)
                 if (!hasHandledActivityResult) {
                     hasHandledActivityResult = fragmentHasHandledActivityResult
@@ -171,7 +171,7 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         var hasHandledRequestPermissionResult = false
         getFragments().forEach { fragment ->
-            if (fragment is ArchTreeFragment<*>? && fragment?.isVisible == true) {
+            if (fragment is ArchTreeFragment && fragment.isVisible) {
                 val fragmentHasHandledRequestPermissionResult = fragment.onFragmentRequestPermissionsResult(requestCode, permissions, grantResults)
                 if (!hasHandledRequestPermissionResult) {
                     hasHandledRequestPermissionResult = fragmentHasHandledRequestPermissionResult
@@ -195,7 +195,7 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
     override fun onConfigurationChanged(newConfig: Configuration) {
         var hasConfigurationChanged = false
         getFragments().forEach { fragment ->
-            if (fragment is ArchTreeFragment<*>? && fragment?.isVisible == true) {
+            if (fragment is ArchTreeFragment && fragment.isVisible) {
                 val fragmentHasConfigurationChanged = fragment.onFragmentConfigurationChanged(newConfig)
                 if (!hasConfigurationChanged) {
                     hasConfigurationChanged = fragmentHasConfigurationChanged
@@ -220,7 +220,7 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
     override fun onNewIntent(intent: Intent?) {
         var hasNewIntentHandled = false
         getFragments().forEach { fragment ->
-            if (fragment is ArchTreeFragment<*>? && fragment?.isVisible == true) {
+            if (fragment is ArchTreeFragment && fragment.isVisible) {
                 val fragmentHasNewIntentHandled = fragment.onFragmentNewIntent(intent)
                 if (!hasNewIntentHandled) {
                     hasNewIntentHandled = fragmentHasNewIntentHandled
@@ -244,7 +244,7 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         var hasHandledOptionsItemSelected = false
         getFragments().forEach { fragment ->
-            if (fragment is ArchTreeFragment<*>? && fragment?.isVisible == true) {
+            if (fragment is ArchTreeFragment && fragment.isVisible) {
                 val fragmentHasHandledOptionsItemSelected = fragment.onOptionsItemSelected(item)
                 if (!hasHandledOptionsItemSelected) {
                     hasHandledOptionsItemSelected = fragmentHasHandledOptionsItemSelected
@@ -311,7 +311,7 @@ abstract class ArchTreeActivity<ViewModel : BaseViewModel> : AppCompatActivity()
         return window.decorView.findViewById(android.R.id.content)
     }
 
-    open fun getViewModel(): ViewModel? {
+    open fun getViewModel(): BaseViewModel? {
         return activityResource?.viewModel
     }
 

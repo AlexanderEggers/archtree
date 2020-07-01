@@ -12,9 +12,9 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LifecycleOwner
 import archtree.viewmodel.BaseViewModel
 
-abstract class ArchTreeResource<ViewModel : BaseViewModel> constructor(builder: ArchTreeBuilder<ViewModel, *>) {
+abstract class ArchTreeResource constructor(builder: ArchTreeBuilder<*>) {
 
-    protected var componentLayer: ComponentLayer<ViewModel>? = builder.componentLayer
+    protected var componentLayer: ComponentLayer? = builder.componentLayer
 
     var view: View? = null
         private set
@@ -24,12 +24,9 @@ abstract class ArchTreeResource<ViewModel : BaseViewModel> constructor(builder: 
     val customBundle: Bundle? = builder.customBundle
 
     val layoutId: Int = builder.layoutId
-    val bindingKey: Int = builder.bindingKey
-
     val menuId: Int? = builder.menuId
 
-    val viewModelClass: Class<ViewModel>? = builder.viewModelClass
-    val viewModelInitMode: ViewModelInitMode = builder.viewModelInitMode
+    val viewModelNodes: List<ViewModelNode> = builder.viewModelNodes
 
     val dataBindingComponent: DataBindingComponent? = builder.dataBindingComponent
     val dataBindingComponentBindingKey: Int = builder.dataBindingComponentBindingKey

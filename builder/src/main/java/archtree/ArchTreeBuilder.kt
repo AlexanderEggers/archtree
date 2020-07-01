@@ -10,16 +10,12 @@ import androidx.databinding.DataBindingComponent
 import archtree.viewmodel.BaseViewModel
 
 @Suppress("UNCHECKED_CAST")
-abstract class ArchTreeBuilder<ViewModel : BaseViewModel, out Builder> {
+abstract class ArchTreeBuilder <out Builder> {
 
     var layoutId: Int = -1
         private set
 
-    var viewModelClass: Class<ViewModel>? = null
-        private set
-    var bindingKey = -1
-        private set
-    var viewModelInitMode: ViewModelInitMode = ViewModelInitMode.NON_FORCE_INIT
+    var viewModelNodes: ArrayList<ViewModelNode> = ArrayList()
         private set
 
     var menuId: Int? = null
@@ -35,7 +31,7 @@ abstract class ArchTreeBuilder<ViewModel : BaseViewModel, out Builder> {
 
     var customBundle: Bundle? = null
         private set
-    var componentLayer: ComponentLayer<ViewModel>? = null
+    var componentLayer: ComponentLayer? = null
         private set
 
     var toolbarViewId: Int? = null
@@ -82,27 +78,25 @@ abstract class ArchTreeBuilder<ViewModel : BaseViewModel, out Builder> {
     }
 
     /**
-     * This method defines the viewmodel for this component.
+     * This method defines the viewModel for this component.
      *
-     * @param viewModelClass Class for the related viewmodel.
-     * @param bindingKey If the viewmodel should be attached to the related component layout, define
+     * @param viewModelClass Class for the related viewModel.
+     * @param bindingKey If the viewModel should be attached to the related component layout, define
      * the relevant binding key here.
-     * @param viewModelInitMode This value defines the initialise mode for this viewmodel. This can
-     * be used to always force to re-initialise the viewmodel base parameters (in case of
+     * @param viewModelInitMode This value defines the initialise mode for this viewModel. This can
+     * be used to always force to re-initialise the viewModel base parameters (in case of
      * re-creating the component). But it can also be used to define the init mode as custom so that
      * you can set the exact BaseViewModel.init() yourself.
      */
     @JvmOverloads
-    open fun setViewModel(viewModelClass: Class<ViewModel>, bindingKey: Int = -1,
+    open fun addViewModel(viewModelClass: Class<BaseViewModel>, bindingKey: Int = -1,
                           viewModelInitMode: ViewModelInitMode = ViewModelInitMode.NON_FORCE_INIT): Builder {
-        this.viewModelClass = viewModelClass
-        this.bindingKey = bindingKey
-        this.viewModelInitMode = viewModelInitMode
+        this.viewModelNodes.add(ViewModelNode(viewModelClass, bindingKey, viewModelInitMode))
         return this as Builder
     }
 
     /**
-     * This method attaches a databinding component to this component.
+     * This method attaches a data binding component to this component.
      *
      * @param dataBindingComponent Instance of a DataBindingComponent that will be attached
      * @param bindingKey If the DataBindingComponent should be attached to the related component
@@ -161,7 +155,7 @@ abstract class ArchTreeBuilder<ViewModel : BaseViewModel, out Builder> {
      * @since 1.0.0
      * @see ComponentLayer
      */
-    protected open fun internalBuild(layer: ComponentLayer<ViewModel>) {
+    protected open fun internalBuild(layer: ComponentLayer) {
         this.componentLayer = layer
     }
 }

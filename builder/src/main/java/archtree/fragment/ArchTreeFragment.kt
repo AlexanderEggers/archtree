@@ -14,13 +14,13 @@ import archtree.ArchTreeResource
 import archtree.viewmodel.BaseViewModel
 import javax.inject.Inject
 
-abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injectable,
-        HasFragmentBuilder<ViewModel> {
+abstract class ArchTreeFragment : Fragment(), Injectable,
+        HasFragmentBuilder {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    var fragmentResource: FragmentResource<ViewModel>? = null
+    var fragmentResource: FragmentResource? = null
         private set
 
     var menu: Menu? = null
@@ -29,7 +29,7 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val builder = FragmentBuilder<ViewModel>()
+        val builder = FragmentBuilder()
         fragmentResource = provideFragmentResource(builder)
 
         val hasOptionsMenu = fragmentResource?.hasOptionsMenu
@@ -72,7 +72,7 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
         }
     }
 
-    private fun refreshFragmentToolbar(activity: Activity?, rootView: View?, fragmentResource: ArchTreeResource<*>?) {
+    private fun refreshFragmentToolbar(activity: Activity?, rootView: View?, fragmentResource: ArchTreeResource?) {
         val toolbarViewId = fragmentResource?.toolbarViewId
         val toolbarTitle = fragmentResource?.toolbarTitle
 
@@ -163,7 +163,7 @@ abstract class ArchTreeFragment<ViewModel : BaseViewModel> : Fragment(), Injecta
         super.onViewStateRestored(savedInstanceState)
     }
 
-    open fun getViewModel(): ViewModel? {
+    open fun getViewModel(): BaseViewModel? {
         return fragmentResource?.viewModel
     }
 

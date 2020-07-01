@@ -4,7 +4,7 @@ import androidx.navigation.fragment.NavHostFragment
 import archtree.ArchTreeBuilder
 import archtree.viewmodel.BaseViewModel
 
-open class ActivityBuilder<ViewModel : BaseViewModel> : ArchTreeBuilder<ViewModel, ActivityBuilder<ViewModel>>() {
+open class ActivityBuilder : ArchTreeBuilder<ActivityBuilder>() {
 
     var systemUiVisibility: Int = 0
         private set
@@ -22,7 +22,7 @@ open class ActivityBuilder<ViewModel : BaseViewModel> : ArchTreeBuilder<ViewMode
      *
      * @param hideSupportBar Hides the support bar if true.
      */
-    open fun setHideSupportBar(hideSupportBar: Boolean): ActivityBuilder<ViewModel> {
+    open fun setHideSupportBar(hideSupportBar: Boolean): ActivityBuilder {
         this.hideSupportBar = hideSupportBar
         return this
     }
@@ -32,7 +32,7 @@ open class ActivityBuilder<ViewModel : BaseViewModel> : ArchTreeBuilder<ViewMode
      *
      * @param systemUiVisibility Int that defines the ui visibility
      */
-    open fun setSystemUiVisibility(systemUiVisibility: Int): ActivityBuilder<ViewModel> {
+    open fun setSystemUiVisibility(systemUiVisibility: Int): ActivityBuilder {
         this.systemUiVisibility = systemUiVisibility
         return this
     }
@@ -42,7 +42,7 @@ open class ActivityBuilder<ViewModel : BaseViewModel> : ArchTreeBuilder<ViewMode
      *
      * @param systemUiVisibility Int that defines the ui visibility
      */
-    open fun setThemeRes(themeRes: Int): ActivityBuilder<ViewModel> {
+    open fun setThemeRes(themeRes: Int): ActivityBuilder {
         this.themeRes = themeRes
         return this
     }
@@ -54,7 +54,7 @@ open class ActivityBuilder<ViewModel : BaseViewModel> : ArchTreeBuilder<ViewMode
      *
      * @param hasNavHostFragment Uses the [NavHostFragment] implementation if true.
      */
-    open fun setHasNavHostFragment(hasNavHostFragment: Boolean): ActivityBuilder<ViewModel> {
+    open fun setHasNavHostFragment(hasNavHostFragment: Boolean): ActivityBuilder {
         this.hasNavHostFragment = hasNavHostFragment
         return this
     }
@@ -65,8 +65,8 @@ open class ActivityBuilder<ViewModel : BaseViewModel> : ArchTreeBuilder<ViewMode
      *
      * @param layer Optional layer provider to simplify the usage accessing the viewmodel.
      */
-    open fun build(layer: ActivityComponentLayer<ViewModel> =
-                           object : ActivityComponentLayer<ViewModel>() {}): ActivityResource<ViewModel> {
+    open fun build(layer: ActivityComponentLayer =
+                           object : ActivityComponentLayer() {}): ActivityResource {
         internalBuild(layer)
         return ActivityResource(this)
     }

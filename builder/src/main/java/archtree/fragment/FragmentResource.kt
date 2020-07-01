@@ -9,22 +9,24 @@ import archtree.ArchTreeResource
 import archtree.ViewModelInitMode
 import archtree.viewmodel.BaseViewModel
 
-open class FragmentResource<ViewModel : BaseViewModel>
-constructor(builder: FragmentBuilder<ViewModel>) : ArchTreeResource<ViewModel>(builder) {
+open class FragmentResource
+constructor(builder: FragmentBuilder) : ArchTreeResource(builder) {
 
-    val layer = super.componentLayer as FragmentComponentLayer<ViewModel>?
+    val layer = super.componentLayer as FragmentComponentLayer?
 
     val hasOptionsMenu = builder.menuId != null
 
-    var viewModel: ViewModel? = null
+    var viewModel: BaseViewModel? = null
         private set
 
     @SuppressLint("LogNotTimber")
-    open fun onCreateViewModel(fragment: Fragment, factory: ViewModelProvider.Factory) {
-        if (viewModelClass != null) {
-            viewModel = ViewModelProvider(fragment.viewModelStore, factory).get(viewModelClass)
+    open fun onCreateViewModel(fragment: Fragment, factory: ViewModelProvider.Factory,
+                               savedInstanceBundle: Bundle?) {
 
-            if (binding != null && bindingKey != -1) binding?.setVariable(bindingKey, viewModel)
+        viewModelNodes.forEach {
+            viewModel = ViewModelProvider(fragment.viewModelStore, factory).get(it.viewModelClass)
+
+            if (binding != null && it.bindingKey != -1) binding?.setVariable(it.bindingKey, viewModel)
             else Log.d(FragmentResource::class.java.name, "ViewModel is not attached to layout.")
         }
     }

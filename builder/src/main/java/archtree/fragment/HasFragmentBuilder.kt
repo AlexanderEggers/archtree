@@ -1,8 +1,6 @@
 package archtree.fragment
 
-import archtree.viewmodel.BaseViewModel
+interface HasFragmentBuilder {
 
-interface HasFragmentBuilder<ViewModel : BaseViewModel> {
-
-    fun provideFragmentResource(builder: FragmentBuilder<ViewModel>): FragmentResource<ViewModel>
+    fun provideFragmentResource(builder: FragmentBuilder): FragmentResource
 }

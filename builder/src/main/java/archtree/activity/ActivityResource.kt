@@ -9,13 +9,13 @@ import archtree.ArchTreeResource
 import archtree.ViewModelInitMode
 import archtree.viewmodel.BaseViewModel
 
-open class ActivityResource<ViewModel : BaseViewModel>
-constructor(builder: ActivityBuilder<ViewModel>) : ArchTreeResource<ViewModel>(builder) {
+open class ActivityResource
+constructor(builder: ActivityBuilder) : ArchTreeResource(builder) {
 
-    val layer = super.componentLayer as ActivityComponentLayer<ViewModel>?
+    val layer = super.componentLayer as ActivityComponentLayer?
     var hasNavHostFragment: Boolean = builder.hasNavHostFragment
 
-    var viewModel: ViewModel? = null
+    var viewModel: BaseViewModel? = null
         private set
 
     val systemUiVisibility: Int = builder.systemUiVisibility

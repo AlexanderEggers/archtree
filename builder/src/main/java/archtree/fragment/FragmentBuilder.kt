@@ -3,7 +3,7 @@ package archtree.fragment
 import archtree.ArchTreeBuilder
 import archtree.viewmodel.BaseViewModel
 
-open class FragmentBuilder<ViewModel : BaseViewModel> : ArchTreeBuilder<ViewModel, FragmentBuilder<ViewModel>>() {
+open class FragmentBuilder : ArchTreeBuilder<FragmentBuilder>() {
 
     /**
      * This method builds a new fragment resource. This object will be used for the fragment
@@ -11,8 +11,8 @@ open class FragmentBuilder<ViewModel : BaseViewModel> : ArchTreeBuilder<ViewMode
      *
      * @param layer Optional layer provider to simplify the usage accessing the viewmodel.
      */
-    open fun build(layer: FragmentComponentLayer<ViewModel> =
-                           object : FragmentComponentLayer<ViewModel>() {}): FragmentResource<ViewModel> {
+    open fun build(layer: FragmentComponentLayer =
+                           object : FragmentComponentLayer() {}): FragmentResource {
         internalBuild(layer)
         return FragmentResource(this)
     }
